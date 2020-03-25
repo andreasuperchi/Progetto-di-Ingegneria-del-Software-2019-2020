@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-public enum Direction {
+public enum Direction  {
     NORTH,
     NORTH_EAST,
     EAST,
@@ -8,7 +8,12 @@ public enum Direction {
     SOUTH,
     SOUTH_WEST,
     WEST,
-    NORTH_WEST
+    NORTH_WEST;
+
+    public static Direction parseInput(String input) {
+        return Enum.valueOf(Direction.class, input.toUpperCase());
+    }
+
 
 }
 
