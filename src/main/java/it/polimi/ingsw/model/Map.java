@@ -8,8 +8,8 @@ public class Map {
     private int completedTowers;
 
     public Map() {
-        for (int row = 0; row <= 4; row++) {
-            for (int column = 0; column <= 4; column++) {
+        for (int row = 0; row < N_ROWS; row++) {
+            for (int column = 0; column < N_COLS; column++) {
                 grid[row][column] = new Cell(row, column);
             }
         }
