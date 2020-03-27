@@ -14,7 +14,6 @@ public enum Direction  {
         return Enum.valueOf(Direction.class, input.toUpperCase());
     }
 
-
 }
 
 

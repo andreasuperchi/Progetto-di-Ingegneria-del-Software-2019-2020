@@ -1,14 +1,20 @@
 package it.polimi.ingsw.model;
 
+import java.util.Objects;
+
 public class Cell {
     private int rowNumber;
     private int columnNumber;
     private boolean isOccupied;
     private int level;
+    private Worker thisWorker;
 
     public Cell(int rowNumber, int columnNumber) {
         this.rowNumber = rowNumber;
         this.columnNumber = columnNumber;
+        level = 0;
+        isOccupied = false;
+        thisWorker = null;
     }
 
     public int getRowNumber() {
@@ -39,6 +45,11 @@ public class Cell {
 
     public void setLevel(int level) { this.level = level; }
 
+    public Worker getThisWorker() {
+        return thisWorker;
+    }
 
-
+    public void setThisWorker(Worker thisWorker) {
+        this.thisWorker = thisWorker;
+    }
 }

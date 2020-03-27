@@ -1,26 +1,31 @@
 package it.polimi.ingsw.model;
 
 public class Worker {
-    private String playerName;
-    private Cell currentCellWorker;
+    private Player player;
+    private Cell currentWorkerCell;
     private boolean canGoUp;
     private int oldLevel;
     private int newLevel;
 
-    public String getPlayerName() {
-        return playerName;
+    public Worker(Player player, Cell currentWorkerCell) {
+        this.player = player;
+        this.currentWorkerCell = currentWorkerCell;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public Player getPlayerName() {
+        return player;
+    }
+
+    public void setPlayerName(Player player) {
+        this.player = player;
     }
 
     public Cell getCurrentWorkerCell() {
-        return currentCellWorker;
+        return currentWorkerCell;
     }
 
     public void setCurrentWorkerCell(Cell currentWorkerCell) {
-        this.currentCellWorker = currentWorkerCell;
+        this.currentWorkerCell = currentWorkerCell;
     }
 
     public boolean getCanGoUp() {
@@ -31,11 +36,27 @@ public class Worker {
         this.canGoUp = canGoUp;
     }
 
-    public boolean checkChoice(Cell nextCellWorker) {    //ritorna un booleano a seconda del fatto che la cella nella direzione scelta dal giocatore sia "valida" o meno
-        if (nextCellWorker == null || nextCellWorker.getLevel() - currentCellWorker.getLevel() > 1 || nextCellWorker.getIsOccupied()){
+    public int getOldLevel() {
+        return oldLevel;
+    }
+
+    public void setOldLevel(int oldLevel) {
+        this.oldLevel = oldLevel;
+    }
+
+    public int getNewLevel() {
+        return newLevel;
+    }
+
+    public void setNewLevel(int newLevel) {
+        this.newLevel = newLevel;
+    }
+
+    public boolean checkChoice(Cell nextWorkerCell) {    //ritorna un booleano a seconda del fatto che la cella nella direzione scelta dal giocatore sia "valida" o meno
+        if (nextWorkerCell == null || nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()){
             return false;
         }
-        else if (nextCellWorker.getLevel() - currentCellWorker.getLevel() == 1 && !canGoUp) {   //controllo per Athena
+        else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
             return false;
         }
         else {
@@ -52,7 +73,7 @@ public class Worker {
     }
 
     public void build(Cell nextWorkerCell) {    //supponiamo di arrivare a build() con una "cella successiva" valida
-        if (!nextWorkerCell.getIsOccupied()) {
+        if (nextWorkerCell.getIsOccupied() || this.getCurrentWorkerCell().equals(nextWorkerCell)) {
             return;
         }
         else if (nextWorkerCell.getLevel() == 3) {
@@ -64,7 +85,7 @@ public class Worker {
         }
     }
 
-    public boolean winCondition(int oldLevel, int newLevel) {
+    public boolean winCondition() {
         if (newLevel == 3 && oldLevel == 2) {
             return true;
         }
