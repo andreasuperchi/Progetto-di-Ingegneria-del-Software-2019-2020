@@ -4,7 +4,7 @@ public class Map {
     private static final int N_ROWS = 5;
     private static final int N_COLS = 5;
 
-    private Cell[][] map = new Cell[Map.N_COLS][Map.N_ROWS];
+    protected Cell[][] map = new Cell[Map.N_COLS][Map.N_ROWS];
     private int completedTowers;
 
     public Map() {
@@ -25,9 +25,9 @@ public class Map {
                 case SOUTH:
                     return map[baseCell.getRowNumber() + 1][baseCell.getColumnNumber()];
                 case EAST:
-                    return map[baseCell.getRowNumber()][baseCell.getColumnNumber() - 1];
-                case WEST:
                     return map[baseCell.getRowNumber()][baseCell.getColumnNumber() + 1];
+                case WEST:
+                    return map[baseCell.getRowNumber()][baseCell.getColumnNumber() - 1];
                 case NORTH_EAST:
                     return map[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() + 1];
                 case NORTH_WEST:
