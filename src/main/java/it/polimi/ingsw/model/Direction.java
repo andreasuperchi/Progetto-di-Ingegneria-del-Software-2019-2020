@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-public enum Direction  {
+public enum Direction {
     NORTH,
     NORTH_EAST,
     EAST,

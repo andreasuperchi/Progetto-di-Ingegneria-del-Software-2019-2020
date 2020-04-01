@@ -12,7 +12,7 @@ class WorkerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Test", 22, "blue");
+        player = new Player("Test", 22);
         testMap = new Map();
     }
 
@@ -21,7 +21,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -29,7 +29,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -37,7 +37,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.EAST);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -45,7 +45,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.WEST);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -53,7 +53,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_EAST);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -61,7 +61,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_WEST);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -69,7 +69,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_EAST);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -77,7 +77,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_WEST);
-        assertEquals(true, worker.checkChoice(nextWorkerCell));
+        assertEquals(true, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -85,7 +85,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[0][0];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -93,7 +93,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[4][4];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -101,7 +101,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[0][4];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.EAST);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -109,7 +109,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[2][0];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.WEST);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -117,7 +117,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[0][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_EAST);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -125,7 +125,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[3][0];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_WEST);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -133,7 +133,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[4][2];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_EAST);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -141,7 +141,7 @@ class WorkerTest {
         Cell baseCellWorker = testMap.getGrid()[4][1];
         worker = new Worker(player, baseCellWorker);
         Cell nextWorkerCell = testMap.getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_WEST);
-        assertEquals(false, worker.checkChoice(nextWorkerCell));
+        assertEquals(false, worker.checkMove(nextWorkerCell));
     }
 
     @Test
@@ -150,7 +150,7 @@ class WorkerTest {
         Cell nextCellWorker = testMap.getGrid()[1][0];
         worker = new Worker(player, baseCellWorker);
         nextCellWorker.setLevel(2);
-        assertEquals(false, worker.checkChoice(nextCellWorker));
+        assertEquals(false, worker.checkMove(nextCellWorker));
     }
 
     @Test
@@ -159,7 +159,7 @@ class WorkerTest {
         Cell nextCellWorker = testMap.getGrid()[1][0];
         worker = new Worker(player, baseCellWorker);
         nextCellWorker.setIsOccupied(true);
-        assertEquals(false, worker.checkChoice(nextCellWorker));
+        assertEquals(false, worker.checkMove(nextCellWorker));
     }
 
     @Test

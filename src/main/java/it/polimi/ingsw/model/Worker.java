@@ -3,13 +3,20 @@ package it.polimi.ingsw.model;
 public class Worker {
     private Player player;
     private Cell currentWorkerCell;
-    private boolean canGoUp;
+    private static boolean canGoUp;
     private int oldLevel;
     private int newLevel;
+    private boolean hasMoved;
+    private boolean hasBuilt;
+    private boolean canBeUsed;
 
     public Worker(Player player, Cell currentWorkerCell) {
         this.player = player;
         this.currentWorkerCell = currentWorkerCell;
+        this.canGoUp = true;
+        this.hasMoved = false;
+        this.hasBuilt = false;
+        this.canBeUsed = true;
     }
 
     public Player getPlayerName() {
@@ -33,7 +40,7 @@ public class Worker {
     }
 
     public void setCanGoUp(boolean canGoUp) {
-        this.canGoUp = canGoUp;
+        Worker.canGoUp = canGoUp;
     }
 
     public int getOldLevel() {
@@ -44,24 +51,49 @@ public class Worker {
         this.oldLevel = oldLevel;
     }
 
-    public int getNewLevel() {
-        return newLevel;
-    }
+    public int getNewLevel() { return newLevel; }
 
     public void setNewLevel(int newLevel) {
         this.newLevel = newLevel;
     }
 
-    public boolean checkChoice(Cell nextWorkerCell) {    //ritorna un booleano a seconda del fatto che la cella nella direzione scelta dal giocatore sia "valida" o meno
-        if (nextWorkerCell == null || nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()){
+    public boolean getHasMoved() { return hasMoved; }
+
+    public void setHasMoved(boolean hasMoved) { this.hasMoved = hasMoved; }
+
+    public boolean getHasBuilt() { return hasBuilt; }
+
+    public void setHasBuilt(boolean hasBuilt) { this.hasBuilt = hasBuilt; }
+
+    public boolean getCanBeUsed() { return canBeUsed; }
+
+    public void setCanBeUsed(boolean canBeUsed) { this.canBeUsed = canBeUsed; }
+
+    public boolean checkMove(Cell nextWorkerCell) {    //ritorna un booleano a seconda del fatto che la cella nella direzione scelta dal giocatore sia "valida" o meno
+        if (nextWorkerCell == null || nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
             return false;
-        }
-        else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
+        } else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
             return false;
-        }
-        else {
+        } else {
             return true;
         }
+    }
+
+    public boolean checkBuild(Cell nextWorkerCell) {
+        if (nextWorkerCell.getIsOccupied() || this.getCurrentWorkerCell().equals(nextWorkerCell)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkSurroundingCells(Map map) {
+        for (Direction d : Direction.values()){
+            if (checkMove(map.getNextWorkerCell(getCurrentWorkerCell(), d))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void move(Cell nextWorkerCell) { //supponiamo di arrivare a move() con una "cella successiva" valida
@@ -73,14 +105,10 @@ public class Worker {
     }
 
     public void build(Cell nextWorkerCell) {    //supponiamo di arrivare a build() con una "cella successiva" valida
-        if (nextWorkerCell.getIsOccupied() || this.getCurrentWorkerCell().equals(nextWorkerCell)) {
-            return;
-        }
-        else if (nextWorkerCell.getLevel() == 3) {
+        if (nextWorkerCell.getLevel() == 3) {
             nextWorkerCell.setLevel(4);
             nextWorkerCell.setIsOccupied(true);
-        }
-        else {
+        } else {
             nextWorkerCell.setLevel(nextWorkerCell.getLevel() + 1);
         }
     }
@@ -88,9 +116,18 @@ public class Worker {
     public boolean winCondition() {
         if (newLevel == 3 && oldLevel == 2) {
             return true;
-        }
-        else {
+        } else {
             return false;
+        }
+    }
+
+    public void turn(Cell nextWorkerCell) {
+        if (!this.hasMoved) {
+            this.move(nextWorkerCell);
+            this.hasMoved = true;
+        } else if (!this.hasBuilt) {
+            this.build(nextWorkerCell);
+            this.hasBuilt = true;
         }
     }
 }

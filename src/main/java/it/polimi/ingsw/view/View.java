@@ -1,4 +1,19 @@
 package it.polimi.ingsw.view;
 
-public class View {
+import java.util.Observable;
+import java.util.Observer;
+
+public class View extends Observable implements Runnable, Observer {
+
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
+
+    @Override
+    public void run() {
+
+    }
 }

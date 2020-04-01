@@ -4,16 +4,16 @@ public class Player {
 
     private String name;
     private int age;
-    private String color;
     private boolean isInGame;
     private String god;
+    private Worker[] workers;
 
-    public Player(String name, int age, String color) {
+    public Player(String name, int age) {
         this.name = name;
         this.age = age;
-        this.color = color;
         isInGame = true;
         god = null;
+        workers = new Worker[2];
     }
 
     public String getName() {
@@ -22,14 +22,6 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public boolean getIsInGame() {
@@ -48,8 +40,16 @@ public class Player {
         this.god = god;
     }
 
+    public boolean getInGame() { return isInGame; }
+
+    public void setInGame(boolean inGame) { isInGame = inGame; }
+
+    public Worker[] getWorkers() { return workers; }
+
+    public void setWorkers(Worker[] workers) { this.workers = workers; }
+
     public void chooseGod(String godName) {
-        
+
     }
 
 
