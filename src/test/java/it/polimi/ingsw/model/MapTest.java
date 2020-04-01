@@ -80,7 +80,7 @@ class MapTest {
     void NullNorthTest() {
         Cell cell = testMap.grid[0][2];
         cell = testMap.getNextWorkerCell(cell, Direction.NORTH);
-        assertEquals(null,cell);
+        assertNull(cell);
     }
 
 
@@ -88,49 +88,49 @@ class MapTest {
     void NullSouthTest() {
         Cell cell = testMap.grid[4][2];
         cell = testMap.getNextWorkerCell(cell, Direction.SOUTH);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
     @Test
     void NullEastTest() {
         Cell cell = testMap.grid[2][4];
         cell = testMap.getNextWorkerCell(cell, Direction.EAST);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
     @Test
     void NullWestTest() {
         Cell cell = testMap.grid[2][0];
         cell = testMap.getNextWorkerCell(cell, Direction.WEST);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
     @Test
     void NullNorthEastTest() {
         Cell cell = testMap.grid[0][4];
         cell = testMap.getNextWorkerCell(cell, Direction.NORTH_EAST);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
     @Test
     void NullNorthWestTest() {
         Cell cell = testMap.grid[0][0];
         cell = testMap.getNextWorkerCell(cell, Direction.NORTH_WEST);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
     @Test
     void NullSouthEastTest() {
         Cell cell = testMap.grid[4][4];
         cell = testMap.getNextWorkerCell(cell, Direction.SOUTH_EAST);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
     @Test
     void NullSouthWestTest() {
         Cell cell = testMap.grid[4][0];
         cell = testMap.getNextWorkerCell(cell, Direction.SOUTH_WEST);
-        assertEquals(null, cell);
+        assertNull(cell);
     }
 
 }
