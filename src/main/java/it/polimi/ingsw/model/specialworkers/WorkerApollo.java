@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerApollo extends Worker {
 
-    public WorkerApollo(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerApollo(Player player) {
+        super(player);
     }
 
 

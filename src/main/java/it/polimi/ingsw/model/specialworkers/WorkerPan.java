@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerPan extends Worker {
 
-    public WorkerPan(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerPan(Player player) {
+        super(player);
     }
 }

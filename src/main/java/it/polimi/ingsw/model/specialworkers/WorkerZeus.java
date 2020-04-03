@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerZeus extends Worker {
 
-    public WorkerZeus(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerZeus(Player player) {
+        super(player);
     }
 }

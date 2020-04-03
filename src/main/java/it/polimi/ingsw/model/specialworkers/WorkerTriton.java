@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerTriton extends Worker {
 
-    public WorkerTriton(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerTriton(Player player) {
+        super(player);
     }
 }

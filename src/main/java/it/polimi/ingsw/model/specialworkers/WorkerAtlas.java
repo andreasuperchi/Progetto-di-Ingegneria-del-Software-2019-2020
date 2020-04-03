@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerAtlas extends Worker {
 
-    public WorkerAtlas(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerAtlas(Player player) {
+        super(player);
     }
 }

@@ -55,15 +55,18 @@ public class Controller implements Observer {
         }
         if (arg instanceof Integer) {   //mi arriva il numero di giocatori
             model.setNumberOfPlayers((Integer) arg);
-        }
-        else if (arg instanceof Player) {   //mi arriva un giocatore
+        } else if (arg instanceof Player) {   //mi arriva un giocatore
             model.addPlayer((Player) arg);
-        }
-        else if (arg instanceof ArrayList) {    //mi arriva l'array degli dèi scelti
+        } else if (arg instanceof ArrayList) {    //mi arriva l'array degli dèi scelti
             model.setAvailableGods((ArrayList<GodName>) arg);
+        } else if (arg instanceof GodName) {  //mi arriva il "nome di un dio"
+            model.setPlayerWorker((GodName) arg);
+            endTurn();
+        } else if (arg instanceof Cell[]) {
+            model.setWorkerStartPosition((Cell[]) arg);
+        } else {
+            game((Cell) arg);
         }
-        else if (arg instanceof GodName) {  //mi arriva il "nome di un dio"
 
-        }
     }
 }

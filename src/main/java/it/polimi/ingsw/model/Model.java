@@ -62,9 +62,13 @@ public class Model extends Observable {
     }
 
     public void addPlayer(Player player) {
+        if (players.isEmpty()) {
+            this.currentPlayer = player;
+        }
         players.add(player);
         setChanged();
         notifyObservers();
+
     }
 
     public void setAvailableGods(ArrayList<GodName> gods) {
@@ -72,4 +76,20 @@ public class Model extends Observable {
         setChanged();
         notifyObservers();
     }
+
+    public void setPlayerWorker(GodName godName) {
+        currentPlayer.getWorkers()[0] = godName.parseGod(currentPlayer);
+        currentPlayer.getWorkers()[1] = godName.parseGod(currentPlayer);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void setWorkerStartPosition(Cell[] arg) {
+        currentPlayer.getWorkers()[0].setCurrentWorkerCell(arg[0]);
+        currentPlayer.getWorkers()[1].setCurrentWorkerCell(arg[1]);
+        setChanged();
+        notifyObservers();
+    }
+
+
 }

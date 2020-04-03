@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerDemeter extends Worker {
 
-    public WorkerDemeter(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerDemeter(Player player) {
+        super(player);
     }
 }

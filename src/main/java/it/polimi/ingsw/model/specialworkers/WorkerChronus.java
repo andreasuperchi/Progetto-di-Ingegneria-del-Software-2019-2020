@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerChronus extends Worker {
 
-    public WorkerChronus(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerChronus(Player player) {
+        super(player);
     }
 }

@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerHestia extends Worker {
 
-    public WorkerHestia(Player player, Cell baseWorkerCell) {
-        super(player, baseWorkerCell);
+    public WorkerHestia(Player player) {
+        super(player);
     }
 
 }

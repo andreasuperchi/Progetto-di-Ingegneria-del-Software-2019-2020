@@ -10,9 +10,8 @@ public class Worker {
     private boolean hasBuilt;
     private boolean canBeUsed;
 
-    public Worker(Player player, Cell currentWorkerCell) {
+    public Worker(Player player) {
         this.player = player;
-        this.currentWorkerCell = currentWorkerCell;
         this.canGoUp = true;
         this.hasMoved = false;
         this.hasBuilt = false;

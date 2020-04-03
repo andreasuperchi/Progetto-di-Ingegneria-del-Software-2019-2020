@@ -22,37 +22,37 @@ public enum GodName {
         return Enum.valueOf(GodName.class, input.toUpperCase());
     }
 
-    public Worker parseGod(Player player, Cell baseWorkerCell) {
+    public Worker parseGod(Player player) {
         try {
             switch (this) {
                 case APOLLO:
-                    return new WorkerApollo(player, baseWorkerCell);
+                    return new WorkerApollo(player);
                 case ARTEMIS:
-                    return new WorkerArtemis(player, baseWorkerCell);
+                    return new WorkerArtemis(player);
                 case ATHENA:
-                    return new WorkerAthena(player, baseWorkerCell);
+                    return new WorkerAthena(player);
                 case ATLAS:
-                    return new WorkerAtlas(player, baseWorkerCell);
+                    return new WorkerAtlas(player);
                 case CHARON:
-                    return new WorkerCharon(player, baseWorkerCell);
+                    return new WorkerCharon(player);
                 case CHRONUS:
-                    return new WorkerChronus(player, baseWorkerCell);
+                    return new WorkerChronus(player);
                 case DEMETER:
-                    return new WorkerDemeter(player, baseWorkerCell);
+                    return new WorkerDemeter(player);
                 case HEPHAESTUS:
-                    return new WorkerHephaestus(player, baseWorkerCell);
+                    return new WorkerHephaestus(player);
                 case HESTIA:
-                    return new WorkerHestia(player, baseWorkerCell);
+                    return new WorkerHestia(player);
                 case MINOTAUR:
-                    return new WorkerMinotaur(player, baseWorkerCell);
+                    return new WorkerMinotaur(player);
                 case PAN:
-                    return new WorkerPan(player, baseWorkerCell);
+                    return new WorkerPan(player);
                 case PROMETHEUS:
-                    return new WorkerPrometheus(player, baseWorkerCell);
+                    return new WorkerPrometheus(player);
                 case TRITON:
-                    return new WorkerTriton(player, baseWorkerCell);
+                    return new WorkerTriton(player);
                 case ZEUS:
-                    return new WorkerZeus(player, baseWorkerCell);
+                    return new WorkerZeus(player);
                 default:
                     throw new IllegalArgumentException();
             }
