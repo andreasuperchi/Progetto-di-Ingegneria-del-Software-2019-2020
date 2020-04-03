@@ -41,13 +41,9 @@ public class Cell {
         isOccupied = occupied;
     }
 
-    public int getLevel() {
-        return level;
-    }
+    public int getLevel() { return level; }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+    public void setLevel(int level) { this.level = level; }
 
     public Worker getThisWorker() {
         return thisWorker;

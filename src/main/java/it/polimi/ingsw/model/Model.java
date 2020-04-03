@@ -67,7 +67,7 @@ public class Model extends Observable {
         notifyObservers();
     }
 
-    public void setAvailableGodList(ArrayList<GodName> gods) {
+    public void setAvailableGods(ArrayList<GodName> gods) {
         this.availableGods.addAll(gods);
         setChanged();
         notifyObservers();

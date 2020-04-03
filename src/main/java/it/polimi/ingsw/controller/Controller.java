@@ -60,7 +60,7 @@ public class Controller implements Observer {
             model.addPlayer((Player) arg);
         }
         else if (arg instanceof ArrayList) {    //mi arriva l'array degli dèi scelti
-            model.setAvailableGodList((ArrayList<GodName>) arg);
+            model.setAvailableGods((ArrayList<GodName>) arg);
         }
         else if (arg instanceof GodName) {  //mi arriva il "nome di un dio"
 
