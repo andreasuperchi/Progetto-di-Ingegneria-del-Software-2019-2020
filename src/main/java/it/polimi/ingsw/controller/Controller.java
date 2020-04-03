@@ -53,16 +53,16 @@ public class Controller implements Observer {
         if (o != view) {
             throw new IllegalArgumentException();
         }
-        if (arg instanceof Integer) {
+        if (arg instanceof Integer) {   //mi arriva il numero di giocatori
             model.setNumberOfPlayers((Integer) arg);
         }
-        else if (arg instanceof Player) {
+        else if (arg instanceof Player) {   //mi arriva un giocatore
             model.addPlayer((Player) arg);
         }
-        else if (arg instanceof ArrayList) {
-            model.setAvailableGodList((ArrayList<GodList>) arg);
+        else if (arg instanceof ArrayList) {    //mi arriva l'array degli dèi scelti
+            model.setAvailableGodList((ArrayList<GodName>) arg);
         }
-        else if (arg instanceof GodList) {
+        else if (arg instanceof GodName) {  //mi arriva il "nome di un dio"
 
         }
     }

@@ -24,6 +24,10 @@ public class Map {
         this.grid = grid;
     }
 
+    public int getCompletedTowers() { return completedTowers; }
+
+    public void setCompletedTowers(int completedTowers) { this.completedTowers = completedTowers; }
+
     //ritorna la cella nella direzione scelta rispetto alla "cella base", dove "cella base" è la cella in cui si trova il lavoratore prima di compiere il movimento
     public Cell getNextWorkerCell(Cell baseCell, Direction direction) {
         try {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class Model extends Observable {
-    private ArrayList<GodList> availableGods;
+    private ArrayList<GodName> availableGods;
     private ArrayList<Player> players;
     private Player currentPlayer;
     private Worker currentWorker;
@@ -67,7 +67,7 @@ public class Model extends Observable {
         notifyObservers();
     }
 
-    public void setAvailableGodList(ArrayList<GodList> gods) {
+    public void setAvailableGodList(ArrayList<GodName> gods) {
         this.availableGods.addAll(gods);
         setChanged();
         notifyObservers();
