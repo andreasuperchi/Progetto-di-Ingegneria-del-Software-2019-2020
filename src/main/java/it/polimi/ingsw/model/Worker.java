@@ -12,7 +12,7 @@ public class Worker {
 
     public Worker(Player player) {
         this.player = player;
-        this.canGoUp = true;
+        canGoUp = true;
         this.hasMoved = false;
         this.hasBuilt = false;
         this.canBeUsed = true;
@@ -31,6 +31,8 @@ public class Worker {
     }
 
     public void setCurrentWorkerCell(Cell currentWorkerCell) {
+        currentWorkerCell.setIsOccupied(true);
+        currentWorkerCell.setThisWorker(this);
         this.currentWorkerCell = currentWorkerCell;
     }
 
@@ -101,6 +103,7 @@ public class Worker {
         setCurrentWorkerCell(nextWorkerCell);
         newLevel = getCurrentWorkerCell().getLevel();
         getCurrentWorkerCell().setIsOccupied(true);
+        // nextWorkerCell.setThisWorker(this);
     }
 
     public void build(Cell nextWorkerCell) {    //supponiamo di arrivare a build() con una "cella successiva" valida

@@ -9,14 +9,11 @@ public class Model extends Observable {
     private Player currentPlayer;
     private Worker currentWorker;
     private boolean gameOver;
-    private Map map;
+    private static Map map;
 
-    public Model(ArrayList<Player> players, Player currentPlayer, Worker currentWorker, boolean gameOver) {
-        this.players = players;
-        this.currentPlayer = currentPlayer;
-        this.currentWorker = currentWorker;
+    public Model(boolean gameOver) {
         this.gameOver = gameOver;
-        this.map = new Map();
+        map = new Map();
     }
 
     public ArrayList<Player> getPlayers() {
@@ -53,12 +50,12 @@ public class Model extends Observable {
         this.gameOver = gameOver;
     }
 
-    public Map getMap() {
+    public static Map getMap() {
         return map;
     }
 
     public void setMap(Map map) {
-        this.map = map;
+        Model.map = map;
     }
 
     public void addPlayer(Player player) {

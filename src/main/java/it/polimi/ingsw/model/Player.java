@@ -5,14 +5,12 @@ public class Player {
     private String name;
     private int age;
     private boolean isInGame;
-    private String god;
     private Worker[] workers;
 
     public Player(String name, int age) {
         this.name = name;
         this.age = age;
         isInGame = true;
-        god = null;
         workers = new Worker[2];
     }
 
@@ -30,14 +28,6 @@ public class Player {
 
     public void setIsInGame(boolean isInGame) {
         this.isInGame = isInGame;
-    }
-
-    public String getGod() {
-        return god;
-    }
-
-    public void setGod(String god) {
-        this.god = god;
     }
 
     public boolean getInGame() { return isInGame; }

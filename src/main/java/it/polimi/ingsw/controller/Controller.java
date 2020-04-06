@@ -20,10 +20,6 @@ public class Controller implements Observer {
         model.setCurrentWorker(model.getCurrentPlayer().getWorkers()[workerIndex]);
     }
 
-    public void setup() {
-
-    }
-
     public void game(Cell nextCell) {
         model.getCurrentWorker().turn(nextCell);
         model.setGameOver(model.getCurrentWorker().winCondition());
@@ -32,7 +28,7 @@ public class Controller implements Observer {
         }
         for (Player player : model.getPlayers()) {
             for (Worker worker : player.getWorkers()) {
-                worker.setCanBeUsed(worker.checkSurroundingCells(model.getMap()));
+                worker.setCanBeUsed(worker.checkSurroundingCells(Model.getMap()));
             }
         }
         if (model.getCurrentWorker().getHasMoved() && model.getCurrentWorker().getHasBuilt()) {

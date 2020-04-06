@@ -10,5 +10,11 @@ public class WorkerApollo extends Worker {
         super(player);
     }
 
-
+    @Override
+    public void move(Cell nextWorkerCell) {
+        if (nextWorkerCell.getIsOccupied() && nextWorkerCell.getLevel() != 4) {
+            nextWorkerCell.getThisWorker().move(this.getCurrentWorkerCell());
+        }
+        super.move(nextWorkerCell);
+    }
 }
