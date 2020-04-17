@@ -1,19 +1,31 @@
 package it.polimi.ingsw.view;
 
-import java.util.Observable;
-import java.util.Observer;
+import it.polimi.ingsw.model.*;
 
-public class View extends Observable implements Runnable, Observer {
+public abstract class View extends Observable<PlayerChoice> implements Observer<Model> {
+    private Player player;
 
+    protected View(Player player) {
+        this.player = player;
+    }
+
+    protected Player getPlayer() {
+        return player;
+    }
+
+    protected void processGodChoice(GodName input) {
+        notify(new PlayerGodChoice(player, input));
+    }
+
+    protected void processNumberOfPlayersChoice(int input) {
+        notify(new NumberOfPlayersChoice(player, input));
+    }
 
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Model message) {
 
     }
 
-    @Override
-    public void run() {
 
-    }
 }

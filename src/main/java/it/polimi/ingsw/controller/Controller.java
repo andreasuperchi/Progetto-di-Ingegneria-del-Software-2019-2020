@@ -1,13 +1,13 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.view.Observer;
 import it.polimi.ingsw.view.View;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
-public class Controller implements Observer {
+public class Controller implements Observer<PlayerChoice> {
     Model model;
     View view;
 
