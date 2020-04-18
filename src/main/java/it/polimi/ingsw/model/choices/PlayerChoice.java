@@ -1,0 +1,13 @@
+package it.polimi.ingsw.model.choices;
+
+import it.polimi.ingsw.model.Player;
+
+public abstract class PlayerChoice {
+    protected Player player;
+
+
+    public Player getPlayer() {
+        return player;
+    }
+
+}

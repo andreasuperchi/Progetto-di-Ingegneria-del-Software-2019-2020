@@ -132,6 +132,16 @@ public class Worker {
             this.hasBuilt = true;
         }
     }
+
+    public Outcome setMoveCompleted() {
+        this.hasMoved = true;
+        return Outcome.MOVE_COMPLETED;
+    }
+
+    public Outcome setBuildCompleted() {
+        this.hasBuilt = true;
+        return Outcome.BUILD_COMPLETED;
+    }
 }
 
 

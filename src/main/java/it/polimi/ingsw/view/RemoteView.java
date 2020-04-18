@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Player;
 
 public class RemoteView extends View {
     private boolean setupDone = false;
+    private int counter;
 
     protected RemoteView(Player player) {
         super(player);
@@ -18,18 +19,27 @@ public class RemoteView extends View {
             if (!setupDone) {
                 try {
                     GodName godName = GodName.parseInput(message);
+                    counter--;
+                    if (counter == 0) {
+                        setupDone = true;
+                    }
                     processGodChoice(godName);
                 } catch (IllegalArgumentException e) {
                     //TODO stampare lato client
                 }
             } else {
-                try {
-                    Direction direction = Direction.parseInput(message);
-                    processDirectionPlayerChoice(direction);
-                } catch (IllegalArgumentException e) {
-                    //TODO stampare lato client
+                if (message.equals("y") || message.equals("n")) {
+                    processStringChoice(message);
+                } else {
+                    try {
+                        Direction direction = Direction.parseInput(message);
+                        processDirectionPlayerChoice(direction);
+                    } catch (IllegalArgumentException e) {
+                        //TODO stampare lato client
+                    }
                 }
             }
+
         }
     }
 
@@ -40,6 +50,7 @@ public class RemoteView extends View {
                 if (message <= 1 || message > 3) {
                     //TODO stampare lato client
                 } else {
+                    counter = 2 * message;
                     processNumberOfPlayersChoice(message);
                 }
             } else {

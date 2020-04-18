@@ -1,6 +1,9 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.choices.*;
+
+import java.util.ArrayList;
 
 public abstract class View extends Observable<PlayerChoice> implements Observer<Model> {
     private Player player;
@@ -29,6 +32,7 @@ public abstract class View extends Observable<PlayerChoice> implements Observer<
         notify(new WorkerPlayerChoice(player, input));
     }
 
+    protected void processStringChoice(String input) { notify(new StringChoice(player, input));}
 
     @Override
     public void update(Model message) {

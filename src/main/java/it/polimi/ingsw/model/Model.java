@@ -1,92 +1,92 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
-import java.util.Observable;
+import it.polimi.ingsw.model.choices.DirectionPlayerChoice;
+import it.polimi.ingsw.model.choices.NumberOfPlayersChoice;
+import it.polimi.ingsw.model.choices.PlayerGodChoice;
+import it.polimi.ingsw.model.choices.WorkerPlayerChoice;
+import it.polimi.ingsw.view.Observable;
 
-public class Model extends Observable {
+import java.util.ArrayList;
+
+public class Model extends Observable<Model> implements Cloneable {
+    private int numberOfPlayers;
     private ArrayList<GodName> availableGods;
     private ArrayList<Player> players;
     private Player currentPlayer;
     private Worker currentWorker;
     private boolean gameOver;
     private static Map map;
+    private Outcome outcome;
 
-    public Model(boolean gameOver) {
-        this.gameOver = gameOver;
+    public Model() {
+        availableGods = new ArrayList<GodName>();
+        players = new ArrayList<Player>();
+        gameOver = false;
         map = new Map();
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public void setNumberOfPlayers(NumberOfPlayersChoice numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers.getNumberOfPlayers();
+        notify(this);
     }
 
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        this.players = new ArrayList<Player>(numberOfPlayers);
-        setChanged();
-        notifyObservers();
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
-    public Worker getCurrentWorker() {
-        return currentWorker;
-    }
-
-    public void setCurrentWorker(Worker currentWorker) {
-        this.currentWorker = currentWorker;
-    }
-
-    public boolean getGameOver() {
-        return gameOver;
-    }
-
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
-    }
-
-    public static Map getMap() {
-        return map;
-    }
-
-    public void setMap(Map map) {
-        Model.map = map;
-    }
-
-    public void addPlayer(Player player) {
-        if (players.isEmpty()) {
-            this.currentPlayer = player;
+    public void setPlayerGod(PlayerGodChoice playerGodChoice) { //assegna a un giocatore il suo Dio e ne istanzia i rispettivi lavoratori
+        if (availableGods.contains(playerGodChoice.getGodName())) {
+            playerGodChoice.getPlayer().getWorkers()[0] = playerGodChoice.getGodName().parseGod(playerGodChoice.getPlayer());
+            playerGodChoice.getPlayer().getWorkers()[1] = playerGodChoice.getGodName().parseGod(playerGodChoice.getPlayer());
+            availableGods.remove(playerGodChoice.getGodName());
         }
-        players.add(player);
-        setChanged();
-        notifyObservers();
-
+        else {
+            outcome = Outcome.INVALID_GOD;
+        }
+        notify(this);
     }
 
-    public void setAvailableGods(ArrayList<GodName> gods) {
-        this.availableGods.addAll(gods);
-        setChanged();
-        notifyObservers();
+    public void setAvailableGods(PlayerGodChoice playerGodChoice) { //aggiunge un Dio alla lista di dèi disponibili
+        availableGods.add(playerGodChoice.getGodName());
+        notify(this);
     }
 
-    public void setPlayerWorker(GodName godName) {
-        currentPlayer.getWorkers()[0] = godName.parseGod(currentPlayer);
-        currentPlayer.getWorkers()[1] = godName.parseGod(currentPlayer);
-        setChanged();
-        notifyObservers();
+    public void setDirectionMove(DirectionPlayerChoice directionPlayerChoice) {
+        Cell nextCell;
+        try {
+            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionPlayerChoice.getDirection());
+            if (currentWorker.checkMove(nextCell)) {
+                currentWorker.move(nextCell);
+                outcome = currentWorker.setMoveCompleted();
+            } else {
+                outcome = Outcome.INVALID_DIRECTION;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            outcome = Outcome.INVALID_DIRECTION;
+        } finally {
+            notify(this);
+        }
     }
 
-    public void setWorkerStartPosition(Cell[] arg) {
-        currentPlayer.getWorkers()[0].setCurrentWorkerCell(arg[0]);
-        currentPlayer.getWorkers()[1].setCurrentWorkerCell(arg[1]);
-        setChanged();
-        notifyObservers();
+    public void setDirectionBuild(DirectionPlayerChoice directionPlayerChoice) {
+        Cell nextCell;
+        try {
+            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionPlayerChoice.getDirection());
+            if (currentWorker.checkBuild(nextCell)) {
+                currentWorker.build(nextCell);
+                outcome = currentWorker.setBuildCompleted();
+            } else {
+                outcome = Outcome.INVALID_DIRECTION;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            outcome = Outcome.INVALID_DIRECTION;
+        } finally {
+            notify(this);
+        }
+    }
+
+    public void setCurrentWorker(WorkerPlayerChoice workerPlayerChoice) {
+        this.currentWorker = this.currentPlayer.getWorkers()[workerPlayerChoice.getWorkerNumber()];
+        notify(this);
     }
 
 
 }
+
+//TODO: controllo Player
