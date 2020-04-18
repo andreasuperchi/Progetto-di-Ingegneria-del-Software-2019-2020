@@ -21,6 +21,14 @@ public abstract class View extends Observable<PlayerChoice> implements Observer<
         notify(new NumberOfPlayersChoice(player, input));
     }
 
+    protected void processDirectionPlayerChoice(Direction input) {
+        notify(new DirectionPlayerChoice(player, input));
+    }
+
+    protected void processWorkerPlayerChoice(int input) {
+        notify(new WorkerPlayerChoice(player, input));
+    }
+
 
     @Override
     public void update(Model message) {

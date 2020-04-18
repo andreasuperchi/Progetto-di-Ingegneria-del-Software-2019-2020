@@ -25,7 +25,7 @@ public class RemoteView extends View {
             } else {
                 try {
                     Direction direction = Direction.parseInput(message);
-                    processChoice(null, -1, direction);
+                    processDirectionPlayerChoice(direction);
                 } catch (IllegalArgumentException e) {
                     //TODO stampare lato client
                 }
@@ -43,7 +43,11 @@ public class RemoteView extends View {
                     processNumberOfPlayersChoice(message);
                 }
             } else {
-
+                if (message < 0 || message > 1) {
+                    //TODO stampare lato client
+                } else {
+                    processWorkerPlayerChoice(message);
+                }
             }
 
         }
