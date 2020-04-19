@@ -9,4 +9,8 @@ public class StringChoice extends PlayerChoice {
         this.player = player;
         this.string = string;
     }
+
+    public String getString() {
+        return string;
+    }
 }

@@ -16,7 +16,10 @@ public enum GodName {
     PAN,
     PROMETHEUS,
     TRITON,
-    ZEUS;
+    ZEUS,
+
+    SELECTED_GOD;
+
 
     public static GodName parseInput(String input) {
         return Enum.valueOf(GodName.class, input.toUpperCase());

@@ -47,6 +47,7 @@ public class RemoteView extends View {
         @Override
         public void update(Integer message) {
             if (!setupDone) {
+                //ricevo il numero di giocatori della partita
                 if (message <= 1 || message > 3) {
                     //TODO stampare lato client
                 } else {
@@ -54,7 +55,8 @@ public class RemoteView extends View {
                     processNumberOfPlayersChoice(message);
                 }
             } else {
-                if (message < 0 || message > 1) {
+                //stiamo scegliendo il numero del worker per giocare
+                if (message != 0 && message != 1) {
                     //TODO stampare lato client
                 } else {
                     processWorkerPlayerChoice(message);

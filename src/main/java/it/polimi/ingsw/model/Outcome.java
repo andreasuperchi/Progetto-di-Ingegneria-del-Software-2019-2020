@@ -8,7 +8,9 @@ public enum Outcome {
     BUILD_COMPLETED,
     MOVE_AGAIN,
     BUILD_AGAIN,
-    INVALID_GOD;
+    INVALID_GOD,
+    DUPLICATE_GOD,
+    UNAVAILABLE_WORKER;
 
     public String printOutcome() {
         String out;
@@ -37,6 +39,12 @@ public enum Outcome {
                 break;
             case INVALID_GOD:
                 out = "You can't use this god!";
+                break;
+            case DUPLICATE_GOD:
+                out = "The god has already been selected";
+                break;
+            case UNAVAILABLE_WORKER:
+                out = "Selected worker is unavailable";
                 break;
             default:
                 throw new IllegalArgumentException();

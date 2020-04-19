@@ -8,6 +8,7 @@ public class Worker {
     private int newLevel;
     private boolean hasMoved;
     private boolean hasBuilt;
+    private boolean endOfTurn;
     private boolean canBeUsed;
 
     public Worker(Player player) {
@@ -16,6 +17,10 @@ public class Worker {
         this.hasMoved = false;
         this.hasBuilt = false;
         this.canBeUsed = true;
+    }
+
+    public boolean isEndOfTurn() {
+        return endOfTurn;
     }
 
     public Player getPlayerName() {
@@ -120,16 +125,6 @@ public class Worker {
             return true;
         } else {
             return false;
-        }
-    }
-
-    public void turn(Cell nextWorkerCell) {
-        if (!this.hasMoved) {
-            this.move(nextWorkerCell);
-            this.hasMoved = true;
-        } else if (!this.hasBuilt) {
-            this.build(nextWorkerCell);
-            this.hasBuilt = true;
         }
     }
 
