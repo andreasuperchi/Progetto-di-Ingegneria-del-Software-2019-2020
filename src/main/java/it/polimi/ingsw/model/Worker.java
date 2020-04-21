@@ -8,7 +8,6 @@ public class Worker {
     private int newLevel;
     private boolean hasMoved;
     private boolean hasBuilt;
-    private boolean endOfTurn;
     private boolean canBeUsed;
 
     public Worker(Player player) {
@@ -17,10 +16,6 @@ public class Worker {
         this.hasMoved = false;
         this.hasBuilt = false;
         this.canBeUsed = true;
-    }
-
-    public boolean isEndOfTurn() {
-        return endOfTurn;
     }
 
     public Player getPlayerName() {
@@ -93,9 +88,9 @@ public class Worker {
         }
     }
 
-    public boolean checkSurroundingCells(Map map) {
+    public boolean checkSurroundingCells() {
         for (Direction d : Direction.values()){
-            if (checkMove(map.getNextWorkerCell(getCurrentWorkerCell(), d))) {
+            if (checkMove(Model.getMap().getNextWorkerCell(getCurrentWorkerCell(), d))) {
                 return true;
             }
         }

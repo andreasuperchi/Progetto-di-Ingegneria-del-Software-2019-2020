@@ -42,17 +42,4 @@ public class WorkerTriton extends Worker {
             return true;
         }
     }
-
-    @Override
-    public void turn(Cell nextWorkerCell) {
-        if (!this.getHasMoved()) {  //TODO: mettere a posto questo metodo
-            do {
-                this.move(nextWorkerCell);
-                this.setHasMoved(true);
-            } while (moveAnotherTime);
-        } else if (!this.getHasBuilt()) {
-            this.build(nextWorkerCell);
-            this.setHasBuilt(true);
-        }
-    }
 }

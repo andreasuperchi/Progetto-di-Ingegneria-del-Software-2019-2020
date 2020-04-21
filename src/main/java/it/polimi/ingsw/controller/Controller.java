@@ -11,29 +11,27 @@ public class Controller implements Observer<PlayerChoice> {
         this.model = model;
     }
 
-
-
     @Override
     public void update(PlayerChoice message) {
         if (message instanceof NumberOfPlayersChoice) {
             model.setNumberOfPlayers((NumberOfPlayersChoice) message);
         }
-        else if (message instanceof PlayerGodChoice) {
+        else if (message instanceof GodChoice) {
             //per aggiungere gli dèi all'array setAvailableGods
             if (model.getAvailableGods().size() < model.getNumberOfPlayers()) {
-                model.setAvailableGods((PlayerGodChoice) message);
+                model.setAvailableGods((GodChoice) message);
             }
             //oppure per la scelta del dio di un giocatore
             else {
-                model.setPlayerGod((PlayerGodChoice) message);
+                model.setPlayerGod((GodChoice) message);
             }
-        } else if (message instanceof WorkerPlayerChoice) {
-            model.setCurrentWorker((WorkerPlayerChoice) message);
-        } else if (message instanceof DirectionPlayerChoice) {
+        } else if (message instanceof WorkerChoice) {
+            model.setCurrentWorker((WorkerChoice) message);
+        } else if (message instanceof DirectionChoice) {
             if (model.getCurrentWorker().getHasMoved()) {
-                model.setDirectionBuild((DirectionPlayerChoice) message);
+                model.setDirectionBuild((DirectionChoice) message);
             } else {
-                model.setDirectionMove((DirectionPlayerChoice) message);
+                model.setDirectionMove((DirectionChoice) message);
             }
         } else if (message instanceof StringChoice) {
             if (model.getCurrentWorker().getHasMoved() && !model.getCurrentWorker().getHasBuilt()) {
@@ -41,8 +39,8 @@ public class Controller implements Observer<PlayerChoice> {
             } else if (model.getCurrentWorker().getHasBuilt()) {
                 model.setCurrentWorkerHasBuild((StringChoice) message);
             }
-        } else if (model.getCurrentWorker().isEndOfTurn()) {
-
+        } else if (model.getCurrentPlayer().isEndOfTurn()) {
+            model.endTurn();
         }
     }
 }

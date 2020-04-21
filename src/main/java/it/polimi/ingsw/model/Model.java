@@ -27,8 +27,20 @@ public class Model extends Observable<Model> implements Cloneable {
         return availableGods;
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public int getNumberOfPlayers() {
         return numberOfPlayers;
+    }
+
+    public static Map getMap() {
+        return map;
+    }
+
+    public Worker getCurrentWorker() {
+        return currentWorker;
     }
 
     public void setNumberOfPlayers(NumberOfPlayersChoice numberOfPlayers) {
@@ -36,45 +48,41 @@ public class Model extends Observable<Model> implements Cloneable {
         notify(this);
     }
 
-    public Worker getCurrentWorker() {
-        return currentWorker;
-    }
-
-    public void setPlayerGod(PlayerGodChoice playerGodChoice) { //assegna a un giocatore il suo Dio e ne istanzia i rispettivi lavoratori
-        if (availableGods.contains(playerGodChoice.getGodName())) {
-            playerGodChoice.getPlayer().getWorkers()[0] = playerGodChoice.getGodName().parseGod(playerGodChoice.getPlayer());
-            playerGodChoice.getPlayer().getWorkers()[1] = playerGodChoice.getGodName().parseGod(playerGodChoice.getPlayer());
-            availableGods.set(availableGods.indexOf(playerGodChoice.getGodName()), GodName.SELECTED_GOD);
+    public void setPlayerGod(GodChoice godChoice) { //assegna a un giocatore il suo Dio e ne istanzia i rispettivi lavoratori
+        if (availableGods.contains(godChoice.getGodName())) {
+            godChoice.getPlayer().getWorkers()[0] = godChoice.getGodName().parseGod(godChoice.getPlayer());
+            godChoice.getPlayer().getWorkers()[1] = godChoice.getGodName().parseGod(godChoice.getPlayer());
+            availableGods.set(availableGods.indexOf(godChoice.getGodName()), GodName.SELECTED_GOD);
         } else {
             outcome = Outcome.INVALID_GOD;
         }
         notify(this);
     }
 
-    public void setAvailableGods(PlayerGodChoice playerGodChoice) { //aggiunge un Dio alla lista di dèi disponibili
-        if (availableGods.contains(playerGodChoice.getGodName())) {
+    public void setAvailableGods(GodChoice godChoice) { //aggiunge un Dio alla lista di dèi disponibili
+        if (availableGods.contains(godChoice.getGodName())) {
             outcome = Outcome.DUPLICATE_GOD;
         } else {
-            availableGods.add(playerGodChoice.getGodName());
+            availableGods.add(godChoice.getGodName());
         }
         notify(this);
     }
 
     //imposta il worker scelto per il turno
-    public void setCurrentWorker(WorkerPlayerChoice workerPlayerChoice) {
+    public void setCurrentWorker(WorkerChoice workerChoice) {
         //controllo se il lavoratore è disponibile
-        if (currentPlayer.getWorkers()[workerPlayerChoice.getWorkerNumber()].getCanBeUsed()) {
-            this.currentWorker = this.currentPlayer.getWorkers()[workerPlayerChoice.getWorkerNumber()];
+        if (currentPlayer.getWorkers()[workerChoice.getWorkerNumber()].getCanBeUsed()) {
+            this.currentWorker = this.currentPlayer.getWorkers()[workerChoice.getWorkerNumber()];
         } else {
             outcome = Outcome.UNAVAILABLE_WORKER;
         }
         notify(this);
     }
 
-    public void setDirectionMove(DirectionPlayerChoice directionPlayerChoice) {
+    public void setDirectionMove(DirectionChoice directionChoice) {
         Cell nextCell;
         try {
-            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionPlayerChoice.getDirection());
+            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionChoice.getDirection());
             if (currentWorker.checkMove(nextCell)) {
                 currentWorker.move(nextCell);
                 if (getCurrentWorker().winCondition()) {
@@ -93,10 +101,10 @@ public class Model extends Observable<Model> implements Cloneable {
         }
     }
 
-    public void setDirectionBuild(DirectionPlayerChoice directionPlayerChoice) {
+    public void setDirectionBuild(DirectionChoice directionChoice) {
         Cell nextCell;
         try {
-            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionPlayerChoice.getDirection());
+            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionChoice.getDirection());
             if (currentWorker.checkBuild(nextCell)) {
                 currentWorker.build(nextCell);
                 if (getCurrentWorker().winCondition()) {
@@ -132,18 +140,17 @@ public class Model extends Observable<Model> implements Cloneable {
     public void endTurn() {
         currentWorker.setHasBuilt(false);
         currentWorker.setHasMoved(false);
+
         if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
             currentPlayer = players.get(0);
         } else {
             currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
         }
 
-        //TODO: CONTORLLO LAVORATORI DISPONIBILI NUOVO PLAYER
-
+        for (Worker w : currentPlayer.getWorkers()) {
+            w.setCanBeUsed(w.checkSurroundingCells());
+        }
         notify(this);
     }
 
-
 }
-
-//TODO: controllo Player

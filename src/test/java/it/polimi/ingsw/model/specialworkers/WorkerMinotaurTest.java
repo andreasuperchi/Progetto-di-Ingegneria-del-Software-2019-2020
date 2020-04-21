@@ -24,7 +24,7 @@ class WorkerMinotaurTest {
         p2 = new Player("Enemy", 34);
         w1 = new WorkerMinotaur(p1);
         w2 = new Worker(p2);
-        model = new Model(gameOver);
+        model = new Model();
     }
 
     @Test

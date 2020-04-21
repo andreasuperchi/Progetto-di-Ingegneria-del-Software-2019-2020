@@ -6,6 +6,7 @@ public class Player {
     private int age;
     private boolean isInGame;
     private Worker[] workers;
+    private boolean endOfTurn;
 
     public Player(String name, int age) {
         this.name = name;
@@ -37,6 +38,10 @@ public class Player {
     public Worker[] getWorkers() { return workers; }
 
     public void setWorkers(Worker[] workers) { this.workers = workers; }
+
+    public boolean isEndOfTurn() {
+        return endOfTurn;
+    }
 
     public void chooseGod(String godName) {
 

@@ -3,10 +3,10 @@ package it.polimi.ingsw.model.choices;
 import it.polimi.ingsw.model.Direction;
 import it.polimi.ingsw.model.Player;
 
-public class DirectionPlayerChoice extends PlayerChoice {
-    private Direction direction;
+public class DirectionChoice extends PlayerChoice {
+    private final Direction direction;
 
-    public DirectionPlayerChoice(Player player, Direction diection) {
+    public DirectionChoice(Player player, Direction direction) {
         this.player = player;
         this.direction = direction;
     }

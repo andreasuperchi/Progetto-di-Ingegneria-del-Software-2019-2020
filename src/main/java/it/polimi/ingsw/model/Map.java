@@ -24,31 +24,39 @@ public class Map {
         this.grid = grid;
     }
 
-    public int getCompletedTowers() { return completedTowers; }
+    public int getCompletedTowers() {
+        return completedTowers;
+    }
 
-    public void setCompletedTowers(int completedTowers) { this.completedTowers = completedTowers; }
+    public void setCompletedTowers(int completedTowers) {
+        this.completedTowers = completedTowers;
+    }
 
     //ritorna la cella nella direzione scelta rispetto alla "cella base", dove "cella base" è la cella in cui si trova il lavoratore prima di compiere il movimento
     public Cell getNextWorkerCell(Cell baseCell, Direction direction) {
-        switch (direction) {
-            case NORTH:
-                return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber()];
-            case SOUTH:
-                return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber()];
-            case EAST:
-                return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() + 1];
-            case WEST:
-                return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() - 1];
-            case NORTH_EAST:
-                return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() + 1];
-            case NORTH_WEST:
-                return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() - 1];
-            case SOUTH_EAST:
-                return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() + 1];
-            case SOUTH_WEST:
-                return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() - 1];
-            default:
-                throw new ArrayIndexOutOfBoundsException("Unexpected case!");
+        try {
+            switch (direction) {
+                case NORTH:
+                    return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber()];
+                case SOUTH:
+                    return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber()];
+                case EAST:
+                    return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() + 1];
+                case WEST:
+                    return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() - 1];
+                case NORTH_EAST:
+                    return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() + 1];
+                case NORTH_WEST:
+                    return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() - 1];
+                case SOUTH_EAST:
+                    return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() + 1];
+                case SOUTH_WEST:
+                    return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() - 1];
+                default:
+                    throw new IllegalArgumentException("Unexpected case!");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
         }
     }
 }
