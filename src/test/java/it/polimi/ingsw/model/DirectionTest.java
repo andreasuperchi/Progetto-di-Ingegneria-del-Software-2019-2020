@@ -49,4 +49,6 @@ class DirectionTest {
     public void correctSouthWestParsing() {
         assertEquals(Direction.parseInput("South_West"), Direction.valueOf("SOUTH_WEST"));
     }
+
+    // TODO: fare caso in cui l'input sia errato
 }
