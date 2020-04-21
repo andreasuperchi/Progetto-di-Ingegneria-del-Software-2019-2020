@@ -20,7 +20,7 @@ public enum Outcome {
                 out = "You Win!";
                 break;
             case LOSE:
-                out = "You lose!";
+                out = "You Lose!";
                 break;
             case INVALID_DIRECTION:
                 out = "The direction you chose is invalid!";
@@ -41,10 +41,10 @@ public enum Outcome {
                 out = "You can't use this god!";
                 break;
             case DUPLICATE_GOD:
-                out = "The god has already been selected";
+                out = "This god has already been selected!";
                 break;
             case UNAVAILABLE_WORKER:
-                out = "Selected worker is unavailable";
+                out = "Selected worker is unavailable!";
                 break;
             default:
                 throw new IllegalArgumentException();
