@@ -13,6 +13,9 @@ public class Player {
         this.age = age;
         isInGame = true;
         workers = new Worker[2];
+        workers[0] = new Worker();
+        workers[1] = new Worker();
+
     }
 
     public String getName() {

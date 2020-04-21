@@ -14,8 +14,8 @@ public class WorkerMinotaur extends Worker {
         this.forceBack = forceBack;
     }
 
-    public WorkerMinotaur(Player player) {
-        super(player);
+    public WorkerMinotaur() {
+        super();
     }
 
     public Cell getCellInThatDirection(Cell baseWorkerCell, Cell nextWorkerCell) {  //restituisce la cella successiva a nextWorkerCell nella Direzione scelta

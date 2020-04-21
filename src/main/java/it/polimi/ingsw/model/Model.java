@@ -23,8 +23,20 @@ public class Model extends Observable<Model> implements Cloneable {
         map = new Map();
     }
 
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setCurrentWorker(Worker currentWorker) {
+        this.currentWorker = currentWorker;
+    }
+
     public ArrayList<GodName> getAvailableGods() {
         return availableGods;
+    }
+
+    public Outcome getOutcome() {
+        return outcome;
     }
 
     public Player getCurrentPlayer() {
@@ -50,8 +62,8 @@ public class Model extends Observable<Model> implements Cloneable {
 
     public void setPlayerGod(GodChoice godChoice) { //assegna a un giocatore il suo Dio e ne istanzia i rispettivi lavoratori
         if (availableGods.contains(godChoice.getGodName())) {
-            godChoice.getPlayer().getWorkers()[0] = godChoice.getGodName().parseGod(godChoice.getPlayer());
-            godChoice.getPlayer().getWorkers()[1] = godChoice.getGodName().parseGod(godChoice.getPlayer());
+            godChoice.getPlayer().getWorkers()[0] = godChoice.getGodName().parseGod();
+            godChoice.getPlayer().getWorkers()[1] = godChoice.getGodName().parseGod();
             availableGods.set(availableGods.indexOf(godChoice.getGodName()), GodName.SELECTED_GOD);
         } else {
             outcome = Outcome.INVALID_GOD;
@@ -69,7 +81,7 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     //imposta il worker scelto per il turno
-    public void setCurrentWorker(WorkerChoice workerChoice) {
+    public void setWorkerChoice(WorkerChoice workerChoice) {
         //controllo se il lavoratore è disponibile
         if (currentPlayer.getWorkers()[workerChoice.getWorkerNumber()].getCanBeUsed()) {
             this.currentWorker = this.currentPlayer.getWorkers()[workerChoice.getWorkerNumber()];
@@ -81,47 +93,40 @@ public class Model extends Observable<Model> implements Cloneable {
 
     public void setDirectionMove(DirectionChoice directionChoice) {
         Cell nextCell;
-        try {
-            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionChoice.getDirection());
-            if (currentWorker.checkMove(nextCell)) {
-                currentWorker.move(nextCell);
-                if (getCurrentWorker().winCondition()) {
-                    outcome = Outcome.WIN;
-                    gameOver = true;
-                } else {
-                    outcome = currentWorker.setMoveCompleted();
-                }
+        nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionChoice.getDirection());
+        if (currentWorker.checkMove(nextCell)) {
+            currentWorker.move(nextCell);
+            if (getCurrentWorker().winCondition()) {
+                outcome = Outcome.WIN;
+                gameOver = true;
             } else {
-                outcome = Outcome.INVALID_DIRECTION;
+                outcome = currentWorker.setMoveCompleted();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } else {
             outcome = Outcome.INVALID_DIRECTION;
-        } finally {
-            notify(this);
         }
+        notify(this);
+
     }
 
     public void setDirectionBuild(DirectionChoice directionChoice) {
         Cell nextCell;
-        try {
-            nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionChoice.getDirection());
-            if (currentWorker.checkBuild(nextCell)) {
-                currentWorker.build(nextCell);
-                if (getCurrentWorker().winCondition()) {
-                    outcome = Outcome.WIN;
-                    gameOver = true;
-                } else {
-                    outcome = currentWorker.setBuildCompleted();
-                }
+
+        nextCell = map.getNextWorkerCell(currentWorker.getCurrentWorkerCell(), directionChoice.getDirection());
+        if (currentWorker.checkBuild(nextCell)) {
+            currentWorker.build(nextCell);
+            if (getCurrentWorker().winCondition()) {
+                outcome = Outcome.WIN;
+                gameOver = true;
             } else {
-                outcome = Outcome.INVALID_DIRECTION;
+                outcome = currentWorker.setBuildCompleted();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } else {
             outcome = Outcome.INVALID_DIRECTION;
-        } finally {
-            notify(this);
         }
+        notify(this);
     }
+
 
     public void setCurrentWorkerHasMoved(StringChoice stringChoice) {
         if (stringChoice.getString().equals("y")) {

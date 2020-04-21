@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 public class Worker {
-    private Player player;
+    //private Player player;
     private Cell currentWorkerCell;
     private static boolean canGoUp;
     private int oldLevel;
@@ -10,21 +10,14 @@ public class Worker {
     private boolean hasBuilt;
     private boolean canBeUsed;
 
-    public Worker(Player player) {
-        this.player = player;
+    public Worker() {
+        // this.player = player;
         canGoUp = true;
         this.hasMoved = false;
         this.hasBuilt = false;
         this.canBeUsed = true;
     }
 
-    public Player getPlayerName() {
-        return player;
-    }
-
-    public void setPlayerName(Player player) {
-        this.player = player;
-    }
 
     public Cell getCurrentWorkerCell() {
         return currentWorkerCell;

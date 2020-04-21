@@ -90,14 +90,14 @@ class GodNameTest {
     @Test
     public void checkParseGodApollo() {
         GodName godName = GodName.APOLLO;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerApollo);
     }
 
     @Test
     public void checkParseGodArtemis() {
         GodName godName = GodName.ARTEMIS;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerArtemis);
     }
 
@@ -105,84 +105,84 @@ class GodNameTest {
     @Test
     public void checkParseGodAthena() {
         GodName godName = GodName.ATHENA;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerAthena);
     }
 
     @Test
     public void checkParseGodAtlas() {
         GodName godName = GodName.ATLAS;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerAtlas);
     }
 
     @Test
     public void checkParseGodCharon() {
         GodName godName = GodName.CHARON;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerCharon);
     }
 
     @Test
     public void checkParseGodChronus() {
         GodName godName = GodName.CHRONUS;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerChronus);
     }
 
     @Test
     public void checkParseGodDemeter() {
         GodName godName = GodName.DEMETER;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerDemeter);
     }
 
     @Test
     public void checkParseGodHephaestus() {
         GodName godName = GodName.HEPHAESTUS;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerHephaestus);
     }
 
     @Test
     public void checkParseGodHestia() {
         GodName godName = GodName.HESTIA;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerHestia);
     }
 
     @Test
     public void checkParseGodMinotaur() {
         GodName godName = GodName.MINOTAUR;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerMinotaur);
     }
 
     @Test
     public void checkParseGodPan() {
         GodName godName = GodName.PAN;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerPan);
     }
 
     @Test
     public void checkParseGodPrometheus() {
         GodName godName = GodName.PROMETHEUS;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerPrometheus);
     }
 
     @Test
     public void checkParseGodTriton() {
         GodName godName = GodName.TRITON;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerTriton);
     }
 
     @Test
     public void checkParseGodZeus() {
         GodName godName = GodName.ZEUS;
-        Worker worker = godName.parseGod(player);
+        Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerZeus);
     }
 }

@@ -26,7 +26,7 @@ public class Controller implements Observer<PlayerChoice> {
                 model.setPlayerGod((GodChoice) message);
             }
         } else if (message instanceof WorkerChoice) {
-            model.setCurrentWorker((WorkerChoice) message);
+            model.setWorkerChoice((WorkerChoice) message);
         } else if (message instanceof DirectionChoice) {
             if (model.getCurrentWorker().getHasMoved()) {
                 model.setDirectionBuild((DirectionChoice) message);

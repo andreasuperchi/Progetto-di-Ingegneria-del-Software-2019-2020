@@ -22,8 +22,8 @@ class WorkerMinotaurTest {
     void setUp() {
         p1 = new Player("Test", 22);
         p2 = new Player("Enemy", 34);
-        w1 = new WorkerMinotaur(p1);
-        w2 = new Worker(p2);
+        w1 = new WorkerMinotaur();
+        w2 = new Worker();
         model = new Model();
     }
 

@@ -21,7 +21,7 @@ class WorkerTest {
     @Test
     public void checkIfNorthIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -30,7 +30,7 @@ class WorkerTest {
     @Test
     public void checkIfSouthIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -39,7 +39,7 @@ class WorkerTest {
     @Test
     public void checkIfEastIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.EAST);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -48,7 +48,7 @@ class WorkerTest {
     @Test
     public void checkIfWestIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.WEST);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -57,7 +57,7 @@ class WorkerTest {
     @Test
     public void checkIfNorthEastIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_EAST);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -66,7 +66,7 @@ class WorkerTest {
     @Test
     public void checkIfNorthWestIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_WEST);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -75,7 +75,7 @@ class WorkerTest {
     @Test
     public void checkIfSouthEastIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_EAST);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -84,7 +84,7 @@ class WorkerTest {
     @Test
     public void checkIfSouthWestIsValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_WEST);
         assertTrue(worker.checkMove(nextWorkerCell));
@@ -93,7 +93,7 @@ class WorkerTest {
     @Test
     public void checkIfNorthCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[0][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -102,7 +102,7 @@ class WorkerTest {
     @Test
     public void checkIfSouthCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[4][4];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -111,7 +111,7 @@ class WorkerTest {
     @Test
     public void checkIfEastCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[0][4];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.EAST);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -120,7 +120,7 @@ class WorkerTest {
     @Test
     public void checkIfWestCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.WEST);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -129,7 +129,7 @@ class WorkerTest {
     @Test
     public void checkIfNorthEastCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[0][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_EAST);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -138,7 +138,7 @@ class WorkerTest {
     @Test
     public void checkIfNorthWestCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[3][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.NORTH_WEST);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -147,7 +147,7 @@ class WorkerTest {
     @Test
     public void checkIfSouthEastCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[4][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_EAST);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -156,7 +156,7 @@ class WorkerTest {
     @Test
     public void checkIfSouthWestCellIsNotValid() {
         Cell baseCellWorker = Model.getMap().getGrid()[4][1];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextWorkerCell = Model.getMap().getNextWorkerCell(worker.getCurrentWorkerCell(), Direction.SOUTH_WEST);
         assertFalse(worker.checkMove(nextWorkerCell));
@@ -166,7 +166,7 @@ class WorkerTest {
     public void checkIfWorkerCantGoUp() {
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         Cell nextCellWorker = Model.getMap().getGrid()[1][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         nextCellWorker.setLevel(2);
         assertFalse(worker.checkMove(nextCellWorker));
@@ -176,7 +176,7 @@ class WorkerTest {
     public void checkIfNextCellIsOccupied() {
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         Cell nextCellWorker = Model.getMap().getGrid()[1][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         nextCellWorker.setIsOccupied(true);
         assertFalse(worker.checkMove(nextCellWorker));
@@ -186,7 +186,7 @@ class WorkerTest {
     public void checkCorrectMove() {
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         Cell nextCellWorker = Model.getMap().getGrid()[1][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         worker.move(nextCellWorker);
         assertEquals(nextCellWorker, worker.getCurrentWorkerCell());
@@ -196,7 +196,7 @@ class WorkerTest {
     public void checkIfWorkerOccupiesCell() {
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         Cell nextCellWorker = Model.getMap().getGrid()[1][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         worker.move(nextCellWorker);
         assertTrue(worker.getCurrentWorkerCell().getIsOccupied());
@@ -206,7 +206,7 @@ class WorkerTest {
     public void checkIfOldCellIsEmpty() {
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         Cell nextCellWorker = Model.getMap().getGrid()[1][0];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         worker.move(nextCellWorker);
         assertFalse(baseCellWorker.getIsOccupied());
@@ -216,7 +216,7 @@ class WorkerTest {
     public void checkCorrectBuild() {
         Cell baseCellWorker = Model.getMap().getGrid()[2][2];
         Cell nextCellWorker = Model.getMap().getGrid()[1][2];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         worker.build(nextCellWorker);
         assertEquals(1, nextCellWorker.getLevel());
@@ -226,7 +226,7 @@ class WorkerTest {
     public void checkCorrectWinCondition() {
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         Cell nextCellWorker = Model.getMap().getGrid()[0][1];
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setCurrentWorkerCell(baseCellWorker);
         baseCellWorker.setLevel(2);
         nextCellWorker.setLevel(3);
@@ -236,7 +236,7 @@ class WorkerTest {
 
     @Test
     public void checkIfWorkerCantMove() {
-        worker = new Worker(player);
+        worker = new Worker();
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextCellWorker = Model.getMap().getGrid()[0][0];
@@ -260,7 +260,7 @@ class WorkerTest {
 
     @Test
     public void checkIfWorkerCanMove() {
-        worker = new Worker(player);
+        worker = new Worker();
         Cell baseCellWorker = Model.getMap().getGrid()[1][1];
         worker.setCurrentWorkerCell(baseCellWorker);
         Cell nextCellWorker = Model.getMap().getGrid()[0][0];
@@ -282,7 +282,7 @@ class WorkerTest {
 
     @Test
     public void checkSetMoveCompleted(){
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setMoveCompleted();
         assertTrue(worker.getHasMoved());
         assertEquals(Outcome.MOVE_COMPLETED, worker.setMoveCompleted());
@@ -290,7 +290,7 @@ class WorkerTest {
 
     @Test
     public void checkSetBuildCompleted(){
-        worker = new Worker(player);
+        worker = new Worker();
         worker.setBuildCompleted();
         assertTrue(worker.getHasBuilt());
         assertEquals(Outcome.BUILD_COMPLETED, worker.setBuildCompleted());

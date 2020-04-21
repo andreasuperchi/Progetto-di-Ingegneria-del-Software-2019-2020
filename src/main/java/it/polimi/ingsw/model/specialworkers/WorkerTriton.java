@@ -6,8 +6,8 @@ public class WorkerTriton extends Worker {
 
     private boolean moveAnotherTime;
 
-    public WorkerTriton(Player player) {
-        super(player);
+    public WorkerTriton() {
+        super();
     }
 
     public boolean getMoveAnotherTime() {

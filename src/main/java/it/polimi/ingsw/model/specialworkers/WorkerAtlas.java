@@ -8,8 +8,8 @@ public class WorkerAtlas extends Worker {
 
     private boolean wantsToBuildADome;
 
-    public WorkerAtlas(Player player) {
-        super(player);
+    public WorkerAtlas() {
+        super();
     }
 
     @Override

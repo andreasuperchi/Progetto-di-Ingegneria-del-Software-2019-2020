@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.*;
 
 public class WorkerChronus extends Worker {
 
-    public WorkerChronus(Player player) {
-        super(player);
+    public WorkerChronus() {
+        super();
     }
 
     @Override

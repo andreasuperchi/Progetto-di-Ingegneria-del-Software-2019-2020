@@ -25,36 +25,36 @@ public enum GodName {
         return Enum.valueOf(GodName.class, input.toUpperCase());
     }
 
-    public Worker parseGod(Player player) {
+    public Worker parseGod() {
         switch (this) {
             case APOLLO:
-                return new WorkerApollo(player);
+                return new WorkerApollo();
             case ARTEMIS:
-                return new WorkerArtemis(player);
+                return new WorkerArtemis();
             case ATHENA:
-                return new WorkerAthena(player);
+                return new WorkerAthena();
             case ATLAS:
-                return new WorkerAtlas(player);
+                return new WorkerAtlas();
             case CHARON:
-                return new WorkerCharon(player);
+                return new WorkerCharon();
             case CHRONUS:
-                return new WorkerChronus(player);
+                return new WorkerChronus();
             case DEMETER:
-                return new WorkerDemeter(player);
+                return new WorkerDemeter();
             case HEPHAESTUS:
-                return new WorkerHephaestus(player);
+                return new WorkerHephaestus();
             case HESTIA:
-                return new WorkerHestia(player);
+                return new WorkerHestia();
             case MINOTAUR:
-                return new WorkerMinotaur(player);
+                return new WorkerMinotaur();
             case PAN:
-                return new WorkerPan(player);
+                return new WorkerPan();
             case PROMETHEUS:
-                return new WorkerPrometheus(player);
+                return new WorkerPrometheus();
             case TRITON:
-                return new WorkerTriton(player);
+                return new WorkerTriton();
             case ZEUS:
-                return new WorkerZeus(player);
+                return new WorkerZeus();
             default:
                 throw new IllegalArgumentException("Unexpected God!");
         }

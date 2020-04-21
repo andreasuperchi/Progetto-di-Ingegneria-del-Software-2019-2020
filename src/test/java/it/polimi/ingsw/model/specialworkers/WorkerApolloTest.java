@@ -18,8 +18,8 @@ class WorkerApolloTest {
         testMap = new Map();
         p1 = new Player("Test", 23);
         p2 = new Player("Enemy", 25);
-        w1 = new WorkerApollo(p1);
-        w2 = new Worker(p2);
+        w1 = new WorkerApollo();
+        w2 = new Worker();
     }
 
     @Test
