@@ -9,7 +9,7 @@ public class Model extends Observable<Model> implements Cloneable {
     private int numberOfPlayers;
     private ArrayList<GodName> availableGods;
     private ArrayList<Player> players;
-    private Player currentPlayer;
+    private static Player currentPlayer;
     private Worker currentWorker;
     private boolean gameOver;
     private static Map map;
@@ -23,8 +23,8 @@ public class Model extends Observable<Model> implements Cloneable {
         map = new Map();
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public static void setCurrentPlayer(Player currentPlayer) {
+        Model.currentPlayer = currentPlayer;
     }
 
     public void setCurrentWorker(Worker currentWorker) {
@@ -39,7 +39,7 @@ public class Model extends Observable<Model> implements Cloneable {
         return outcome;
     }
 
-    public Player getCurrentPlayer() {
+    public static Player getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -84,7 +84,7 @@ public class Model extends Observable<Model> implements Cloneable {
     public void setWorkerChoice(WorkerChoice workerChoice) {
         //controllo se il lavoratore è disponibile
         if (currentPlayer.getWorkers()[workerChoice.getWorkerNumber()].getCanBeUsed()) {
-            this.currentWorker = this.currentPlayer.getWorkers()[workerChoice.getWorkerNumber()];
+            this.currentWorker = currentPlayer.getWorkers()[workerChoice.getWorkerNumber()];
         } else {
             outcome = Outcome.UNAVAILABLE_WORKER;
         }

@@ -1,12 +1,14 @@
 package it.polimi.ingsw.model.specialworkers;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.choices.GodChoice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
 
 class WorkerMinotaurTest {
 
@@ -17,6 +19,7 @@ class WorkerMinotaurTest {
     Cell c1, c2;
     ArrayList<Player> players;
     boolean gameOver = false;
+    GodChoice godChoice;
 
     @BeforeEach
     void setUp() {
@@ -25,6 +28,7 @@ class WorkerMinotaurTest {
         w1 = new WorkerMinotaur();
         w2 = new Worker();
         model = new Model();
+        godChoice = new GodChoice(p1, GodName.MINOTAUR);
     }
 
     @Test
@@ -46,5 +50,16 @@ class WorkerMinotaurTest {
         assertEquals(Model.getMap().getGrid()[1][3], w2.getCurrentWorkerCell());
     }
 
-
+    @Test
+    public void checkIfBothWorkersAreMine() {
+        model.setAvailableGods(godChoice);
+        model.setPlayerGod(godChoice);
+        c1 = Model.getMap().getGrid()[1][1];
+        c2 = Model.getMap().getGrid()[1][2];
+        w1 = (WorkerMinotaur) p1.getWorkers()[0];
+        w1.setCurrentWorkerCell(c1);
+        p1.getWorkers()[1].setCurrentWorkerCell(c2);
+        Model.setCurrentPlayer(p1);
+        assertFalse(w1.checkMove(c2));
+    }
 }

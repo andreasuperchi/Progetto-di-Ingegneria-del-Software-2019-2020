@@ -47,7 +47,9 @@ public class WorkerMinotaur extends Worker {
 
     @Override
     public boolean checkMove(Cell nextWorkerCell) {
-        if (nextWorkerCell == null || nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() > 1) {
+        if (nextWorkerCell == null || nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() > 1 ||
+                (nextWorkerCell.getThisWorker().equals(Model.getCurrentPlayer().getWorkers()[0]) ||
+                        nextWorkerCell.getThisWorker().equals(Model.getCurrentPlayer().getWorkers()[1]))) {
             return false;
         } else if (nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() == 1 && getCanGoUp()) {   //controllo per Athena
             return false;
