@@ -45,10 +45,4 @@ public class Player {
     public boolean isEndOfTurn() {
         return endOfTurn;
     }
-
-    public void chooseGod(String godName) {
-
-    }
-
-
 }

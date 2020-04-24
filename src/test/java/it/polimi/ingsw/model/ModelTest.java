@@ -28,7 +28,7 @@ class ModelTest {
     void setUp() {
         model = new Model();
         player = new Player("test", 2);
-        model.setCurrentPlayer(player);
+        Model.setCurrentPlayer(player);
         numberOfPlayersChoice = new NumberOfPlayersChoice(player, 3);
         godChoice = new GodChoice(player, GodName.APOLLO);
         model.getAvailableGods().add(GodName.APOLLO);
@@ -77,20 +77,20 @@ class ModelTest {
     @Test
     public void checkSetCurrentWorkerAvailable() {
         model.setWorkerChoice(workerChoice);
-        assertEquals(model.getCurrentWorker(), model.getCurrentPlayer().getWorkers()[0]);
+        assertEquals(model.getCurrentWorker(), Model.getCurrentPlayer().getWorkers()[0]);
     }
 
     @Test
     public void checkSetCurrentWorkerUnavailable() {
-        model.getCurrentPlayer().getWorkers()[0].setCanBeUsed(false);
+        Model.getCurrentPlayer().getWorkers()[0].setCanBeUsed(false);
         model.setWorkerChoice(workerChoice);
         assertEquals(model.getOutcome(), Outcome.UNAVAILABLE_WORKER);
     }
 
     @Test
     public void checkSetDirectionMoveInvalid() {
-        model.getCurrentPlayer().getWorkers()[0].setCurrentWorkerCell(cell);
-        model.setCurrentWorker(model.getCurrentPlayer().getWorkers()[0]);
+        Model.getCurrentPlayer().getWorkers()[0].setCurrentWorkerCell(cell);
+        model.setCurrentWorker(Model.getCurrentPlayer().getWorkers()[0]);
         model.setDirectionMove(directionChoice);
         assertEquals(Outcome.INVALID_DIRECTION, model.getOutcome());
     }

@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.choices.GodChoice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.assertFalse;
 
@@ -17,8 +15,6 @@ class WorkerMinotaurTest {
     WorkerMinotaur w1;
     Worker w2;
     Cell c1, c2;
-    ArrayList<Player> players;
-    boolean gameOver = false;
     GodChoice godChoice;
 
     @BeforeEach
