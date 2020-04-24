@@ -34,11 +34,7 @@ public class WorkerTriton extends Worker {
         } else if (nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() == 1 && getCanGoUp()) {   //controllo per Athena
             return false;
         } else {
-            if (verifyPerimeter(nextWorkerCell)) {
-                moveAnotherTime = true;
-            } else {
-                moveAnotherTime = false;
-            }
+            moveAnotherTime = verifyPerimeter(nextWorkerCell);
             return true;
         }
     }
