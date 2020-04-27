@@ -2,13 +2,13 @@ package it.polimi.ingsw.model;
 
 public class Worker {
     //private Player player;
-    private Cell currentWorkerCell;
-    private static boolean canGoUp;
-    private int oldLevel;
-    private int newLevel;
-    private boolean hasMoved;
-    private boolean hasBuilt;
-    private boolean canBeUsed;
+    protected Cell currentWorkerCell;
+    protected static boolean canGoUp;
+    protected int oldLevel;
+    protected int newLevel;
+    protected boolean hasMoved;
+    protected boolean hasBuilt;
+    protected boolean canBeUsed;
 
     public Worker() {
         // this.player = player;
