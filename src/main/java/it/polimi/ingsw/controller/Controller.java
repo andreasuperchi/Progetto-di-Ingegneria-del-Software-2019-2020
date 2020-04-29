@@ -39,7 +39,7 @@ public class Controller implements Observer<PlayerChoice> {
             } else if (model.getCurrentWorker().getHasBuilt()) {
                 model.setCurrentWorkerHasBuild((StringChoice) message);
             }
-        } else if (model.getCurrentPlayer().isEndOfTurn()) {
+        } else if (Model.getCurrentPlayer().isEndOfTurn()) {
             model.endTurn();
         }
     }

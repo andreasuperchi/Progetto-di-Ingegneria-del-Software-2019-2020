@@ -18,7 +18,6 @@ public class Worker {
         this.canBeUsed = true;
     }
 
-
     public Cell getCurrentWorkerCell() {
         return currentWorkerCell;
     }
