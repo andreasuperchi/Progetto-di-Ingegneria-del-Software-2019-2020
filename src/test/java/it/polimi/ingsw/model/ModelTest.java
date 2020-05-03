@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.choices.GodChoice;
 
 import static org.junit.Assert.assertTrue;
 
-import it.polimi.ingsw.model.choices.NumberOfPlayersChoice;
+import it.polimi.ingsw.model.choices.IntChoice;
 import it.polimi.ingsw.model.choices.WorkerChoice;
 import it.polimi.ingsw.model.specialworkers.WorkerApollo;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,7 @@ class ModelTest {
 
     Model model;
     Player player;
-    NumberOfPlayersChoice numberOfPlayersChoice;
+    IntChoice intChoice;
     GodChoice godChoice;
     WorkerChoice workerChoice;
     DirectionChoice directionChoice;
@@ -29,7 +29,7 @@ class ModelTest {
         model = new Model();
         player = new Player("test", 2);
         Model.setCurrentPlayer(player);
-        numberOfPlayersChoice = new NumberOfPlayersChoice(player, 3);
+        intChoice = new IntChoice(player, 3);
         godChoice = new GodChoice(player, GodName.APOLLO);
         model.getAvailableGods().add(GodName.APOLLO);
         workerChoice = new WorkerChoice(player, 0);
@@ -40,7 +40,7 @@ class ModelTest {
 
     @Test
     public void checkSetNumberOfPlayers() {
-        model.setNumberOfPlayers(numberOfPlayersChoice);
+        model.setNumberOfPlayers(intChoice);
         assertEquals(model.getNumberOfPlayers(), 3);
     }
 

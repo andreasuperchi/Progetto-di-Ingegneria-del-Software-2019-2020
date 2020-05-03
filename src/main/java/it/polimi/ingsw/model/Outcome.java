@@ -4,13 +4,12 @@ public enum Outcome {
     WIN,
     LOSE,
     INVALID_DIRECTION,
-    MOVE_COMPLETED,
-    BUILD_COMPLETED,
-    MOVE_AGAIN,
-    BUILD_AGAIN,
     INVALID_GOD,
     DUPLICATE_GOD,
-    UNAVAILABLE_WORKER;
+    UNAVAILABLE_WORKER,
+    WORKER_MENU,
+    ACTION_MENU,
+    AVAILABLE_GODS_MENU;
 
     public String printOutcome() {
         String out;
@@ -25,18 +24,6 @@ public enum Outcome {
             case INVALID_DIRECTION:
                 out = "The direction you chose is invalid!";
                 break;
-            case MOVE_COMPLETED:
-                out = "You have successfully moved!";
-                break;
-            case BUILD_COMPLETED:
-                out = "You have successfully built!";
-                break;
-            case MOVE_AGAIN:
-                out = "Do you want to move again? Answer with y/n";
-                break;
-            case BUILD_AGAIN:
-                out = "Do you want to build again? Answer with y/n";
-                break;
             case INVALID_GOD:
                 out = "You can't use this god!";
                 break;
@@ -46,6 +33,11 @@ public enum Outcome {
             case UNAVAILABLE_WORKER:
                 out = "Selected worker is unavailable!";
                 break;
+            case WORKER_MENU:
+                out = "Choose your Worker: \n[0]Worker 1 \n[1]Worker 2";
+                break;
+            case AVAILABLE_GODS_MENU:
+                out = "Pick some Gods for the Game: [0]Apollo \n[1]ARTEMIS \n[2]ATHENA \n[3]ATLAS \n[4]CHARON \n[5]CHRONUS \n[6]DEMETER \n[7]HEPHAESTUS \n[8]HESTIA \n[9]MINOTAUR \n[10]PAN \n[11]PROMETHEUS \n[12]TRITON \n[13]ZEUS";
             default:
                 throw new IllegalArgumentException();
         }

@@ -59,4 +59,5 @@ public enum GodName {
                 throw new IllegalArgumentException("Unexpected God!");
         }
     }
+
 }

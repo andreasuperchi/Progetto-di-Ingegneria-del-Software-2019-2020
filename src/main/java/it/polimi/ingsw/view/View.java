@@ -14,7 +14,7 @@ public abstract class View extends Observable<PlayerChoice> implements Observer<
         return player;
     }
 
-    protected void processGodChoice(GodName input) {
+    /*protected void processGodChoice(GodName input) {
         notify(new GodChoice(player, input));
     }
 
@@ -31,6 +31,12 @@ public abstract class View extends Observable<PlayerChoice> implements Observer<
     }
 
     protected void processStringChoice(String input) { notify(new StringChoice(player, input));}
+*/
+
+    protected void processIntChoice(int input) {
+        notify(new IntChoice(player, input));
+    }
+
 
     @Override
     public void update(Model message) {

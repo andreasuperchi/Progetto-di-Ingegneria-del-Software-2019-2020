@@ -13,6 +13,11 @@ public class Model extends Observable<Model> implements Cloneable {
     private Worker currentWorker;
     private boolean gameOver;
     private static Map map;
+
+    private enum turnPhase {NUMBER_OF_PLAYERS, AVAILABLE_GODS, GOD_CHOICE, WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, END_TURN}
+
+    ;
+    private turnPhase currentPhase;
     private Outcome outcome;
 
 
@@ -20,6 +25,7 @@ public class Model extends Observable<Model> implements Cloneable {
         availableGods = new ArrayList<GodName>();
         players = new ArrayList<Player>();
         gameOver = false;
+        currentPhase = turnPhase.NUMBER_OF_PLAYERS;
         map = new Map();
     }
 
@@ -55,7 +61,7 @@ public class Model extends Observable<Model> implements Cloneable {
         return currentWorker;
     }
 
-    public void setNumberOfPlayers(NumberOfPlayersChoice numberOfPlayers) {
+    public void setNumberOfPlayers(IntChoice numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers.getNumberOfPlayers();
         notify(this);
     }
@@ -156,6 +162,10 @@ public class Model extends Observable<Model> implements Cloneable {
             w.setCanBeUsed(w.checkSurroundingCells());
         }
         notify(this);
+    }
+
+    public void parseIntChoice(IntChoice intChoice) {
+
     }
 
 }
