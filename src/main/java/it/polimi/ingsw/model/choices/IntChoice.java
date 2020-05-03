@@ -10,7 +10,7 @@ public class IntChoice extends PlayerChoice {
         this.value = numberOfPlayers;
     }
 
-    public int getNumberOfPlayers() {
+    public int getValue() {
         return value;
     }
 }

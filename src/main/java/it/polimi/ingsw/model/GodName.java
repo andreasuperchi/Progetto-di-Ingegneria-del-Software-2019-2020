@@ -16,9 +16,7 @@ public enum GodName {
     PAN,
     PROMETHEUS,
     TRITON,
-    ZEUS,
-
-    SELECTED_GOD;
+    ZEUS;
 
 
     public static GodName parseInput(String input) {

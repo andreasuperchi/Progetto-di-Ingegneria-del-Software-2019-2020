@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.GodName;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.choices.GodChoice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -34,13 +34,22 @@ public class Player {
         this.isInGame = isInGame;
     }
 
-    public boolean getInGame() { return isInGame; }
+    public boolean getInGame() {
+        return isInGame;
+    }
 
-    public void setInGame(boolean inGame) { isInGame = inGame; }
+    public void setInGame(boolean inGame) {
+        isInGame = inGame;
+    }
 
-    public Worker[] getWorkers() { return workers; }
+    public Worker[] getWorkers() {
+        return workers;
+    }
 
-    public void setWorkers(Worker[] workers) { this.workers = workers; }
+    public void setWorkers(GodName godName) {
+        workers[0] = godName.parseGod();
+        workers[1] = godName.parseGod();
+    }
 
     public boolean isEndOfTurn() {
         return endOfTurn;

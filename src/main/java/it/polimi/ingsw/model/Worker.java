@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 public class Worker {
     //private Player player;
+    protected String symbol;
     protected Cell currentWorkerCell;
     protected static boolean canGoUp;
     protected int oldLevel;
@@ -26,6 +27,14 @@ public class Worker {
         currentWorkerCell.setIsOccupied(true);
         currentWorkerCell.setThisWorker(this);
         this.currentWorkerCell = currentWorkerCell;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public boolean getCanGoUp() {
@@ -115,15 +124,22 @@ public class Worker {
         }
     }
 
-    public Outcome setMoveCompleted() {
-        this.hasMoved = true;
-        return Outcome.MOVE_COMPLETED;
+    public boolean canMove() {
+        if (hasMoved) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public Outcome setBuildCompleted() {
-        this.hasBuilt = true;
-        return Outcome.BUILD_COMPLETED;
+    public boolean canBuild() {
+        if (hasMoved && !hasBuilt) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 }
 
 

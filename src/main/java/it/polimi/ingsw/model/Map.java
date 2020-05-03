@@ -59,4 +59,57 @@ public class Map {
             return null;
         }
     }
+
+    public void showMap() {                         //TODO Cambaire output a String
+        Cell cell;
+        int[] levels = new int[5];                 //i livelli delle celle di una riga
+        Worker[] workers = new Worker[5];         // i worker che sono presenti sulla riga
+
+        //i le righe, j le colonne
+        for (int i = 0; i < 5; i++) {
+            System.out.println();               //vado nella nuova riga
+            System.out.print('|');
+            for (int j = 0; j < 5; j++) {
+                cell = grid[i][j];
+                System.out.print("---");
+                System.out.print('|');
+                switch (cell.getLevel()) {
+                    case 0:
+                        levels[j] = 0;
+                        break;
+                    case 1:
+                        levels[j] = 1;
+                        break;
+                    case 2:
+                        levels[j] = 2;
+                        break;
+                    case 3:
+                        levels[j] = 3;
+                        break;
+                    case 4:
+                        levels[j] = 4;
+                        break;
+                    default:
+                        levels[j] = 0;
+                        break;
+                }
+                //recupero il worker se è sulla cella
+                workers[j] = cell.getThisWorker();
+            }
+
+            //scrivo i contenuti delle celle
+            System.out.println();
+            for (int j = 0; j < 6; j++) {
+                System.out.print('|');
+                System.out.print(levels[j]);
+                if (!workers[j].equals(null)) {
+                    System.out.print(workers[j].getSymbol());
+
+                } else {
+                    System.out.print("   ");
+                }
+            }
+        }
+    }
+
 }

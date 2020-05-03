@@ -1,12 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.choices.DirectionChoice;
-import it.polimi.ingsw.model.choices.GodChoice;
-
 import static org.junit.Assert.assertTrue;
 
 import it.polimi.ingsw.model.choices.IntChoice;
-import it.polimi.ingsw.model.choices.WorkerChoice;
 import it.polimi.ingsw.model.specialworkers.WorkerApollo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
