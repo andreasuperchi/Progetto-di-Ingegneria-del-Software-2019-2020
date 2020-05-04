@@ -60,7 +60,7 @@ public class Map {
         StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
         int counter = 0;
         for (int i = 0; i < (4 * N_ROWS); i++) {
-            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+            if ((i - 3) % 4 == 0) {
                 string.append(" --------  --------  --------  --------  --------  \n");
             } else {
                 for (int j = 0; j < N_COLS; j++) {
