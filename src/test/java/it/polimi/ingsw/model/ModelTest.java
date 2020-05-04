@@ -14,9 +14,6 @@ class ModelTest {
     Model model;
     Player player;
     IntChoice intChoice;
-    GodChoice godChoice;
-    WorkerChoice workerChoice;
-    DirectionChoice directionChoice;
     Cell cell;
 
 

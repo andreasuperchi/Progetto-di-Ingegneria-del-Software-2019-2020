@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.choices;
 
 import it.polimi.ingsw.model.Player;
 
-public abstract class PlayerChoice {
+public abstract class Choice {
     protected Player player;
 
 

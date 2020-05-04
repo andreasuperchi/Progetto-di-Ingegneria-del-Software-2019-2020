@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.choices.*;
 import it.polimi.ingsw.view.Observer;
 
-public class Controller implements Observer<PlayerChoice> {
+public class Controller implements Observer<Choice> {
     Model model;
 
     public Controller(Model model) {
@@ -12,7 +12,7 @@ public class Controller implements Observer<PlayerChoice> {
     }
 
     @Override
-    public void update(PlayerChoice message) {
+    public void update(Choice message) {
         if (message instanceof IntChoice) {
 
         }

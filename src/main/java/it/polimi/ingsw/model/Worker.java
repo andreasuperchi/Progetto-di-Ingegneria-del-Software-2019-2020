@@ -9,6 +9,7 @@ public class Worker {
     protected int newLevel;
     protected boolean hasMoved;
     protected boolean hasBuilt;
+    protected boolean hasUsedAdditionalPower;
     protected boolean canBeUsed;
 
     public Worker() {
@@ -61,18 +62,28 @@ public class Worker {
 
     public boolean getHasMoved() { return hasMoved; }
 
-    public void setHasMoved(boolean hasMoved) { this.hasMoved = hasMoved; }
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
 
-    public boolean getHasBuilt() { return hasBuilt; }
+    public boolean getHasBuilt() {
+        return hasBuilt;
+    }
 
-    public void setHasBuilt(boolean hasBuilt) { this.hasBuilt = hasBuilt; }
+    public void setHasBuilt(boolean hasBuilt) {
+        this.hasBuilt = hasBuilt;
+    }
 
-    public boolean getCanBeUsed() { return canBeUsed; }
+    public boolean getCanBeUsed() {
+        return canBeUsed;
+    }
 
-    public void setCanBeUsed(boolean canBeUsed) { this.canBeUsed = canBeUsed; }
+    public void setCanBeUsed(boolean canBeUsed) {
+        this.canBeUsed = canBeUsed;
+    }
 
-    public boolean checkMove(Cell nextWorkerCell) {    //ritorna un booleano a seconda del fatto che la cella nella direzione scelta dal giocatore sia "valida" o meno
-        if (nextWorkerCell == null || nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
+    public boolean checkMove(Cell nextWorkerCell) {    //arrivo qui con una cella che esiste
+        if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
             return false;
         } else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
             return false;
@@ -90,7 +101,7 @@ public class Worker {
     }
 
     public boolean checkSurroundingCells() {
-        for (Direction d : Direction.values()){
+        for (Direction d : Direction.values()) {
             if (checkMove(Model.getMap().getNextWorkerCell(getCurrentWorkerCell(), d))) {
                 return true;
             }
@@ -98,42 +109,40 @@ public class Worker {
         return false;
     }
 
-    public void move(Cell nextWorkerCell) { //supponiamo di arrivare a move() con una "cella successiva" valida
-        oldLevel = getCurrentWorkerCell().getLevel();
-        getCurrentWorkerCell().setIsOccupied(false);
-        setCurrentWorkerCell(nextWorkerCell);
-        newLevel = getCurrentWorkerCell().getLevel();
-        getCurrentWorkerCell().setIsOccupied(true);
-        // nextWorkerCell.setThisWorker(this);
+    public void move(Cell nextWorkerCell) {
+        if (!checkMove(nextWorkerCell)) {
+            throw new IllegalArgumentException();
+        } else {
+            oldLevel = getCurrentWorkerCell().getLevel();
+            getCurrentWorkerCell().setIsOccupied(false);
+            setCurrentWorkerCell(nextWorkerCell);
+            newLevel = getCurrentWorkerCell().getLevel();
+            getCurrentWorkerCell().setIsOccupied(true);
+            this.hasMoved = true;
+        }
     }
 
-    public void build(Cell nextWorkerCell) {    //supponiamo di arrivare a build() con una "cella successiva" valida
-        if (nextWorkerCell.getLevel() == 3) {
-            nextWorkerCell.setLevel(4);
-            nextWorkerCell.setIsOccupied(true);
+    public void build(Cell nextWorkerCell) {
+        if (!checkBuild(nextWorkerCell)) {
+            throw new IllegalArgumentException();
         } else {
-            nextWorkerCell.setLevel(nextWorkerCell.getLevel() + 1);
+            if (nextWorkerCell.getLevel() == 3) {
+                nextWorkerCell.setLevel(4);
+                Model.getMap().setCompletedTowers(Model.getMap().getCompletedTowers() + 1);
+                nextWorkerCell.setIsOccupied(true);
+            } else {
+                nextWorkerCell.setLevel(nextWorkerCell.getLevel() + 1);
+            }
+            this.hasBuilt = true;
         }
+    }
+
+    //ogni lavoratore farà l'Override
+    public void specialPower(Cell nextWorkerCell) {
     }
 
     public boolean winCondition() {
         if (newLevel == 3 && oldLevel == 2) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean canMove() {
-        if (hasMoved) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public boolean canBuild() {
-        if (hasMoved && !hasBuilt) {
             return true;
         } else {
             return false;

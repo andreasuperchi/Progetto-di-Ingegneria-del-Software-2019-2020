@@ -13,7 +13,6 @@ class WorkerApolloTest {
     WorkerApollo w1;
     Worker w2;
     Cell c1, c2;
-    GodChoice godChoice;
 
     @BeforeEach
     void setup() {
@@ -22,7 +21,6 @@ class WorkerApolloTest {
         p2 = new Player("Enemy", 25);
         w1 = new WorkerApollo();
         w2 = new Worker();
-        godChoice = new GodChoice(p1, GodName.APOLLO);
     }
 
     @Test
@@ -47,8 +45,7 @@ class WorkerApolloTest {
 
     @Test
     public void checkIfBothWorkersAreMine() {
-        model.setAvailableGods(godChoice);
-        model.setPlayerGod(godChoice);
+        Model.getAvailableGods().add(GodName.APOLLO);
         c1 = Model.getMap().getGrid()[1][1];
         c2 = Model.getMap().getGrid()[1][2];
         w1 = (WorkerApollo) p1.getWorkers()[0];

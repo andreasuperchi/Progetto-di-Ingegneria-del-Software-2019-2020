@@ -10,8 +10,4 @@ public class WorkerArtemis extends Worker {
         super();
     }
 
-    @Override
-    public Outcome setMoveCompleted() {
-        return super.setMoveCompleted();
-    }
 }

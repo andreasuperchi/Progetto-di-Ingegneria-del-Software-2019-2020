@@ -14,12 +14,13 @@ public class Model extends Observable<Model> implements Cloneable {
     private boolean gameOver;
     private static Map map;
 
-    private enum turnPhase {NUMBER_OF_PLAYERS, AVAILABLE_GODS, GOD_CHOICE, WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN}
+    private enum turnPhase {
+        NUMBER_OF_PLAYERS, AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
+        WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN
+    }
 
-    ;
     private turnPhase currentPhase;
     private Outcome outcome;
-
 
     public Model() {
         availableGods = new ArrayList<GodName>();
@@ -76,6 +77,7 @@ public class Model extends Observable<Model> implements Cloneable {
                         outcome = Outcome.AVAILABLE_GODS_MENU;
                     }
                     break;
+
                 case AVAILABLE_GODS:
                     try {
                         addGod(intChoice.getValue());
@@ -88,6 +90,7 @@ public class Model extends Observable<Model> implements Cloneable {
                         updateCurrentPlayer();
                     }
                     break;
+
                 case GOD_CHOICE:
                     if (intChoice.getValue() >= availableGods.size()) {
                         outcome = Outcome.INVALID_GOD;
@@ -104,6 +107,9 @@ public class Model extends Observable<Model> implements Cloneable {
                         updateCurrentPlayer();
                     }
                     break;
+
+                case WORKER_PLACEMENT:
+                    //TODO: aaa
                 case WORKER_CHOICE:
                     if (intChoice.getValue() != 0 || intChoice.getValue() != 1) {
                         outcome = Outcome.INVALID_WORKER;
@@ -117,6 +123,7 @@ public class Model extends Observable<Model> implements Cloneable {
                         }
                     }
                     break;
+
                 case ACTION_CHOICE:
                     if (intChoice.getValue() < 0 || intChoice.getValue() > 3) {
                         outcome = Outcome.INVALID_ACTION;
@@ -125,24 +132,68 @@ public class Model extends Observable<Model> implements Cloneable {
                     }
                     break;
 
+                case MOVE:
+                    Direction direction;
+                    Cell cell;
+
+                    try {
+                        direction = parseDirection(intChoice.getValue());
+                        cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
+                        currentWorker.move(cell);
+                        //TODO: gestire wincondition
+                        currentPhase = turnPhase.ACTION_CHOICE;
+                        outcome = Outcome.ACTION_MENU;
+                    } catch (IllegalArgumentException e) {
+                        outcome = Outcome.INVALID_DIRECTION;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        outcome = Outcome.OUT_OF_MAP;
+                    }
+                    break;
+
+                case BUILD:
+                    if (!currentWorker.hasMoved) {
+                        outcome = Outcome.NOT_MOVED_ERROR;
+                    } else {
+                        try {
+                            direction = parseDirection(intChoice.getValue());
+                            cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
+                            currentWorker.build(cell);
+                            //TODO: gestire wincondition
+                            currentPhase = turnPhase.ACTION_CHOICE;
+                            outcome = Outcome.ACTION_MENU;
+                        } catch (IllegalArgumentException e) {
+                            outcome = Outcome.INVALID_DIRECTION;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            outcome = Outcome.OUT_OF_MAP;
+                        }
+                    }
+                    break;
+
+                case SPECIAL_POWER:
+                    //TODO: gestire menù per chi non ha special powers
+                    try {
+                        direction = parseDirection(intChoice.getValue());
+                        cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
+                        currentWorker.specialPower(cell);
+                        //TODO: gestire wincondition
+                        currentPhase = turnPhase.ACTION_CHOICE;
+                        outcome = Outcome.ACTION_MENU;
+                    } catch (IllegalArgumentException e) {
+                        outcome = Outcome.INVALID_DIRECTION;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        outcome = Outcome.OUT_OF_MAP;
+                    } //TODO: definire eccezione
+                case END_TURN:
+                    if (!currentWorker.hasMoved || !currentWorker.hasBuilt) {
+                        outcome = Outcome.CANT_GO_TO_END_TURN;
+                    } else {
+                        endTurn();
+                        currentPhase = turnPhase.WORKER_CHOICE;
+                        outcome = Outcome.WORKER_MENU;
+                    }
+                    break;
+
             }
-
-
-        }
-        notify(this);
-    }
-
-
-    public void setCurrentWorkerHasMoved(StringChoice stringChoice) {
-        if (stringChoice.getString().equals("y")) {
-            currentWorker.setHasMoved(false);
-        }
-        notify(this);
-    }
-
-    public void setCurrentWorkerHasBuild(StringChoice stringChoice) {
-        if (stringChoice.getString().equals("y")) {
-            currentWorker.setHasBuilt(false);
         }
         notify(this);
     }
@@ -156,11 +207,6 @@ public class Model extends Observable<Model> implements Cloneable {
         for (Worker w : currentPlayer.getWorkers()) {
             w.setCanBeUsed(w.checkSurroundingCells());
         }
-        notify(this);
-    }
-
-    public void parseIntChoice(IntChoice intChoice) {
-
     }
 
     private void addGod(int index) {
@@ -227,11 +273,32 @@ public class Model extends Observable<Model> implements Cloneable {
                 break;
             case 3:
                 currentPhase = turnPhase.END_TURN;
-
                 break;
             default:
                 throw new IllegalArgumentException();
+        }
+    }
 
+    private Direction parseDirection(int input) {
+        switch (input) {
+            case 0:
+                return Direction.NORTH;
+            case 1:
+                return Direction.NORTH_EAST;
+            case 2:
+                return Direction.EAST;
+            case 3:
+                return Direction.SOUTH_EAST;
+            case 4:
+                return Direction.SOUTH;
+            case 5:
+                return Direction.SOUTH_WEST;
+            case 6:
+                return Direction.WEST;
+            case 7:
+                return Direction.NORTH_WEST;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 

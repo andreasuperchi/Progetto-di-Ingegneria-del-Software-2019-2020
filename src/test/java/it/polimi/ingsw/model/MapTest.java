@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
     Map testMap;
+    Worker worker;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         testMap = new Map();
+        worker = new Worker();
     }
 
     @Test
@@ -133,4 +135,17 @@ class MapTest {
         assertNull(cell);
     }
 
+    @Test
+    void testToString() {
+        worker.symbol = "@A";
+        worker.setCurrentWorkerCell(testMap.grid[2][2]);
+        testMap.grid[2][2].setLevel(3);
+        testMap.grid[0][1].setLevel(3);
+        testMap.grid[1][1].setLevel(2);
+        testMap.grid[2][1].setLevel(1);
+        testMap.grid[0][4].setLevel(3);
+        testMap.grid[2][3].setLevel(4);
+        testMap.grid[4][1].setLevel(2);
+        System.out.println(testMap.toString());
+    }
 }

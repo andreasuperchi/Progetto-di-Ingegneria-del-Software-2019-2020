@@ -34,82 +34,74 @@ public class Map {
 
     //ritorna la cella nella direzione scelta rispetto alla "cella base", dove "cella base" è la cella in cui si trova il lavoratore prima di compiere il movimento
     public Cell getNextWorkerCell(Cell baseCell, Direction direction) {
-        try {
-            switch (direction) {
-                case NORTH:
-                    return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber()];
-                case SOUTH:
-                    return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber()];
-                case EAST:
-                    return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() + 1];
-                case WEST:
-                    return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() - 1];
-                case NORTH_EAST:
-                    return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() + 1];
-                case NORTH_WEST:
-                    return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() - 1];
-                case SOUTH_EAST:
-                    return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() + 1];
-                case SOUTH_WEST:
-                    return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() - 1];
-                default:
-                    throw new IllegalArgumentException("Unexpected case!");
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return null;
+        switch (direction) {
+            case NORTH:
+                return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber()];
+            case SOUTH:
+                return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber()];
+            case EAST:
+                return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() + 1];
+            case WEST:
+                return grid[baseCell.getRowNumber()][baseCell.getColumnNumber() - 1];
+            case NORTH_EAST:
+                return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() + 1];
+            case NORTH_WEST:
+                return grid[baseCell.getRowNumber() - 1][baseCell.getColumnNumber() - 1];
+            case SOUTH_EAST:
+                return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() + 1];
+            case SOUTH_WEST:
+                return grid[baseCell.getRowNumber() + 1][baseCell.getColumnNumber() - 1];
+            default:
+                throw new IllegalArgumentException("Unexpected case!");
         }
     }
 
-    public void showMap() {                         //TODO Cambaire output a String
-        Cell cell;
-        int[] levels = new int[5];                 //i livelli delle celle di una riga
-        Worker[] workers = new Worker[5];         // i worker che sono presenti sulla riga
-
-        //i le righe, j le colonne
-        for (int i = 0; i < 5; i++) {
-            System.out.println();               //vado nella nuova riga
-            System.out.print('|');
-            for (int j = 0; j < 5; j++) {
-                cell = grid[i][j];
-                System.out.print("---");
-                System.out.print('|');
-                switch (cell.getLevel()) {
-                    case 0:
-                        levels[j] = 0;
-                        break;
-                    case 1:
-                        levels[j] = 1;
-                        break;
-                    case 2:
-                        levels[j] = 2;
-                        break;
-                    case 3:
-                        levels[j] = 3;
-                        break;
-                    case 4:
-                        levels[j] = 4;
-                        break;
-                    default:
-                        levels[j] = 0;
-                        break;
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
+        int counter;
+        for (int i = 0; i < (4 * N_ROWS); i++) {
+            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+                string.append(" --------  --------  --------  --------  --------  \n");
+            } else {
+                for (int j = 0; j < N_COLS; j++) {
+                    for (int r = 0; r < 10; r++) {
+                        counter = i % 4;
+                        switch (r) {
+                            case 1:
+                                if (counter == 0) {
+                                    string.append(grid[i / 4][j].getLevel());
+                                } else {
+                                    string.append(" ");
+                                }
+                                break;
+                            case 2:
+                            case 3:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                                string.append(" ");
+                                break;
+                            case 4:
+                                if (i == 1 || i == 5 || i == 9 || i == 13) {
+                                    string.append(grid[i / 4][j].toString());
+                                    if (grid[i / 4][j].getIsOccupied()) {
+                                        r++;
+                                    }
+                                } else {
+                                    string.append(" ");
+                                }
+                                break;
+                            default:
+                                string.append("|");
+                        }
+                    }
                 }
-                //recupero il worker se è sulla cella
-                workers[j] = cell.getThisWorker();
-            }
 
-            //scrivo i contenuti delle celle
-            System.out.println();
-            for (int j = 0; j < 6; j++) {
-                System.out.print('|');
-                System.out.print(levels[j]);
-                if (!workers[j].equals(null)) {
-                    System.out.print(workers[j].getSymbol());
-
-                } else {
-                    System.out.print("   ");
-                }
+                string.append("\n");
             }
         }
+        return string.toString();
     }
-
 }

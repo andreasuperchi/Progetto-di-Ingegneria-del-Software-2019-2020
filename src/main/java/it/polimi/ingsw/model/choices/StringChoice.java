@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.choices;
 
 import it.polimi.ingsw.model.Player;
 
-public class StringChoice extends PlayerChoice {
+public class StringChoice extends Choice {
     private String string;
 
     public StringChoice(Player player, String string) {

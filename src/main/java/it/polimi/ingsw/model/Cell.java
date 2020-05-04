@@ -41,9 +41,13 @@ public class Cell {
         isOccupied = occupied;
     }
 
-    public int getLevel() { return level; }
+    public int getLevel() {
+        return level;
+    }
 
-    public void setLevel(int level) { this.level = level; }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public Worker getThisWorker() {
         return thisWorker;
@@ -51,5 +55,16 @@ public class Cell {
 
     public void setThisWorker(Worker thisWorker) {
         this.thisWorker = thisWorker;
+    }
+
+    @Override
+    public String toString() {
+        String string;
+        if (isOccupied) {
+            string = thisWorker.symbol;
+        } else {
+            string = " ";
+        }
+        return string;
     }
 }
