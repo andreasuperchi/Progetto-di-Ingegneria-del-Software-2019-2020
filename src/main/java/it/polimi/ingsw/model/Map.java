@@ -76,7 +76,11 @@ public class Map {
                                 break;
                             case 4:
                                 if ((i - 1) % 4 == 0) {
-                                    string.append(counter);
+                                    if (grid[i / 4][j].getIsOccupied()) {
+                                        string.append(grid[i / 4][j].toString());
+                                    } else {
+                                        string.append(counter);
+                                    }
                                     counter++;
                                 } else {
                                     string.append(" ");

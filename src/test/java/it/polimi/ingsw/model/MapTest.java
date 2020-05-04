@@ -137,6 +137,8 @@ class MapTest {
 
     @Test
     void testInitialMap() {
+        worker.symbol = "@A";
+        worker.setCurrentWorkerCell(testMap.grid[4][2]);
         System.out.println(testMap.showInitialMap());
     }
 
