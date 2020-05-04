@@ -26,30 +26,6 @@ class OutcomeTest {
     }
 
     @Test
-    public void checkMoveCompleted() {
-        outcome = Outcome.MOVE_COMPLETED;
-        assertEquals("You have successfully moved!", outcome.printOutcome());
-    }
-
-    @Test
-    public void checkBuildCompleted() {
-        outcome = Outcome.BUILD_COMPLETED;
-        assertEquals("You have successfully built!", outcome.printOutcome());
-    }
-
-    @Test
-    public void checkMoveAgain() {
-        outcome = Outcome.MOVE_AGAIN;
-        assertEquals("Do you want to move again? Answer with y/n", outcome.printOutcome());
-    }
-
-    @Test
-    public void checkBuildAgain() {
-        outcome = Outcome.BUILD_AGAIN;
-        assertEquals("Do you want to build again? Answer with y/n", outcome.printOutcome());
-    }
-
-    @Test
     public void checkInvalidGod() {
         outcome = Outcome.INVALID_GOD;
         assertEquals("You can't use this god!", outcome.printOutcome());

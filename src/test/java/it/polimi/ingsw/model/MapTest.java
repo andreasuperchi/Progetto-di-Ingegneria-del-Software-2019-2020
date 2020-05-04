@@ -78,67 +78,72 @@ class MapTest {
         assertEquals(nextCell, cell);
     }
 
-    @Test
-    void NullNorthTest() {
-        Cell cell = testMap.grid[0][2];
-        cell = testMap.getNextWorkerCell(cell, Direction.NORTH);
-        assertNull(cell);
-    }
+//    @Test
+//    void NullNorthTest() {
+//        Cell cell = testMap.grid[0][2];
+//        cell = testMap.getNextWorkerCell(cell, Direction.NORTH);
+//        assertNull(cell);
+//    }
+//
+//
+//    @Test
+//    void NullSouthTest() {
+//        Cell cell = testMap.grid[4][2];
+//        cell = testMap.getNextWorkerCell(cell, Direction.SOUTH);
+//        assertNull(cell);
+//    }
+//
+//    @Test
+//    void NullEastTest() {
+//        Cell cell = testMap.grid[2][4];
+//        cell = testMap.getNextWorkerCell(cell, Direction.EAST);
+//        assertNull(cell);
+//    }
+//
+//    @Test
+//    void NullWestTest() {
+//        Cell cell = testMap.grid[2][0];
+//        cell = testMap.getNextWorkerCell(cell, Direction.WEST);
+//        assertNull(cell);
+//    }
+//
+//    @Test
+//    void NullNorthEastTest() {
+//        Cell cell = testMap.grid[0][4];
+//        cell = testMap.getNextWorkerCell(cell, Direction.NORTH_EAST);
+//        assertNull(cell);
+//    }
+//
+//    @Test
+//    void NullNorthWestTest() {
+//        Cell cell = testMap.grid[0][0];
+//        cell = testMap.getNextWorkerCell(cell, Direction.NORTH_WEST);
+//        assertNull(cell);
+//    }
+//
+//    @Test
+//    void NullSouthEastTest() {
+//        Cell cell = testMap.grid[4][4];
+//        cell = testMap.getNextWorkerCell(cell, Direction.SOUTH_EAST);
+//        assertNull(cell);
+//    }
+//
+//    @Test
+//    void NullSouthWestTest() {
+//        Cell cell = testMap.grid[4][0];
+//        cell = testMap.getNextWorkerCell(cell, Direction.SOUTH_WEST);
+//        assertNull(cell);
+//    }
 
-
     @Test
-    void NullSouthTest() {
-        Cell cell = testMap.grid[4][2];
-        cell = testMap.getNextWorkerCell(cell, Direction.SOUTH);
-        assertNull(cell);
-    }
-
-    @Test
-    void NullEastTest() {
-        Cell cell = testMap.grid[2][4];
-        cell = testMap.getNextWorkerCell(cell, Direction.EAST);
-        assertNull(cell);
-    }
-
-    @Test
-    void NullWestTest() {
-        Cell cell = testMap.grid[2][0];
-        cell = testMap.getNextWorkerCell(cell, Direction.WEST);
-        assertNull(cell);
-    }
-
-    @Test
-    void NullNorthEastTest() {
-        Cell cell = testMap.grid[0][4];
-        cell = testMap.getNextWorkerCell(cell, Direction.NORTH_EAST);
-        assertNull(cell);
-    }
-
-    @Test
-    void NullNorthWestTest() {
-        Cell cell = testMap.grid[0][0];
-        cell = testMap.getNextWorkerCell(cell, Direction.NORTH_WEST);
-        assertNull(cell);
-    }
-
-    @Test
-    void NullSouthEastTest() {
-        Cell cell = testMap.grid[4][4];
-        cell = testMap.getNextWorkerCell(cell, Direction.SOUTH_EAST);
-        assertNull(cell);
-    }
-
-    @Test
-    void NullSouthWestTest() {
-        Cell cell = testMap.grid[4][0];
-        cell = testMap.getNextWorkerCell(cell, Direction.SOUTH_WEST);
-        assertNull(cell);
+    void testInitialMap() {
+        System.out.println(testMap.showInitialMap());
     }
 
     @Test
     void testToString() {
         worker.symbol = "@A";
-        worker.setCurrentWorkerCell(testMap.grid[2][2]);
+        worker.setCurrentWorkerCell(testMap.grid[4][2]);
         testMap.grid[2][2].setLevel(3);
         testMap.grid[0][1].setLevel(3);
         testMap.grid[1][1].setLevel(2);

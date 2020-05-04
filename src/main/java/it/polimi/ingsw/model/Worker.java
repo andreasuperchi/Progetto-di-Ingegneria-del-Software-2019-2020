@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 public class Worker {
-    //private Player player;
     protected String symbol;
     protected Cell currentWorkerCell;
     protected static boolean canGoUp;
@@ -9,11 +8,10 @@ public class Worker {
     protected int newLevel;
     protected boolean hasMoved;
     protected boolean hasBuilt;
-    protected boolean hasUsedAdditionalPower;
+    protected boolean hasUsedSpecialPower;
     protected boolean canBeUsed;
 
     public Worker() {
-        // this.player = player;
         canGoUp = true;
         this.hasMoved = false;
         this.hasBuilt = false;

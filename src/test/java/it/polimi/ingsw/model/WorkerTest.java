@@ -279,20 +279,4 @@ class WorkerTest {
         nextCellWorker.setLevel(4);
         assertTrue(worker.checkSurroundingCells());
     }
-
-    @Test
-    public void checkSetMoveCompleted(){
-        worker = new Worker();
-        worker.setMoveCompleted();
-        assertTrue(worker.getHasMoved());
-        assertEquals(Outcome.MOVE_COMPLETED, worker.setMoveCompleted());
-    }
-
-    @Test
-    public void checkSetBuildCompleted(){
-        worker = new Worker();
-        worker.setBuildCompleted();
-        assertTrue(worker.getHasBuilt());
-        assertEquals(Outcome.BUILD_COMPLETED, worker.setBuildCompleted());
-    }
 }

@@ -6,7 +6,6 @@ public class Player {
     private int age;
     private boolean isInGame;
     private Worker[] workers;
-    private boolean endOfTurn;
 
     public Player(String name, int age) {
         this.name = name;
@@ -15,7 +14,6 @@ public class Player {
         workers = new Worker[2];
         workers[0] = new Worker();
         workers[1] = new Worker();
-
     }
 
     public String getName() {
@@ -49,9 +47,5 @@ public class Player {
     public void setWorkers(GodName godName) {
         workers[0] = godName.parseGod();
         workers[1] = godName.parseGod();
-    }
-
-    public boolean isEndOfTurn() {
-        return endOfTurn;
     }
 }

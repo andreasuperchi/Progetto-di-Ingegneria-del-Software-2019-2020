@@ -198,7 +198,7 @@ public class Model extends Observable<Model> implements Cloneable {
         notify(this);
     }
 
-    public void endTurn() {
+    private void endTurn() {
         currentWorker.setHasBuilt(false);
         currentWorker.setHasMoved(false);
 

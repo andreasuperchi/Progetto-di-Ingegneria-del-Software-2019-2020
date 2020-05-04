@@ -56,12 +56,56 @@ public class Map {
         }
     }
 
+    public String showInitialMap() {
+        StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
+        int counter = 0;
+        for (int i = 0; i < (4 * N_ROWS); i++) {
+            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+                string.append(" --------  --------  --------  --------  --------  \n");
+            } else {
+                for (int j = 0; j < N_COLS; j++) {
+                    for (int r = 0; r < 10; r++) {
+                        switch (r) {
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 6:
+                            case 7:
+                            case 8:
+                                string.append(" ");
+                                break;
+                            case 4:
+                                if ((i - 1) % 4 == 0) {
+                                    string.append(counter);
+                                    counter++;
+                                } else {
+                                    string.append(" ");
+                                }
+                                break;
+                            case 5:
+                                if (!((i - 1) % 4 == 0 && counter > 9)) {
+                                    string.append(" ");
+                                }
+                                break;
+                            default:
+                                string.append("|");
+                        }
+                    }
+                }
+
+                string.append("\n");
+            }
+        }
+        return string.toString();
+    }
+
+
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
         int counter;
         for (int i = 0; i < (4 * N_ROWS); i++) {
-            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+            if ((i - 3) % 4 == 0) {
                 string.append(" --------  --------  --------  --------  --------  \n");
             } else {
                 for (int j = 0; j < N_COLS; j++) {
@@ -84,7 +128,7 @@ public class Map {
                                 string.append(" ");
                                 break;
                             case 4:
-                                if (i == 1 || i == 5 || i == 9 || i == 13) {
+                                if ((i - 1) % 4 == 0) {
                                     string.append(grid[i / 4][j].toString());
                                     if (grid[i / 4][j].getIsOccupied()) {
                                         r++;
