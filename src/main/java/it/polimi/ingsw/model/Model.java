@@ -99,8 +99,8 @@ public class Model extends Observable<Model> implements Cloneable {
                         currentPlayer.setWorkers(godName);
                         availableGods.remove(godName);
                         if (availableGods.size() == 0) {
-                            currentPhase = turnPhase.WORKER_CHOICE;
-                            outcome = Outcome.WORKER_MENU;
+                            currentPhase = turnPhase.WORKER_PLACEMENT;
+                            outcome = Outcome.WORKERS_PLACEMENT_MENU;
                         } else {
                             outcome = Outcome.GOD_CHOICE_MENU;
                         }
@@ -109,7 +109,35 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case WORKER_PLACEMENT:
-                    //TODO: aaa
+                    Cell workerCell;
+                    int count = 0;
+
+                    try {
+                        workerCell = parseCell(intChoice.getValue());
+                        if (currentPlayer.getWorkers()[0].getCurrentWorkerCell().equals(null)) {
+                            currentPlayer.getWorkers()[0].setCurrentWorkerCell(workerCell);
+                        } else if (currentPlayer.getWorkers()[1].getCurrentWorkerCell().equals(null)) {
+                            currentPlayer.getWorkers()[1].setCurrentWorkerCell(workerCell);
+                        } else {
+                            updateCurrentPlayer();
+                        }
+                    } catch (IllegalArgumentException e) {
+                        outcome = Outcome.INVALID_INPUT;
+                    }
+                    //controllo che tutti i giocatori abbiano piazzato i loro workers
+                    for (Player p : players) {
+                        for (Worker w : p.getWorkers()) {
+                            if (!w.getCurrentWorkerCell().equals(null)) {
+                                count++;
+                            }
+                        }
+                    }
+                    if (count == 6) {
+                        currentPhase = turnPhase.WORKER_CHOICE;
+                        outcome = Outcome.WORKER_MENU;
+                    }
+                    break;
+
                 case WORKER_CHOICE:
                     if (intChoice.getValue() != 0 || intChoice.getValue() != 1) {
                         outcome = Outcome.INVALID_WORKER;
@@ -140,11 +168,14 @@ public class Model extends Observable<Model> implements Cloneable {
                         direction = parseDirection(intChoice.getValue());
                         cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
                         currentWorker.move(cell);
-                        //TODO: gestire wincondition
+                        gameOver = currentWorker.winCondition();
+                        if (gameOver) {
+                            break;
+                        }
                         currentPhase = turnPhase.ACTION_CHOICE;
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_DIRECTION;
+                        outcome = Outcome.INVALID_INPUT;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
                     }
@@ -157,12 +188,15 @@ public class Model extends Observable<Model> implements Cloneable {
                         try {
                             direction = parseDirection(intChoice.getValue());
                             cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
+                            gameOver = currentWorker.winCondition();
                             currentWorker.build(cell);
-                            //TODO: gestire wincondition
+                            if (gameOver) {
+                                break;
+                            }
                             currentPhase = turnPhase.ACTION_CHOICE;
                             outcome = Outcome.ACTION_MENU;
                         } catch (IllegalArgumentException e) {
-                            outcome = Outcome.INVALID_DIRECTION;
+                            outcome = Outcome.INVALID_INPUT;
                         } catch (ArrayIndexOutOfBoundsException e) {
                             outcome = Outcome.OUT_OF_MAP;
                         }
@@ -170,24 +204,31 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case SPECIAL_POWER:
-                    //TODO: gestire menù per chi non ha special powers
                     try {
                         direction = parseDirection(intChoice.getValue());
                         cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
                         currentWorker.specialPower(cell);
-                        //TODO: gestire wincondition
+                        gameOver = currentWorker.winCondition();
+                        if (gameOver) {
+                            break;
+                        }
                         currentPhase = turnPhase.ACTION_CHOICE;
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_DIRECTION;
+                        outcome = Outcome.INVALID_INPUT;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
-                    } //TODO: definire eccezione
+                    }
+
                 case END_TURN:
                     if (!currentWorker.hasMoved || !currentWorker.hasBuilt) {
                         outcome = Outcome.CANT_GO_TO_END_TURN;
                     } else {
                         endTurn();
+                        //TODO: gestire se il giocatore è fuori partita
+                        //if (!currentPlayer.getInGame()){
+                        //
+                        //}
                         currentPhase = turnPhase.WORKER_CHOICE;
                         outcome = Outcome.WORKER_MENU;
                     }
@@ -198,16 +239,6 @@ public class Model extends Observable<Model> implements Cloneable {
         notify(this);
     }
 
-    private void endTurn() {
-        currentWorker.setHasBuilt(false);
-        currentWorker.setHasMoved(false);
-
-        updateCurrentPlayer();
-
-        for (Worker w : currentPlayer.getWorkers()) {
-            w.setCanBeUsed(w.checkSurroundingCells());
-        }
-    }
 
     private void addGod(int index) {
         switch (index) {
@@ -269,7 +300,12 @@ public class Model extends Observable<Model> implements Cloneable {
                 outcome = Outcome.DIRECTION_MENU;
                 break;
             case 2:
-                currentPhase = turnPhase.SPECIAL_POWER;
+                if (!currentWorker.hasSpecialPower) {
+                    outcome = Outcome.NO_SPECIAL_POWER;
+                } else {
+                    currentPhase = turnPhase.SPECIAL_POWER;
+                    outcome = Outcome.DIRECTION_MENU;
+                }
                 break;
             case 3:
                 currentPhase = turnPhase.END_TURN;
@@ -302,11 +338,83 @@ public class Model extends Observable<Model> implements Cloneable {
         }
     }
 
+    private Cell parseCell(int cellNumber) {
+        switch (cellNumber) {
+            case 0:
+                return map.grid[0][0];
+            case 1:
+                return map.grid[0][1];
+            case 2:
+                return map.grid[0][2];
+            case 3:
+                return map.grid[0][3];
+            case 4:
+                return map.grid[0][4];
+            case 5:
+                return map.grid[1][0];
+            case 6:
+                return map.grid[1][1];
+            case 7:
+                return map.grid[1][2];
+            case 8:
+                return map.grid[1][3];
+            case 9:
+                return map.grid[1][4];
+            case 10:
+                return map.grid[2][0];
+            case 11:
+                return map.grid[2][1];
+            case 12:
+                return map.grid[2][2];
+            case 13:
+                return map.grid[2][3];
+            case 14:
+                return map.grid[2][4];
+            case 15:
+                return map.grid[3][0];
+            case 16:
+                return map.grid[3][1];
+            case 17:
+                return map.grid[3][2];
+            case 18:
+                return map.grid[3][3];
+            case 19:
+                return map.grid[3][4];
+            case 20:
+                return map.grid[4][0];
+            case 21:
+                return map.grid[4][1];
+            case 22:
+                return map.grid[4][2];
+            case 23:
+                return map.grid[4][3];
+            case 24:
+                return map.grid[4][4];
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
     private void updateCurrentPlayer() {
         if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
             currentPlayer = players.get(0);
         } else {
             currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
+        }
+
+        if (!currentPlayer.getWorkers()[0].canBeUsed && !currentPlayer.getWorkers()[0].canBeUsed) {
+            currentPlayer.setInGame(false);
+        }
+    }
+
+    private void endTurn() {
+        currentWorker.setHasBuilt(false);
+        currentWorker.setHasMoved(false);
+
+        updateCurrentPlayer();
+
+        for (Worker w : currentPlayer.getWorkers()) {
+            w.setCanBeUsed(w.checkSurroundingCells());
         }
     }
 

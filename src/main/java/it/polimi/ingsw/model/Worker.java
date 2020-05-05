@@ -4,6 +4,7 @@ public class Worker {
     protected String symbol;
     protected Cell currentWorkerCell;
     protected static boolean canGoUp;
+    protected boolean hasSpecialPower;
     protected int oldLevel;
     protected int newLevel;
     protected boolean hasMoved;
@@ -16,6 +17,7 @@ public class Worker {
         this.hasMoved = false;
         this.hasBuilt = false;
         this.canBeUsed = true;
+        this.currentWorkerCell = null;
     }
 
     public Cell getCurrentWorkerCell() {
@@ -23,9 +25,13 @@ public class Worker {
     }
 
     public void setCurrentWorkerCell(Cell currentWorkerCell) {
-        currentWorkerCell.setIsOccupied(true);
-        currentWorkerCell.setThisWorker(this);
-        this.currentWorkerCell = currentWorkerCell;
+        if (currentWorkerCell.getIsOccupied()) {
+            throw new IllegalArgumentException();
+        } else {
+            currentWorkerCell.setIsOccupied(true);
+            currentWorkerCell.setThisWorker(this);
+            this.currentWorkerCell = currentWorkerCell;
+        }
     }
 
     public String getSymbol() {

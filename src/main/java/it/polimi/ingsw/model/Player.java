@@ -1,19 +1,23 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
+
 public class Player {
 
     private String name;
     private int age;
     private boolean isInGame;
     private Worker[] workers;
+    private String symbol;
 
-    public Player(String name, int age) {
+    public Player(String name, int age, String symbol) {
         this.name = name;
         this.age = age;
         isInGame = true;
         workers = new Worker[2];
         workers[0] = new Worker();
         workers[1] = new Worker();
+        this.symbol = symbol;
     }
 
     public String getName() {
@@ -46,6 +50,9 @@ public class Player {
 
     public void setWorkers(GodName godName) {
         workers[0] = godName.parseGod();
+        workers[0].symbol = symbol + "A";
         workers[1] = godName.parseGod();
+        workers[1].symbol = symbol + "B";
+
     }
 }

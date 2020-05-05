@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 public enum Outcome {
     WIN,
     LOSE,
-    INVALID_DIRECTION,
+    INVALID_INPUT,
     INVALID_GOD,
     DUPLICATE_GOD,
     UNAVAILABLE_WORKER,
@@ -18,6 +18,9 @@ public enum Outcome {
     INVALID_ACTION,
     OUT_OF_MAP,
     NOT_MOVED_ERROR,
+    INVALID_CELL,
+    WORKERS_PLACEMENT_MENU,
+    NO_SPECIAL_POWER,
     CANT_GO_TO_END_TURN;
 
     public String printOutcome() {
@@ -30,8 +33,8 @@ public enum Outcome {
             case LOSE:
                 out = "You Lose!";
                 break;
-            case INVALID_DIRECTION:
-                out = "The direction you chose is invalid!";
+            case INVALID_INPUT:
+                out = "Invalid input";
                 break;
             case INVALID_GOD:
                 out = "You can't select this god!";
@@ -110,11 +113,21 @@ public enum Outcome {
             case CANT_GO_TO_END_TURN:
                 out = "You have to move and build before ending your turn!";
                 break;
+            case INVALID_CELL:
+                out = "The cell you selected is not valid. Please choose another one.";
+                break;
+            case WORKERS_PLACEMENT_MENU:
+                out = "Enter the number of the cell where you want to place your worker";
+                break;
+            case NO_SPECIAL_POWER:
+                out = "your god has not special powers, do another action";
             default:
                 throw new IllegalArgumentException();
+
         }
 
         return out;
     }
+
 
 }
