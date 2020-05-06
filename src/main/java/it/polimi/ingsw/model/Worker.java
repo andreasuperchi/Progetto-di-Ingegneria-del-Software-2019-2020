@@ -143,6 +143,7 @@ public class Worker {
 
     //ogni lavoratore farà l'Override
     public void specialPower(Cell nextWorkerCell) {
+
     }
 
     public boolean winCondition() {

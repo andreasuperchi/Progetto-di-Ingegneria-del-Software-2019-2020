@@ -46,6 +46,9 @@ public class Cell {
     }
 
     public void setLevel(int level) {
+        if (level == 4) {
+            isOccupied = true;
+        }
         this.level = level;
     }
 
