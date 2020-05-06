@@ -4,19 +4,17 @@ import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.GodName;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
-class WorkerChronusTest {
+public class WorkerChronusTest {
 
     Model model;
     Player player;
     Cell c1, c2;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
 //        model = new Model();
 //        player = new Player("Test", 55);
 //        godChoice = new GodChoice(player, GodName.CHRONUS);

@@ -1,32 +1,28 @@
 package it.polimi.ingsw.model;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
 
-class DirectionTest {
+public class DirectionTest {
 
     @Test
     public void correctNorthParsing() {
-
         assertEquals(Direction.parseInput("North"), Direction.valueOf("NORTH"));
     }
 
     @Test
     public void correctSouthParsing() {
-
         assertEquals(Direction.parseInput("South"), Direction.valueOf("SOUTH"));
     }
 
     @Test
     public void correctEastParsing() {
-
         assertEquals(Direction.parseInput("East"), Direction.valueOf("EAST"));
     }
 
     @Test
     public void correctWestParsing() {
-
         assertEquals(Direction.parseInput("West"), Direction.valueOf("WEST"));
     }
 
@@ -50,5 +46,8 @@ class DirectionTest {
         assertEquals(Direction.parseInput("South_West"), Direction.valueOf("SOUTH_WEST"));
     }
 
-    // TODO: fare caso in cui l'input sia errato
+    @Test(expected = IllegalArgumentException.class)
+    public void checkInvalidInput() {
+        assertEquals(Direction.parseInput("Test"), Direction.valueOf("SOUTH_WEST"));
+    }
 }

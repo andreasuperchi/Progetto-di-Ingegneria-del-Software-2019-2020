@@ -341,55 +341,55 @@ public class Model extends Observable<Model> implements Cloneable {
     private Cell parseCell(int cellNumber) {
         switch (cellNumber) {
             case 0:
-                return map.grid[0][0];
+                return map.getGrid()[0][0];
             case 1:
-                return map.grid[0][1];
+                return map.getGrid()[0][1];
             case 2:
-                return map.grid[0][2];
+                return map.getGrid()[0][2];
             case 3:
-                return map.grid[0][3];
+                return map.getGrid()[0][3];
             case 4:
-                return map.grid[0][4];
+                return map.getGrid()[0][4];
             case 5:
-                return map.grid[1][0];
+                return map.getGrid()[1][0];
             case 6:
-                return map.grid[1][1];
+                return map.getGrid()[1][1];
             case 7:
-                return map.grid[1][2];
+                return map.getGrid()[1][2];
             case 8:
-                return map.grid[1][3];
+                return map.getGrid()[1][3];
             case 9:
-                return map.grid[1][4];
+                return map.getGrid()[1][4];
             case 10:
-                return map.grid[2][0];
+                return map.getGrid()[2][0];
             case 11:
-                return map.grid[2][1];
+                return map.getGrid()[2][1];
             case 12:
-                return map.grid[2][2];
+                return map.getGrid()[2][2];
             case 13:
-                return map.grid[2][3];
+                return map.getGrid()[2][3];
             case 14:
-                return map.grid[2][4];
+                return map.getGrid()[2][4];
             case 15:
-                return map.grid[3][0];
+                return map.getGrid()[3][0];
             case 16:
-                return map.grid[3][1];
+                return map.getGrid()[3][1];
             case 17:
-                return map.grid[3][2];
+                return map.getGrid()[3][2];
             case 18:
-                return map.grid[3][3];
+                return map.getGrid()[3][3];
             case 19:
-                return map.grid[3][4];
+                return map.getGrid()[3][4];
             case 20:
-                return map.grid[4][0];
+                return map.getGrid()[4][0];
             case 21:
-                return map.grid[4][1];
+                return map.getGrid()[4][1];
             case 22:
-                return map.grid[4][2];
+                return map.getGrid()[4][2];
             case 23:
-                return map.grid[4][3];
+                return map.getGrid()[4][3];
             case 24:
-                return map.grid[4][4];
+                return map.getGrid()[4][4];
             default:
                 throw new IllegalArgumentException();
         }

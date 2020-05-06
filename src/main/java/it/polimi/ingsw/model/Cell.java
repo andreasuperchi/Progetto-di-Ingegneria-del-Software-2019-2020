@@ -63,7 +63,7 @@ public class Cell {
     @Override
     public String toString() {
         String string;
-        if (isOccupied) {
+        if (isOccupied && level != 4) {
             string = thisWorker.symbol;
         } else {
             string = " ";

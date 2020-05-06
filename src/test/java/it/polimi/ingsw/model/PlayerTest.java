@@ -1,16 +1,16 @@
 package it.polimi.ingsw.model;
 
-//import it.polimi.ingsw.model.choices.NumberOfPlayersChoice;
-//import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 
-//import static org.junit.jupiter.api.Assertions.*;
-
-class PlayerTest {
+public class PlayerTest {
+    Player player;
 
     @Test
-    public void x() {
-
+    public void testSymbol() {
+        player = new Player("Test", 11, "@");
+        player.setWorkers(GodName.APOLLO);
+        assertEquals("@A", player.getWorkers()[0].symbol);
     }
 }

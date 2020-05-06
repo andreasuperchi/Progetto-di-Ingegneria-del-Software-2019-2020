@@ -1,17 +1,19 @@
 package it.polimi.ingsw.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-class CellTest {
+import org.junit.Before;
+import org.junit.Test;
+
+public class CellTest {
+    Player player;
+    Model model;
     Cell cell;
-    Worker worker;
 
-    @BeforeEach
-    void setUp() {
-        cell = new Cell(1, 1);
-        worker = new Worker();
-        worker.symbol = "@A";
+    @Before
+    public void setUp() {
+        model = new Model();
+        cell = Model.getMap().getGrid()[1][2];
+        player = new Player("Test", 43, "#");
     }
 
     @Test
@@ -23,7 +25,8 @@ class CellTest {
     @Test
     public void testToString() {
         cell.setLevel(2);
-        worker.setCurrentWorkerCell(cell);
+        player.setWorkers(GodName.APOLLO);
+        player.getWorkers()[0].setCurrentWorkerCell(cell);
         System.out.println(cell.toString());
     }
 }

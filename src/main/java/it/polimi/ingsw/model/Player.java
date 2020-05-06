@@ -13,11 +13,9 @@ public class Player {
     public Player(String name, int age, String symbol) {
         this.name = name;
         this.age = age;
-        isInGame = true;
-        workers = new Worker[2];
-        workers[0] = new Worker();
-        workers[1] = new Worker();
+        this.isInGame = true;
         this.symbol = symbol;
+        workers = new Worker[2];
     }
 
     public String getName() {
@@ -48,11 +46,14 @@ public class Player {
         return workers;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
     public void setWorkers(GodName godName) {
         workers[0] = godName.parseGod();
-        workers[0].symbol = symbol + "A";
         workers[1] = godName.parseGod();
+        workers[0].symbol = symbol + "A";
         workers[1].symbol = symbol + "B";
-
     }
 }

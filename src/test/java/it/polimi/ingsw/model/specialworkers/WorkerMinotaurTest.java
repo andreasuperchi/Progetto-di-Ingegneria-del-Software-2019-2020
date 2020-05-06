@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model.specialworkers;
 
 import it.polimi.ingsw.model.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
-class WorkerMinotaurTest {
+public class WorkerMinotaurTest {
 
     Model model;
     Player p1, p2;
@@ -15,8 +14,8 @@ class WorkerMinotaurTest {
     Worker w2;
     Cell c1, c2;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         p1 = new Player("Test", 22, "@");
         p2 = new Player("Enemy", 34, "#");
         w1 = new WorkerMinotaur();

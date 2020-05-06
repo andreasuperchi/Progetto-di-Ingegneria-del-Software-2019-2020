@@ -13,9 +13,10 @@ public class WorkerTest {
 
     @Before
     public void setUp() {
-        player = new Player("Test", 22, "@");
         model = new Model();
-        worker = new Worker();
+        player = new Player("Test", 22, "@");
+        player.setWorkers(GodName.ZEUS);
+        worker = player.getWorkers()[0];
     }
 
     @Test
@@ -225,5 +226,12 @@ public class WorkerTest {
         nextWorkerCell = Model.getMap().getGrid()[2][0];
         nextWorkerCell.setLevel(4);
         assertTrue(worker.checkSurroundingCells());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void checkCellWithADome() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        baseWorkerCell.setLevel(4);
+        worker.setCurrentWorkerCell(baseWorkerCell);
     }
 }
