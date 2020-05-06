@@ -20,12 +20,6 @@ class OutcomeTest {
     }
 
     @Test
-    public void checkInvalidDirection() {
-        outcome = Outcome.INVALID_DIRECTION;
-        assertEquals("The direction you chose is invalid!", outcome.printOutcome());
-    }
-
-    @Test
     public void checkInvalidGod() {
         outcome = Outcome.INVALID_GOD;
         assertEquals("You can't use this god!", outcome.printOutcome());

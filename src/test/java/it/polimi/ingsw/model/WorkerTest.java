@@ -14,7 +14,7 @@ class WorkerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Test", 22);
+        player = new Player("Test", 22, "@");
         model = new Model();
     }
 

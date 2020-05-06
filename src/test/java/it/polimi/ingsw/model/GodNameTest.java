@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.specialworkers.*;
+import it.polimi.ingsw.model.GodName.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class GodNameTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Test", 22);
+        player = new Player("Test", 22, "@");
     }
 
     @Test
@@ -185,4 +186,10 @@ class GodNameTest {
         Worker worker = godName.parseGod();
         assertTrue(worker instanceof WorkerZeus);
     }
+
+//    @org.junit.Test (expected = IllegalArgumentException.class)
+//    public void checkParseFail() {
+//        GodName godName = GodName.parseInput("Test");
+//        godName.parseGod();
+//    }
 }

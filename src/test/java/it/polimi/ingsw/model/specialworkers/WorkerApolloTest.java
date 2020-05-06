@@ -17,8 +17,8 @@ class WorkerApolloTest {
     @BeforeEach
     void setup() {
         model = new Model();
-        p1 = new Player("Test", 23);
-        p2 = new Player("Enemy", 25);
+        p1 = new Player("Test", 23, "@");
+        p2 = new Player("Enemy", 25, "#");
         w1 = new WorkerApollo();
         w2 = new Worker();
     }
