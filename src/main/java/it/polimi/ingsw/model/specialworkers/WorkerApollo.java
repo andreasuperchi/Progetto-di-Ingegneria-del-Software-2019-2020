@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.specialworkers;
 
 import it.polimi.ingsw.model.Cell;
-import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Worker;
 
 public class WorkerApollo extends Worker {
@@ -11,21 +9,44 @@ public class WorkerApollo extends Worker {
         super();
     }
 
+    public boolean checkBothApollos(Cell opponentsCell) {
+        return opponentsCell.getThisWorker() instanceof WorkerApollo;
+    }
+
+    @Override
+    public void setCurrentWorkerCell(Cell currentWorkerCell) {
+        if (currentWorkerCell.getIsOccupied() && currentWorkerCell.getLevel() == 4) {
+            throw new IllegalArgumentException();
+        } else {
+            currentWorkerCell.setIsOccupied(true);
+            currentWorkerCell.setThisWorker(this);
+            this.currentWorkerCell = currentWorkerCell;
+        }
+    }
+
     @Override
     public boolean checkMove(Cell nextWorkerCell) {
-        //controllo per Athena
-        if (nextWorkerCell == null || nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() > 1 || nextWorkerCell.getIsOccupied() ||
-                (nextWorkerCell.getThisWorker().equals(Model.getCurrentPlayer().getWorkers()[0]) ||
-                        nextWorkerCell.getThisWorker().equals(Model.getCurrentPlayer().getWorkers()[1]))) {
-            return false;
-        } else return nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() != 1 || getCanGoUp();
+        int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();
+
+        return !(this.getCurrentWorkerCell().equals(nextWorkerCell)) &&
+                ((nextWorkerCell.getLevel() != 4 && levelDiff <= 0 && !checkBothApollos(nextWorkerCell)) ||
+                        (nextWorkerCell.getLevel() != 4 && levelDiff == 1 && canGoUp && !checkBothApollos(nextWorkerCell)));
     }
 
     @Override
     public void move(Cell nextWorkerCell) {
-        if (nextWorkerCell.getIsOccupied() && nextWorkerCell.getLevel() != 4) {
-            nextWorkerCell.getThisWorker().move(this.getCurrentWorkerCell());
+        Cell tempCell = new Cell(0, 0);
+        Cell oldCell = this.currentWorkerCell;
+
+        if (!checkMove(nextWorkerCell)) {
+            throw new IllegalArgumentException();
+        } else {
+            if (nextWorkerCell.getIsOccupied() && nextWorkerCell.getLevel() != 4) {
+                this.setCurrentWorkerCell(tempCell);
+                oldCell.setIsOccupied(false);
+                nextWorkerCell.getThisWorker().setCurrentWorkerCell(oldCell);
+            }
+            super.move(nextWorkerCell);
         }
-        super.move(nextWorkerCell);
     }
 }

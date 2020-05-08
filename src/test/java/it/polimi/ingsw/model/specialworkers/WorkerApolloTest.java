@@ -8,48 +8,47 @@ import static org.junit.Assert.*;
 
 public class WorkerApolloTest {
     Model model;
-    Player p1, p2;
-    WorkerApollo w1;
-    Worker w2;
-    Cell c1, c2;
+    Player player, opponent;
+    WorkerApollo workerApollo;
+    Worker workerOpponent;
+    Cell baseWorkerCell, nextWorkerCell;
 
     @Before
-    public void setup() {
+    public void setUp() {
         model = new Model();
-        p1 = new Player("Test", 23, "@");
-        p2 = new Player("Enemy", 25, "#");
-        w1 = new WorkerApollo();
-        w2 = new Worker();
+        player = new Player("Test", 23, "@");
+        opponent = new Player("Enemy", 25, "#");
+        player.setWorkers(GodName.APOLLO);
+        opponent.setWorkers(GodName.TRITON);
+        workerApollo = (WorkerApollo) player.getWorkers()[0];
+        workerOpponent = opponent.getWorkers()[0];
+        Model.setCurrentPlayer(player);
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        nextWorkerCell = Model.getMap().getGrid()[1][2];
     }
 
     @Test
     public void checkMoveWithAnotherWorker() {
-        c1 = Model.getMap().getGrid()[1][1];
-        c2 = Model.getMap().getGrid()[1][2];
-        w1.setCurrentWorkerCell(c1);
-        w2.setCurrentWorkerCell(c2);
-        w1.move(c2);
-        assertEquals(c2, w1.getCurrentWorkerCell());
-        assertEquals(c1, w2.getCurrentWorkerCell());
+        workerApollo.setCurrentWorkerCell(baseWorkerCell);
+        workerOpponent.setCurrentWorkerCell(nextWorkerCell);
+        workerApollo.move(nextWorkerCell);
+        assertEquals(nextWorkerCell, workerApollo.getCurrentWorkerCell());
+        assertEquals(baseWorkerCell, workerOpponent.getCurrentWorkerCell());
     }
 
     @Test
     public void checkMoveWithoutAnotherWorker() {
-        c1 = Model.getMap().getGrid()[1][1];
-        c2 = Model.getMap().getGrid()[1][2];
-        w1.setCurrentWorkerCell(c1);
-        w1.move(c2);
-        assertEquals(c2, w1.getCurrentWorkerCell());
+        workerApollo.setCurrentWorkerCell(baseWorkerCell);
+        workerApollo.move(nextWorkerCell);
+        assertEquals(nextWorkerCell, workerApollo.getCurrentWorkerCell());
     }
 
     @Test
     public void checkIfBothWorkersAreMine() {
         Model.getAvailableGods().add(GodName.APOLLO);
-        c1 = Model.getMap().getGrid()[1][1];
-        c2 = Model.getMap().getGrid()[1][2];
-        w1 = (WorkerApollo) p1.getWorkers()[0];
-        w1.setCurrentWorkerCell(c1);
-        p1.getWorkers()[1].setCurrentWorkerCell(c2);
-        assertFalse(w1.checkMove(c2));
+        workerApollo = (WorkerApollo) player.getWorkers()[0];
+        workerApollo.setCurrentWorkerCell(baseWorkerCell);
+        player.getWorkers()[1].setCurrentWorkerCell(nextWorkerCell);
+        assertFalse(workerApollo.checkMove(nextWorkerCell));
     }
 }

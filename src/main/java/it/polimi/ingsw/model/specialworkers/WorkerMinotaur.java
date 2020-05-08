@@ -6,16 +6,23 @@ public class WorkerMinotaur extends Worker {
 
     private boolean forceBack;
 
-    public boolean getForceBack() {
-        return forceBack;
-    }
-
-    public void setForceBack(boolean forceBack) {
-        this.forceBack = forceBack;
-    }
-
     public WorkerMinotaur() {
         super();
+    }
+
+    public boolean checkNotBothMinotaurs(Cell opponentsCell) {
+        return !(opponentsCell.getThisWorker() instanceof WorkerMinotaur);
+    }
+
+    @Override
+    public void setCurrentWorkerCell(Cell currentWorkerCell) {
+        if (currentWorkerCell.getLevel() == 4) {
+            throw new IllegalArgumentException();
+        } else {
+            currentWorkerCell.setIsOccupied(true);
+            currentWorkerCell.setThisWorker(this);
+            this.currentWorkerCell = currentWorkerCell;
+        }
     }
 
     public Cell getCellInThatDirection(Cell baseWorkerCell, Cell nextWorkerCell) {  //restituisce la cella successiva a nextWorkerCell nella Direzione scelta
@@ -23,7 +30,7 @@ public class WorkerMinotaur extends Worker {
         cellsDifference[0] = baseWorkerCell.getRowNumber() - nextWorkerCell.getRowNumber();
         cellsDifference[1] = baseWorkerCell.getColumnNumber() - nextWorkerCell.getColumnNumber();
         if (cellsDifference[0] == 0 && cellsDifference[1] == 0) {
-            return null;
+            throw new IllegalArgumentException();
         } else {
             if (cellsDifference[0] == 1 && cellsDifference[1] == -1) {
                 return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.NORTH_EAST);
@@ -47,28 +54,24 @@ public class WorkerMinotaur extends Worker {
 
     @Override
     public boolean checkMove(Cell nextWorkerCell) {
-        if (nextWorkerCell == null || nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() > 1 ||
-                (nextWorkerCell.getThisWorker().equals(Model.getCurrentPlayer().getWorkers()[0]) ||
-                        nextWorkerCell.getThisWorker().equals(Model.getCurrentPlayer().getWorkers()[1]))) {
-            return false;
-        } else if (nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() == 1 && getCanGoUp()) {   //controllo per Athena
-            return false;
-        } else if ((nextWorkerCell.getIsOccupied() && nextWorkerCell.getLevel() != 4) &&
-                getCellInThatDirection(this.getCurrentWorkerCell(), nextWorkerCell) != null &&
-                !getCellInThatDirection(this.getCurrentWorkerCell(), nextWorkerCell).getIsOccupied()) {
-            forceBack = true;
-            return true;
-        } else {
-            forceBack = false;
-            return true;
-        }
+        int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();
+
+        return !(this.getCurrentWorkerCell().equals(nextWorkerCell)) &&
+                ((nextWorkerCell.getLevel() != 4 && levelDiff <= 0 && checkNotBothMinotaurs(nextWorkerCell)) ||
+                        (nextWorkerCell.getLevel() != 4 && levelDiff == 1 && canGoUp && checkNotBothMinotaurs(nextWorkerCell)));
     }
 
     @Override
     public void move(Cell nextWorkerCell) {
-        if (forceBack) {
-            nextWorkerCell.getThisWorker().move(getCellInThatDirection(this.getCurrentWorkerCell(), nextWorkerCell));
+        Cell otherCell = getCellInThatDirection(this.currentWorkerCell, nextWorkerCell);
+
+        if (!checkMove(nextWorkerCell)) {
+            throw new IllegalArgumentException();
+        } else {
+            if (nextWorkerCell.getIsOccupied() && !otherCell.getIsOccupied()) {
+                nextWorkerCell.getThisWorker().setCurrentWorkerCell(otherCell);
+            }
+            super.move(nextWorkerCell);
         }
-        super.move(nextWorkerCell);
     }
 }

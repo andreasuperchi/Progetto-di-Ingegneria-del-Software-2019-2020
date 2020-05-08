@@ -84,11 +84,40 @@ public class WorkerTest {
     }
 
     @Test
+    public void checkIfWorkerCanGoUp() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        nextWorkerCell = Model.getMap().getGrid()[1][0];
+        baseWorkerCell.setLevel(1);
+        nextWorkerCell.setLevel(2);
+        worker.setCurrentWorkerCell(baseWorkerCell);
+        assertTrue(worker.checkMove(nextWorkerCell));
+    }
+
+    @Test
     public void checkIfWorkerCantGoUp() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
         nextWorkerCell = Model.getMap().getGrid()[1][0];
         worker.setCurrentWorkerCell(baseWorkerCell);
         nextWorkerCell.setLevel(2);
+        assertFalse(worker.checkMove(nextWorkerCell));
+    }
+
+    @Test
+    public void checkIfWorkerCanJumpDown() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        nextWorkerCell = Model.getMap().getGrid()[1][0];
+        worker.setCurrentWorkerCell(baseWorkerCell);
+        baseWorkerCell.setLevel(3);
+        assertTrue(worker.checkMove(nextWorkerCell));
+    }
+
+    @Test
+    public void checkIfWorkerCantGoUpAthena() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        nextWorkerCell = Model.getMap().getGrid()[1][0];
+        worker.setCurrentWorkerCell(baseWorkerCell);
+        worker.setCanGoUp(false);
+        nextWorkerCell.setLevel(1);
         assertFalse(worker.checkMove(nextWorkerCell));
     }
 

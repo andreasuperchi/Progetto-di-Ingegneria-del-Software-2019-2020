@@ -1,24 +1,20 @@
 package it.polimi.ingsw.model.specialworkers;
 
 import it.polimi.ingsw.model.Cell;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Worker;
 
 public class WorkerAtlas extends Worker {
-
-    private boolean wantsToBuildADome;
 
     public WorkerAtlas() {
         super();
     }
 
     @Override
-    public void build(Cell nextWorkerCell) {
-        if (wantsToBuildADome) {
-            nextWorkerCell.setLevel(4);
+    public void specialPower(Cell nextWorkerCell) {
+        if (nextWorkerCell.getLevel() == 4) {
+            throw new IllegalArgumentException();
         } else {
-            super.build(nextWorkerCell);
+            nextWorkerCell.setLevel(4);
         }
     }
-
 }

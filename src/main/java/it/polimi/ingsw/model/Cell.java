@@ -47,6 +47,7 @@ public class Cell {
 
     public void setLevel(int level) {
         if (level == 4) {
+            Model.getMap().setCompletedTowers(Model.getMap().getCompletedTowers() + 1);
             isOccupied = true;
         }
         this.level = level;

@@ -4,23 +4,15 @@ import it.polimi.ingsw.model.*;
 
 public class WorkerTriton extends Worker {
 
-    private boolean moveAnotherTime;
-
     public WorkerTriton() {
         super();
     }
 
-    public boolean getMoveAnotherTime() {
-        return moveAnotherTime;
-    }
-
-    public void setMoveAnotherTime(boolean moveAnotherTime) {
-        this.moveAnotherTime = moveAnotherTime;
-    }
-
     public boolean verifyPerimeter(Cell nextWorkerCell) {
         for (Direction d : Direction.values()) {
-            if (Model.getMap().getNextWorkerCell(nextWorkerCell, d) == null) {
+            try {
+                Model.getMap().getNextWorkerCell(nextWorkerCell, d);
+            } catch (ArrayIndexOutOfBoundsException e) {
                 return true;
             }
         }
@@ -28,14 +20,16 @@ public class WorkerTriton extends Worker {
     }
 
     @Override
-    public boolean checkMove(Cell nextWorkerCell) {
-        if (nextWorkerCell == null || nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
-            return false;
-        } else if (nextWorkerCell.getLevel() - getCurrentWorkerCell().getLevel() == 1 && getCanGoUp()) {   //controllo per Athena
-            return false;
+    public void move(Cell nextWorkerCell) {
+        if (!checkMove(nextWorkerCell)) {
+            throw new IllegalArgumentException();
         } else {
-            moveAnotherTime = verifyPerimeter(nextWorkerCell);
-            return true;
+            oldLevel = getCurrentWorkerCell().getLevel();
+            getCurrentWorkerCell().setIsOccupied(false);
+            setCurrentWorkerCell(nextWorkerCell);
+            newLevel = getCurrentWorkerCell().getLevel();
+            getCurrentWorkerCell().setIsOccupied(true);
+            this.hasMoved = !verifyPerimeter(nextWorkerCell);  // se la cella era perimetrale posso muovermi ancora
         }
     }
 }

@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 public class MapTest {
     Model model;
     Worker worker;
-    Player player;
 
     @Before
     public void setUp() {
@@ -81,55 +80,55 @@ public class MapTest {
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullNorthTest() {
+    public void nullNorthTest() {
         Cell cell = Model.getMap().getGrid()[0][2];
         Model.getMap().getNextWorkerCell(cell, Direction.NORTH);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullSouthTest() {
+    public void nullSouthTest() {
         Cell cell = Model.getMap().getGrid()[4][2];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.SOUTH);
         assertNull(cell);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullEastTest() {
+    public void nullEastTest() {
         Cell cell = Model.getMap().getGrid()[2][4];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.EAST);
         assertNull(cell);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullWestTest() {
+    public void nullWestTest() {
         Cell cell = Model.getMap().getGrid()[2][0];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.WEST);
         assertNull(cell);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullNorthEastTest() {
+    public void nullNorthEastTest() {
         Cell cell = Model.getMap().getGrid()[0][4];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.NORTH_EAST);
         assertNull(cell);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullNorthWestTest() {
+    public void nullNorthWestTest() {
         Cell cell = Model.getMap().getGrid()[0][0];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.NORTH_WEST);
         assertNull(cell);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullSouthEastTest() {
+    public void nullSouthEastTest() {
         Cell cell = Model.getMap().getGrid()[4][4];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.SOUTH_EAST);
         assertNull(cell);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void NullSouthWestTest() {
+    public void nullSouthWestTest() {
         Cell cell = Model.getMap().getGrid()[4][0];
         cell = Model.getMap().getNextWorkerCell(cell, Direction.SOUTH_WEST);
         assertNull(cell);

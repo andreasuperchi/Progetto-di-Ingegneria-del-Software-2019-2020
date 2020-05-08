@@ -86,22 +86,26 @@ public class Worker {
         this.canBeUsed = canBeUsed;
     }
 
-    public boolean checkMove(Cell nextWorkerCell) {    //arrivo qui con una cella che esiste
-        if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
-            return false;
-        } else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
-            return false;
-        } else {
-            return true;
-        }
+//    public boolean checkMove(Cell nextWorkerCell) {    //arrivo qui con una cella che esiste
+//        if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
+//            return false;
+//        } else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+
+    public boolean checkMove(Cell nextWorkerCell) {
+        int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();
+
+        return !(this.getCurrentWorkerCell().equals(nextWorkerCell)) &&
+                ((!nextWorkerCell.getIsOccupied() && levelDiff <= 0) ||
+                        (!nextWorkerCell.getIsOccupied() && levelDiff == 1 && canGoUp));
     }
 
     public boolean checkBuild(Cell nextWorkerCell) {
-        if (nextWorkerCell.getIsOccupied() || this.getCurrentWorkerCell().equals(nextWorkerCell)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !nextWorkerCell.getIsOccupied() && !this.getCurrentWorkerCell().equals(nextWorkerCell);
     }
 
     public boolean checkSurroundingCells() {
@@ -119,6 +123,7 @@ public class Worker {
         } else {
             oldLevel = getCurrentWorkerCell().getLevel();
             getCurrentWorkerCell().setIsOccupied(false);
+            getCurrentWorkerCell().setThisWorker(null);
             setCurrentWorkerCell(nextWorkerCell);
             newLevel = getCurrentWorkerCell().getLevel();
             getCurrentWorkerCell().setIsOccupied(true);
