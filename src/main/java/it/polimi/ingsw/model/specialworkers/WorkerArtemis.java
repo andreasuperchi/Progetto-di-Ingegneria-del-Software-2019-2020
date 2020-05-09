@@ -24,14 +24,12 @@ public class WorkerArtemis extends Worker {
 
     @Override
     public void specialPower(Cell nextWorkerCell) {
-        if (!hasMoved || hasBuilt){
+        if (!hasMoved || hasBuilt) {
             throw new IllegalArgumentException();
-        }
-        else{
-            if (nextWorkerCell.equals(oldPosition)){
+        } else {
+            if (nextWorkerCell.equals(oldPosition)) {
                 throw new IllegalArgumentException();
-            }
-            else{
+            } else {
                 move(nextWorkerCell);
                 hasUsedSpecialPower = true;
             }

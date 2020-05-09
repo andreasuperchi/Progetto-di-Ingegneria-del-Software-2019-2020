@@ -21,7 +21,8 @@ public enum Outcome {
     INVALID_CELL,
     WORKERS_PLACEMENT_MENU,
     NO_SPECIAL_POWER,
-    CANT_GO_TO_END_TURN;
+    CANT_GO_TO_END_TURN,
+    USED_SPECIAL_POWER;
 
     public String printOutcome() {
         StringBuilder out;
@@ -122,6 +123,8 @@ public enum Outcome {
                 break;
             case NO_SPECIAL_POWER:
                 out = new StringBuilder("your god has not special powers, do another action.");
+            case USED_SPECIAL_POWER:
+                out = new StringBuilder("The Special Power has already been used");
             default:
                 throw new IllegalArgumentException();
         }

@@ -14,7 +14,7 @@ public class Model extends Observable<Model> implements Cloneable {
     private boolean gameOver;
     private static Map map;
 
-    private enum turnPhase {
+    enum turnPhase {
         NUMBER_OF_PLAYERS, AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
         WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN
     }
@@ -62,6 +62,26 @@ public class Model extends Observable<Model> implements Cloneable {
         return currentWorker;
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public turnPhase getCurrentPhase() {
+        return currentPhase;
+    }
+
+    public void setCurrentPhase(turnPhase currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+
+    public void setOutcome(Outcome outcome) {
+        this.outcome = outcome;
+    }
+
 
     public void doAction(IntChoice intChoice) {
         if (!currentPlayer.equals(intChoice.getPlayer())) {
@@ -69,12 +89,12 @@ public class Model extends Observable<Model> implements Cloneable {
         } else {
             switch (currentPhase) {
                 case NUMBER_OF_PLAYERS:
-                    if (intChoice.getValue() != 2 || intChoice.getValue() != 3) {
-                        outcome = Outcome.INVALID_NUMBER_OF_PLAYERS;
-                    } else {
+                    if (intChoice.getValue() == 2 || intChoice.getValue() == 3) {
                         numberOfPlayers = intChoice.getValue();
                         currentPhase = turnPhase.AVAILABLE_GODS;
                         outcome = Outcome.AVAILABLE_GODS_MENU;
+                    } else {
+                        outcome = Outcome.INVALID_NUMBER_OF_PLAYERS;
                     }
                     break;
 
@@ -114,11 +134,10 @@ public class Model extends Observable<Model> implements Cloneable {
 
                     try {
                         workerCell = parseCell(intChoice.getValue());
-                        if (currentPlayer.getWorkers()[0].getCurrentWorkerCell().equals(null)) {
+                        if (currentPlayer.getWorkers()[0].getCurrentWorkerCell() == null) {
                             currentPlayer.getWorkers()[0].setCurrentWorkerCell(workerCell);
-                        } else if (currentPlayer.getWorkers()[1].getCurrentWorkerCell().equals(null)) {
-                            currentPlayer.getWorkers()[1].setCurrentWorkerCell(workerCell);
                         } else {
+                            currentPlayer.getWorkers()[1].setCurrentWorkerCell(workerCell);
                             updateCurrentPlayer();
                         }
                     } catch (IllegalArgumentException e) {
@@ -127,7 +146,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     //controllo che tutti i giocatori abbiano piazzato i loro workers
                     for (Player p : players) {
                         for (Worker w : p.getWorkers()) {
-                            if (!w.getCurrentWorkerCell().equals(null)) {
+                            if (w.getCurrentWorkerCell() != null) {
                                 count++;
                             }
                         }
@@ -139,9 +158,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case WORKER_CHOICE:
-                    if (intChoice.getValue() != 0 || intChoice.getValue() != 1) {
-                        outcome = Outcome.INVALID_WORKER;
-                    } else {
+                    if (intChoice.getValue() == 0 || intChoice.getValue() == 1) {
                         if (!currentPlayer.getWorkers()[intChoice.getValue()].canBeUsed) {
                             outcome = Outcome.UNAVAILABLE_WORKER;
                         } else {
@@ -149,6 +166,9 @@ public class Model extends Observable<Model> implements Cloneable {
                             currentPhase = turnPhase.ACTION_CHOICE;
                             outcome = Outcome.ACTION_MENU;
                         }
+
+                    } else {
+                        outcome = Outcome.INVALID_WORKER;
                     }
                     break;
 
@@ -156,7 +176,11 @@ public class Model extends Observable<Model> implements Cloneable {
                     if (intChoice.getValue() < 0 || intChoice.getValue() > 3) {
                         outcome = Outcome.INVALID_ACTION;
                     } else {
-                        processAction(intChoice.getValue());
+                        try {
+                            processAction(intChoice.getValue());
+                        } catch (IllegalArgumentException e) {
+                            outcome = Outcome.INVALID_INPUT;
+                        }
                     }
                     break;
 
@@ -243,46 +267,102 @@ public class Model extends Observable<Model> implements Cloneable {
     private void addGod(int index) {
         switch (index) {
             case 0:
-                availableGods.add(GodName.APOLLO);
+                if (!availableGods.contains(GodName.APOLLO)) {
+                    availableGods.add(GodName.APOLLO);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 1:
-                availableGods.add(GodName.ARTEMIS);
+                if (!availableGods.contains(GodName.ARTEMIS)) {
+                    availableGods.add(GodName.ARTEMIS);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 2:
-                availableGods.add(GodName.ATHENA);
+                if (!availableGods.contains(GodName.ATHENA)) {
+                    availableGods.add(GodName.ATHENA);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 3:
-                availableGods.add(GodName.ATLAS);
+                if (!availableGods.contains(GodName.ATLAS)) {
+                    availableGods.add(GodName.ATLAS);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 4:
-                availableGods.add(GodName.CHARON);
+                if (!availableGods.contains(GodName.CHARON)) {
+                    availableGods.add(GodName.CHARON);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 5:
-                availableGods.add(GodName.CHRONUS);
+                if (!availableGods.contains(GodName.CHRONUS)) {
+                    availableGods.add(GodName.CHRONUS);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 6:
-                availableGods.add(GodName.DEMETER);
+                if (!availableGods.contains(GodName.DEMETER)) {
+                    availableGods.add(GodName.DEMETER);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 7:
-                availableGods.add(GodName.HEPHAESTUS);
+                if (!availableGods.contains(GodName.HEPHAESTUS)) {
+                    availableGods.add(GodName.HEPHAESTUS);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 8:
-                availableGods.add(GodName.HESTIA);
+                if (!availableGods.contains(GodName.HESTIA)) {
+                    availableGods.add(GodName.HESTIA);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 9:
-                availableGods.add(GodName.MINOTAUR);
+                if (!availableGods.contains(GodName.MINOTAUR)) {
+                    availableGods.add(GodName.MINOTAUR);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 10:
-                availableGods.add(GodName.PAN);
+                if (!availableGods.contains(GodName.PAN)) {
+                    availableGods.add(GodName.PAN);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 11:
-                availableGods.add(GodName.PROMETHEUS);
+                if (!availableGods.contains(GodName.PROMETHEUS)) {
+                    availableGods.add(GodName.PROMETHEUS);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 12:
-                availableGods.add(GodName.TRITON);
+                if (!availableGods.contains(GodName.TRITON)) {
+                    availableGods.add(GodName.TRITON);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 13:
-                availableGods.add(GodName.ZEUS);
+                if (!availableGods.contains(GodName.ZEUS)) {
+                    availableGods.add(GodName.ZEUS);
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -292,23 +372,39 @@ public class Model extends Observable<Model> implements Cloneable {
     private void processAction(int input) {
         switch (input) {
             case 0:
-                currentPhase = turnPhase.MOVE;
-                outcome = Outcome.DIRECTION_MENU;
+                if (currentWorker.getHasMoved()) {
+                    throw new IllegalArgumentException();
+                } else {
+                    currentPhase = turnPhase.MOVE;
+                    outcome = Outcome.DIRECTION_MENU;
+                }
                 break;
             case 1:
-                currentPhase = turnPhase.BUILD;
-                outcome = Outcome.DIRECTION_MENU;
+                if (currentWorker.getHasMoved() && !currentWorker.getHasBuilt()) {
+                    currentPhase = turnPhase.BUILD;
+                    outcome = Outcome.DIRECTION_MENU;
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             case 2:
                 if (!currentWorker.hasSpecialPower) {
                     outcome = Outcome.NO_SPECIAL_POWER;
                 } else {
-                    currentPhase = turnPhase.SPECIAL_POWER;
-                    outcome = Outcome.DIRECTION_MENU;
+                    if (currentWorker.hasUsedSpecialPower) {
+                        outcome = Outcome.USED_SPECIAL_POWER;
+                    } else {
+                        currentPhase = turnPhase.SPECIAL_POWER;
+                        outcome = Outcome.DIRECTION_MENU;
+                    }
                 }
                 break;
             case 3:
-                currentPhase = turnPhase.END_TURN;
+                if (currentWorker.hasMoved && currentWorker.hasBuilt) {
+                    currentPhase = turnPhase.END_TURN;
+                } else {
+                    throw new IllegalArgumentException();
+                }
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -401,9 +497,10 @@ public class Model extends Observable<Model> implements Cloneable {
         } else {
             currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
         }
-
-        if (!currentPlayer.getWorkers()[0].canBeUsed && !currentPlayer.getWorkers()[0].canBeUsed) {
-            currentPlayer.setInGame(false);
+        if (!currentPhase.equals(turnPhase.GOD_CHOICE)) {
+            if (!currentPlayer.getWorkers()[0].canBeUsed && !currentPlayer.getWorkers()[1].canBeUsed) {
+                currentPlayer.setInGame(false);
+            }
         }
     }
 
