@@ -38,6 +38,14 @@ public class Worker {
         return symbol;
     }
 
+    public boolean getHasUsedSpecialPower() {
+        return hasUsedSpecialPower;
+    }
+
+    public void setHasUsedSpecialPower(boolean hasUsedSpecialPower) {
+        this.hasUsedSpecialPower = hasUsedSpecialPower;
+    }
+
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
