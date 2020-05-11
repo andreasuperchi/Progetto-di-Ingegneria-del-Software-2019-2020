@@ -13,7 +13,6 @@ public enum Outcome {
     DIRECTION_MENU,
     GOD_CHOICE_MENU,
     INVALID_PLAYER,
-    INVALID_NUMBER_OF_PLAYERS,
     INVALID_WORKER,
     INVALID_ACTION,
     OUT_OF_MAP,
@@ -97,9 +96,6 @@ public enum Outcome {
                 break;
             case INVALID_PLAYER:
                 out = new StringBuilder("It's Not Your Turn!");
-                break;
-            case INVALID_NUMBER_OF_PLAYERS:
-                out = new StringBuilder("Invalid Number of Players!");
                 break;
             case INVALID_WORKER:
                 out = new StringBuilder("Invalid Worker! Please Choose a Valid Worker.");

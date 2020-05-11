@@ -15,19 +15,22 @@ public class Model extends Observable<Model> implements Cloneable {
     private static Map map;
 
     enum turnPhase {
-        NUMBER_OF_PLAYERS, AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
+        AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
         WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN
     }
 
     private turnPhase currentPhase;
     private Outcome outcome;
 
-    public Model() {
+    public Model(ArrayList<Player> players, int numberOfPlayers) {
         availableGods = new ArrayList<GodName>();
-        players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
+        this.players.addAll(players);
+        this.numberOfPlayers = numberOfPlayers;
         gameOver = false;
-        currentPhase = turnPhase.NUMBER_OF_PLAYERS;
+        currentPhase = turnPhase.AVAILABLE_GODS;
         map = new Map();
+        outcome = Outcome.AVAILABLE_GODS_MENU;
     }
 
     public static void setCurrentPlayer(Player currentPlayer) {
@@ -95,16 +98,6 @@ public class Model extends Observable<Model> implements Cloneable {
             outcome = Outcome.INVALID_PLAYER;
         } else {
             switch (currentPhase) {
-                case NUMBER_OF_PLAYERS:
-                    if (intChoice.getValue() == 2 || intChoice.getValue() == 3) {
-                        numberOfPlayers = intChoice.getValue();
-                        currentPhase = turnPhase.AVAILABLE_GODS;
-                        outcome = Outcome.AVAILABLE_GODS_MENU;
-                    } else {
-                        outcome = Outcome.INVALID_NUMBER_OF_PLAYERS;
-                    }
-                    break;
-
                 case AVAILABLE_GODS:
                     try {
                         addGod(intChoice.getValue());

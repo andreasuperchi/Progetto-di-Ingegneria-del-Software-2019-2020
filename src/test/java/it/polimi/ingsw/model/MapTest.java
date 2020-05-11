@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class MapTest {
@@ -11,7 +13,14 @@ public class MapTest {
 
     @Before
     public void setUp() {
-        model = new Model();
+        Player player1 = new Player("Andre", 5, "@");
+        Player player2 = new Player("Fra", 2, "#");
+        Player player3 = new Player("Ale", 78, "$");
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        model = new Model(players, 3);
         worker = new Worker();
     }
 

@@ -5,6 +5,7 @@ import it.polimi.ingsw.view.Observable;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Connection extends Observable<Integer> implements ClientConnection, Runnable {
@@ -35,12 +36,25 @@ public class Connection extends Observable<Integer> implements ClientConnection,
 
     @Override
     public void closeConnection() {
-
+        send("Connection closed!");
+        try {
+            socket.close();
+        } catch (IOException e) {
+            System.err.println("Error when closing socket!");
+        }
+        active = false;
     }
 
     @Override
     public void asyncSend(Object message) {
 
+    }
+
+    private void close() {
+        closeConnection();
+        System.out.println("Deregistering client...");
+        server.deregisterConnection(this);
+        System.out.println("Done!");
     }
 
     @Override
@@ -64,17 +78,17 @@ public class Connection extends Observable<Integer> implements ClientConnection,
             name = in.nextLine();    //prende la stringa in ingresso
 
             send("What's your age?\n");
-            intValue = in.nextInt();    //prende la stringa in ingresso
+            intValue = in.nextInt();    //prende l'età
             server.lobby(this, name, intValue);
 
             while (isActive()) {
                 intValue = in.nextInt();
                 notify(intValue);
             }
-        } catch (IOException e) {
-
+        } catch (IOException | NoSuchElementException e) {
+            System.err.println("Error!" + e.getMessage());
         } finally {
-
+            close();
         }
     }
 }

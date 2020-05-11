@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.specialworkers.WorkerTriton;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class ModelTest {
@@ -15,14 +17,16 @@ public class ModelTest {
 
     @Before
     public void setUp() {
-        model = new Model();
+
         player1 = new Player("Andre", 5, "@");
         player2 = new Player("Fra", 2, "#");
         player3 = new Player("Ale", 78, "$");
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        model = new Model(players, 3);
         Model.setCurrentPlayer(player1);
-        model.getPlayers().add(player1);
-        model.getPlayers().add(player2);
-        model.getPlayers().add(player3);
     }
 
     @Test
@@ -33,30 +37,8 @@ public class ModelTest {
     }
 
     @Test
-    public void setNumberOfPlayersTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
-        Model.turnPhase tp = Model.turnPhase.AVAILABLE_GODS;
-        assertEquals(3, model.getNumberOfPlayers());
-        assertEquals(tp, model.getCurrentPhase());
-        assertEquals(Outcome.AVAILABLE_GODS_MENU, model.getOutcome());
-    }
-
-    @Test
-    public void invalidSetNumberOfPlayersTest() {
-        input = new IntChoice(player1, 4);
-        model.doAction(input);
-        Model.turnPhase tp = Model.turnPhase.NUMBER_OF_PLAYERS;
-        model.getOutcome().printOutcome();
-        assertEquals(0, model.getNumberOfPlayers());
-        assertEquals(tp, model.getCurrentPhase());
-        assertEquals(Outcome.INVALID_NUMBER_OF_PLAYERS, model.getOutcome());
-    }
-
-    @Test
     public void invalidAvailableGodsTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
+
         input = new IntChoice(player1, 27);
         model.doAction(input);
         assertEquals(Outcome.INVALID_GOD, model.getOutcome());
@@ -64,7 +46,6 @@ public class ModelTest {
 
     @Test
     public void availableGodsTest() {
-        model.setCurrentPhase(Model.turnPhase.AVAILABLE_GODS);
         input = new IntChoice(player1, 10);
         model.doAction(input);
         assertTrue(Model.getAvailableGods().contains(GodName.PAN));
@@ -73,8 +54,6 @@ public class ModelTest {
 
     @Test
     public void fullAvailableGodsTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -93,7 +72,6 @@ public class ModelTest {
 
     @Test
     public void duplicateAvailableGodsTest() {
-        model.setCurrentPhase(Model.turnPhase.AVAILABLE_GODS);
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 10);
@@ -103,8 +81,6 @@ public class ModelTest {
 
     @Test
     public void invalidGodChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -121,8 +97,6 @@ public class ModelTest {
 
     @Test
     public void godChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -142,8 +116,6 @@ public class ModelTest {
 
     @Test
     public void fullGodChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -166,8 +138,6 @@ public class ModelTest {
 
     @Test
     public void invalidWorkerPlacementTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -192,8 +162,6 @@ public class ModelTest {
 
     @Test
     public void firstWorkerPlacementTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -219,8 +187,6 @@ public class ModelTest {
 
     @Test
     public void secondWorkerPlacementTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -251,8 +217,6 @@ public class ModelTest {
 
     @Test
     public void occupiedWorkerPlacementTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -281,8 +245,6 @@ public class ModelTest {
 
     @Test
     public void fullWorkerPlacementTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -318,8 +280,6 @@ public class ModelTest {
 
     @Test
     public void invalidWorkerChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -358,8 +318,6 @@ public class ModelTest {
 
     @Test
     public void cantBeUsedWorkerChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -398,8 +356,6 @@ public class ModelTest {
 
     @Test
     public void workerChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -438,8 +394,6 @@ public class ModelTest {
 
     @Test
     public void invalidActionChoice() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -481,8 +435,6 @@ public class ModelTest {
 
     @Test
     public void actionChoiceTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -523,8 +475,6 @@ public class ModelTest {
 
     @Test
     public void invalidMoveTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -568,8 +518,6 @@ public class ModelTest {
 
     @Test
     public void outOfMapMoveTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -613,8 +561,6 @@ public class ModelTest {
 
     @Test
     public void validMoveTest() {
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
 
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -663,9 +609,6 @@ public class ModelTest {
         Model.getMap().getGrid()[0][0].setLevel(2);
         Model.getMap().getGrid()[0][1].setLevel(3);
 
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -711,9 +654,7 @@ public class ModelTest {
     public void cantBuildTest() {
         Model.getMap().getGrid()[0][0].setLevel(2);
         Model.getMap().getGrid()[0][1].setLevel(3);
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
+
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -754,9 +695,7 @@ public class ModelTest {
 
     @Test
     public void invalidBuildTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
+
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -806,9 +745,7 @@ public class ModelTest {
 
     @Test
     public void outOfMapBuildTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
+
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -858,9 +795,6 @@ public class ModelTest {
 
     @Test
     public void validBuildTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -911,9 +845,6 @@ public class ModelTest {
 
     @Test
     public void cantGoToEndTurnTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -960,9 +891,6 @@ public class ModelTest {
 
     @Test
     public void canGoToEndTurnTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -1015,9 +943,6 @@ public class ModelTest {
 
     @Test
     public void invalidEndTurn() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -1073,9 +998,6 @@ public class ModelTest {
 
     @Test
     public void confirmEndTurnTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
@@ -1132,9 +1054,6 @@ public class ModelTest {
 
     @Test
     public void dontConfirmEndTurnTest() {
-        //numero di giocatori
-        input = new IntChoice(player1, 3);
-        model.doAction(input);
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
