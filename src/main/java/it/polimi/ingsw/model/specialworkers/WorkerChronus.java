@@ -6,6 +6,7 @@ public class WorkerChronus extends Worker {
 
     public WorkerChronus() {
         super();
+        hasSpecialPower = false;
     }
 
     @Override

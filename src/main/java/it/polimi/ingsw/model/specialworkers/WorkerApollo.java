@@ -7,10 +7,11 @@ public class WorkerApollo extends Worker {
 
     public WorkerApollo() {
         super();
+        hasSpecialPower = false;
     }
 
-    public boolean checkBothApollos(Cell opponentsCell) {
-        return opponentsCell.getThisWorker() instanceof WorkerApollo;
+    public boolean checkNotBothApollos(Cell opponentsCell) {
+        return !(opponentsCell.getThisWorker() instanceof WorkerApollo);
     }
 
     @Override
@@ -29,8 +30,8 @@ public class WorkerApollo extends Worker {
         int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();
 
         return !(this.getCurrentWorkerCell().equals(nextWorkerCell)) &&
-                ((nextWorkerCell.getLevel() != 4 && levelDiff <= 0 && !checkBothApollos(nextWorkerCell)) ||
-                        (nextWorkerCell.getLevel() != 4 && levelDiff == 1 && canGoUp && !checkBothApollos(nextWorkerCell)));
+                ((nextWorkerCell.getLevel() != 4 && levelDiff <= 0 && checkNotBothApollos(nextWorkerCell)) ||
+                        (nextWorkerCell.getLevel() != 4 && levelDiff == 1 && canGoUp && checkNotBothApollos(nextWorkerCell)));
     }
 
     @Override

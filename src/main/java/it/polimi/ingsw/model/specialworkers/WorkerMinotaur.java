@@ -4,10 +4,9 @@ import it.polimi.ingsw.model.*;
 
 public class WorkerMinotaur extends Worker {
 
-    private boolean forceBack;
-
     public WorkerMinotaur() {
         super();
+        hasSpecialPower = false;
     }
 
     public boolean checkNotBothMinotaurs(Cell opponentsCell) {

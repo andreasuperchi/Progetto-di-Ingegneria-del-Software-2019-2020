@@ -37,6 +37,25 @@ public class WorkerAtlasTest {
     public void testSpecialPower() {
         workerAtlas.specialPower(nextWorkerCell);
         assertEquals(4, nextWorkerCell.getLevel());
+        assertTrue(workerAtlas.getHasUsedSpecialPower());
+    }
+
+    @Test
+    public void normalMove() {
+        workerAtlas.move(nextWorkerCell);
+        assertEquals(0, nextWorkerCell.getLevel());
+        assertTrue(workerAtlas.getHasMoved());
+        assertFalse(workerAtlas.getHasUsedSpecialPower());
+    }
+
+    @Test
+    public void moveAndSpecialPower() {
+        Cell otherCell = Model.getMap().getGrid()[2][4];
+        workerAtlas.move(nextWorkerCell);
+        workerAtlas.specialPower(otherCell);
+        assertEquals(Model.getMap().getGrid()[2][3], workerAtlas.getCurrentWorkerCell());
+        assertEquals(4, otherCell.getLevel());
+        assertTrue(workerAtlas.getHasUsedSpecialPower());
     }
 
 }

@@ -7,6 +7,8 @@ public class WorkerAtlas extends Worker {
 
     public WorkerAtlas() {
         super();
+        hasSpecialPower = true;
+        hasUsedSpecialPower = false;
     }
 
     @Override
@@ -15,6 +17,8 @@ public class WorkerAtlas extends Worker {
             throw new IllegalArgumentException();
         } else {
             nextWorkerCell.setLevel(4);
+            hasUsedSpecialPower = true;
+            hasBuilt = true;
         }
     }
 }

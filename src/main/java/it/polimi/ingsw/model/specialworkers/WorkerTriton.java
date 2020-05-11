@@ -6,6 +6,8 @@ public class WorkerTriton extends Worker {
 
     public WorkerTriton() {
         super();
+        hasSpecialPower = true;
+        hasUsedSpecialPower = false;
     }
 
     public boolean verifyPerimeter(Cell nextWorkerCell) {

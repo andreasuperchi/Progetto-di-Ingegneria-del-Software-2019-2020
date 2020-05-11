@@ -41,6 +41,7 @@ public class WorkerApolloTest {
         workerApollo.move(nextWorkerCell);
         assertEquals(nextWorkerCell, workerApollo.getCurrentWorkerCell());
         assertEquals(baseWorkerCell, workerOpponent.getCurrentWorkerCell());
+        assertTrue(workerApollo.getHasMoved());
     }
 
     @Test
@@ -48,6 +49,7 @@ public class WorkerApolloTest {
         workerApollo.setCurrentWorkerCell(baseWorkerCell);
         workerApollo.move(nextWorkerCell);
         assertEquals(nextWorkerCell, workerApollo.getCurrentWorkerCell());
+        assertTrue(workerApollo.getHasMoved());
     }
 
     @Test
@@ -57,5 +59,6 @@ public class WorkerApolloTest {
         workerApollo.setCurrentWorkerCell(baseWorkerCell);
         player1.getWorkers()[1].setCurrentWorkerCell(nextWorkerCell);
         assertFalse(workerApollo.checkMove(nextWorkerCell));
+        assertFalse(workerApollo.getHasMoved());
     }
 }
