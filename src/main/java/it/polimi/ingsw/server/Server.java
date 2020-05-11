@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.RemoteView;

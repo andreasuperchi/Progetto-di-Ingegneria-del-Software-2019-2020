@@ -12,5 +12,6 @@ public class PlayerTest {
         player = new Player("Test", 11, "@");
         player.setWorkers(GodName.APOLLO);
         assertEquals("@A", player.getWorkers()[0].symbol);
+        assertEquals("@B", player.getWorkers()[1].symbol);
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.GodName;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.choices.IntChoice;
@@ -36,6 +37,6 @@ public class ControllerTest {
         Model.setCurrentPlayer(player);
         controller.update(intChoice);
 
-        assertEquals(3, model.getNumberOfPlayers());
+        assertTrue(Model.getAvailableGods().contains(GodName.ATLAS));
     }
 }

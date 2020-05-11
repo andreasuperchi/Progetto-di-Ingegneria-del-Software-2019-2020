@@ -17,7 +17,6 @@ public class ModelTest {
 
     @Before
     public void setUp() {
-
         player1 = new Player("Andre", 5, "@");
         player2 = new Player("Fra", 2, "#");
         player3 = new Player("Ale", 78, "$");
@@ -38,7 +37,6 @@ public class ModelTest {
 
     @Test
     public void invalidAvailableGodsTest() {
-
         input = new IntChoice(player1, 27);
         model.doAction(input);
         assertEquals(Outcome.INVALID_GOD, model.getOutcome());
@@ -54,7 +52,6 @@ public class ModelTest {
 
     @Test
     public void fullAvailableGodsTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -81,7 +78,6 @@ public class ModelTest {
 
     @Test
     public void invalidGodChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -97,7 +93,6 @@ public class ModelTest {
 
     @Test
     public void godChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -116,7 +111,6 @@ public class ModelTest {
 
     @Test
     public void fullGodChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -138,7 +132,6 @@ public class ModelTest {
 
     @Test
     public void invalidWorkerPlacementTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -162,7 +155,6 @@ public class ModelTest {
 
     @Test
     public void firstWorkerPlacementTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -187,7 +179,6 @@ public class ModelTest {
 
     @Test
     public void secondWorkerPlacementTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -217,7 +208,6 @@ public class ModelTest {
 
     @Test
     public void occupiedWorkerPlacementTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -245,7 +235,6 @@ public class ModelTest {
 
     @Test
     public void fullWorkerPlacementTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -280,7 +269,6 @@ public class ModelTest {
 
     @Test
     public void invalidWorkerChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -318,7 +306,6 @@ public class ModelTest {
 
     @Test
     public void cantBeUsedWorkerChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -356,7 +343,6 @@ public class ModelTest {
 
     @Test
     public void workerChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -394,7 +380,6 @@ public class ModelTest {
 
     @Test
     public void invalidActionChoice() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -435,7 +420,6 @@ public class ModelTest {
 
     @Test
     public void actionChoiceTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -475,7 +459,6 @@ public class ModelTest {
 
     @Test
     public void invalidMoveTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -518,7 +501,6 @@ public class ModelTest {
 
     @Test
     public void outOfMapMoveTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -561,7 +543,6 @@ public class ModelTest {
 
     @Test
     public void validMoveTest() {
-
         input = new IntChoice(player1, 10);
         model.doAction(input);
         input = new IntChoice(player1, 12);
@@ -695,7 +676,6 @@ public class ModelTest {
 
     @Test
     public void invalidBuildTest() {
-
         //scelta degli dèi in gioco
         input = new IntChoice(player1, 10);
         model.doAction(input);
