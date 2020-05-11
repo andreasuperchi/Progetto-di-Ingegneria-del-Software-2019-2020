@@ -82,6 +82,13 @@ public class Model extends Observable<Model> implements Cloneable {
         this.outcome = outcome;
     }
 
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
 
     public void doAction(IntChoice intChoice) {
         if (!currentPlayer.equals(intChoice.getPlayer())) {
@@ -206,24 +213,20 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case BUILD:
-                    if (!currentWorker.hasMoved) {
-                        outcome = Outcome.NOT_MOVED_ERROR;
-                    } else {
-                        try {
-                            direction = parseDirection(intChoice.getValue());
-                            cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
-                            gameOver = currentWorker.winCondition();
-                            currentWorker.build(cell);
-                            if (gameOver) {
-                                break;
-                            }
-                            currentPhase = turnPhase.ACTION_CHOICE;
-                            outcome = Outcome.ACTION_MENU;
-                        } catch (IllegalArgumentException e) {
-                            outcome = Outcome.INVALID_INPUT;
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            outcome = Outcome.OUT_OF_MAP;
+                    try {
+                        direction = parseDirection(intChoice.getValue());
+                        cell = map.getNextWorkerCell(currentWorker.currentWorkerCell, direction);
+                        gameOver = currentWorker.winCondition();
+                        currentWorker.build(cell);
+                        if (gameOver) {
+                            break;
                         }
+                        currentPhase = turnPhase.ACTION_CHOICE;
+                        outcome = Outcome.ACTION_MENU;
+                    } catch (IllegalArgumentException e) {
+                        outcome = Outcome.INVALID_INPUT;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        outcome = Outcome.OUT_OF_MAP;
                     }
                     break;
 
@@ -245,17 +248,22 @@ public class Model extends Observable<Model> implements Cloneable {
                     }
 
                 case END_TURN:
-                    if (!currentWorker.hasMoved || !currentWorker.hasBuilt) {
-                        outcome = Outcome.CANT_GO_TO_END_TURN;
+                    if (intChoice.getValue() == 0 || intChoice.getValue() == 1) {
+                        if (intChoice.getValue() == 0) {
+                            endTurn();
+                            currentPhase = turnPhase.WORKER_CHOICE;
+                            outcome = Outcome.WORKER_MENU;
+                        } else {
+                            currentPhase = turnPhase.ACTION_CHOICE;
+                            outcome = Outcome.ACTION_MENU;
+                        }
                     } else {
-                        endTurn();
-                        //TODO: gestire se il giocatore è fuori partita
-                        //if (!currentPlayer.getInGame()){
-                        //
-                        //}
-                        currentPhase = turnPhase.WORKER_CHOICE;
-                        outcome = Outcome.WORKER_MENU;
+                        outcome = Outcome.INVALID_INPUT;
                     }
+                    //TODO: gestire se il giocatore è fuori partita
+                    //if (!currentPlayer.getInGame()){
+                    //
+                    //}
                     break;
 
             }
@@ -402,6 +410,7 @@ public class Model extends Observable<Model> implements Cloneable {
             case 3:
                 if (currentWorker.hasMoved && currentWorker.hasBuilt) {
                     currentPhase = turnPhase.END_TURN;
+                    outcome = Outcome.CONFIRM_END_TURN;
                 } else {
                     throw new IllegalArgumentException();
                 }

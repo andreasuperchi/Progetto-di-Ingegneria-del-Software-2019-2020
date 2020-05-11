@@ -14,7 +14,7 @@ public class Controller implements Observer<Choice> {
     @Override
     public void update(Choice message) {
         if (message instanceof IntChoice) {
-
+            model.doAction((IntChoice) message);
         }
     }
 }

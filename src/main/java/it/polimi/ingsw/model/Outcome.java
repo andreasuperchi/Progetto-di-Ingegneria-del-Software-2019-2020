@@ -22,7 +22,8 @@ public enum Outcome {
     WORKERS_PLACEMENT_MENU,
     NO_SPECIAL_POWER,
     CANT_GO_TO_END_TURN,
-    USED_SPECIAL_POWER;
+    USED_SPECIAL_POWER,
+    CONFIRM_END_TURN;
 
     public String printOutcome() {
         StringBuilder out;
@@ -123,8 +124,14 @@ public enum Outcome {
                 break;
             case NO_SPECIAL_POWER:
                 out = new StringBuilder("your god has not special powers, do another action.");
+                break;
             case USED_SPECIAL_POWER:
                 out = new StringBuilder("The Special Power has already been used");
+                break;
+            case CONFIRM_END_TURN:
+                out = new StringBuilder("Are you sure you want to end your turn?\n" +
+                        "\t[0]Yes" +
+                        "\t[1]No");
             default:
                 throw new IllegalArgumentException();
         }

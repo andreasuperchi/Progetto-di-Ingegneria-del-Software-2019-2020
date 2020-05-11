@@ -20,7 +20,7 @@ public class WorkerTriton extends Worker {
     }
 
     @Override
-    public void move(Cell nextWorkerCell) {
+    public void specialPower(Cell nextWorkerCell) {
         if (!checkMove(nextWorkerCell)) {
             throw new IllegalArgumentException();
         } else {
@@ -29,7 +29,7 @@ public class WorkerTriton extends Worker {
             setCurrentWorkerCell(nextWorkerCell);
             newLevel = getCurrentWorkerCell().getLevel();
             getCurrentWorkerCell().setIsOccupied(true);
-            this.hasMoved = !verifyPerimeter(nextWorkerCell);  // se la cella era perimetrale posso muovermi ancora
+            this.hasUsedSpecialPower = !verifyPerimeter(nextWorkerCell);  // se la cella era perimetrale posso muovermi ancora
         }
     }
 }
