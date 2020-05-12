@@ -15,7 +15,7 @@ public class WorkerPrometheus extends Worker {
     @Override
     public void move(Cell nextWorkerCell) {
         super.move(nextWorkerCell);
-        if (canGoUp = false) {
+        if (!canGoUp) {
             canGoUp = true;
         }
     }
