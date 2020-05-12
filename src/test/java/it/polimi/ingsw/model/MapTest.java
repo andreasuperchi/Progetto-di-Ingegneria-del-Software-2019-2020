@@ -142,7 +142,7 @@ public class MapTest {
         cell = Model.getMap().getNextWorkerCell(cell, Direction.SOUTH_WEST);
         assertNull(cell);
     }
-
+//
 //    @Test
 //    public void testInitialMap() {
 //        System.out.println(Model.getMap().showInitialMap());

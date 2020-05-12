@@ -29,7 +29,7 @@ public class ControllerTest {
         model = new Model(players, 3);
         controller = new Controller(model);
         player = new Player("Test", 134, "@");
-        intChoice = new IntChoice(player, 3);
+        intChoice = new IntChoice(player, 4);
     }
 
     @Test

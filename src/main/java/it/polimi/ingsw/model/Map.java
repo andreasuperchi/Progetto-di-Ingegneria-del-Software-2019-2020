@@ -58,7 +58,7 @@ public class Map {
 
     public String showInitialMap() {
         StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
-        int counter = 0;
+        int counter = 1;
         for (int i = 0; i < (4 * N_ROWS); i++) {
             if ((i - 3) % 4 == 0) {
                 string.append(" --------  --------  --------  --------  --------  \n");

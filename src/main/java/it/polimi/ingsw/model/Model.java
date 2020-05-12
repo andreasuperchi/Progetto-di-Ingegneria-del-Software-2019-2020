@@ -13,14 +13,13 @@ public class Model extends Observable<Model> implements Cloneable {
     private Worker currentWorker;
     private boolean gameOver;
     private static Map map;
+    private turnPhase currentPhase;
+    private Outcome outcome;
 
     enum turnPhase {
         AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
         WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN
     }
-
-    private turnPhase currentPhase;
-    private Outcome outcome;
 
     public Model(ArrayList<Player> players, int numberOfPlayers) {
         availableGods = new ArrayList<GodName>();
@@ -112,10 +111,10 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case GOD_CHOICE:
-                    if (intChoice.getValue() >= availableGods.size()) {
+                    if (intChoice.getValue() > availableGods.size()) {
                         outcome = Outcome.INVALID_GOD;
                     } else {
-                        GodName godName = availableGods.get(intChoice.getValue());
+                        GodName godName = availableGods.get(intChoice.getValue() - 1);
                         currentPlayer.setWorkers(godName);
                         availableGods.remove(godName);
                         if (availableGods.size() == 0) {
@@ -158,11 +157,11 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case WORKER_CHOICE:
-                    if (intChoice.getValue() == 0 || intChoice.getValue() == 1) {
-                        if (!currentPlayer.getWorkers()[intChoice.getValue()].canBeUsed) {
+                    if (intChoice.getValue() == 1 || intChoice.getValue() == 2) {
+                        if (!currentPlayer.getWorkers()[intChoice.getValue() - 1].canBeUsed) {
                             outcome = Outcome.UNAVAILABLE_WORKER;
                         } else {
-                            currentWorker = currentPlayer.getWorkers()[intChoice.getValue()];
+                            currentWorker = currentPlayer.getWorkers()[intChoice.getValue() - 1];
                             currentPhase = turnPhase.ACTION_CHOICE;
                             outcome = Outcome.ACTION_MENU;
                         }
@@ -173,7 +172,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     break;
 
                 case ACTION_CHOICE:
-                    if (intChoice.getValue() < 0 || intChoice.getValue() > 3) {
+                    if (intChoice.getValue() < 1 || intChoice.getValue() > 4) {
                         outcome = Outcome.INVALID_ACTION;
                     } else {
                         try {
@@ -241,8 +240,8 @@ public class Model extends Observable<Model> implements Cloneable {
                     }
 
                 case END_TURN:
-                    if (intChoice.getValue() == 0 || intChoice.getValue() == 1) {
-                        if (intChoice.getValue() == 0) {
+                    if (intChoice.getValue() == 1 || intChoice.getValue() == 2) {
+                        if (intChoice.getValue() == 1) {
                             endTurn();
                             currentPhase = turnPhase.WORKER_CHOICE;
                             outcome = Outcome.WORKER_MENU;
@@ -267,98 +266,98 @@ public class Model extends Observable<Model> implements Cloneable {
 
     private void addGod(int index) {
         switch (index) {
-            case 0:
+            case 1:
                 if (!availableGods.contains(GodName.APOLLO)) {
                     availableGods.add(GodName.APOLLO);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 1:
+            case 2:
                 if (!availableGods.contains(GodName.ARTEMIS)) {
                     availableGods.add(GodName.ARTEMIS);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 2:
+            case 3:
                 if (!availableGods.contains(GodName.ATHENA)) {
                     availableGods.add(GodName.ATHENA);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 3:
+            case 4:
                 if (!availableGods.contains(GodName.ATLAS)) {
                     availableGods.add(GodName.ATLAS);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 4:
+            case 5:
                 if (!availableGods.contains(GodName.CHARON)) {
                     availableGods.add(GodName.CHARON);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 5:
+            case 6:
                 if (!availableGods.contains(GodName.CHRONUS)) {
                     availableGods.add(GodName.CHRONUS);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 6:
+            case 7:
                 if (!availableGods.contains(GodName.DEMETER)) {
                     availableGods.add(GodName.DEMETER);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 7:
+            case 8:
                 if (!availableGods.contains(GodName.HEPHAESTUS)) {
                     availableGods.add(GodName.HEPHAESTUS);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 8:
+            case 9:
                 if (!availableGods.contains(GodName.HESTIA)) {
                     availableGods.add(GodName.HESTIA);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 9:
+            case 10:
                 if (!availableGods.contains(GodName.MINOTAUR)) {
                     availableGods.add(GodName.MINOTAUR);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 10:
+            case 11:
                 if (!availableGods.contains(GodName.PAN)) {
                     availableGods.add(GodName.PAN);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 11:
+            case 12:
                 if (!availableGods.contains(GodName.PROMETHEUS)) {
                     availableGods.add(GodName.PROMETHEUS);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 12:
+            case 13:
                 if (!availableGods.contains(GodName.TRITON)) {
                     availableGods.add(GodName.TRITON);
                 } else {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 13:
+            case 14:
                 if (!availableGods.contains(GodName.ZEUS)) {
                     availableGods.add(GodName.ZEUS);
                 } else {
@@ -372,7 +371,7 @@ public class Model extends Observable<Model> implements Cloneable {
 
     private void processAction(int input) {
         switch (input) {
-            case 0:
+            case 1:
                 if (currentWorker.getHasMoved()) {
                     throw new IllegalArgumentException();
                 } else {
@@ -380,7 +379,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     outcome = Outcome.DIRECTION_MENU;
                 }
                 break;
-            case 1:
+            case 2:
                 if (currentWorker.getHasMoved() && !currentWorker.getHasBuilt()) {
                     currentPhase = turnPhase.BUILD;
                     outcome = Outcome.DIRECTION_MENU;
@@ -388,7 +387,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     throw new IllegalArgumentException();
                 }
                 break;
-            case 2:
+            case 3:
                 if (!currentWorker.hasSpecialPower) {
                     outcome = Outcome.NO_SPECIAL_POWER;
                 } else {
@@ -400,7 +399,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     }
                 }
                 break;
-            case 3:
+            case 4:
                 if (currentWorker.hasMoved && currentWorker.hasBuilt) {
                     currentPhase = turnPhase.END_TURN;
                     outcome = Outcome.CONFIRM_END_TURN;
@@ -415,21 +414,21 @@ public class Model extends Observable<Model> implements Cloneable {
 
     private Direction parseDirection(int input) {
         switch (input) {
-            case 0:
-                return Direction.NORTH;
             case 1:
-                return Direction.NORTH_EAST;
+                return Direction.NORTH;
             case 2:
-                return Direction.EAST;
+                return Direction.NORTH_EAST;
             case 3:
-                return Direction.SOUTH_EAST;
+                return Direction.EAST;
             case 4:
-                return Direction.SOUTH;
+                return Direction.SOUTH_EAST;
             case 5:
-                return Direction.SOUTH_WEST;
+                return Direction.SOUTH;
             case 6:
-                return Direction.WEST;
+                return Direction.SOUTH_WEST;
             case 7:
+                return Direction.WEST;
+            case 8:
                 return Direction.NORTH_WEST;
             default:
                 throw new IllegalArgumentException();
@@ -438,55 +437,55 @@ public class Model extends Observable<Model> implements Cloneable {
 
     private Cell parseCell(int cellNumber) {
         switch (cellNumber) {
-            case 0:
-                return map.getGrid()[0][0];
             case 1:
-                return map.getGrid()[0][1];
+                return map.getGrid()[0][0];
             case 2:
-                return map.getGrid()[0][2];
+                return map.getGrid()[0][1];
             case 3:
-                return map.getGrid()[0][3];
+                return map.getGrid()[0][2];
             case 4:
-                return map.getGrid()[0][4];
+                return map.getGrid()[0][3];
             case 5:
-                return map.getGrid()[1][0];
+                return map.getGrid()[0][4];
             case 6:
-                return map.getGrid()[1][1];
+                return map.getGrid()[1][0];
             case 7:
-                return map.getGrid()[1][2];
+                return map.getGrid()[1][1];
             case 8:
-                return map.getGrid()[1][3];
+                return map.getGrid()[1][2];
             case 9:
-                return map.getGrid()[1][4];
+                return map.getGrid()[1][3];
             case 10:
-                return map.getGrid()[2][0];
+                return map.getGrid()[1][4];
             case 11:
-                return map.getGrid()[2][1];
+                return map.getGrid()[2][0];
             case 12:
-                return map.getGrid()[2][2];
+                return map.getGrid()[2][1];
             case 13:
-                return map.getGrid()[2][3];
+                return map.getGrid()[2][2];
             case 14:
-                return map.getGrid()[2][4];
+                return map.getGrid()[2][3];
             case 15:
-                return map.getGrid()[3][0];
+                return map.getGrid()[2][4];
             case 16:
-                return map.getGrid()[3][1];
+                return map.getGrid()[3][0];
             case 17:
-                return map.getGrid()[3][2];
+                return map.getGrid()[3][1];
             case 18:
-                return map.getGrid()[3][3];
+                return map.getGrid()[3][2];
             case 19:
-                return map.getGrid()[3][4];
+                return map.getGrid()[3][3];
             case 20:
-                return map.getGrid()[4][0];
+                return map.getGrid()[3][4];
             case 21:
-                return map.getGrid()[4][1];
+                return map.getGrid()[4][0];
             case 22:
-                return map.getGrid()[4][2];
+                return map.getGrid()[4][1];
             case 23:
-                return map.getGrid()[4][3];
+                return map.getGrid()[4][2];
             case 24:
+                return map.getGrid()[4][3];
+            case 25:
                 return map.getGrid()[4][4];
             default:
                 throw new IllegalArgumentException();

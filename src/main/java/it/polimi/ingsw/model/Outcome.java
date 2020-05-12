@@ -48,28 +48,28 @@ public enum Outcome {
                 break;
             case WORKER_MENU:
                 out = new StringBuilder("Choose your Worker:\n" +
-                        "\t[0]Worker A" +
-                        "\t[1]Worker B");
+                        "\t[1]Worker A" +
+                        "\t[2]Worker B");
                 break;
             case AVAILABLE_GODS_MENU:
                 out = new StringBuilder("Pick some Gods for the Game:\n" +
-                        "\t[0]Apollo" +
-                        "\t[1]ARTEMIS" +
-                        "\t[2]ATHENA" +
-                        "\t[3]ATLAS" +
-                        "\t[4]CHARON" +
-                        "\t[5]CHRONUS" +
-                        "\t[6]DEMETER" +
-                        "\t[7]HEPHAESTUS" +
-                        "\t[8]HESTIA" +
-                        "\t[9]MINOTAUR" +
-                        "\t[10]PAN" +
-                        "\t[11]PROMETHEUS" +
-                        "\t[12]TRITON" +
-                        "\t[13]ZEUS");
+                        "\t[1]APOLLO" +
+                        "\t[2]ARTEMIS" +
+                        "\t[3]ATHENA" +
+                        "\t[4]ATLAS" +
+                        "\t[5]CHARON" +
+                        "\t[6]CHRONUS" +
+                        "\t[7]DEMETER" +
+                        "\t[8]HEPHAESTUS" +
+                        "\t[9]HESTIA" +
+                        "\t[10]MINOTAUR" +
+                        "\t[11]PAN" +
+                        "\t[12]PROMETHEUS" +
+                        "\t[13]TRITON" +
+                        "\t[14]ZEUS");
                 break;
             case GOD_CHOICE_MENU:
-                int index = 0;
+                int index = 1;
                 out = new StringBuilder("Select One God:\n");
                 for (GodName g : Model.getAvailableGods()) {
                     out.append("\t[").append(index).append("]").append(g);
@@ -78,21 +78,21 @@ public enum Outcome {
                 break;
             case ACTION_MENU:
                 out = new StringBuilder("Choose your action:\n" +
-                        "\t[0]Move" +
-                        "\t[1]Build" +
-                        "\t[2]Additional Power" +
-                        "\t[3]End Turn");
+                        "\t[1]Move" +
+                        "\t[2]Build" +
+                        "\t[3]Additional Power" +
+                        "\t[4]End Turn");
                 break;
             case DIRECTION_MENU:
                 out = new StringBuilder("Choose a Direction:\n" +
-                        "\t[0]NORTH" +
-                        "\t[1]NORTH_EAST" +
-                        "\t[2]EAST" +
-                        "\t[3]SOUTH_EAST" +
-                        "\t[4]SOUTH" +
-                        "\t[5]SOUTH_WEST" +
-                        "\t[6]WEST" +
-                        "\t[7]NORTH_WEST");
+                        "\t[1]NORTH" +
+                        "\t[2]NORTH_EAST" +
+                        "\t[3]EAST" +
+                        "\t[4]SOUTH_EAST" +
+                        "\t[5]SOUTH" +
+                        "\t[6]SOUTH_WEST" +
+                        "\t[7]WEST" +
+                        "\t[8]NORTH_WEST");
                 break;
             case INVALID_PLAYER:
                 out = new StringBuilder("It's Not Your Turn!");
@@ -126,8 +126,9 @@ public enum Outcome {
                 break;
             case CONFIRM_END_TURN:
                 out = new StringBuilder("Are you sure you want to end your turn?\n" +
-                        "\t[0]Yes" +
-                        "\t[1]No");
+                        "\t[1]Yes" +
+                        "\t[2]No");
+                break;
             default:
                 throw new IllegalArgumentException();
         }

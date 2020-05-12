@@ -44,7 +44,7 @@ public class ModelTest {
 
     @Test
     public void availableGodsTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
         assertTrue(Model.getAvailableGods().contains(GodName.PAN));
         assertEquals(Model.turnPhase.AVAILABLE_GODS, model.getCurrentPhase());
@@ -52,11 +52,11 @@ public class ModelTest {
 
     @Test
     public void fullAvailableGodsTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 1);
+        input = new IntChoice(player1, 2);
         model.doAction(input);
 
         assertTrue(Model.getAvailableGods().contains(GodName.PAN));
@@ -78,14 +78,14 @@ public class ModelTest {
 
     @Test
     public void invalidGodChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 1);
+        input = new IntChoice(player1, 2);
         model.doAction(input);
 
-        input = new IntChoice(player2, 3);
+        input = new IntChoice(player2, 4);
         model.doAction(input);
 
         assertEquals(Outcome.INVALID_GOD, model.getOutcome());
@@ -93,14 +93,14 @@ public class ModelTest {
 
     @Test
     public void godChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 1);
+        input = new IntChoice(player1, 2);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 2);
         model.doAction(input);
 
         assertTrue(player2.getWorkers()[0] instanceof WorkerTriton);
@@ -111,18 +111,18 @@ public class ModelTest {
 
     @Test
     public void fullGodChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 1);
+        input = new IntChoice(player1, 2);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 2);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
-        input = new IntChoice(player1, 0);
+        input = new IntChoice(player1, 1);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.WORKER_PLACEMENT, model.getCurrentPhase());
@@ -132,21 +132,21 @@ public class ModelTest {
 
     @Test
     public void invalidWorkerPlacementTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 25);
+        input = new IntChoice(player2, 26);
         model.doAction(input);
 
         assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
@@ -155,21 +155,21 @@ public class ModelTest {
 
     @Test
     public void firstWorkerPlacementTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 15);
+        input = new IntChoice(player2, 16);
         model.doAction(input);
 
         assertEquals(Model.getMap().getGrid()[3][0], player2.getWorkers()[0].getCurrentWorkerCell());
@@ -179,23 +179,23 @@ public class ModelTest {
 
     @Test
     public void secondWorkerPlacementTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 16);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 15);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
 
         assertEquals(Model.getMap().getGrid()[2][2], player2.getWorkers()[1].getCurrentWorkerCell());
@@ -208,23 +208,23 @@ public class ModelTest {
 
     @Test
     public void occupiedWorkerPlacementTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 16);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 15);
-        model.doAction(input);
-        input = new IntChoice(player2, 15);
+        input = new IntChoice(player2, 16);
         model.doAction(input);
 
         assertEquals(Model.getMap().getGrid()[3][0], player2.getWorkers()[0].getCurrentWorkerCell());
@@ -235,31 +235,31 @@ public class ModelTest {
 
     @Test
     public void fullWorkerPlacementTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 16);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 0);
+        input = new IntChoice(player3, 2);
         model.doAction(input);
-
-        input = new IntChoice(player2, 15);
+        input = new IntChoice(player3, 21);
         model.doAction(input);
-        input = new IntChoice(player2, 12);
+        input = new IntChoice(player1, 3);
         model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
+        input = new IntChoice(player1, 22);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.WORKER_CHOICE, model.getCurrentPhase());
@@ -269,34 +269,34 @@ public class ModelTest {
 
     @Test
     public void invalidWorkerChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 16);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 0);
+        input = new IntChoice(player3, 2);
         model.doAction(input);
-
-        input = new IntChoice(player2, 15);
+        input = new IntChoice(player3, 21);
         model.doAction(input);
-        input = new IntChoice(player2, 12);
+        input = new IntChoice(player1, 3);
         model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
+        input = new IntChoice(player1, 22);
         model.doAction(input);
 
-        input = new IntChoice(player2, 2);
+        input = new IntChoice(player2, 3);
         model.doAction(input);
 
         assertEquals(Outcome.INVALID_WORKER, model.getOutcome());
@@ -306,34 +306,34 @@ public class ModelTest {
 
     @Test
     public void cantBeUsedWorkerChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
+        input = new IntChoice(player2, 16);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+
         input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 15);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
         player2.getWorkers()[0].setCanBeUsed(false);
         model.doAction(input);
 
@@ -343,34 +343,34 @@ public class ModelTest {
 
     @Test
     public void workerChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
+        input = new IntChoice(player2, 16);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+
         input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 15);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
         model.doAction(input);
 
         assertEquals(Outcome.ACTION_MENU, model.getOutcome());
@@ -380,37 +380,37 @@ public class ModelTest {
 
     @Test
     public void invalidActionChoice() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
+        input = new IntChoice(player2, 16);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
 
-        input = new IntChoice(player2, 15);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 4);
+        input = new IntChoice(player2, 5);
         model.doAction(input);
 
         assertEquals(Outcome.INVALID_ACTION, model.getOutcome());
@@ -420,37 +420,37 @@ public class ModelTest {
 
     @Test
     public void actionChoiceTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
+        input = new IntChoice(player2, 16);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
 
-        input = new IntChoice(player2, 15);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.MOVE, model.getCurrentPhase());
@@ -459,40 +459,40 @@ public class ModelTest {
 
     @Test
     public void invalidMoveTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
+        input = new IntChoice(player2, 16);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
+
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-
-        input = new IntChoice(player2, 8);
+        input = new IntChoice(player2, 9);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.MOVE, model.getCurrentPhase());
@@ -501,40 +501,40 @@ public class ModelTest {
 
     @Test
     public void outOfMapMoveTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 0);
+        input = new IntChoice(player3, 2);
         model.doAction(input);
-
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player3, 21);
         model.doAction(input);
-        input = new IntChoice(player2, 12);
+        input = new IntChoice(player1, 3);
         model.doAction(input);
-        input = new IntChoice(player3, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
+        input = new IntChoice(player1, 22);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.MOVE, model.getCurrentPhase());
@@ -543,40 +543,40 @@ public class ModelTest {
 
     @Test
     public void validMoveTest() {
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 0);
+        input = new IntChoice(player3, 10);
         model.doAction(input);
-
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player3, 21);
         model.doAction(input);
-        input = new IntChoice(player2, 12);
+        input = new IntChoice(player1, 3);
         model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
+        input = new IntChoice(player1, 22);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 2);
+        input = new IntChoice(player2, 3);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
@@ -590,40 +590,40 @@ public class ModelTest {
         Model.getMap().getGrid()[0][0].setLevel(2);
         Model.getMap().getGrid()[0][1].setLevel(3);
 
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
+        input = new IntChoice(player1, 13);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
         model.doAction(input);
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        input = new IntChoice(player3, 0);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        input = new IntChoice(player1, 0);
+        input = new IntChoice(player3, 10);
         model.doAction(input);
-
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player3, 21);
         model.doAction(input);
-        input = new IntChoice(player2, 12);
+        input = new IntChoice(player1, 3);
         model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
-        model.doAction(input);
-        input = new IntChoice(player1, 2);
-        model.doAction(input);
-        input = new IntChoice(player1, 21);
+        input = new IntChoice(player1, 22);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        input = new IntChoice(player2, 2);
+        input = new IntChoice(player2, 3);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.MOVE, model.getCurrentPhase());
@@ -637,37 +637,37 @@ public class ModelTest {
         Model.getMap().getGrid()[0][1].setLevel(3);
 
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
         model.doAction(input);
         //scelta del worker
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
         //scelta azione
-        input = new IntChoice(player2, 1);
+        input = new IntChoice(player2, 2);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
@@ -677,46 +677,46 @@ public class ModelTest {
     @Test
     public void invalidBuildTest() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
         //costruisco
-        input = new IntChoice(player2, 9);
+        input = new IntChoice(player2, 10);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.BUILD, model.getCurrentPhase());
@@ -725,48 +725,47 @@ public class ModelTest {
 
     @Test
     public void outOfMapBuildTest() {
-
-        //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+//scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
         //costruisco
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.BUILD, model.getCurrentPhase());
@@ -776,46 +775,46 @@ public class ModelTest {
     @Test
     public void validBuildTest() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
         //costruisco
-        input = new IntChoice(player2, 4);
+        input = new IntChoice(player2, 5);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
@@ -826,43 +825,43 @@ public class ModelTest {
     @Test
     public void cantGoToEndTurnTest() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di andare all'end turn
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
         input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di andare all'end turn
+        input = new IntChoice(player2, 4);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
@@ -872,49 +871,49 @@ public class ModelTest {
     @Test
     public void canGoToEndTurnTest() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
         //costruisco
-        input = new IntChoice(player2, 4);
+        input = new IntChoice(player2, 5);
         model.doAction(input);
         //vado all'end turn
-        input = new IntChoice(player2, 3);
+        input = new IntChoice(player2, 4);
         model.doAction(input);
 
         assertEquals(Model.turnPhase.END_TURN, model.getCurrentPhase());
@@ -924,49 +923,49 @@ public class ModelTest {
     @Test
     public void invalidEndTurn() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
         //costruisco
-        input = new IntChoice(player2, 4);
+        input = new IntChoice(player2, 5);
         model.doAction(input);
         //vado all'end turn
-        input = new IntChoice(player2, 3);
+        input = new IntChoice(player2, 4);
         model.doAction(input);
         //confermo end turn
         input = new IntChoice(player2, 3);
@@ -979,52 +978,52 @@ public class ModelTest {
     @Test
     public void confirmEndTurnTest() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        //costruisco
-        input = new IntChoice(player2, 4);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        //vado all'end turn
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
         input = new IntChoice(player2, 3);
         model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //vado all'end turn
+        input = new IntChoice(player2, 4);
+        model.doAction(input);
         //confermo end turn
-        input = new IntChoice(player2, 0);
+        input = new IntChoice(player2, 1);
         model.doAction(input);
 
         assertEquals(Outcome.WORKER_MENU, model.getOutcome());
@@ -1035,53 +1034,54 @@ public class ModelTest {
     @Test
     public void dontConfirmEndTurnTest() {
         //scelta degli dèi in gioco
-        input = new IntChoice(player1, 10);
+        input = new IntChoice(player1, 11);
         model.doAction(input);
-        input = new IntChoice(player1, 12);
-        model.doAction(input);
-        input = new IntChoice(player1, 1);
-        model.doAction(input);
-        //scelta di un dio per ogni giocatore
-        input = new IntChoice(player2, 1);
-        model.doAction(input);
-        input = new IntChoice(player3, 0);
-        model.doAction(input);
-        input = new IntChoice(player1, 0);
-        model.doAction(input);
-        //piazzamento worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        input = new IntChoice(player2, 12);
-        model.doAction(input);
-        input = new IntChoice(player3, 9);
-        model.doAction(input);
-        input = new IntChoice(player3, 20);
+        input = new IntChoice(player1, 13);
         model.doAction(input);
         input = new IntChoice(player1, 2);
         model.doAction(input);
-        input = new IntChoice(player1, 21);
-        model.doAction(input);
-        //scelta del worker
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //scelgo di muovere
-        input = new IntChoice(player2, 0);
-        model.doAction(input);
-        //muovo
+        //scelta di un dio per ogni giocatore
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        //scelgo di costruire
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
-        //costruisco
-        input = new IntChoice(player2, 4);
+        input = new IntChoice(player2, 13);
         model.doAction(input);
-        //vado all'end turn
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
         input = new IntChoice(player2, 3);
         model.doAction(input);
-        //confermo end turn
-        input = new IntChoice(player2, 1);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
         model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //vado all'end turn
+        input = new IntChoice(player2, 4);
+        model.doAction(input);
+        //confermo end turn
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+
 
         assertEquals(Outcome.ACTION_MENU, model.getOutcome());
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
