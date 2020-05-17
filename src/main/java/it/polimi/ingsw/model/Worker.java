@@ -50,11 +50,11 @@ public class Worker {
         this.symbol = symbol;
     }
 
-    public boolean getCanGoUp() {
+    public static boolean getCanGoUp() {
         return canGoUp;
     }
 
-    public void setCanGoUp(boolean canGoUp) {
+    public static void setCanGoUp(boolean canGoUp) {
         Worker.canGoUp = canGoUp;
     }
 
@@ -113,7 +113,7 @@ public class Worker {
     }
 
     public boolean checkBuild(Cell nextWorkerCell) {
-        return !nextWorkerCell.getIsOccupied() && !this.getCurrentWorkerCell().equals(nextWorkerCell);
+        return !nextWorkerCell.getIsOccupied();
     }
 
     public boolean checkSurroundingCells() {
