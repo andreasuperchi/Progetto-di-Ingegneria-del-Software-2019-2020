@@ -86,7 +86,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
                 notify(intValue);
             }
         } catch (IOException | NoSuchElementException e) {
-            System.err.println("Error!" + e.getMessage());
+            System.err.println("Error! " + e.getMessage());
         } finally {
             close();
         }
