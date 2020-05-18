@@ -6,7 +6,7 @@ import it.polimi.ingsw.view.Observable;
 import java.util.ArrayList;
 
 public class Model extends Observable<Model> implements Cloneable {
-    private int numberOfPlayers;
+    private static int numberOfPlayers;
     private static ArrayList<GodName> availableGods;
     private ArrayList<Player> players;
     private static Player currentPlayer;
@@ -22,10 +22,10 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     public Model(ArrayList<Player> players, int numberOfPlayers) {
-        availableGods = new ArrayList<GodName>();
+        availableGods = new ArrayList<>();
         this.players = new ArrayList<>();
         this.players.addAll(players);
-        this.numberOfPlayers = numberOfPlayers;
+        Model.numberOfPlayers = numberOfPlayers;
         gameOver = false;
         currentPhase = turnPhase.AVAILABLE_GODS;
         map = new Map();
@@ -53,7 +53,7 @@ public class Model extends Observable<Model> implements Cloneable {
         return currentPlayer;
     }
 
-    public int getNumberOfPlayers() {
+    public static int getNumberOfPlayers() {
         return numberOfPlayers;
     }
 
@@ -151,7 +151,7 @@ public class Model extends Observable<Model> implements Cloneable {
                             }
                         }
                     }
-                    if (count == 6) {
+                    if (count == 2 * numberOfPlayers) {
                         currentPhase = turnPhase.WORKER_CHOICE;
                         outcome = Outcome.WORKER_MENU;
                     }
@@ -283,107 +283,114 @@ public class Model extends Observable<Model> implements Cloneable {
 
 
     private void addGod(int index) {
-        switch (index) {
-            case 1:
-                if (!availableGods.contains(GodName.APOLLO)) {
-                    availableGods.add(GodName.APOLLO);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 2:
-                if (!availableGods.contains(GodName.ARTEMIS)) {
-                    availableGods.add(GodName.ARTEMIS);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 3:
-                if (!availableGods.contains(GodName.ATHENA)) {
-                    availableGods.add(GodName.ATHENA);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 4:
-                if (!availableGods.contains(GodName.ATLAS)) {
-                    availableGods.add(GodName.ATLAS);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 5:
-                if (!availableGods.contains(GodName.CHARON)) {
-                    availableGods.add(GodName.CHARON);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 6:
-                if (!availableGods.contains(GodName.CHRONUS)) {
-                    availableGods.add(GodName.CHRONUS);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 7:
-                if (!availableGods.contains(GodName.DEMETER)) {
-                    availableGods.add(GodName.DEMETER);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 8:
-                if (!availableGods.contains(GodName.HEPHAESTUS)) {
-                    availableGods.add(GodName.HEPHAESTUS);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 9:
-                if (!availableGods.contains(GodName.HESTIA)) {
-                    availableGods.add(GodName.HESTIA);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 10:
-                if (!availableGods.contains(GodName.MINOTAUR)) {
-                    availableGods.add(GodName.MINOTAUR);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 11:
-                if (!availableGods.contains(GodName.PAN)) {
-                    availableGods.add(GodName.PAN);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 12:
-                if (!availableGods.contains(GodName.PROMETHEUS)) {
-                    availableGods.add(GodName.PROMETHEUS);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 13:
-                if (!availableGods.contains(GodName.TRITON)) {
-                    availableGods.add(GodName.TRITON);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            case 14:
-                if (!availableGods.contains(GodName.ZEUS)) {
-                    availableGods.add(GodName.ZEUS);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                break;
-            default:
-                throw new IllegalArgumentException();
+//        switch (index) {
+//            case 1:
+//                if (!availableGods.contains(GodName.APOLLO)) {
+//                    availableGods.add(GodName.APOLLO);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 2:
+//                if (!availableGods.contains(GodName.ARTEMIS)) {
+//                    availableGods.add(GodName.ARTEMIS);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 3:
+//                if (!availableGods.contains(GodName.ATHENA)) {
+//                    availableGods.add(GodName.ATHENA);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 4:
+//                if (!availableGods.contains(GodName.ATLAS)) {
+//                    availableGods.add(GodName.ATLAS);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 5:
+//                if (!availableGods.contains(GodName.CHARON)) {
+//                    availableGods.add(GodName.CHARON);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 6:
+//                if (!availableGods.contains(GodName.CHRONUS)) {
+//                    availableGods.add(GodName.CHRONUS);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 7:
+//                if (!availableGods.contains(GodName.DEMETER)) {
+//                    availableGods.add(GodName.DEMETER);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 8:
+//                if (!availableGods.contains(GodName.HEPHAESTUS)) {
+//                    availableGods.add(GodName.HEPHAESTUS);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 9:
+//                if (!availableGods.contains(GodName.HESTIA)) {
+//                    availableGods.add(GodName.HESTIA);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 10:
+//                if (!availableGods.contains(GodName.MINOTAUR)) {
+//                    availableGods.add(GodName.MINOTAUR);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 11:
+//                if (!availableGods.contains(GodName.PAN)) {
+//                    availableGods.add(GodName.PAN);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 12:
+//                if (!availableGods.contains(GodName.PROMETHEUS)) {
+//                    availableGods.add(GodName.PROMETHEUS);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 13:
+//                if (!availableGods.contains(GodName.TRITON)) {
+//                    availableGods.add(GodName.TRITON);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            case 14:
+//                if (!availableGods.contains(GodName.ZEUS)) {
+//                    availableGods.add(GodName.ZEUS);
+//                } else {
+//                    throw new IllegalArgumentException();
+//                }
+//                break;
+//            default:
+//                throw new IllegalArgumentException();
+//        }
+        GodName selectedGod = GodName.parseInput(Outcome.getGods().get(index - 1));
+        if (!availableGods.contains(selectedGod)) {
+            availableGods.add(selectedGod);
+            Outcome.getGods().remove(index - 1);
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 

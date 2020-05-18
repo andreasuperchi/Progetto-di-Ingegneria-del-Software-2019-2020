@@ -61,9 +61,15 @@ public class Cell {
 
     @Override
     public String toString() {
-        String string;
+        String string = "";
         if (isOccupied && level != 4) {
-            string = thisWorker.symbol;
+            if (thisWorker.symbol.contains("@")) {
+                string = "\u001b[36;1m" + string;
+            } else if (thisWorker.symbol.contains("#")) {
+                string = "\u001b[35;1m" + string;
+            } else {
+            }
+            string = string + thisWorker.symbol + "\u001b[0m";
         } else {
             string = " ";
         }

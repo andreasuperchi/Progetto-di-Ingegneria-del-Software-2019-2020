@@ -1,7 +1,10 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.choices.IntChoice;
+import it.polimi.ingsw.model.specialworkers.WorkerArtemis;
+import it.polimi.ingsw.model.specialworkers.WorkerPan;
 import it.polimi.ingsw.model.specialworkers.WorkerTriton;
+import it.polimi.ingsw.model.specialworkers.WorkerZeus;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -118,13 +121,26 @@ public class ModelTest {
         input = new IntChoice(player1, 2);
         model.doAction(input);
 
+        assertTrue(Model.getAvailableGods().contains(GodName.PAN));
+        assertTrue(Model.getAvailableGods().contains(GodName.ZEUS));
+        assertTrue(Model.getAvailableGods().contains(GodName.ARTEMIS));
+
+        System.out.println(model.getOutcome().printOutcome());
         input = new IntChoice(player2, 2);
         model.doAction(input);
+        System.out.println(model.getOutcome().printOutcome());
         input = new IntChoice(player3, 1);
         model.doAction(input);
+        System.out.println(model.getOutcome().printOutcome());
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
+        assertTrue(player2.getWorkers()[0] instanceof WorkerZeus);
+        assertTrue(player2.getWorkers()[1] instanceof WorkerZeus);
+        assertTrue(player3.getWorkers()[0] instanceof WorkerPan);
+        assertTrue(player3.getWorkers()[1] instanceof WorkerPan);
+        assertTrue(player1.getWorkers()[0] instanceof WorkerArtemis);
+        assertTrue(player1.getWorkers()[1] instanceof WorkerArtemis);
         assertEquals(Model.turnPhase.WORKER_PLACEMENT, model.getCurrentPhase());
         assertEquals(Outcome.WORKERS_PLACEMENT_MENU, model.getOutcome());
         assertEquals(player2, Model.getCurrentPlayer());

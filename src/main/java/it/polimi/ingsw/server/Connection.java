@@ -46,8 +46,13 @@ public class Connection extends Observable<Integer> implements ClientConnection,
     }
 
     @Override
-    public void asyncSend(Object message) {
-
+    public void asyncSend(final Object message) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                send(message);
+            }
+        }).start();
     }
 
     private void close() {
@@ -60,7 +65,6 @@ public class Connection extends Observable<Integer> implements ClientConnection,
     @Override
     public void run() {
         Scanner in;
-        Scanner inName;
         String name;
         int numberOfPlayers;
         int intValue;
@@ -69,18 +73,18 @@ public class Connection extends Observable<Integer> implements ClientConnection,
             in = new Scanner(socket.getInputStream());  //ricevo dal client
             out = new ObjectOutputStream(socket.getOutputStream()); //dà al client
 
-            send("Welcome! What's your name?");
-            name = in.nextLine();    //prende la stringa in ingresso
-
-            if (server.getNumberOfPlayers() == 0) {
-                server.setNumberOfPlayers(1);
-                send("Insert the number of players");
-                numberOfPlayers = Integer.parseInt(in.nextLine());
-                server.setNumberOfPlayers(numberOfPlayers);
+            synchronized (server) {
+                if (server.getNumberOfPlayers() == 0) {
+                    send("\033[31;1mWelcome to Santorini! \n\u001b[0mInsert the number of players: ");
+                    numberOfPlayers = Integer.parseInt(in.nextLine());
+                    server.setNumberOfPlayers(numberOfPlayers);
+                }
             }
 
+            send("\nWhat's your name?");
+            name = in.nextLine();    //prende la stringa in ingresso
 
-            send("What's your age?");
+            send("\nWhat's your age?");
             intValue = Integer.parseInt(in.nextLine());    //prende l'età
             server.lobby(this, name, intValue);
 

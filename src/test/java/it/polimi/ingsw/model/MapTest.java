@@ -9,13 +9,14 @@ import static org.junit.Assert.*;
 
 public class MapTest {
     Model model;
+    Player player1, player2, player3;
     Worker worker;
 
     @Before
     public void setUp() {
-        Player player1 = new Player("Andre", 5, "@");
-        Player player2 = new Player("Fra", 2, "#");
-        Player player3 = new Player("Ale", 78, "$");
+        player1 = new Player("Andre", 5, "@");
+        player2 = new Player("Fra", 2, "#");
+        player3 = new Player("Ale", 78, "$");
         ArrayList<Player> players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
@@ -153,10 +154,9 @@ public class MapTest {
 
 //    @Test
 //    public void testToString() {
-//        player = new Player("Test", 33, "#");
-//        player.setWorkers(GodName.APOLLO);
-//        player.getWorkers()[0].setCurrentWorkerCell(Model.getMap().getGrid()[1][2]);
-//        player.getWorkers()[1].setCurrentWorkerCell(Model.getMap().getGrid()[1][3]);
+//        player1.setWorkers(GodName.APOLLO);
+//        player1.getWorkers()[0].setCurrentWorkerCell(Model.getMap().getGrid()[1][2]);
+//        player1.getWorkers()[1].setCurrentWorkerCell(Model.getMap().getGrid()[1][3]);
 //        Model.getMap().getGrid()[2][2].setLevel(3);
 //        Model.getMap().getGrid()[0][1].setLevel(3);
 //        Model.getMap().getGrid()[1][1].setLevel(2);

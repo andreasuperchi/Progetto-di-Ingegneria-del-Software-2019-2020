@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public enum Outcome {
     WIN,
     LOSE,
@@ -23,6 +26,13 @@ public enum Outcome {
     CANT_GO_TO_END_TURN,
     USED_SPECIAL_POWER,
     CONFIRM_END_TURN;
+
+    private static ArrayList<String> gods = new ArrayList<>(Arrays.asList("Apollo", "Artemis", "Athena", "Atlas", "Charon", "Chronus", "Demeter", "Hephaestus",
+            "Hestia", "Minotaur", "Pan", "Prometheus", "Triton", "Zeus"));
+
+    public static ArrayList<String> getGods() {
+        return gods;
+    }
 
     public String printOutcome() {
         StringBuilder out;
@@ -48,25 +58,17 @@ public enum Outcome {
                 break;
             case WORKER_MENU:
                 out = new StringBuilder("Choose your Worker:\n" +
-                        "\t[1]Worker A" +
-                        "\t[2]Worker B");
+                        "\t[1]Worker " + Model.getCurrentPlayer().getWorkers()[0].symbol +
+                        "\t[2]Worker " + Model.getCurrentPlayer().getWorkers()[1].symbol);
                 break;
             case AVAILABLE_GODS_MENU:
-                out = new StringBuilder("Pick some Gods for the Game:\n" +
-                        "\t[1]APOLLO" +
-                        "\t[2]ARTEMIS" +
-                        "\t[3]ATHENA" +
-                        "\t[4]ATLAS" +
-                        "\t[5]CHARON" +
-                        "\t[6]CHRONUS" +
-                        "\t[7]DEMETER" +
-                        "\t[8]HEPHAESTUS" +
-                        "\t[9]HESTIA" +
-                        "\t[10]MINOTAUR" +
-                        "\t[11]PAN" +
-                        "\t[12]PROMETHEUS" +
-                        "\t[13]TRITON" +
-                        "\t[14]ZEUS");
+                out = new StringBuilder("Pick " + Model.getNumberOfPlayers() + " Gods for the Game:\n");
+                for (String s : gods) {
+                    out.append("\t[").append(gods.indexOf(s) + 1).append("]").append(s);
+                    if (gods.indexOf(s) + 1 == 7) {
+                        out.append("\n");
+                    }
+                }
                 break;
             case GOD_CHOICE_MENU:
                 int index = 1;

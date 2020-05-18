@@ -119,7 +119,11 @@ public class Map {
                         switch (r) {
                             case 1:
                                 if (counter == 0) {
-                                    string.append(grid[i / 4][j].getLevel());
+                                    if (grid[i / 4][j].getLevel() == 4) {
+                                        string.append("\u001b[31;1m").append(grid[i / 4][j].getLevel()).append("\u001b[0m");
+                                    } else {
+                                        string.append(grid[i / 4][j].getLevel());
+                                    }
                                 } else {
                                     string.append(" ");
                                 }

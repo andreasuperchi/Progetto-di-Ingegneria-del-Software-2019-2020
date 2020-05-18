@@ -76,7 +76,7 @@ public class Client {
 
     public void run() throws IOException {         //Inizializza il client e stabilisce la connessione con il server
         Socket socket = new Socket(ip, port);
-        System.out.println("Connection Established");
+        System.out.println("\u001b[32;1mConnection Established.\u001b[0m\n");
         ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
         PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
@@ -86,7 +86,7 @@ public class Client {
             t0.join();
             t1.join();
         } catch (InterruptedException | NoSuchElementException e) {
-            System.out.println("Connection closed from the client side");
+            System.out.println("Connection closed from the client side.");
         } finally {
             stdin.close();
             socketIn.close();

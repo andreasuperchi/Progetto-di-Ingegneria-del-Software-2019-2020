@@ -22,10 +22,11 @@ public class Server {
     private Map<String, Integer> mapNameAge = new HashMap<>();
     private ArrayList<ClientConnection> playingConnection = new ArrayList<>();
 
-    private int numberOfPlayers = 0;
+    private int numberOfPlayers;
 
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
+        this.numberOfPlayers = 0;
     }
 
     public int getNumberOfPlayers() {
@@ -58,6 +59,7 @@ public class Server {
     public synchronized void lobby(ClientConnection c, String name, int age) {
         waitingConnection.put(name, c);
         mapNameAge.put(name, age);
+
         if (waitingConnection.size() == numberOfPlayers) {
             List<String> keys = new ArrayList<>(waitingConnection.keySet());
             ArrayList<Player> players = new ArrayList<Player>();
@@ -84,7 +86,7 @@ public class Server {
                 playingConnection.add(c2);
 
                 c1.asyncSend(model.getOutcome().printOutcome());
-                c2.asyncSend("Wait for your turn");
+                c2.asyncSend("\u001b[33;1mWaiting for the other players to make their moves...\u001b[0m");
 
             } else if (numberOfPlayers == 3) {
                 ClientConnection c1 = waitingConnection.get(keys.get(0));
@@ -119,8 +121,8 @@ public class Server {
                 playingConnection.add(c3);
 
                 c1.asyncSend(model.getOutcome().printOutcome());
-                c2.asyncSend("Wait for your turn");
-                c3.asyncSend("Wait for your turn");
+                c2.asyncSend("\u001b[33;1mWaiting for the other players to make their moves...\u001b[0m");
+                c3.asyncSend("\u001b[33;1mWaiting for the other players to make their moves...\u001b[0m");
 
             }
             waitingConnection.clear();
@@ -131,7 +133,7 @@ public class Server {
     }
 
     public void run() {
-        System.out.println("Server running");
+        System.out.println("\u001b[32;1mServer running...");
         while (true) {
             try {
                 Socket newSocket = serverSocket.accept();   //aspetta la connessione in ingresso
