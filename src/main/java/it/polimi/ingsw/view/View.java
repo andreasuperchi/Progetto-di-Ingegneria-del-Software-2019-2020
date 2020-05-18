@@ -19,6 +19,9 @@ public abstract class View extends Observable<Choice> implements Observer<Model>
     }
 
 
+    protected abstract void showMessage(Object message);
+
+
     @Override
     public void update(Model message) {
 

@@ -16,9 +16,9 @@ public class Model extends Observable<Model> implements Cloneable {
     private turnPhase currentPhase;
     private Outcome outcome;
 
-    enum turnPhase {
+    public enum turnPhase {
         AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
-        WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN
+        WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN, GAME_OVER
     }
 
     public Model(ArrayList<Player> players, int numberOfPlayers) {
@@ -243,8 +243,14 @@ public class Model extends Observable<Model> implements Cloneable {
                     if (intChoice.getValue() == 1 || intChoice.getValue() == 2) {
                         if (intChoice.getValue() == 1) {
                             endTurn();
-                            currentPhase = turnPhase.WORKER_CHOICE;
-                            outcome = Outcome.WORKER_MENU;
+                            if (!currentPlayer.getInGame()) {
+                                outcome = Outcome.LOSE;
+                                currentPhase = turnPhase.GAME_OVER;
+                            } else {
+                                currentPhase = turnPhase.WORKER_CHOICE;
+                                outcome = Outcome.WORKER_MENU;
+                            }
+
                         } else {
                             currentPhase = turnPhase.ACTION_CHOICE;
                             outcome = Outcome.ACTION_MENU;
@@ -252,12 +258,23 @@ public class Model extends Observable<Model> implements Cloneable {
                     } else {
                         outcome = Outcome.INVALID_INPUT;
                     }
-                    //TODO: gestire se il giocatore è fuori partita
-                    //if (!currentPlayer.getInGame()){
-                    //
-                    //}
                     break;
-
+                case GAME_OVER:
+                    Player removedPlayer = currentPlayer;
+                    endTurn();
+                    players.remove(removedPlayer);
+                    if (players.size() == 1) {
+                        gameOver = true;
+                        outcome = Outcome.WIN;
+                    } else {
+                        if (!currentPlayer.getInGame()) {
+                            outcome = Outcome.LOSE;
+                            currentPhase = turnPhase.GAME_OVER;
+                        } else {
+                            currentPhase = turnPhase.WORKER_CHOICE;
+                            outcome = Outcome.WORKER_MENU;
+                        }
+                    }
             }
         }
         notify(this);
