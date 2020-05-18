@@ -2,6 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.Outcome;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
@@ -82,6 +83,9 @@ public class Server {
                 playingConnection.add(c1);
                 playingConnection.add(c2);
 
+                c1.asyncSend(model.getOutcome().printOutcome());
+                c2.asyncSend("Wait for your turn");
+
             } else if (numberOfPlayers == 3) {
                 ClientConnection c1 = waitingConnection.get(keys.get(0));
                 ClientConnection c2 = waitingConnection.get(keys.get(1));
@@ -114,7 +118,12 @@ public class Server {
                 playingConnection.add(c2);
                 playingConnection.add(c3);
 
+                c1.asyncSend(model.getOutcome().printOutcome());
+                c2.asyncSend("Wait for your turn");
+                c3.asyncSend("Wait for your turn");
+
             }
+            waitingConnection.clear();
 
 
         }
@@ -122,6 +131,7 @@ public class Server {
     }
 
     public void run() {
+        System.out.println("Server running");
         while (true) {
             try {
                 Socket newSocket = serverSocket.accept();   //aspetta la connessione in ingresso

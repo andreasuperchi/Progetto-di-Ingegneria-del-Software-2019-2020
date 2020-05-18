@@ -30,6 +30,7 @@ public class Model extends Observable<Model> implements Cloneable {
         currentPhase = turnPhase.AVAILABLE_GODS;
         map = new Map();
         outcome = Outcome.AVAILABLE_GODS_MENU;
+        currentPlayer = players.get(0);
     }
 
     public static void setCurrentPlayer(Player currentPlayer) {

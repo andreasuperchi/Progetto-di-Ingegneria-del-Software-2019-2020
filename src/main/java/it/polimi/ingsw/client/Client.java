@@ -16,6 +16,7 @@ public class Client {
     public Client(String ip, int port) {
         this.ip = ip;
         this.port = port;
+        isActive = true;
     }
 
     public synchronized boolean isActive() {
@@ -60,8 +61,8 @@ public class Client {
             public void run() {        //Invia messaggi a RemoteView
                 try {
                     while (isActive()) {
-                        int inputInt = stdin.nextInt();
-                        socketOut.println(inputInt);
+                        String input = stdin.nextLine();
+                        socketOut.println(input);
                         socketOut.flush();
                     }
                 } catch (Exception e) {
