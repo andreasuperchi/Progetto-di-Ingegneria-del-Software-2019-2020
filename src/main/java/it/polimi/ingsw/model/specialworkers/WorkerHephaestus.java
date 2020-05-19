@@ -9,6 +9,7 @@ public class WorkerHephaestus extends Worker {
 
     public WorkerHephaestus() {
         super();
+        hasSpecialPower = true;
     }
 
 

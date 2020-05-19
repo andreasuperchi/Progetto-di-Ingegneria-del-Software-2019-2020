@@ -8,6 +8,7 @@ public class WorkerAthena extends Worker {
 
     public WorkerAthena() {
         super();
+        hasSpecialPower = false;
     }
 
     @Override

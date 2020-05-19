@@ -58,7 +58,7 @@ public class Client {
     public Thread asyncWriteFromSocket(final Scanner stdin, final PrintWriter socketOut) {
         Thread t = new Thread(new Runnable() {
             @Override
-            public void run() {        //Invia messaggi a RemoteView
+            public void run() {        //Invia messaggi a Conection che notificha la RemoteView
                 try {
                     while (isActive()) {
                         String input = stdin.nextLine();

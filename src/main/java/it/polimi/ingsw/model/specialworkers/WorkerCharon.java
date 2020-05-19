@@ -6,6 +6,7 @@ public class WorkerCharon extends Worker {
 
     public WorkerCharon() {
         super();
+        hasSpecialPower = true;
     }
 
     private Cell symmetricalCell;                  //salvo cella simmetrica rispetto al mio worker
