@@ -12,13 +12,13 @@ public class WorkerAtlas extends Worker {
     }
 
     @Override
-    public boolean checkBuild(Cell nextWorkerCell) {
-        return !nextWorkerCell.getIsOccupied() && !(nextWorkerCell.equals(this.currentWorkerCell));
+    public boolean canUseSpecialPower() {
+        return hasMoved && !hasBuilt;
     }
 
     @Override
     public void specialPower(Cell nextWorkerCell) {
-        if (nextWorkerCell.getLevel() == 4 || !this.hasMoved) {
+        if (!checkBuild(nextWorkerCell)) {
             throw new IllegalArgumentException();
         } else {
             nextWorkerCell.setLevel(4);

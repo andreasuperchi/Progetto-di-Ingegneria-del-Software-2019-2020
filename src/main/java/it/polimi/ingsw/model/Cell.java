@@ -64,6 +64,8 @@ public class Cell {
         String string;
         if (isOccupied && level != 4) {
             string = thisWorker.symbol;
+        } else if (level == 4) {
+            string = "  ";
         } else {
             string = " ";
         }

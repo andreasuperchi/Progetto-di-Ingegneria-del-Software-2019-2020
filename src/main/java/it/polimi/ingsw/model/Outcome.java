@@ -25,7 +25,8 @@ public enum Outcome {
     NO_SPECIAL_POWER,
     CANT_GO_TO_END_TURN,
     USED_SPECIAL_POWER,
-    CONFIRM_END_TURN;
+    CONFIRM_END_TURN,
+    CANT_USE_SPECIAL_POWER;
 
     private static ArrayList<String> gods;
 
@@ -131,12 +132,20 @@ public enum Outcome {
                         "\t[4]End Turn");
                 break;
             case USED_SPECIAL_POWER:
-                out = new StringBuilder("The Special Power has already been used");
+                out = new StringBuilder("The Special Power has already been used.");
                 break;
             case CONFIRM_END_TURN:
                 out = new StringBuilder("Are you sure you want to end your turn?\n" +
                         "\t[1]Yes" +
                         "\t[2]No");
+                break;
+            case CANT_USE_SPECIAL_POWER:
+                out = new StringBuilder("\u001b[31mYou can't use your special power now.\u001b[0m" +
+                        "\nChoose your action:\n" +
+                        "\t[1]Move" +
+                        "\t[2]Build" +
+                        "\t[3]Additional Power" +
+                        "\t[4]End Turn");
                 break;
             default:
                 throw new IllegalArgumentException();

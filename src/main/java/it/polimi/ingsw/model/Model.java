@@ -242,6 +242,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
                     }
+                    break;
 
                 case END_TURN:
                     if (intChoice.getValue() == 1 || intChoice.getValue() == 2) {
@@ -421,13 +422,16 @@ public class Model extends Observable<Model> implements Cloneable {
                 if (!currentWorker.hasSpecialPower) {
                     outcome = Outcome.NO_SPECIAL_POWER;
                     currentPhase = turnPhase.ACTION_CHOICE;
-                } else {
+                } else if (currentWorker.canUseSpecialPower()) {
                     if (currentWorker.hasUsedSpecialPower) {
                         outcome = Outcome.USED_SPECIAL_POWER;
                     } else {
                         currentPhase = turnPhase.SPECIAL_POWER;
                         outcome = Outcome.DIRECTION_MENU;
                     }
+                } else {
+                    outcome = Outcome.CANT_USE_SPECIAL_POWER;
+                    currentPhase = turnPhase.ACTION_CHOICE;
                 }
                 break;
             case 4:
