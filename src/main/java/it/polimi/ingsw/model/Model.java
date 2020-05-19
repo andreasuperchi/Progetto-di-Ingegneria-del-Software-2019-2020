@@ -280,6 +280,7 @@ public class Model extends Observable<Model> implements Cloneable {
                             outcome = Outcome.WORKER_MENU;
                         }
                     }
+                    break;
             }
         }
         notify(this);
