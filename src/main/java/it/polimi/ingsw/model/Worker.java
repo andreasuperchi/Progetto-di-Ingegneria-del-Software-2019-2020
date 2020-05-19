@@ -116,6 +116,10 @@ public class Worker {
         return !nextWorkerCell.getIsOccupied() && !(nextWorkerCell.equals(this.currentWorkerCell));
     }
 
+    public boolean canUseSpecialPower() {
+        return false;
+    }
+
     public boolean checkSurroundingCells() {
         for (Direction d : Direction.values()) {
             if (checkMove(Model.getMap().getNextWorkerCell(getCurrentWorkerCell(), d))) {
@@ -156,7 +160,6 @@ public class Worker {
 
     //ogni lavoratore farà l'Override
     public void specialPower(Cell nextWorkerCell) {
-
     }
 
     public boolean winCondition() {
