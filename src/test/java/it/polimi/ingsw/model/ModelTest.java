@@ -63,20 +63,11 @@ public class ModelTest {
         model.doAction(input);
 
         assertTrue(Model.getAvailableGods().contains(GodName.PAN));
-        assertTrue(Model.getAvailableGods().contains(GodName.TRITON));
+        assertTrue(Model.getAvailableGods().contains(GodName.ZEUS));
         assertTrue(Model.getAvailableGods().contains(GodName.ARTEMIS));
         assertEquals(Model.turnPhase.GOD_CHOICE, model.getCurrentPhase());
         assertEquals(Outcome.GOD_CHOICE_MENU, model.getOutcome());
         assertEquals(player2, Model.getCurrentPlayer());
-    }
-
-    @Test
-    public void duplicateAvailableGodsTest() {
-        input = new IntChoice(player1, 10);
-        model.doAction(input);
-        input = new IntChoice(player1, 10);
-        model.doAction(input);
-        assertEquals(Outcome.INVALID_GOD, model.getOutcome());
     }
 
     @Test
@@ -106,8 +97,8 @@ public class ModelTest {
         input = new IntChoice(player2, 2);
         model.doAction(input);
 
-        assertTrue(player2.getWorkers()[0] instanceof WorkerTriton);
-        assertTrue(player2.getWorkers()[1] instanceof WorkerTriton);
+        assertTrue(player2.getWorkers()[0] instanceof WorkerZeus);
+        assertTrue(player2.getWorkers()[1] instanceof WorkerZeus);
         assertEquals(Outcome.GOD_CHOICE_MENU, model.getOutcome());
         assertEquals(player3, Model.getCurrentPlayer());
     }
@@ -125,13 +116,11 @@ public class ModelTest {
         assertTrue(Model.getAvailableGods().contains(GodName.ZEUS));
         assertTrue(Model.getAvailableGods().contains(GodName.ARTEMIS));
 
-        System.out.println(model.getOutcome().printOutcome());
+
         input = new IntChoice(player2, 2);
         model.doAction(input);
-        System.out.println(model.getOutcome().printOutcome());
         input = new IntChoice(player3, 1);
         model.doAction(input);
-        System.out.println(model.getOutcome().printOutcome());
         input = new IntChoice(player1, 1);
         model.doAction(input);
 

@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.choices.*;
 import it.polimi.ingsw.view.Observable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Model extends Observable<Model> implements Cloneable {
     private static int numberOfPlayers;
@@ -31,6 +32,8 @@ public class Model extends Observable<Model> implements Cloneable {
         map = new Map();
         outcome = Outcome.AVAILABLE_GODS_MENU;
         currentPlayer = players.get(0);
+        Outcome.setGods(new ArrayList<>(Arrays.asList("Apollo", "Artemis", "Athena", "Atlas", "Charon", "Chronus", "Demeter", "Hephaestus",
+                "Hestia", "Minotaur", "Pan", "Prometheus", "Triton", "Zeus")));
     }
 
     public static void setCurrentPlayer(Player currentPlayer) {
@@ -385,10 +388,12 @@ public class Model extends Observable<Model> implements Cloneable {
 //            default:
 //                throw new IllegalArgumentException();
 //        }
-        GodName selectedGod = GodName.parseInput(Outcome.getGods().get(index - 1));
-        if (!availableGods.contains(selectedGod)) {
-            availableGods.add(selectedGod);
-            Outcome.getGods().remove(index - 1);
+        if (index >= 0 && index <= Outcome.getGods().size()) {
+            GodName selectedGod = GodName.parseInput(Outcome.getGods().get(index - 1));
+            if (!availableGods.contains(selectedGod)) {
+                availableGods.add(selectedGod);
+                Outcome.getGods().remove(index - 1);
+            }
         } else {
             throw new IllegalArgumentException();
         }
@@ -415,6 +420,7 @@ public class Model extends Observable<Model> implements Cloneable {
             case 3:
                 if (!currentWorker.hasSpecialPower) {
                     outcome = Outcome.NO_SPECIAL_POWER;
+                    currentPhase = turnPhase.ACTION_CHOICE;
                 } else {
                     if (currentWorker.hasUsedSpecialPower) {
                         outcome = Outcome.USED_SPECIAL_POWER;

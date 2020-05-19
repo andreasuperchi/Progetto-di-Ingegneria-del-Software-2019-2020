@@ -18,7 +18,6 @@ public abstract class View extends Observable<Choice> implements Observer<Model>
         notify(new IntChoice(player, input));
     }
 
-
     protected abstract void showMessage(Object message);
 
 }

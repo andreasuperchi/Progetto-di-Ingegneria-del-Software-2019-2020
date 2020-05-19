@@ -27,11 +27,14 @@ public enum Outcome {
     USED_SPECIAL_POWER,
     CONFIRM_END_TURN;
 
-    private static ArrayList<String> gods = new ArrayList<>(Arrays.asList("Apollo", "Artemis", "Athena", "Atlas", "Charon", "Chronus", "Demeter", "Hephaestus",
-            "Hestia", "Minotaur", "Pan", "Prometheus", "Triton", "Zeus"));
+    private static ArrayList<String> gods;
 
     public static ArrayList<String> getGods() {
         return gods;
+    }
+
+    public static void setGods(ArrayList<String> gods) {
+        Outcome.gods = gods;
     }
 
     public String printOutcome() {
@@ -121,7 +124,11 @@ public enum Outcome {
                 out = new StringBuilder("Enter the number of the cell where you want to place your worker.");
                 break;
             case NO_SPECIAL_POWER:
-                out = new StringBuilder("your god has not special powers, do another action.");
+                out = new StringBuilder("\u001b[31mYour god has no special power!\u001b[0m \nChoose your action: \n" +
+                        "\t[1]Move" +
+                        "\t[2]Build" +
+                        "\t[3]Additional Power" +
+                        "\t[4]End Turn");
                 break;
             case USED_SPECIAL_POWER:
                 out = new StringBuilder("The Special Power has already been used");

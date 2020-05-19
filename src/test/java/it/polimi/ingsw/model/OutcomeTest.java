@@ -62,23 +62,16 @@ public class OutcomeTest {
 //        System.out.println(outcome.printOutcome());
 //    }
 
-    @Test
-    public void checkAvailableGodsMenu() {
-        Player player1 = new Player("Andre", 5, "@");
-        Player player2 = new Player("Fra", 2, "#");
-        Player player3 = new Player("Ale", 78, "$");
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
-        model = new Model(players, 3);
-        System.out.println(model.getOutcome().printOutcome());
-    }
-
-    @Test
-    public void prova() {
-        System.out.println(GodName.parseInput(Outcome.getGods().get(11 - 1)));
-        Outcome.getGods().remove(11 - 1);
-        System.out.println(GodName.parseInput(Outcome.getGods().get(13 - 1)));
-    }
+//    @Test
+//    public void checkAvailableGodsMenu() {
+//        Player player1 = new Player("Andre", 5, "@");
+//        Player player2 = new Player("Fra", 2, "#");
+//        Player player3 = new Player("Ale", 78, "$");
+//        ArrayList<Player> players = new ArrayList<>();
+//        players.add(player1);
+//        players.add(player2);
+//        players.add(player3);
+//        model = new Model(players, 3);
+//        System.out.println(model.getOutcome().printOutcome());
+//    }
 }
