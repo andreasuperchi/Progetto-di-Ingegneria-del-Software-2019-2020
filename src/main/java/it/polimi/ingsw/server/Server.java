@@ -68,9 +68,9 @@ public class Server {
             if (numberOfPlayers == 2) {
                 ClientConnection c1 = waitingConnection.get(keys.get(0));
                 ClientConnection c2 = waitingConnection.get(keys.get(1));
-                Player player1 = new Player(keys.get(0), mapNameAge.get(keys.get(0)), "@");
+                Player player1 = new Player(keys.get(0), mapNameAge.get(keys.get(0)), "\u001b[32m@");
                 players.add(player1);
-                Player player2 = new Player(keys.get(1), mapNameAge.get(keys.get(1)), "#");
+                Player player2 = new Player(keys.get(1), mapNameAge.get(keys.get(1)), "\u001b[36m#");
                 players.add(player2);
                 View player1View = new RemoteView(player1, c1);
                 View player2View = new RemoteView(player2, c2);
@@ -93,11 +93,11 @@ public class Server {
                 ClientConnection c2 = waitingConnection.get(keys.get(1));
                 ClientConnection c3 = waitingConnection.get(keys.get(2));
 
-                Player player1 = new Player(keys.get(0), mapNameAge.get(keys.get(0)), "@");
+                Player player1 = new Player(keys.get(0), mapNameAge.get(keys.get(0)), "\u001b[32m@");
                 players.add(player1);
-                Player player2 = new Player(keys.get(1), mapNameAge.get(keys.get(1)), "#");
+                Player player2 = new Player(keys.get(1), mapNameAge.get(keys.get(1)), "\u001b[36m#");
                 players.add(player2);
-                Player player3 = new Player(keys.get(2), mapNameAge.get(keys.get(2)), "$");
+                Player player3 = new Player(keys.get(2), mapNameAge.get(keys.get(2)), "\u001b[35m$");
                 players.add(player3);
 
                 View player1View = new RemoteView(player1, c1);
@@ -121,8 +121,8 @@ public class Server {
                 playingConnection.add(c3);
 
                 c1.asyncSend(model.getOutcome().printOutcome());
-                c2.asyncSend("\u001b[33;1mWaiting for the other players to make their moves...\u001b[0m");
-                c3.asyncSend("\u001b[33;1mWaiting for the other players to make their moves...\u001b[0m");
+                c2.asyncSend("\u001b[33;1m Waiting for the other players to make their moves...\u001b[0m");
+                c3.asyncSend("\u001b[33;1m Waiting for the other players to make their moves...\u001b[0m");
 
             }
             waitingConnection.clear();

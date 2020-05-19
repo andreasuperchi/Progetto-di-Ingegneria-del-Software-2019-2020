@@ -192,13 +192,6 @@ public class WorkerTest {
         worker.build(nextWorkerCell);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void checkBuildUnderWorker() {
-        baseWorkerCell = Model.getMap().getGrid()[1][1];
-        worker.setCurrentWorkerCell(baseWorkerCell);
-        worker.build(baseWorkerCell);
-    }
-
     @Test
     public void checkCorrectWinCondition() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];

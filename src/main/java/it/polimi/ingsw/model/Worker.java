@@ -113,7 +113,7 @@ public class Worker {
     }
 
     public boolean checkBuild(Cell nextWorkerCell) {
-        return !nextWorkerCell.getIsOccupied();
+        return !nextWorkerCell.getIsOccupied() && !(nextWorkerCell.equals(this.currentWorkerCell));
     }
 
     public boolean checkSurroundingCells() {

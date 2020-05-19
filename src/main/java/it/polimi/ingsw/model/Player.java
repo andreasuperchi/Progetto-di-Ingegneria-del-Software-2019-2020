@@ -53,7 +53,7 @@ public class Player {
     public void setWorkers(GodName godName) {
         workers[0] = godName.parseGod();
         workers[1] = godName.parseGod();
-        workers[0].symbol = symbol + "A";
-        workers[1].symbol = symbol + "B";
+        workers[0].symbol = symbol + "A\u001b[0m";
+        workers[1].symbol = symbol + "B\u001b[0m";
     }
 }
