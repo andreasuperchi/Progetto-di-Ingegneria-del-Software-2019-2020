@@ -11,13 +11,20 @@ public class WorkerHestia extends Worker {
 
     @Override
     public void specialPower(Cell nextWorkerCell) {
-        if (!hasMoved || !hasBuilt) {
-            throw new IllegalArgumentException();
-        } else if (isPerimetricCell(nextWorkerCell)) {
+        if (isPerimetricCell(nextWorkerCell)) {
             throw new IllegalArgumentException();
         } else {
             build(nextWorkerCell);
             hasUsedSpecialPower = true;
+        }
+    }
+
+    @Override
+    public boolean canUseSpecialPower() {
+        if (!hasMoved || !hasBuilt) {
+            return false;
+        } else {
+            return true;
         }
     }
 

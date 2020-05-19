@@ -21,12 +21,17 @@ public class WorkerPrometheus extends Worker {
     }
 
     @Override
-    public void specialPower(Cell nextWorkerCell) {
-        if (!hasMoved) {
-            build(nextWorkerCell);
-            canGoUp = false;
+    public boolean canUseSpecialPower() {
+        if (hasMoved) {
+            return false;
         } else {
-            throw new IllegalArgumentException();
+            return true;
         }
+    }
+
+    @Override
+    public void specialPower(Cell nextWorkerCell) {
+        build(nextWorkerCell);
+        canGoUp = false;
     }
 }

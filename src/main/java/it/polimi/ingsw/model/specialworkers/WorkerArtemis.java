@@ -21,18 +21,23 @@ public class WorkerArtemis extends Worker {
         super.move(nextWorkerCell);
     }
 
+    @Override
+    public boolean canUseSpecialPower() {
+        if (!hasMoved || hasBuilt) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     @Override
     public void specialPower(Cell nextWorkerCell) {
-        if (!hasMoved || hasBuilt) {
+        if (nextWorkerCell.equals(oldPosition)) {
             throw new IllegalArgumentException();
         } else {
-            if (nextWorkerCell.equals(oldPosition)) {
-                throw new IllegalArgumentException();
-            } else {
-                move(nextWorkerCell);
-                hasUsedSpecialPower = true;
-            }
+            move(nextWorkerCell);
+            hasUsedSpecialPower = true;
         }
     }
+
 }

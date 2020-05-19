@@ -19,17 +19,23 @@ public class WorkerDemeter extends Worker {
     }
 
     @Override
-    public void specialPower(Cell nextWorkerCell) {
+    public boolean canUseSpecialPower() {
         if (!hasMoved || !hasBuilt) {
-            throw new IllegalArgumentException();
+            return false;
         } else {
-            if (nextWorkerCell.equals(oldBuildPosition)) {
-                throw new IllegalArgumentException();
-            } else {
-                build(nextWorkerCell);
-                hasUsedSpecialPower = true;
-            }
+            return true;
         }
     }
+
+    @Override
+    public void specialPower(Cell nextWorkerCell) {
+        if (nextWorkerCell.equals(oldBuildPosition)) {
+            throw new IllegalArgumentException();
+        } else {
+            build(nextWorkerCell);
+            hasUsedSpecialPower = true;
+        }
+    }
+
 
 }
