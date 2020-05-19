@@ -143,27 +143,27 @@ public class MapTest {
         cell = Model.getMap().getNextWorkerCell(cell, Direction.SOUTH_WEST);
         assertNull(cell);
     }
-//
-//    @Test
-//    public void testInitialMap() {
-//        System.out.println(Model.getMap().showInitialMap());
-//        worker.symbol = "@A";
-//        worker.setCurrentWorkerCell(Model.getMap().getGrid()[4][2]);
-//        System.out.println("\n\n\n\n" + Model.getMap().showInitialMap());
-//    }
 
     @Test
-    public void testToString() {
-        player1.setWorkers(GodName.APOLLO);
-        player1.getWorkers()[0].setCurrentWorkerCell(Model.getMap().getGrid()[1][2]);
-        player1.getWorkers()[1].setCurrentWorkerCell(Model.getMap().getGrid()[1][3]);
-        Model.getMap().getGrid()[2][2].setLevel(3);
-        Model.getMap().getGrid()[0][1].setLevel(3);
-        Model.getMap().getGrid()[1][1].setLevel(2);
-        Model.getMap().getGrid()[2][1].setLevel(1);
-        Model.getMap().getGrid()[0][4].setLevel(3);
-        Model.getMap().getGrid()[2][3].setLevel(4);
-        Model.getMap().getGrid()[4][1].setLevel(2);
-        System.out.println(Model.getMap().toString());
+    public void testInitialMap() {
+        System.out.println(Model.getMap().showInitialMap());
+        worker.symbol = "@A";
+        worker.setCurrentWorkerCell(Model.getMap().getGrid()[4][2]);
+        System.out.println("\n\n\n\n" + Model.getMap().showInitialMap());
     }
+
+//    @Test
+//    public void testToString() {
+//        player1.setWorkers(GodName.APOLLO);
+//        player1.getWorkers()[0].setCurrentWorkerCell(Model.getMap().getGrid()[1][2]);
+//        player1.getWorkers()[1].setCurrentWorkerCell(Model.getMap().getGrid()[1][3]);
+//        Model.getMap().getGrid()[2][2].setLevel(3);
+//        Model.getMap().getGrid()[0][1].setLevel(3);
+//        Model.getMap().getGrid()[1][1].setLevel(2);
+//        Model.getMap().getGrid()[2][1].setLevel(1);
+//        Model.getMap().getGrid()[0][4].setLevel(3);
+//        Model.getMap().getGrid()[2][3].setLevel(4);
+//        Model.getMap().getGrid()[4][1].setLevel(2);
+//        System.out.println(Model.getMap().toString());
+//    }
 }

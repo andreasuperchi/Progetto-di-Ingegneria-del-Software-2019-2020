@@ -88,7 +88,7 @@ public class Map {
                                 }
                                 break;
                             case 5:
-                                if (!((i - 1) % 4 == 0 && counter > 9)) {
+                                if (!((i - 1) % 4 == 0 && counter > 10)) {
                                     string.append(" ");
                                 }
                                 break;

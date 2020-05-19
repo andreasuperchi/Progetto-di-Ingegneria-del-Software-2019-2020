@@ -36,7 +36,7 @@ public class WorkerTriton extends Worker {
             setCurrentWorkerCell(nextWorkerCell);
             newLevel = getCurrentWorkerCell().getLevel();
             getCurrentWorkerCell().setIsOccupied(true);
-            this.hasUsedSpecialPower = verifyPerimeter(nextWorkerCell);  // se la cella era perimetrale posso muovermi ancora
+            this.hasUsedSpecialPower = verifyPerimeter(this.currentWorkerCell);  // se la cella era perimetrale posso muovermi ancora
         }
     }
 }

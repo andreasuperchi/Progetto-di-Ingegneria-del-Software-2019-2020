@@ -425,6 +425,7 @@ public class Model extends Observable<Model> implements Cloneable {
                 } else if (currentWorker.canUseSpecialPower()) {
                     if (currentWorker.hasUsedSpecialPower) {
                         outcome = Outcome.USED_SPECIAL_POWER;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     } else {
                         currentPhase = turnPhase.SPECIAL_POWER;
                         outcome = Outcome.DIRECTION_MENU;
