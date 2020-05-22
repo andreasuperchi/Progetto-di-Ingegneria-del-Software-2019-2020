@@ -11,6 +11,8 @@ public class WorkerAthena extends Worker {
         hasSpecialPower = false;
     }
 
+    //il potere speciale è gia 'incluso' in move
+
     @Override
     public void move(Cell nextWorkerCell) {
         setCanGoUp(true);                       // setto canGoUp a true per tutti
@@ -34,9 +36,4 @@ public class WorkerAthena extends Worker {
 
     }
 
-    // il potere speciale è già incluso
-    @Override
-    public void specialPower(Cell nextWorkerCell) {
-        throw new IllegalArgumentException();
-    }
 }

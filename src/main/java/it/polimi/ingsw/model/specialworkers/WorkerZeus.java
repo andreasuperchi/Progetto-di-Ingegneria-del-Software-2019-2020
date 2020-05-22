@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.specialworkers;
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Worker;
 
@@ -10,19 +11,12 @@ public class WorkerZeus extends Worker {
 
     public WorkerZeus() {
         super();
-        hasSpecialPower = false;
+        hasSpecialPower = true;
     }
 
-    //tengo traccia se costruisce sotto di se -> non potrà vincere
     @Override
-    public boolean checkBuild(Cell nextWorkerCell) {
-        if (nextWorkerCell.equals(currentWorkerCell)) {
-            canWin = false;
-            return true;
-        } else {
-            canWin = true;
-            return !nextWorkerCell.getIsOccupied();
-        }
+    public boolean canUseSpecialPower() {
+        return hasMoved && !hasBuilt;
     }
 
     @Override
@@ -34,9 +28,25 @@ public class WorkerZeus extends Worker {
         }
     }
 
-    // il potere speciale è già incluso
+    // costruisce sotto di se
     @Override
     public void specialPower(Cell nextWorkerCell) {
-        throw new IllegalArgumentException();
+        if (!nextWorkerCell.equals(currentWorkerCell)){
+            throw new IllegalArgumentException();
+        }
+        else{
+            if (nextWorkerCell.getLevel() == 3) {
+                //non puo costruirsi una cupola sotto di se
+                throw new IllegalArgumentException();
+            } else {
+                nextWorkerCell.setLevel(nextWorkerCell.getLevel() + 1);
+                this.hasBuilt = true;
+                //se è salito al livello 3, non può vincere
+                if (nextWorkerCell.getLevel()==3){
+                    canWin=false;
+                }
+            }
+
+        }
     }
 }

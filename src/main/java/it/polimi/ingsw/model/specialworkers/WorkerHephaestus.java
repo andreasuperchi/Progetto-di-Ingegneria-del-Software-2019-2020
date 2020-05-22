@@ -7,13 +7,20 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerHephaestus extends Worker {
 
+
+    private Cell builtCell;
+
     public WorkerHephaestus() {
         super();
         hasSpecialPower = true;
     }
 
 
-    private Cell builtCell;
+
+    @Override
+    public boolean canUseSpecialPower() {
+        return hasMoved && hasBuilt;
+    }
 
     @Override
     public void build(Cell nextWorkerCell) {
@@ -43,6 +50,7 @@ public class WorkerHephaestus extends Worker {
             throw new IllegalArgumentException();
         } else {
             build(cell);
+            builtCell=null;     //così non puo riusare 2 volte di fila il potere speciale
         }
     }
 }

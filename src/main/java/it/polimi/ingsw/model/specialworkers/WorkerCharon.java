@@ -9,6 +9,12 @@ public class WorkerCharon extends Worker {
         hasSpecialPower = true;
     }
 
+    @Override
+    public boolean canUseSpecialPower() {
+        return !hasMoved && !hasBuilt;
+    }
+
+
     private Cell symmetricalCell;                  //salvo cella simmetrica rispetto al mio worker
     private boolean opponentWorkerAround = false;
 
