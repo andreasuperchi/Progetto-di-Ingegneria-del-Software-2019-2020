@@ -34,7 +34,7 @@ public class Client {
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof String && inputObject.equals("You Win!!!!")) {
+                        if (inputObject instanceof String && ((String) inputObject).contains("You Win!")) {
                             System.out.println((String) inputObject);
                             setActive(false);
                         } else if (inputObject instanceof String && ((String) inputObject).contains("You Lose")) {

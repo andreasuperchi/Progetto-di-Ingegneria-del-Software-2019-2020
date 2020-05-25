@@ -73,9 +73,11 @@ public class Connection extends Observable<Integer> implements ClientConnection,
             in = new Scanner(socket.getInputStream());  //ricevo dal client
             out = new ObjectOutputStream(socket.getOutputStream()); //dà al client
 
+            send("\033[31;1mWelcome to Santorini! \n\u001b[0mWaiting for the other players...\n ");
+
             synchronized (server) {
                 if (server.getNumberOfPlayers() == 0) {
-                    send("\033[31;1mWelcome to Santorini! \n\u001b[0mInsert the number of players: ");
+                    send("Insert the number of players: ");
                     numberOfPlayers = Integer.parseInt(in.nextLine());
                     server.setNumberOfPlayers(numberOfPlayers);
                 }

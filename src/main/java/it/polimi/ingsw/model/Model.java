@@ -104,8 +104,9 @@ public class Model extends Observable<Model> implements Cloneable {
                 case AVAILABLE_GODS:
                     try {
                         addGod(intChoice.getValue());
+                        outcome = Outcome.AVAILABLE_GODS_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_GOD;
+                        outcome = Outcome.AVAILABLE_GODS_ERROR;
                     }
                     if (availableGods.size() == numberOfPlayers) {
                         currentPhase = turnPhase.GOD_CHOICE;
@@ -116,7 +117,7 @@ public class Model extends Observable<Model> implements Cloneable {
 
                 case GOD_CHOICE:
                     if (intChoice.getValue() > availableGods.size()) {
-                        outcome = Outcome.INVALID_GOD;
+                        outcome = Outcome.GOD_CHOICE_ERROR;
                     } else {
                         GodName godName = availableGods.get(intChoice.getValue() - 1);
                         currentPlayer.setWorkers(godName);
@@ -143,8 +144,9 @@ public class Model extends Observable<Model> implements Cloneable {
                             currentPlayer.getWorkers()[1].setCurrentWorkerCell(workerCell);
                             updateCurrentPlayer();
                         }
+                        outcome = Outcome.WORKERS_PLACEMENT_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_INPUT;
+                        outcome = Outcome.WORKERS_PLACEMENT_ERROR;
                     }
                     //controllo che tutti i giocatori abbiano piazzato i loro workers
                     for (Player p : players) {
@@ -171,18 +173,18 @@ public class Model extends Observable<Model> implements Cloneable {
                         }
 
                     } else {
-                        outcome = Outcome.INVALID_WORKER;
+                        outcome = Outcome.WORKER_CHOICE_ERROR;
                     }
                     break;
 
                 case ACTION_CHOICE:
                     if (intChoice.getValue() < 1 || intChoice.getValue() > 4) {
-                        outcome = Outcome.INVALID_ACTION;
+                        outcome = Outcome.ACTION_CHOICE_ERROR;
                     } else {
                         try {
                             processAction(intChoice.getValue());
                         } catch (IllegalArgumentException e) {
-                            outcome = Outcome.INVALID_INPUT;
+                            outcome = Outcome.PROCESS_ACTION_ERROR;
                         }
                     }
                     break;
@@ -202,9 +204,11 @@ public class Model extends Observable<Model> implements Cloneable {
                         currentPhase = turnPhase.ACTION_CHOICE;
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_INPUT;
+                        outcome = Outcome.DIRECTION_ERROR;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     }
                     break;
 
@@ -220,7 +224,7 @@ public class Model extends Observable<Model> implements Cloneable {
                         currentPhase = turnPhase.ACTION_CHOICE;
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_INPUT;
+                        outcome = Outcome.DIRECTION_ERROR;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
                     }
@@ -238,7 +242,7 @@ public class Model extends Observable<Model> implements Cloneable {
                         currentPhase = turnPhase.ACTION_CHOICE;
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
-                        outcome = Outcome.INVALID_INPUT;
+                        outcome = Outcome.DIRECTION_ERROR;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
                     }
@@ -249,7 +253,6 @@ public class Model extends Observable<Model> implements Cloneable {
                         if (intChoice.getValue() == 1) {
                             endTurn();
                             if (!currentPlayer.getInGame()) {
-                                outcome = Outcome.LOSE;
                                 currentPhase = turnPhase.GAME_OVER;
                             } else {
                                 currentPhase = turnPhase.WORKER_CHOICE;
@@ -261,9 +264,10 @@ public class Model extends Observable<Model> implements Cloneable {
                             outcome = Outcome.ACTION_MENU;
                         }
                     } else {
-                        outcome = Outcome.INVALID_INPUT;
+                        outcome = Outcome.DIRECTION_ERROR;
                     }
                     break;
+
                 case GAME_OVER:
                     Player removedPlayer = currentPlayer;
                     endTurn();
@@ -288,108 +292,6 @@ public class Model extends Observable<Model> implements Cloneable {
 
 
     private void addGod(int index) {
-//        switch (index) {
-//            case 1:
-//                if (!availableGods.contains(GodName.APOLLO)) {
-//                    availableGods.add(GodName.APOLLO);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 2:
-//                if (!availableGods.contains(GodName.ARTEMIS)) {
-//                    availableGods.add(GodName.ARTEMIS);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 3:
-//                if (!availableGods.contains(GodName.ATHENA)) {
-//                    availableGods.add(GodName.ATHENA);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 4:
-//                if (!availableGods.contains(GodName.ATLAS)) {
-//                    availableGods.add(GodName.ATLAS);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 5:
-//                if (!availableGods.contains(GodName.CHARON)) {
-//                    availableGods.add(GodName.CHARON);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 6:
-//                if (!availableGods.contains(GodName.CHRONUS)) {
-//                    availableGods.add(GodName.CHRONUS);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 7:
-//                if (!availableGods.contains(GodName.DEMETER)) {
-//                    availableGods.add(GodName.DEMETER);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 8:
-//                if (!availableGods.contains(GodName.HEPHAESTUS)) {
-//                    availableGods.add(GodName.HEPHAESTUS);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 9:
-//                if (!availableGods.contains(GodName.HESTIA)) {
-//                    availableGods.add(GodName.HESTIA);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 10:
-//                if (!availableGods.contains(GodName.MINOTAUR)) {
-//                    availableGods.add(GodName.MINOTAUR);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 11:
-//                if (!availableGods.contains(GodName.PAN)) {
-//                    availableGods.add(GodName.PAN);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 12:
-//                if (!availableGods.contains(GodName.PROMETHEUS)) {
-//                    availableGods.add(GodName.PROMETHEUS);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 13:
-//                if (!availableGods.contains(GodName.TRITON)) {
-//                    availableGods.add(GodName.TRITON);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            case 14:
-//                if (!availableGods.contains(GodName.ZEUS)) {
-//                    availableGods.add(GodName.ZEUS);
-//                } else {
-//                    throw new IllegalArgumentException();
-//                }
-//                break;
-//            default:
-//                throw new IllegalArgumentException();
-//        }
         if (index >= 0 && index <= Outcome.getGods().size()) {
             GodName selectedGod = GodName.parseInput(Outcome.getGods().get(index - 1));
             if (!availableGods.contains(selectedGod)) {
@@ -535,21 +437,23 @@ public class Model extends Observable<Model> implements Cloneable {
         } else {
             currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
         }
-        if (!currentPhase.equals(turnPhase.GOD_CHOICE)) {
-            if (!currentPlayer.getWorkers()[0].canBeUsed && !currentPlayer.getWorkers()[1].canBeUsed) {
-                currentPlayer.setInGame(false);
-            }
-        }
     }
 
     private void endTurn() {
         currentWorker.setHasBuilt(false);
         currentWorker.setHasMoved(false);
+        currentWorker.setHasUsedSpecialPower(false);
 
         updateCurrentPlayer();
 
         for (Worker w : currentPlayer.getWorkers()) {
             w.setCanBeUsed(w.checkSurroundingCells());
+        }
+
+        if (!currentPhase.equals(turnPhase.GOD_CHOICE)) {
+            if (!currentPlayer.getWorkers()[0].canBeUsed && !currentPlayer.getWorkers()[1].canBeUsed) {
+                currentPlayer.setInGame(false);
+            }
         }
     }
 

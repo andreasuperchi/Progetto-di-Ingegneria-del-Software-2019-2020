@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.choices.IntChoice;
 import it.polimi.ingsw.model.specialworkers.WorkerArtemis;
 import it.polimi.ingsw.model.specialworkers.WorkerPan;
-import it.polimi.ingsw.model.specialworkers.WorkerTriton;
 import it.polimi.ingsw.model.specialworkers.WorkerZeus;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class ModelTest {
     public void invalidAvailableGodsTest() {
         input = new IntChoice(player1, 27);
         model.doAction(input);
-        assertEquals(Outcome.INVALID_GOD, model.getOutcome());
+        assertEquals(Outcome.GOD_CHOICE_ERROR, model.getOutcome());
     }
 
     @Test
@@ -82,7 +81,7 @@ public class ModelTest {
         input = new IntChoice(player2, 4);
         model.doAction(input);
 
-        assertEquals(Outcome.INVALID_GOD, model.getOutcome());
+        assertEquals(Outcome.GOD_CHOICE_ERROR, model.getOutcome());
     }
 
     @Test
@@ -154,7 +153,7 @@ public class ModelTest {
         input = new IntChoice(player2, 26);
         model.doAction(input);
 
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
         assertEquals(Model.turnPhase.WORKER_PLACEMENT, model.getCurrentPhase());
     }
 
@@ -235,7 +234,7 @@ public class ModelTest {
         assertEquals(Model.getMap().getGrid()[3][0], player2.getWorkers()[0].getCurrentWorkerCell());
         assertEquals(Model.turnPhase.WORKER_PLACEMENT, model.getCurrentPhase());
         assertEquals(player2, Model.getCurrentPlayer());
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
     @Test
@@ -304,7 +303,7 @@ public class ModelTest {
         input = new IntChoice(player2, 3);
         model.doAction(input);
 
-        assertEquals(Outcome.INVALID_WORKER, model.getOutcome());
+        assertEquals(Outcome.WORKER_CHOICE_ERROR, model.getOutcome());
         assertEquals(Model.turnPhase.WORKER_CHOICE, model.getCurrentPhase());
     }
 
@@ -418,7 +417,7 @@ public class ModelTest {
         input = new IntChoice(player2, 5);
         model.doAction(input);
 
-        assertEquals(Outcome.INVALID_ACTION, model.getOutcome());
+        assertEquals(Outcome.ACTION_CHOICE_ERROR, model.getOutcome());
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
     }
 
@@ -501,7 +500,7 @@ public class ModelTest {
         model.doAction(input);
 
         assertEquals(Model.turnPhase.MOVE, model.getCurrentPhase());
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
     @Test
@@ -676,7 +675,7 @@ public class ModelTest {
         model.doAction(input);
 
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
     @Test
@@ -725,7 +724,7 @@ public class ModelTest {
         model.doAction(input);
 
         assertEquals(Model.turnPhase.BUILD, model.getCurrentPhase());
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
     @Test
@@ -870,7 +869,7 @@ public class ModelTest {
         model.doAction(input);
 
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
     @Test
@@ -976,7 +975,7 @@ public class ModelTest {
         input = new IntChoice(player2, 3);
         model.doAction(input);
 
-        assertEquals(Outcome.INVALID_INPUT, model.getOutcome());
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
         assertEquals(Model.turnPhase.END_TURN, model.getCurrentPhase());
     }
 

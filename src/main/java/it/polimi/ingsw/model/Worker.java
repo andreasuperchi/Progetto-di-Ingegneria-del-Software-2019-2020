@@ -94,16 +94,6 @@ public class Worker {
         this.canBeUsed = canBeUsed;
     }
 
-//    public boolean checkMove(Cell nextWorkerCell) {    //arrivo qui con una cella che esiste
-//        if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() > 1 || nextWorkerCell.getIsOccupied()) {
-//            return false;
-//        } else if (nextWorkerCell.getLevel() - currentWorkerCell.getLevel() == 1 && !canGoUp) {   //controllo per Athena
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-
     public boolean checkMove(Cell nextWorkerCell) {
         int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();
 
@@ -122,8 +112,12 @@ public class Worker {
 
     public boolean checkSurroundingCells() {
         for (Direction d : Direction.values()) {
-            if (checkMove(Model.getMap().getNextWorkerCell(getCurrentWorkerCell(), d))) {
-                return true;
+            try {
+                Cell cell = Model.getMap().getNextWorkerCell(getCurrentWorkerCell(), d);
+                if (checkMove(cell)) {
+                    return true;
+                }
+            } catch (ArrayIndexOutOfBoundsException ignored) {
             }
         }
         return false;
