@@ -15,17 +15,6 @@ public class WorkerApollo extends Worker {
     }
 
     @Override
-    public void setCurrentWorkerCell(Cell currentWorkerCell) {
-        if (currentWorkerCell.getIsOccupied() && currentWorkerCell.getLevel() == 4) {
-            throw new IllegalArgumentException();
-        } else {
-            currentWorkerCell.setIsOccupied(true);
-            currentWorkerCell.setThisWorker(this);
-            this.currentWorkerCell = currentWorkerCell;
-        }
-    }
-
-    @Override
     public boolean checkMove(Cell nextWorkerCell) {
         int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();
 
@@ -46,6 +35,7 @@ public class WorkerApollo extends Worker {
                 this.setCurrentWorkerCell(tempCell);
                 oldCell.setIsOccupied(false);
                 nextWorkerCell.getThisWorker().setCurrentWorkerCell(oldCell);
+                nextWorkerCell.setIsOccupied(false);
             }
             super.move(nextWorkerCell);
         }
