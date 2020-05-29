@@ -33,13 +33,15 @@ public class RemoteView extends View {
         String resultMessage = "";
         Model.turnPhase currentPhase = model.getCurrentPhase();
         if (model.isGameOver()) {
-            if (getPlayer().equals(Model.getCurrentPlayer())) {
-                resultMessage = "You Win!";
+            if (!getPlayer().getIsInGame()) {
+                resultMessage = "You Lose!";
             } else {
-                resultMessage = "You Lose. " + Model.getCurrentPlayer().getName() + " win ";
+                resultMessage = "You Win!";
             }
         } else {
-            if (Model.getCurrentPlayer().equals(getPlayer())) {
+            if (!getPlayer().getIsInGame()) {
+                resultMessage = "close";
+            } else if (Model.getCurrentPlayer().equals(getPlayer())) {
                 if (currentPhase.equals(Model.turnPhase.WORKER_PLACEMENT)) {
                     resultMessage = Model.getMap().showInitialMap() + "\n\n" + model.getOutcome().printOutcome();
                 } else if (currentPhase.equals(Model.turnPhase.WORKER_CHOICE) || currentPhase.equals(Model.turnPhase.ACTION_CHOICE) ||

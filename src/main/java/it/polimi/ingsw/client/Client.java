@@ -34,11 +34,11 @@ public class Client {
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof String && ((String) inputObject).contains("You Win!")) {
+                        if (inputObject instanceof String && (inputObject.equals("You Win!") || inputObject.equals("You Lose!"))) {
                             System.out.println((String) inputObject);
                             setActive(false);
-                        } else if (inputObject instanceof String && ((String) inputObject).contains("You Lose")) {
-                            System.out.println((String) inputObject);
+                        } else if (inputObject instanceof String && inputObject.equals("\n\n\nclose")) {
+                            System.out.println("You are out of the game. Disconnecting from the server...");
                             setActive(false);
                         } else if (inputObject instanceof String) {
                             System.out.println((String) inputObject);

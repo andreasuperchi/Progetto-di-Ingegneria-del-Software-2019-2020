@@ -253,7 +253,24 @@ public class Model extends Observable<Model> implements Cloneable {
                         if (intChoice.getValue() == 1) {
                             endTurn();
                             if (!currentPlayer.getInGame()) {
-                                currentPhase = turnPhase.GAME_OVER;
+                                int c = 0;
+
+                                for (Player p : players) {
+                                    if (p.getIsInGame()) {
+                                        c++;
+                                    }
+                                }
+
+                                if (c == 1) {
+                                    gameOver = true;
+                                } else {
+                                    Player removedPlayer = currentPlayer;
+                                    endTurn();
+                                    players.remove(removedPlayer);
+                                    deleteWorkers(removedPlayer);
+                                    currentPhase = turnPhase.WORKER_CHOICE;
+                                    outcome = Outcome.WORKER_MENU;
+                                }
                             } else {
                                 currentPhase = turnPhase.WORKER_CHOICE;
                                 outcome = Outcome.WORKER_MENU;
@@ -268,23 +285,25 @@ public class Model extends Observable<Model> implements Cloneable {
                     }
                     break;
 
-                case GAME_OVER:
-                    Player removedPlayer = currentPlayer;
-                    endTurn();
-                    players.remove(removedPlayer);
-                    if (players.size() == 1) {
-                        gameOver = true;
-                        outcome = Outcome.WIN;
-                    } else {
-                        if (!currentPlayer.getInGame()) {
-                            outcome = Outcome.LOSE;
-                            currentPhase = turnPhase.GAME_OVER;
-                        } else {
-                            currentPhase = turnPhase.WORKER_CHOICE;
-                            outcome = Outcome.WORKER_MENU;
-                        }
-                    }
-                    break;
+//                case GAME_OVER: //entro qui se il nuovo giocatore ha entrambi i worker murati
+////                    Player removedPlayer = currentPlayer;
+////                    endTurn();
+////                    players.remove(removedPlayer);
+////                    if (players.size() == 1) {
+////                        gameOver = true;
+////                        outcome = Outcome.WIN;
+////                    } else {
+////                        if (!currentPlayer.getInGame()) {
+////                            outcome = Outcome.LOSE;
+////                            currentPhase = turnPhase.GAME_OVER;
+////                        } else {
+////                            currentPhase = turnPhase.WORKER_CHOICE;
+////                            outcome = Outcome.WORKER_MENU;
+////                        }
+////                    }
+//
+//
+//                    break;
             }
         }
         notify(this);
@@ -349,6 +368,34 @@ public class Model extends Observable<Model> implements Cloneable {
             default:
                 throw new IllegalArgumentException();
         }
+    }
+
+    private void updateCurrentPlayer() {
+        if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
+            currentPlayer = players.get(0);
+        } else {
+            currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
+        }
+    }
+
+    private void endTurn() {
+        currentWorker.setHasBuilt(false);
+        currentWorker.setHasMoved(false);
+        currentWorker.setHasUsedSpecialPower(false);
+
+        updateCurrentPlayer();
+
+        for (Worker w : currentPlayer.getWorkers()) {
+            w.setCanBeUsed(w.checkSurroundingCells());
+        }
+
+        currentPlayer.setInGame(currentPlayer.getWorkers()[0].canBeUsed || currentPlayer.getWorkers()[1].canBeUsed);
+    }
+
+    private void deleteWorkers(Player removedPlayer) {
+        Cell nullCell = new Cell(0, 0);
+        removedPlayer.getWorkers()[0].setCurrentWorkerCell(nullCell);
+        removedPlayer.getWorkers()[1].setCurrentWorkerCell(nullCell);
     }
 
     private Direction parseDirection(int input) {
@@ -430,34 +477,6 @@ public class Model extends Observable<Model> implements Cloneable {
                 throw new IllegalArgumentException();
         }
     }
-
-    private void updateCurrentPlayer() {
-        if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
-            currentPlayer = players.get(0);
-        } else {
-            currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
-        }
-    }
-
-    private void endTurn() {
-        currentWorker.setHasBuilt(false);
-        currentWorker.setHasMoved(false);
-        currentWorker.setHasUsedSpecialPower(false);
-
-        updateCurrentPlayer();
-
-        for (Worker w : currentPlayer.getWorkers()) {
-            w.setCanBeUsed(w.checkSurroundingCells());
-        }
-
-        if (!currentPhase.equals(turnPhase.GOD_CHOICE)) {
-            if (!currentPlayer.getWorkers()[0].canBeUsed && !currentPlayer.getWorkers()[1].canBeUsed) {
-                currentPlayer.setInGame(false);
-            }
-        }
-    }
-
-
 }
 
 
