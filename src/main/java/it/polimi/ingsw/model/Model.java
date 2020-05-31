@@ -267,7 +267,6 @@ public class Model extends Observable<Model> implements Cloneable {
                                     Player removedPlayer = currentPlayer;
                                     endTurn();
                                     players.remove(removedPlayer);
-                                    deleteWorkers(removedPlayer);
                                     currentPhase = turnPhase.WORKER_CHOICE;
                                     outcome = Outcome.WORKER_MENU;
                                 }
@@ -390,12 +389,6 @@ public class Model extends Observable<Model> implements Cloneable {
         }
 
         currentPlayer.setInGame(currentPlayer.getWorkers()[0].canBeUsed || currentPlayer.getWorkers()[1].canBeUsed);
-    }
-
-    private void deleteWorkers(Player removedPlayer) {
-        Cell nullCell = new Cell(0, 0);
-        removedPlayer.getWorkers()[0].setCurrentWorkerCell(nullCell);
-        removedPlayer.getWorkers()[1].setCurrentWorkerCell(nullCell);
     }
 
     private Direction parseDirection(int input) {
