@@ -20,10 +20,6 @@ public class Map {
         return grid;
     }
 
-    public void setGrid(Cell[][] grid) {
-        this.grid = grid;
-    }
-
     public int getCompletedTowers() {
         return completedTowers;
     }

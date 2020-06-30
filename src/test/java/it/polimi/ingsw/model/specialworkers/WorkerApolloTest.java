@@ -61,4 +61,11 @@ public class WorkerApolloTest {
         assertFalse(workerApollo.checkMove(nextWorkerCell));
         assertFalse(workerApollo.getHasMoved());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cantMove() {
+        workerApollo.setCurrentWorkerCell(baseWorkerCell);
+        nextWorkerCell.setLevel(4);
+        workerApollo.move(nextWorkerCell);
+    }
 }

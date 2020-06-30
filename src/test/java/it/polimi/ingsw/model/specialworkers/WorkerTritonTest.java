@@ -13,6 +13,7 @@ public class WorkerTritonTest {
     Model model;
     Player player1, player2, player3;
     Worker worker;
+    WorkerTriton workerTriton;
     Cell baseWorkerCell, nextWorkerCell;
 
     @Before
@@ -27,15 +28,42 @@ public class WorkerTritonTest {
         model = new Model(players, 3);
         player1.setWorkers(GodName.TRITON);
         player2.setWorkers(GodName.ZEUS);
-        worker = player1.getWorkers()[0];
+        workerTriton = (WorkerTriton) player1.getWorkers()[0];
+        worker = player2.getWorkers()[0];
     }
 
     @Test
     public void checkMultipleMoves() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
         nextWorkerCell = Model.getMap().getGrid()[0][1];
-        worker.setCurrentWorkerCell(baseWorkerCell);
-        worker.specialPower(nextWorkerCell);
+        workerTriton.setCurrentWorkerCell(baseWorkerCell);
+        workerTriton.specialPower(nextWorkerCell);
         assertFalse(player1.getWorkers()[0].getHasUsedSpecialPower());
+    }
+
+    @Test
+    public void notNearPerimeter() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[1][1];
+        workerTriton.setCurrentWorkerCell(baseWorkerCell);
+        assertFalse(workerTriton.verifyPerimeter(nextWorkerCell));
+    }
+
+    @Test
+    public void cantsUseSpecialPower() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[1][1];
+        workerTriton.setCurrentWorkerCell(baseWorkerCell);
+        workerTriton.move(nextWorkerCell);
+        assertFalse(workerTriton.canUseSpecialPower());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void negativeCheckMove() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[1][1];
+        workerTriton.setCurrentWorkerCell(baseWorkerCell);
+        worker.setCurrentWorkerCell(nextWorkerCell);
+        workerTriton.specialPower(nextWorkerCell);
     }
 }

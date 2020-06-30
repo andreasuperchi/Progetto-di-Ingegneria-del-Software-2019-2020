@@ -12,6 +12,7 @@ public class WorkerMinotaurTest {
     Model model;
     Player player1, player2, player3;
     WorkerMinotaur workerMinotaur;
+    Worker otherWorker;
     Cell baseWorkerCell, nextWorkerCell;
 
     @Before
@@ -27,6 +28,7 @@ public class WorkerMinotaurTest {
         player1.setWorkers(GodName.MINOTAUR);
         player2.setWorkers(GodName.ZEUS);
         workerMinotaur = (WorkerMinotaur) player1.getWorkers()[0];
+        otherWorker = player2.getWorkers()[0];
         Model.setCurrentPlayer(player1);
     }
 
@@ -87,5 +89,69 @@ public class WorkerMinotaurTest {
         nextWorkerCell.setLevel(4);
         workerMinotaur.setCurrentWorkerCell(baseWorkerCell);
         workerMinotaur.move(nextWorkerCell);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setFail() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        baseWorkerCell.setLevel(4);
+        workerMinotaur.setCurrentWorkerCell(baseWorkerCell);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void sameCell() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        nextWorkerCell = baseWorkerCell;
+        workerMinotaur.setCurrentWorkerCell(baseWorkerCell);
+        workerMinotaur.move(nextWorkerCell);
+    }
+
+    @Test
+    public void northEast() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[1][3];
+        assertEquals(Model.getMap().getGrid()[0][4], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
+    }
+
+    @Test
+    public void southEast() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[3][3];
+        assertEquals(Model.getMap().getGrid()[4][4], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
+    }
+
+    @Test
+    public void south() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[3][2];
+        assertEquals(Model.getMap().getGrid()[4][2], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
+    }
+
+    @Test
+    public void southWest() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[3][1];
+        assertEquals(Model.getMap().getGrid()[4][0], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
+    }
+
+    @Test
+    public void west() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[2][1];
+        assertEquals(Model.getMap().getGrid()[2][0], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
+    }
+
+    @Test
+    public void northWest() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[1][1];
+        assertEquals(Model.getMap().getGrid()[0][0], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
+    }
+
+    @Test
+    public void north() {
+        baseWorkerCell = Model.getMap().getGrid()[2][2];
+        nextWorkerCell = Model.getMap().getGrid()[1][2];
+        assertEquals(Model.getMap().getGrid()[0][2], workerMinotaur.getCellInThatDirection(baseWorkerCell, nextWorkerCell));
     }
 }

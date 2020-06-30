@@ -58,4 +58,15 @@ public class WorkerAtlasTest {
         assertTrue(workerAtlas.getHasUsedSpecialPower());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void cantBuild() {
+        nextWorkerCell.setLevel(4);
+        workerAtlas.specialPower(nextWorkerCell);
+    }
+
+    @Test
+    public void cantUseSpecialPower() {
+        workerAtlas.move(nextWorkerCell);
+        assertTrue(workerAtlas.canUseSpecialPower());
+    }
 }

@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model;
 
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import static org.junit.Assert.*;
 
 public class CellTest {
     Player player1, player2, player3;
@@ -35,6 +35,19 @@ public class CellTest {
         cell.setLevel(2);
         player1.setWorkers(GodName.APOLLO);
         player1.getWorkers()[0].setCurrentWorkerCell(cell);
+        System.out.println(cell.toString());
+    }
+
+    @Test
+    public void completeTower() {
+        cell.setLevel(4);
+        assertTrue(cell.getIsOccupied());
+        assertEquals(1, Model.getMap().getCompletedTowers());
+    }
+
+    @Test
+    public void toStringCompletedTower() {
+        cell.setLevel(4);
         System.out.println(cell.toString());
     }
 }
