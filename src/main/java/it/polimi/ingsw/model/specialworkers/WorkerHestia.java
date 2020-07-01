@@ -9,6 +9,12 @@ public class WorkerHestia extends Worker {
         this.hasSpecialPower = true;
     }
 
+    /**
+     * Use the special power that consist in additional move actions if nextWorkerCell
+     * isn't a perimetrical cell
+     *
+     * @param nextWorkerCell is the Cell where the Worker wants to use his special power
+     */
     @Override
     public void specialPower(Cell nextWorkerCell) {
         if (isPerimetricCell(nextWorkerCell)) {
@@ -19,6 +25,11 @@ public class WorkerHestia extends Worker {
         }
     }
 
+    /**
+     * Check if the worker can use his special power
+     *
+     * @return
+     */
     @Override
     public boolean canUseSpecialPower() {
         if (!hasMoved || !hasBuilt) {
@@ -28,6 +39,12 @@ public class WorkerHestia extends Worker {
         }
     }
 
+    /**
+     * Check if the cell is perimetrical
+     *
+     * @param cell
+     * @return
+     */
     private boolean isPerimetricCell(Cell cell) {
         if (cell.getRowNumber() == 0 || cell.getRowNumber() == 4) {
             return true;
