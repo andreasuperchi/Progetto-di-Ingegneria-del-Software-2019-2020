@@ -1,14 +1,12 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
-
 public class Player {
 
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
     private boolean isInGame;
-    private Worker[] workers;
-    private String symbol;
+    private final Worker[] workers;
+    private final String symbol;
 
     /**
      * Builds a new player, instantiating his 2 workers
@@ -25,14 +23,6 @@ public class Player {
         workers = new Worker[2];
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean getIsInGame() {
         return isInGame;
     }
@@ -43,10 +33,6 @@ public class Player {
 
     public Worker[] getWorkers() {
         return workers;
-    }
-
-    public String getSymbol() {
-        return symbol;
     }
 
     /**

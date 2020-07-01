@@ -19,7 +19,7 @@ public class Model extends Observable<Model> implements Cloneable {
 
     public enum turnPhase {
         AVAILABLE_GODS, GOD_CHOICE, WORKER_PLACEMENT,
-        WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN, GAME_OVER
+        WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN
     }
 
     /**
@@ -142,7 +142,6 @@ public class Model extends Observable<Model> implements Cloneable {
                     } catch (IllegalArgumentException e) {
                         outcome = Outcome.WORKERS_PLACEMENT_ERROR;
                     }
-                    //controllo che tutti i giocatori abbiano piazzato i loro workers
                     for (Player p : players) {
                         for (Worker w : p.getWorkers()) {
                             if (w.getCurrentWorkerCell() != null) {
@@ -280,26 +279,6 @@ public class Model extends Observable<Model> implements Cloneable {
                         currentPhase = turnPhase.ACTION_CHOICE;
                     }
                     break;
-
-//                case GAME_OVER: //entro qui se il nuovo giocatore ha entrambi i worker murati
-////                    Player removedPlayer = currentPlayer;
-////                    endTurn();
-////                    players.remove(removedPlayer);
-////                    if (players.size() == 1) {
-////                        gameOver = true;
-////                        outcome = Outcome.WIN;
-////                    } else {
-////                        if (!currentPlayer.getInGame()) {
-////                            outcome = Outcome.LOSE;
-////                            currentPhase = turnPhase.GAME_OVER;
-////                        } else {
-////                            currentPhase = turnPhase.WORKER_CHOICE;
-////                            outcome = Outcome.WORKER_MENU;
-////                        }
-////                    }
-//
-//
-//                    break;
             }
         }
         notify(this);

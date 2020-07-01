@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
 public class Cell {
-    private int rowNumber;
-    private int columnNumber;
+    private final int rowNumber;
+    private final int columnNumber;
     private boolean isOccupied;
     private int level;
     private Worker thisWorker;
@@ -26,16 +26,8 @@ public class Cell {
         return rowNumber;
     }
 
-    public void setRowNumber(int rowNumber) {
-        this.rowNumber = rowNumber;
-    }
-
     public int getColumnNumber() {
         return columnNumber;
-    }
-
-    public void setColumnNumber(int columnNumber) {
-        this.columnNumber = columnNumber;
     }
 
     public boolean getIsOccupied() {

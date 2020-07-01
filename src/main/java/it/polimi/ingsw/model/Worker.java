@@ -44,20 +44,12 @@ public class Worker {
         }
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
     public boolean getHasUsedSpecialPower() {
         return hasUsedSpecialPower;
     }
 
     public void setHasUsedSpecialPower(boolean hasUsedSpecialPower) {
         this.hasUsedSpecialPower = hasUsedSpecialPower;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 
     public static boolean getCanGoUp() {
@@ -96,10 +88,6 @@ public class Worker {
         this.hasBuilt = hasBuilt;
     }
 
-    public boolean getCanBeUsed() {
-        return canBeUsed;
-    }
-
     public void setCanBeUsed(boolean canBeUsed) {
         this.canBeUsed = canBeUsed;
     }
@@ -128,6 +116,11 @@ public class Worker {
         return !nextWorkerCell.getIsOccupied() && !(nextWorkerCell.equals(this.currentWorkerCell));
     }
 
+    /**
+     * Tells if this worker can use his special power. Standard worker don't have special powers
+     *
+     * @return always false, because standard workers(workers that are not special) don't have special powers
+     */
     public boolean canUseSpecialPower() {
         return false;
     }
@@ -176,7 +169,7 @@ public class Worker {
      * permanently set to occupied, meaning that no one can move to that Cell.
      * Also sets the hasBuilt flag, which represents the fact that the Worker has built in this turn
      *
-     * @param nextWorkerCell
+     * @param nextWorkerCell is the Cell where the Worker is going to be build
      */
     public void build(Cell nextWorkerCell) {
         if (!checkBuild(nextWorkerCell)) {
@@ -207,11 +200,7 @@ public class Worker {
      * @return true if the worker has gone up from a level 2 cell to a lever 3 cell, false otherwise
      */
     public boolean winCondition() {
-        if (newLevel == 3 && oldLevel == 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return newLevel == 3 && oldLevel == 2;
     }
 
 }

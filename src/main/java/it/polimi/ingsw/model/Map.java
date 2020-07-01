@@ -4,7 +4,7 @@ public class Map {
     private static final int N_ROWS = 5;
     private static final int N_COLS = 5;
 
-    private Cell[][] grid = new Cell[Map.N_COLS][Map.N_ROWS];
+    private final Cell[][] grid = new Cell[Map.N_COLS][Map.N_ROWS];
     private int completedTowers;
 
     /**

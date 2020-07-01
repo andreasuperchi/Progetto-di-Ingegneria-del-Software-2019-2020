@@ -70,8 +70,8 @@ public class Connection extends Observable<Integer> implements ClientConnection,
         int intValue;
 
         try {
-            in = new Scanner(socket.getInputStream());  //ricevo dal client
-            out = new ObjectOutputStream(socket.getOutputStream()); //dà al client
+            in = new Scanner(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
 
             send("\033[31;1mWelcome to Santorini! \n\u001b[0mWaiting for the other players...\n ");
 
@@ -84,10 +84,10 @@ public class Connection extends Observable<Integer> implements ClientConnection,
             }
 
             send("\nWhat's your name?");
-            name = in.nextLine();    //prende la stringa in ingresso
+            name = in.nextLine();
 
             send("\nWhat's your age?");
-            intValue = Integer.parseInt(in.nextLine());    //prende l'età
+            intValue = Integer.parseInt(in.nextLine());
             server.lobby(this, name, intValue);
 
             while (isActive()) {
