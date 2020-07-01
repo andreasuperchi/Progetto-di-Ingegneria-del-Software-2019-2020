@@ -7,6 +7,10 @@ public class Map {
     private Cell[][] grid = new Cell[Map.N_COLS][Map.N_ROWS];
     private int completedTowers;
 
+    /**
+     * Builds a new 5x5 board, initializing every cell by calling the cell constructor. Also sets the
+     * initial number of completed towers to 0
+     */
     public Map() {
         for (int row = 0; row < N_ROWS; row++) {
             for (int column = 0; column < N_COLS; column++) {
@@ -28,7 +32,13 @@ public class Map {
         this.completedTowers = completedTowers;
     }
 
-    //ritorna la cella nella direzione scelta rispetto alla "cella base", dove "cella base" è la cella in cui si trova il lavoratore prima di compiere il movimento
+    /**
+     * Gets the cell on the board starting from the baseCell and moving towards the direction specified
+     *
+     * @param baseCell  is the cell where the worker is actually starting his action
+     * @param direction is the direction where the worker wants to make his action
+     * @return the next cell starting from the baseCell and moving towards the direction
+     */
     public Cell getNextWorkerCell(Cell baseCell, Direction direction) {
         switch (direction) {
             case NORTH:
@@ -52,6 +62,12 @@ public class Map {
         }
     }
 
+    /**
+     * Shows a starting board, in which each cell is associated with a number. It's used
+     * for the placement of the workers at the beginning of the game
+     *
+     * @return the board as a String, showing for each cell the number that is associated with and the worker symbol if the cell is occupied
+     */
     public String showInitialMap() {
         StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
         int counter = 1;
@@ -100,7 +116,12 @@ public class Map {
         return string.toString();
     }
 
-
+    /**
+     * Is the method used for printing the board during the game. For each cell, shows the level and, if occupied, the worker symbol
+     * corresponding to the worker that is occupying that cell
+     *
+     * @return the board represented as a String
+     */
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder(" --------  --------  --------  --------  --------  \n");
