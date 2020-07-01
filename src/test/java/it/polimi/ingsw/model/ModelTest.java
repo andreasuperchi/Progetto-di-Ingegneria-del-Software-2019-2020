@@ -1198,6 +1198,10 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player tries to use a special power, checking
+     * that the player is brought back to the action menu
+     */
     @Test
     public void specialPowerTest() {
         //scelta degli dèi in gioco
@@ -1254,7 +1258,10 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
-
+    /**
+     * tests the scenario where a player tries to use the special power choosing a cell
+     * in a direction that is out of the map
+     */
     @Test
     public void outOfMapSpecialPowerTest() {
         //scelta degli dèi in gioco
@@ -1311,7 +1318,10 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
-
+    /**
+     * tests the scenario where a player tries to use the special power in a forbidden
+     * way
+     */
     @Test
     public void wrongDirectionSpecialPowerTest() {
         //scelta degli dèi in gioco
@@ -1368,6 +1378,10 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player tries to use twice a special power and checks
+     * that the player is brought back to the action menu
+     */
     @Test
     public void doubleUseSpecialPowerTest() {
         //scelta degli dèi in gioco
@@ -1428,6 +1442,10 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player has both of his workers unavailable, so he his
+     * skipped during the turn transition
+     */
     @Test
     public void gameOverTest() {
         //scelta degli dèi in gioco
@@ -1490,8 +1508,7 @@ public class ModelTest {
         //confermo end turn
         input = new IntChoice(player2, 1);
         model.doAction(input);
-
-
+        
         assertEquals(Outcome.WORKER_MENU, model.getOutcome());
         assertEquals(Model.turnPhase.WORKER_CHOICE, model.getCurrentPhase());
         assertEquals(player1, Model.getCurrentPlayer());

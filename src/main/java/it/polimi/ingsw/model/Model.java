@@ -49,10 +49,6 @@ public class Model extends Observable<Model> implements Cloneable {
         Model.currentPlayer = currentPlayer;
     }
 
-    public void setCurrentWorker(Worker currentWorker) {
-        this.currentWorker = currentWorker;
-    }
-
     public static ArrayList<GodName> getAvailableGods() {
         return availableGods;
     }
@@ -89,20 +85,8 @@ public class Model extends Observable<Model> implements Cloneable {
         return currentPhase;
     }
 
-    public void setCurrentPhase(turnPhase currentPhase) {
-        this.currentPhase = currentPhase;
-    }
-
-    public void setOutcome(Outcome outcome) {
-        this.outcome = outcome;
-    }
-
     public boolean isGameOver() {
         return gameOver;
-    }
-
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
     }
 
     public void doAction(IntChoice intChoice) {
