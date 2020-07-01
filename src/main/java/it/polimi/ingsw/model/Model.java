@@ -90,6 +90,50 @@ public class Model extends Observable<Model> implements Cloneable {
         return gameOver;
     }
 
+    /**
+     *This is the core method of the Model, first checks if intChoice is sent by the current player;
+     * then a switch case is used for scan the Phase of the turn. the structure is the following:
+     * case: AVAILABLE_GOD
+     *       This phase is used to add the gods that will be available for this game.
+     *       Also updates the currentPhase and the outcome.
+     *
+     * case: GOD_CHOICE
+     *       This phase is used to assign the choosed god to the current player.
+     *       Also updates the currentPhase and the outcome.
+     *
+     * case: WORKER_PLACEMENT
+     *      This phase place both the workers of the current player on the map.
+     *      Finally checks if all the players have placed their player.
+     *      Also updates the currentPhase and the outcome.
+     *
+     * case: WORKER_CHOICE
+     *       This phase checks if the worker choosed by the current player is available for this turn,
+     *       than sets the current worker with the selected worker.
+     *       Also updates the currentPhase and the outcome.
+     *
+     * case: ACTION_CHOICE
+     *      This phase allow the palyer to choose from: move, build, use special power or end turn.
+     *      Also updates the currentPhase and the outcome.
+     *
+     * case: MOVE
+     *      This phase is used to move che current worker on the map and checks the win condition
+     *      Also updates the currentPhase and the outcome.
+     *
+     * case: BUILD
+     *       This phase is used to build with the current worker, than checks the win condition.
+     *       Also updates the currentPhase and the outcome.
+     *
+     * case: SPECIAL_POWER
+     *      This phase call the special power on the current worker,than checks the win condition.
+     *      Also updates the currentPhase and the outcome.
+     *
+     * case: END_TURN
+     *      This phase call the method endTurn() for updating the current player,
+     *      than checks if current player is still in game and if he is the last remained (thus gameOver=true).
+     *      Also updates the currentPhase and the outcome.
+     *
+     * @param intChoice is an integer that depends on the currentPhase
+     */
     public void doAction(IntChoice intChoice) {
         if (!currentPlayer.equals(intChoice.getPlayer())) {
             outcome = Outcome.INVALID_PLAYER;
