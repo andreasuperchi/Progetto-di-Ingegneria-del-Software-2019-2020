@@ -35,6 +35,17 @@ public class WorkerAthenaTest {
         opponentNextWorkerCell = Model.getMap().getGrid()[2][1];
     }
 
+
+    @Test(expected = IllegalArgumentException.class)
+    public void checkMoveFalse() {
+        baseWorkerCell.setLevel(0);
+        nextWorkerCell.setLevel(0);
+        nextWorkerCell.setIsOccupied(true);
+        workerAthena.setCurrentWorkerCell(baseWorkerCell);
+        workerAthena.move(nextWorkerCell);
+        assertEquals(baseWorkerCell,workerAthena.getCurrentWorkerCell());
+    }
+
     @Test
     public void checkCanGoUpToFalse() {
         baseWorkerCell.setLevel(0);

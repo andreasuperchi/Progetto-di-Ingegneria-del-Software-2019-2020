@@ -15,6 +15,7 @@ public class WorkerHephaestusTest {
     WorkerHephaestus workerHephaestus;
     Cell baseWorkerCell, nextWorkerCell, otherCell;
 
+
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -24,13 +25,77 @@ public class WorkerHephaestusTest {
         players.add(player2);
         model = new Model(players, 2);
         player1.setWorkers(GodName.HEPHAESTUS);
-        player2.setWorkers(GodName.CHARON);
+        player2.setWorkers(GodName.PAN);
         workerHephaestus = (WorkerHephaestus) player1.getWorkers()[0];
         Model.setCurrentPlayer(player1);
         baseWorkerCell = Model.getMap().getGrid()[1][1];
         nextWorkerCell = Model.getMap().getGrid()[1][2];
         otherCell = Model.getMap().getGrid()[0][1];
     }
+
+
+
+    @Test
+    public void canUseSpecialPowerTrue() {
+        nextWorkerCell.setLevel(0);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        workerHephaestus.setHasMoved(true);
+        workerHephaestus.build(nextWorkerCell);
+        assertEquals(true,workerHephaestus.canUseSpecialPower() );
+    }
+
+    @Test
+    public void canUseSpecialPowerFalseNoMove() {
+        nextWorkerCell.setLevel(0);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        //no move
+        workerHephaestus.build(nextWorkerCell);
+        assertEquals(false,workerHephaestus.canUseSpecialPower() );
+    }
+
+    @Test
+    public void canUseSpecialPowerFalseNoBuild() {
+        nextWorkerCell.setLevel(0);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        workerHephaestus.setHasMoved(true);
+        //no Build
+        assertEquals(false,workerHephaestus.canUseSpecialPower() );
+    }
+
+    @Test
+    public void canUseSpecialPowerFalseNoMoveNoBuild() {
+        nextWorkerCell.setLevel(0);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        //no move, no build
+        assertEquals(false,workerHephaestus.canUseSpecialPower() );
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void buildFalse() {
+        nextWorkerCell.setIsOccupied(true);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        workerHephaestus.build(nextWorkerCell);
+        assertEquals(false, workerHephaestus.getHasBuilt());
+    }
+
+    @Test
+    public void buildDomeTrue() {
+        nextWorkerCell.setLevel(3);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        workerHephaestus.build(nextWorkerCell);
+        assertEquals(4, nextWorkerCell.getLevel());
+        assertEquals(true, nextWorkerCell.getIsOccupied());
+    }
+
+    @Test
+    public void buildNotDome() {
+        nextWorkerCell.setLevel(1);
+        workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
+        workerHephaestus.build(nextWorkerCell);
+        assertEquals(2, nextWorkerCell.getLevel());
+    }
+
 
     @Test
     public void buildAgainTrue() {
