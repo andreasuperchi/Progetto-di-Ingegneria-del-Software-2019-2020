@@ -184,7 +184,6 @@ public class Worker {
         } else {
             if (nextWorkerCell.getLevel() == 3) {
                 nextWorkerCell.setLevel(4);
-                Model.getMap().setCompletedTowers(Model.getMap().getCompletedTowers() + 1);
                 nextWorkerCell.setIsOccupied(true);
             } else {
                 nextWorkerCell.setLevel(nextWorkerCell.getLevel() + 1);

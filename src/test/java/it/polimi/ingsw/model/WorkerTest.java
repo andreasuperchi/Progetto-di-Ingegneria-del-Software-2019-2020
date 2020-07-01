@@ -124,7 +124,7 @@ public class WorkerTest {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
         nextWorkerCell = Model.getMap().getGrid()[1][0];
         worker.setCurrentWorkerCell(baseWorkerCell);
-        worker.setCanGoUp(false);
+        Worker.setCanGoUp(false);
         nextWorkerCell.setLevel(1);
         assertFalse(worker.checkMove(nextWorkerCell));
     }
@@ -263,5 +263,18 @@ public class WorkerTest {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
         baseWorkerCell.setLevel(4);
         worker.setCurrentWorkerCell(baseWorkerCell);
+    }
+
+    @Test
+    public void buildATower() {
+        baseWorkerCell = Model.getMap().getGrid()[1][1];
+        nextWorkerCell = Model.getMap().getGrid()[0][1];
+        Cell otherCell = Model.getMap().getGrid()[0][0];
+        otherCell.setLevel(3);
+        worker.setCurrentWorkerCell(baseWorkerCell);
+        worker.move(nextWorkerCell);
+        worker.build(otherCell);
+        assertTrue(otherCell.getIsOccupied());
+        assertEquals(1, Model.getMap().getCompletedTowers());
     }
 }

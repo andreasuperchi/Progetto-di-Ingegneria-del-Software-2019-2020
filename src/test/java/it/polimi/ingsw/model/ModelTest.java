@@ -124,7 +124,8 @@ public class ModelTest {
     }
 
     /**
-     * tests the scenario where a player
+     * tests the scenario where all the three players select one god from the available ones, checking that
+     * each player is associated with the correct god
      */
     @Test
     public void fullGodChoiceTest() {
@@ -158,6 +159,9 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player selects a cell that is out of the map to place his worker
+     */
     @Test
     public void invalidWorkerPlacementTest() {
         input = new IntChoice(player1, 11);
@@ -181,6 +185,9 @@ public class ModelTest {
         assertEquals(Model.turnPhase.WORKER_PLACEMENT, model.getCurrentPhase());
     }
 
+    /**
+     * tests the scenario where a player correctly places his first worker on the board
+     */
     @Test
     public void firstWorkerPlacementTest() {
         input = new IntChoice(player1, 11);
@@ -205,6 +212,10 @@ public class ModelTest {
         assertEquals(Model.turnPhase.WORKER_PLACEMENT, model.getCurrentPhase());
     }
 
+    /**
+     * tests the scenario where the first player correctly positions both of his workers on the board and
+     * checks that the new current player is player3
+     */
     @Test
     public void secondWorkerPlacementTest() {
         input = new IntChoice(player1, 11);
@@ -233,7 +244,9 @@ public class ModelTest {
         assertEquals(Outcome.WORKERS_PLACEMENT_MENU, model.getOutcome());
     }
 
-
+    /**
+     * tests the scenario where a player tries to place a worker on a cell that is occupied by another worker
+     */
     @Test
     public void occupiedWorkerPlacementTest() {
         input = new IntChoice(player1, 11);
@@ -261,6 +274,9 @@ public class ModelTest {
         assertEquals(Outcome.WORKERS_PLACEMENT_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where all the three players correctly place their workers on the board
+     */
     @Test
     public void fullWorkerPlacementTest() {
         input = new IntChoice(player1, 11);
@@ -295,6 +311,9 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player makes a mistake selecting one of his workers
+     */
     @Test
     public void invalidWorkerChoiceTest() {
         input = new IntChoice(player1, 11);
@@ -331,7 +350,10 @@ public class ModelTest {
         assertEquals(Model.turnPhase.WORKER_CHOICE, model.getCurrentPhase());
     }
 
-
+    /**
+     * tests the scenario where a player tries to select a worker that can't be used in this moment and checks
+     * that the current player can choose another one
+     */
     @Test
     public void cantBeUsedWorkerChoiceTest() {
         input = new IntChoice(player1, 11);
@@ -369,6 +391,10 @@ public class ModelTest {
         assertEquals(Model.turnPhase.WORKER_CHOICE, model.getCurrentPhase());
     }
 
+    /**
+     * tests the scenario where a player correctly selects one of his workers and checks
+     * that the selected worker becomes the current worker in the model
+     */
     @Test
     public void workerChoiceTest() {
         input = new IntChoice(player1, 11);
@@ -406,6 +432,10 @@ public class ModelTest {
         assertEquals(player2.getWorkers()[0], model.getCurrentWorker());
     }
 
+    /**
+     * tests the scenario where a player types in a wrong number for the selection of the action
+     * and checks that the current player can make another choice
+     */
     @Test
     public void invalidActionChoice() {
         input = new IntChoice(player1, 11);
@@ -445,7 +475,9 @@ public class ModelTest {
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
     }
 
-
+    /**
+     * tests the scenario where a player chooses a valid action
+     */
     @Test
     public void actionChoiceTest() {
         input = new IntChoice(player1, 11);
@@ -485,6 +517,9 @@ public class ModelTest {
         assertEquals(Outcome.DIRECTION_MENU, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player, after having choose to move, types in an invalid direction
+     */
     @Test
     public void invalidMoveTest() {
         input = new IntChoice(player1, 11);
@@ -527,6 +562,10 @@ public class ModelTest {
         assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player, after having choose to move, tries to move towards a cell
+     * that is out of the map
+     */
     @Test
     public void outOfMapMoveTest() {
         input = new IntChoice(player1, 11);
@@ -569,6 +608,10 @@ public class ModelTest {
         assertEquals(Outcome.OUT_OF_MAP, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player correctly moves one of his workers from a level 0 cell to
+     * another level 0 cell, checking that this move is not making him win
+     */
     @Test
     public void validMoveTest() {
         input = new IntChoice(player1, 11);
@@ -613,6 +656,10 @@ public class ModelTest {
         assertFalse(model.isGameOver());
     }
 
+    /**
+     * tests the scenario where a player correctly moves one of his workers from a level 2 cell to
+     * a level 3 cell, checking that this move is making him win the game
+     */
     @Test
     public void validMoveWinTest() {
         Model.getMap().getGrid()[0][0].setLevel(2);
@@ -659,6 +706,10 @@ public class ModelTest {
         assertTrue(model.isGameOver());
     }
 
+    /**
+     * tests the scenario where a player is trying to build without moving,
+     * checking that the player can repeat his choice
+     */
     @Test
     public void cantBuildTest() {
         Model.getMap().getGrid()[0][0].setLevel(2);
@@ -702,6 +753,10 @@ public class ModelTest {
         assertEquals(Outcome.PROCESS_ACTION_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player, after having choose the build option, selects a direction
+     * that doesn't exist and checks that the player can make another choice
+     */
     @Test
     public void invalidBuildTest() {
         //scelta degli dèi in gioco
@@ -751,6 +806,10 @@ public class ModelTest {
         assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player is trying to build out of the map, checking
+     * that the player can make another choice
+     */
     @Test
     public void outOfMapBuildTest() {
 //scelta degli dèi in gioco
@@ -800,6 +859,10 @@ public class ModelTest {
         assertEquals(Outcome.OUT_OF_MAP, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player correctly moves, checking that the player is brought back
+     * to the action menu
+     */
     @Test
     public void validBuildTest() {
         //scelta degli dèi in gioco
@@ -850,6 +913,10 @@ public class ModelTest {
         assertEquals(1, Model.getMap().getGrid()[1][1].getLevel());
     }
 
+    /**
+     * tests the scenario where a player, after having moved, is trying to go directly to the end-turn,
+     * without having built anything
+     */
     @Test
     public void cantGoToEndTurnTest() {
         //scelta degli dèi in gioco
@@ -896,6 +963,9 @@ public class ModelTest {
         assertEquals(Outcome.PROCESS_ACTION_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player, after having moved and built, correctly goes to the end turn
+     */
     @Test
     public void canGoToEndTurnTest() {
         //scelta degli dèi in gioco
@@ -948,6 +1018,10 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player, after having moved and built, goes to the end-turn but
+     * types in a wrong number for the confirmation of the end-turn itself
+     */
     @Test
     public void invalidEndTurn() {
         //scelta degli dèi in gioco
@@ -1003,6 +1077,10 @@ public class ModelTest {
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
     }
 
+    /**
+     * tests the scenario where a player, after having moved and built, goes to the end-turn and confirms
+     * that he wants to effectively ends his turn
+     */
     @Test
     public void confirmEndTurnTest() {
         //scelta degli dèi in gioco
@@ -1059,6 +1137,10 @@ public class ModelTest {
         assertEquals(player3, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player, after having moved and built, goes to the end-turn and gives
+     * a negative answer at the end-turn confirmation
+     */
     @Test
     public void dontConfirmEndTurnTest() {
         //scelta degli dèi in gioco
