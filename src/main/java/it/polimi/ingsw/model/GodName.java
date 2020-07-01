@@ -18,11 +18,21 @@ public enum GodName {
     TRITON,
     ZEUS;
 
-
+    /**
+     * Parses the god, received as String, to the corresponding enum value
+     *
+     * @param input is the name of a God, received as a String
+     * @return an enum value representing the specified god
+     */
     public static GodName parseInput(String input) {
         return Enum.valueOf(GodName.class, input.toUpperCase());
     }
 
+    /**
+     * creates the workers associated to this god
+     *
+     * @return a worker of the type of this god
+     */
     public Worker parseGod() {
         switch (this) {
             case APOLLO:
