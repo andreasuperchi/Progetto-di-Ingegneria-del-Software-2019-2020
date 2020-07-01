@@ -143,14 +143,10 @@ public enum Outcome {
                 break;
             case OUT_OF_MAP:
                 out = new StringBuilder("\u001b[31mYou can't go out of the map! Please choose a new direction.\u001b[0m \n" +
-                        "\t[1]NORTH" +
-                        "\t[2]NORTH_EAST" +
-                        "\t[3]EAST" +
-                        "\t[4]SOUTH_EAST" +
-                        "\t[5]SOUTH" +
-                        "\t[6]SOUTH_WEST" +
-                        "\t[7]WEST" +
-                        "\t[8]NORTH_WEST");
+                        "\t[1]Move" +
+                        "\t[2]Build" +
+                        "\t[3]Additional Power" +
+                        "\t[4]End Turn");
                 break;
             case NOT_MOVED_ERROR:
                 out = new StringBuilder("You have to move before building!");

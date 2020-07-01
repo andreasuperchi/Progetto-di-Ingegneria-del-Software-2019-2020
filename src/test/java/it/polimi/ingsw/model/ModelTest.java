@@ -16,7 +16,9 @@ public class ModelTest {
     Player player1, player2, player3;
     IntChoice input;
 
-
+    /**
+     * Initializes a game with 3 players and sets player1 as the current player
+     */
     @Before
     public void setUp() {
         player1 = new Player("Andre", 5, "@");
@@ -30,6 +32,9 @@ public class ModelTest {
         Model.setCurrentPlayer(player1);
     }
 
+    /**
+     * tests the scenario where a player tries to do something but it's not his turn
+     */
     @Test
     public void invalidCurrentPlayerTest() {
         input = new IntChoice(player2, 2);
@@ -37,6 +42,9 @@ public class ModelTest {
         assertEquals(Outcome.INVALID_PLAYER, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player types in a wrong number to select a god
+     */
     @Test
     public void invalidAvailableGodsTest() {
         input = new IntChoice(player1, 27);
@@ -44,6 +52,9 @@ public class ModelTest {
         assertEquals(Outcome.AVAILABLE_GODS_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player selects a god
+     */
     @Test
     public void availableGodsTest() {
         input = new IntChoice(player1, 11);
@@ -52,6 +63,9 @@ public class ModelTest {
         assertEquals(Model.turnPhase.AVAILABLE_GODS, model.getCurrentPhase());
     }
 
+    /**
+     * tests the scenario where the first player selects all the three gods
+     */
     @Test
     public void fullAvailableGodsTest() {
         input = new IntChoice(player1, 11);
@@ -69,6 +83,9 @@ public class ModelTest {
         assertEquals(player2, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player tries to select a god that is not available for this game
+     */
     @Test
     public void invalidGodChoiceTest() {
         input = new IntChoice(player1, 11);
@@ -84,6 +101,10 @@ public class ModelTest {
         assertEquals(Outcome.GOD_CHOICE_ERROR, model.getOutcome());
     }
 
+    /**
+     * tests the scenario where a player correctly selects a god from the available ones and checks
+     * that the correct type of workers is associated with him
+     */
     @Test
     public void godChoiceTest() {
         input = new IntChoice(player1, 11);
@@ -102,6 +123,9 @@ public class ModelTest {
         assertEquals(player3, Model.getCurrentPlayer());
     }
 
+    /**
+     * tests the scenario where a player
+     */
     @Test
     public void fullGodChoiceTest() {
         input = new IntChoice(player1, 11);
