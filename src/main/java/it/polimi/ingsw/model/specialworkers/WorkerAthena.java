@@ -6,13 +6,23 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerAthena extends Worker {
 
+    /**
+     * Builds a new worker using his super-class constructor and sets to false
+     * the special power availability.
+     */
     public WorkerAthena() {
         super();
         hasSpecialPower = false;
     }
 
-    //il potere speciale è gia 'incluso' in move
 
+    /**
+     * Do the Override of move from the class Worker.
+     * add the following condition:
+     * if worker Athena is go up, the others workers can't go up in their turn.
+     *
+     * @param nextWorkerCell is the Cell where the Worker is going to be moved
+     */
     @Override
     public void move(Cell nextWorkerCell) {
         setCanGoUp(true);                       // setto canGoUp a true per tutti

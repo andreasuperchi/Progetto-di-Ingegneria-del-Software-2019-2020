@@ -10,18 +10,33 @@ public class WorkerHephaestus extends Worker {
 
     private Cell builtCell;
 
+    /**
+     * Builds a new worker using his super-class constructor and sets to true
+     * the special power availability.
+     */
     public WorkerHephaestus() {
         super();
         hasSpecialPower = true;
     }
 
 
-
+    /**
+     * Checks if the worker can use the special power
+     *
+     * @return a boolean value that indicates if special power can be used
+     */
     @Override
     public boolean canUseSpecialPower() {
         return hasMoved && hasBuilt;
     }
 
+    /**
+     * Do the Override of move from the class Worker.
+     * add the following statement:
+     * save the cell where the worker has built
+     *
+     * @param nextWorkerCell is the Cell where the Worker is going to be build
+     */
     @Override
     public void build(Cell nextWorkerCell) {
         if (!checkBuild(nextWorkerCell)) {
@@ -41,6 +56,14 @@ public class WorkerHephaestus extends Worker {
         }
     }
 
+    /**
+     * Do the Override of move from the class Worker.
+     * add the following check:
+     * check if the cell where worker want to use special power is the same of builtCell and
+     * that the cell level is < 3 (worker Hephaestus can't build a dome)
+     *
+     * @param cell is the cell where the special power is to apply
+     */
     @Override
     //cell è la cella dove voglio costruire il blocco addizionale (non cupola)
     public void specialPower(Cell cell) {
