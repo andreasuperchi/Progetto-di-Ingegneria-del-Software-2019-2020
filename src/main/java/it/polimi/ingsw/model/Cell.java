@@ -7,6 +7,13 @@ public class Cell {
     private int level;
     private Worker thisWorker;
 
+    /**
+     * creates a new cell, initializing his indexes, his level and specifying the fact that no one occupies it and that
+     * is not associated with any worker
+     *
+     * @param rowNumber    is the number of the row that is going to be associated with this cell
+     * @param columnNumber is the number of the column that is going to be associated with this cell
+     */
     public Cell(int rowNumber, int columnNumber) {
         this.rowNumber = rowNumber;
         this.columnNumber = columnNumber;
@@ -43,6 +50,13 @@ public class Cell {
         return level;
     }
 
+    /**
+     * sets the level of the cell.
+     * If the new level is 4, increments the number of the total completed towers.
+     * Also permanently sets this cell as occupied
+     *
+     * @param level is the level that is going to be set
+     */
     public void setLevel(int level) {
         if (level == 4) {
             Model.getMap().setCompletedTowers(Model.getMap().getCompletedTowers() + 1);
@@ -59,6 +73,11 @@ public class Cell {
         this.thisWorker = thisWorker;
     }
 
+    /**
+     * is used to print each cell in the toString method of Map
+     *
+     * @return the String representation of this cell, with a precise formatting
+     */
     @Override
     public String toString() {
         String string;
