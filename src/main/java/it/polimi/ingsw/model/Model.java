@@ -22,6 +22,15 @@ public class Model extends Observable<Model> implements Cloneable {
         WORKER_CHOICE, ACTION_CHOICE, MOVE, BUILD, SPECIAL_POWER, END_TURN, GAME_OVER
     }
 
+    /**
+     * creates a new model object, initializing it with the players that are passed through the players array and with
+     * the number of players that are passed too. Also sets the gameOver attribute to false, creates the map, sets the
+     * initial phase and the initial outcome of the game and creates an arrayList "gods" which contains all
+     * the gods implemented in this project
+     *
+     * @param players
+     * @param numberOfPlayers
+     */
     public Model(ArrayList<Player> players, int numberOfPlayers) {
         availableGods = new ArrayList<>();
         this.players = new ArrayList<>();
@@ -254,7 +263,7 @@ public class Model extends Observable<Model> implements Cloneable {
                     if (intChoice.getValue() == 1 || intChoice.getValue() == 2) {
                         if (intChoice.getValue() == 1) {
                             endTurn();
-                            if (!currentPlayer.getInGame()) {
+                            if (!currentPlayer.getIsInGame()) {
                                 int c = 0;
 
                                 for (Player p : players) {
@@ -391,7 +400,7 @@ public class Model extends Observable<Model> implements Cloneable {
             w.setCanBeUsed(w.checkSurroundingCells());
         }
 
-        currentPlayer.setInGame(currentPlayer.getWorkers()[0].canBeUsed || currentPlayer.getWorkers()[1].canBeUsed);
+        currentPlayer.setIsInGame(currentPlayer.getWorkers()[0].canBeUsed || currentPlayer.getWorkers()[1].canBeUsed);
     }
 
     private Direction parseDirection(int input) {

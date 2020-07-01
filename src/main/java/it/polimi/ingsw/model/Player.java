@@ -41,14 +41,6 @@ public class Player {
         this.isInGame = isInGame;
     }
 
-    public boolean getInGame() {
-        return isInGame;
-    }
-
-    public void setInGame(boolean inGame) {
-        isInGame = inGame;
-    }
-
     public Worker[] getWorkers() {
         return workers;
     }

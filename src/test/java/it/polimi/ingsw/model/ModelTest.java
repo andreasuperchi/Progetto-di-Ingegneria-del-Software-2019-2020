@@ -1458,8 +1458,6 @@ public class ModelTest {
         input = new IntChoice(player1, 22);
         model.doAction(input);
 
-        player3.setIsInGame(false);
-
         //scelta del worker
         input = new IntChoice(player2, 1);
         model.doAction(input);
@@ -1478,6 +1476,17 @@ public class ModelTest {
         //vado all'end turn
         input = new IntChoice(player2, 4);
         model.doAction(input);
+
+        Model.getMap().getGrid()[0][4].setLevel(4);
+        Model.getMap().getGrid()[0][3].setLevel(4);
+        Model.getMap().getGrid()[1][3].setLevel(4);
+        Model.getMap().getGrid()[2][3].setLevel(4);
+        Model.getMap().getGrid()[2][4].setLevel(4);
+
+        Model.getMap().getGrid()[3][0].setLevel(4);
+        Model.getMap().getGrid()[3][1].setLevel(4);
+        Model.getMap().getGrid()[4][1].setLevel(4);
+
         //confermo end turn
         input = new IntChoice(player2, 1);
         model.doAction(input);
