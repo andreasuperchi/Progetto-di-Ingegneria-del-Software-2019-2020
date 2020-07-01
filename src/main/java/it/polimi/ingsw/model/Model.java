@@ -307,10 +307,10 @@ public class Model extends Observable<Model> implements Cloneable {
 
     /**
      *
-     * Check if index is valid, then take the GodName from Outcome.
-     * Add the god selected to arraylist availableGods and remove from arraylist gods
+     * Check if index is valid, then takes the GodName from Outcome.
+     * Add the god selected to arraylist availableGods and removes from arraylist gods
      *
-     * @param index is an integer to select the respective god from ArrayList gods in Ountcome
+     * @param index is an integer to select the respective god from ArrayList gods in Outcome
      */
     private void addGod(int index) {
         if (index >= 0 && index <= Outcome.getGods().size()) {
@@ -324,6 +324,14 @@ public class Model extends Observable<Model> implements Cloneable {
         }
     }
 
+
+    /**
+     * After player has choose the worker, he has to choose what his worker do, this is done by the switch case:
+     * MOVE or BUILD or USE THE SPECIAL POWER or END TURN
+     * Also set the relative Outcome and the relative turnPhase
+     *
+     * @param input is integer that indicates what worker want to do
+     */
     private void processAction(int input) {
         switch (input) {
             case 1:
@@ -372,6 +380,9 @@ public class Model extends Observable<Model> implements Cloneable {
         }
     }
 
+    /**
+     * This method update the currentPlayer from the arrayList players
+     */
     private void updateCurrentPlayer() {
         if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
             currentPlayer = players.get(0);
@@ -380,6 +391,10 @@ public class Model extends Observable<Model> implements Cloneable {
         }
     }
 
+    /**
+     * This method set to false the variables hasMoved, hasBuild and hasUsedSpecialPower for the next turn of the current player.
+     * than update the current player and checks if he is still in game.
+     */
     private void endTurn() {
         currentWorker.setHasBuilt(false);
         currentWorker.setHasMoved(false);
@@ -394,6 +409,11 @@ public class Model extends Observable<Model> implements Cloneable {
         currentPlayer.setIsInGame(currentPlayer.getWorkers()[0].canBeUsed || currentPlayer.getWorkers()[1].canBeUsed);
     }
 
+    /**
+     *
+     * @param input is integer that correspond to a Direction
+     * @return the direction from the enum class Direction
+     */
     private Direction parseDirection(int input) {
         switch (input) {
             case 1:
@@ -417,6 +437,10 @@ public class Model extends Observable<Model> implements Cloneable {
         }
     }
 
+    /**
+     * @param cellNumber is an integer that correspond to a cell
+     * @return the cell from matrix grid in Map class
+     */
     private Cell parseCell(int cellNumber) {
         switch (cellNumber) {
             case 1:
