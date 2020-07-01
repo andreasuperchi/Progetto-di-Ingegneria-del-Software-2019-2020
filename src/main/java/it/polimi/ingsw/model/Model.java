@@ -305,7 +305,13 @@ public class Model extends Observable<Model> implements Cloneable {
         notify(this);
     }
 
-
+    /**
+     *
+     * Check if index is valid, then take the GodName from Outcome.
+     * Add the god selected to arraylist availableGods and remove from arraylist gods
+     *
+     * @param index is an integer to select the respective god from ArrayList gods in Ountcome
+     */
     private void addGod(int index) {
         if (index >= 0 && index <= Outcome.getGods().size()) {
             GodName selectedGod = GodName.parseInput(Outcome.getGods().get(index - 1));
