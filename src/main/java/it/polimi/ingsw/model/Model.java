@@ -28,8 +28,9 @@ public class Model extends Observable<Model> implements Cloneable {
      * initial phase and the initial outcome of the game and creates an arrayList "gods" which contains all
      * the gods implemented in this project
      *
-     * @param players
-     * @param numberOfPlayers
+     * @param players         is the arrayList of the players that the server passes to the model; contains the players that will be in
+     *                        game and all their information
+     * @param numberOfPlayers represents the number of players that are going to be playing this match; comes from the server side
      */
     public Model(ArrayList<Player> players, int numberOfPlayers) {
         availableGods = new ArrayList<>();
