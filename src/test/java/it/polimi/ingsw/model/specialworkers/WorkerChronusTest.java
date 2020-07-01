@@ -29,7 +29,7 @@ public class WorkerChronusTest {
         players.add(player3);
         model = new Model(players, 3);
         player1.setWorkers(GodName.CHRONUS);
-        player2.setWorkers(GodName.ZEUS);
+        player2.setWorkers(GodName.PAN);
         Model.setCurrentPlayer(player1);
     }
 

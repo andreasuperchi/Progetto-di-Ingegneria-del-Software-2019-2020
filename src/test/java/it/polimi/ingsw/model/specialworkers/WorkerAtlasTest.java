@@ -25,7 +25,7 @@ public class WorkerAtlasTest {
         players.add(player3);
         model = new Model(players, 3);
         player1.setWorkers(GodName.ATLAS);
-        player2.setWorkers(GodName.ZEUS);
+        player2.setWorkers(GodName.PAN);
         Model.setCurrentPlayer(player1);
         baseWorkerCell = Model.getMap().getGrid()[2][2];
         nextWorkerCell = Model.getMap().getGrid()[2][3];

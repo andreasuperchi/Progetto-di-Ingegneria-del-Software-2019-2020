@@ -25,7 +25,7 @@ public class WorkerCharonTest {
         players.add(player2);
         model = new Model(players, 2);
         player1.setWorkers(GodName.CHARON);
-        player2.setWorkers(GodName.ZEUS);
+        player2.setWorkers(GodName.PAN);
         workerCharonA = (WorkerCharon) player1.getWorkers()[0];
         workerCharonB = (WorkerCharon) player1.getWorkers()[1];
         workerOpponentA = player2.getWorkers()[0];

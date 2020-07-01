@@ -26,7 +26,7 @@ public class WorkerMinotaurTest {
         players.add(player3);
         model = new Model(players, 3);
         player1.setWorkers(GodName.MINOTAUR);
-        player2.setWorkers(GodName.ZEUS);
+        player2.setWorkers(GodName.PAN);
         workerMinotaur = (WorkerMinotaur) player1.getWorkers()[0];
         otherWorker = player2.getWorkers()[0];
         Model.setCurrentPlayer(player1);
@@ -42,7 +42,7 @@ public class WorkerMinotaurTest {
     @Test
     public void checkForceBack() {
         Player opponent = new Player("Opponent", 33, "#");
-        opponent.setWorkers(GodName.ZEUS);
+        opponent.setWorkers(GodName.PAN);
         Worker workerOpponent = opponent.getWorkers()[0];
         baseWorkerCell = Model.getMap().getGrid()[1][1];
         nextWorkerCell = Model.getMap().getGrid()[1][2];

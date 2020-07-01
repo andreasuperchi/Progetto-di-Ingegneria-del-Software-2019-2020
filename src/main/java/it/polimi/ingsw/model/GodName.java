@@ -15,8 +15,7 @@ public enum GodName {
     MINOTAUR,
     PAN,
     PROMETHEUS,
-    TRITON,
-    ZEUS;
+    TRITON;
 
     /**
      * Parses the god, received as String, to the corresponding enum value
@@ -61,8 +60,6 @@ public enum GodName {
                 return new WorkerPrometheus();
             case TRITON:
                 return new WorkerTriton();
-            case ZEUS:
-                return new WorkerZeus();
             default:
                 throw new IllegalArgumentException("Unexpected God!");
         }

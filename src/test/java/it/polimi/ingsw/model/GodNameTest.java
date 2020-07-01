@@ -82,10 +82,6 @@ public class GodNameTest {
         assertEquals(GodName.TRITON, GodName.parseInput("Triton"));
     }
 
-    @Test
-    public void checkParseInputZeus() {
-        assertEquals(GodName.ZEUS, GodName.parseInput("Zeus"));
-    }
 
     @Test
     public void checkParseGodApollo() {
@@ -179,12 +175,6 @@ public class GodNameTest {
         assertTrue(worker instanceof WorkerTriton);
     }
 
-    @Test
-    public void checkParseGodZeus() {
-        GodName godName = GodName.ZEUS;
-        Worker worker = godName.parseGod();
-        assertTrue(worker instanceof WorkerZeus);
-    }
 
     @Test
     public void checkPlayerParse() {

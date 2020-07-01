@@ -2,8 +2,8 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.choices.IntChoice;
 import it.polimi.ingsw.model.specialworkers.WorkerArtemis;
+import it.polimi.ingsw.model.specialworkers.WorkerDemeter;
 import it.polimi.ingsw.model.specialworkers.WorkerPan;
-import it.polimi.ingsw.model.specialworkers.WorkerZeus;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ public class ModelTest {
         model.doAction(input);
 
         assertTrue(Model.getAvailableGods().contains(GodName.PAN));
-        assertTrue(Model.getAvailableGods().contains(GodName.ZEUS));
+        assertTrue(Model.getAvailableGods().contains(GodName.DEMETER));
         assertTrue(Model.getAvailableGods().contains(GodName.ARTEMIS));
         assertEquals(Model.turnPhase.GOD_CHOICE, model.getCurrentPhase());
         assertEquals(Outcome.GOD_CHOICE_MENU, model.getOutcome());
@@ -96,8 +96,8 @@ public class ModelTest {
         input = new IntChoice(player2, 2);
         model.doAction(input);
 
-        assertTrue(player2.getWorkers()[0] instanceof WorkerZeus);
-        assertTrue(player2.getWorkers()[1] instanceof WorkerZeus);
+        assertTrue(player2.getWorkers()[0] instanceof WorkerDemeter);
+        assertTrue(player2.getWorkers()[1] instanceof WorkerDemeter);
         assertEquals(Outcome.GOD_CHOICE_MENU, model.getOutcome());
         assertEquals(player3, Model.getCurrentPlayer());
     }
@@ -112,7 +112,7 @@ public class ModelTest {
         model.doAction(input);
 
         assertTrue(Model.getAvailableGods().contains(GodName.PAN));
-        assertTrue(Model.getAvailableGods().contains(GodName.ZEUS));
+        assertTrue(Model.getAvailableGods().contains(GodName.DEMETER));
         assertTrue(Model.getAvailableGods().contains(GodName.ARTEMIS));
 
 
@@ -123,8 +123,8 @@ public class ModelTest {
         input = new IntChoice(player1, 1);
         model.doAction(input);
 
-        assertTrue(player2.getWorkers()[0] instanceof WorkerZeus);
-        assertTrue(player2.getWorkers()[1] instanceof WorkerZeus);
+        assertTrue(player2.getWorkers()[0] instanceof WorkerDemeter);
+        assertTrue(player2.getWorkers()[1] instanceof WorkerDemeter);
         assertTrue(player3.getWorkers()[0] instanceof WorkerPan);
         assertTrue(player3.getWorkers()[1] instanceof WorkerPan);
         assertTrue(player1.getWorkers()[0] instanceof WorkerArtemis);

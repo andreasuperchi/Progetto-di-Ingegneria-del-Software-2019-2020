@@ -23,7 +23,7 @@ public class WorkerTest {
         players.add(player2);
         players.add(player3);
         model = new Model(players, 3);
-        player1.setWorkers(GodName.ZEUS);
+        player1.setWorkers(GodName.PAN);
         worker = player1.getWorkers()[0];
     }
 

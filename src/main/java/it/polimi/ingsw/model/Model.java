@@ -33,7 +33,7 @@ public class Model extends Observable<Model> implements Cloneable {
         outcome = Outcome.AVAILABLE_GODS_MENU;
         currentPlayer = players.get(0);
         Outcome.setGods(new ArrayList<>(Arrays.asList("Apollo", "Artemis", "Athena", "Atlas", "Charon", "Chronus", "Demeter", "Hephaestus",
-                "Hestia", "Minotaur", "Pan", "Prometheus", "Triton", "Zeus")));
+                "Hestia", "Minotaur", "Pan", "Prometheus", "Triton")));
     }
 
     public static void setCurrentPlayer(Player currentPlayer) {

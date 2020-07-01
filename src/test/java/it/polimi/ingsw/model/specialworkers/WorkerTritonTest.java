@@ -27,7 +27,7 @@ public class WorkerTritonTest {
         players.add(player3);
         model = new Model(players, 3);
         player1.setWorkers(GodName.TRITON);
-        player2.setWorkers(GodName.ZEUS);
+        player2.setWorkers(GodName.PAN);
         workerTriton = (WorkerTriton) player1.getWorkers()[0];
         worker = player2.getWorkers()[0];
     }

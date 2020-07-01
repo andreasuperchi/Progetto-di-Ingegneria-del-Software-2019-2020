@@ -25,7 +25,7 @@ public class WorkerAthenaTest {
         players.add(player2);
         model = new Model(players, 2);
         player1.setWorkers(GodName.ATHENA);
-        player2.setWorkers(GodName.ZEUS);
+        player2.setWorkers(GodName.PAN);
         workerAthena = (WorkerAthena) player1.getWorkers()[0];
         workerOpponent = player2.getWorkers()[0];
         Model.setCurrentPlayer(player1);
