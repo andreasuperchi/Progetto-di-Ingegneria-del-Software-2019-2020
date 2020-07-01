@@ -91,48 +91,48 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     /**
-     *This is the core method of the Model, first checks if intChoice is sent by the current player;
-     * then a switch case is used for scan the Phase of the turn. the structure is the following:
+     * This is the core method of the Model, it first checks if intChoice is sent by the current player;
+     * then a switch case is used to scan the Phase of the turn. the structure is the following:
      * case: AVAILABLE_GOD
-     *       This phase is used to add the gods that will be available for this game.
-     *       Also updates the currentPhase and the outcome.
-     *
+     * This phase is used to add the gods that will be available for this game.
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: GOD_CHOICE
-     *       This phase is used to assign the choosed god to the current player.
-     *       Also updates the currentPhase and the outcome.
-     *
+     * This phase is used to assign the chosen god to the current player.
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: WORKER_PLACEMENT
-     *      This phase place both the workers of the current player on the map.
-     *      Finally checks if all the players have placed their player.
-     *      Also updates the currentPhase and the outcome.
-     *
+     * This phase place both the workers of the current player on the map.
+     * Finally checks if all the players have placed their workers.
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: WORKER_CHOICE
-     *       This phase checks if the worker choosed by the current player is available for this turn,
-     *       than sets the current worker with the selected worker.
-     *       Also updates the currentPhase and the outcome.
-     *
+     * This phase checks if the worker chosen by the current player is available for this turn,
+     * then sets the selected worker as the current worker .
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: ACTION_CHOICE
-     *      This phase allow the palyer to choose from: move, build, use special power or end turn.
-     *      Also updates the currentPhase and the outcome.
-     *
+     * This phase allows the player to choose between: move, build, use special power or end turn.
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: MOVE
-     *      This phase is used to move che current worker on the map and checks the win condition
-     *      Also updates the currentPhase and the outcome.
-     *
+     * This phase is used to move the current worker on the map and to check the win conditions
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: BUILD
-     *       This phase is used to build with the current worker, than checks the win condition.
-     *       Also updates the currentPhase and the outcome.
-     *
+     * This phase is used to build with the current worker, then checks the win conditions.
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: SPECIAL_POWER
-     *      This phase call the special power on the current worker,than checks the win condition.
-     *      Also updates the currentPhase and the outcome.
-     *
+     * This phase calls the special power on the current worker, then checks the win conditions.
+     * Also updates the currentPhase and the outcome.
+     * <p>
      * case: END_TURN
-     *      This phase call the method endTurn() for updating the current player,
-     *      than checks if current player is still in game and if he is the last remained (thus gameOver=true).
-     *      Also updates the currentPhase and the outcome.
+     * This phase calls the method endTurn() for updating the current player,
+     * then checks if the current player is still in game and if he is the last remained (thus gameOver=true).
+     * Also updates the currentPhase and the outcome.
      *
-     * @param intChoice is an integer that depends on the currentPhase
+     * @param intChoice is the choice received sent by a player
      */
     public void doAction(IntChoice intChoice) {
         if (!currentPlayer.equals(intChoice.getPlayer())) {
@@ -329,7 +329,7 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     /**
-     * Checks if index is valid, then takes the GodName from Outcome.
+     * Checks if the index is valid, then takes the GodName from Outcome.
      * Adds the god selected to the arraylist availableGods and removes it from arraylist gods
      *
      * @param index is an integer used to select the respective god from ArrayList gods in Outcome
@@ -348,7 +348,7 @@ public class Model extends Observable<Model> implements Cloneable {
 
 
     /**
-     * After the player has choose the worker, he has to choose what his worker is going to do; this is done by a switch case:
+     * After the player has chosen the worker, he has to choose what his worker is going to do; this is done by a switch case:
      * MOVE or BUILD or USE THE SPECIAL POWER or END TURN
      * Also sets the relative Outcome and the relative turnPhase
      *
