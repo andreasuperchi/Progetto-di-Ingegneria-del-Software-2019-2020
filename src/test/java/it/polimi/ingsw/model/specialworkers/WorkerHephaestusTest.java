@@ -15,7 +15,10 @@ public class WorkerHephaestusTest {
     WorkerHephaestus workerHephaestus;
     Cell baseWorkerCell, nextWorkerCell, otherCell;
 
-
+    /**
+     * sets the game with 2 players and their workers, creates instance of model
+     * then set the current player
+     */
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -34,7 +37,9 @@ public class WorkerHephaestusTest {
     }
 
 
-
+    /**
+     * checks if workerHephaestus can use special power knowing has move and has build previously
+     */
     @Test
     public void canUseSpecialPowerTrue() {
         nextWorkerCell.setLevel(0);
@@ -44,6 +49,9 @@ public class WorkerHephaestusTest {
         assertEquals(true,workerHephaestus.canUseSpecialPower() );
     }
 
+    /**
+     * checks if workerHephaestus can't use special power knowing hasn't move and has build previously
+     */
     @Test
     public void canUseSpecialPowerFalseNoMove() {
         nextWorkerCell.setLevel(0);
@@ -53,6 +61,9 @@ public class WorkerHephaestusTest {
         assertEquals(false,workerHephaestus.canUseSpecialPower() );
     }
 
+    /**
+     * checks if workerHephaestus can't use special power knowing has move and hasn't build previously
+     */
     @Test
     public void canUseSpecialPowerFalseNoBuild() {
         nextWorkerCell.setLevel(0);
@@ -62,6 +73,9 @@ public class WorkerHephaestusTest {
         assertEquals(false,workerHephaestus.canUseSpecialPower() );
     }
 
+    /**
+     * checks if workerHephaestus can't use special power knowing hasn't move and hasn't build previously
+     */
     @Test
     public void canUseSpecialPowerFalseNoMoveNoBuild() {
         nextWorkerCell.setLevel(0);
@@ -70,7 +84,9 @@ public class WorkerHephaestusTest {
         assertEquals(false,workerHephaestus.canUseSpecialPower() );
     }
 
-
+    /**
+     * checks if workerHephaestus can't build on nextWorkerCell knowing nextWorkerCell is occupied
+     */
     @Test(expected = IllegalArgumentException.class)
     public void buildFalse() {
         nextWorkerCell.setIsOccupied(true);
@@ -79,6 +95,9 @@ public class WorkerHephaestusTest {
         assertEquals(false, workerHephaestus.getHasBuilt());
     }
 
+    /**
+     * checks workerHephaestus can build a dome on nextWorkerCell (level = 4 and isOccuiped = true)
+     */
     @Test
     public void buildDomeTrue() {
         nextWorkerCell.setLevel(3);
@@ -88,6 +107,9 @@ public class WorkerHephaestusTest {
         assertEquals(true, nextWorkerCell.getIsOccupied());
     }
 
+    /**
+     * checks workerHephaestus can build a block different from a dome on nextWorkerCell
+     */
     @Test
     public void buildNotDome() {
         nextWorkerCell.setLevel(1);
@@ -96,7 +118,9 @@ public class WorkerHephaestusTest {
         assertEquals(2, nextWorkerCell.getLevel());
     }
 
-
+    /**
+     * checks the special power on the nextWorkerCell, knowing workerHephaestus has still built on that cell
+     */
     @Test
     public void buildAgainTrue() {
         nextWorkerCell.setLevel(0);
@@ -107,6 +131,9 @@ public class WorkerHephaestusTest {
 
     }
 
+    /**
+     * checks that workerHephaestus cant'use special power on otherCell because has built on a different cell
+     */
     @Test(expected = IllegalArgumentException.class)
     public void buildAgainFalse() {
         nextWorkerCell.setLevel(0);
@@ -118,6 +145,10 @@ public class WorkerHephaestusTest {
         assertEquals(0, otherCell.getLevel());
     }
 
+    /**
+     * checks that workerHephaestus cant'use special power on nextWorkerCell because
+     * the level of that cell is 3 (workerHephaestus cant' build dome with the special power)
+     */
     @Test(expected = IllegalArgumentException.class)
     public void buildDomeFalse() {
         nextWorkerCell.setLevel(2);

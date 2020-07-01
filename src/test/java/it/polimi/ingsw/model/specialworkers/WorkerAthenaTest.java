@@ -16,6 +16,11 @@ public class WorkerAthenaTest {
     Worker workerOpponent;
     Cell baseWorkerCell, nextWorkerCell, opponentBaseWorkerCell, opponentNextWorkerCell;
 
+
+    /**
+     * sets the game with 2 players and their workers, creates instance of model
+     * then set the current player
+     */
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -35,7 +40,9 @@ public class WorkerAthenaTest {
         opponentNextWorkerCell = Model.getMap().getGrid()[2][1];
     }
 
-
+    /**
+     * check if nextWorkerCell is occupied, workerAthena can't move on nextWorkerCell
+     */
     @Test(expected = IllegalArgumentException.class)
     public void checkMoveFalse() {
         baseWorkerCell.setLevel(0);
@@ -46,6 +53,10 @@ public class WorkerAthenaTest {
         assertEquals(baseWorkerCell,workerAthena.getCurrentWorkerCell());
     }
 
+    /**
+     * check if workerAthena move to a cell with higher level than currentWorkerCell of workerAthena,
+     * CanGoUp is false
+     */
     @Test
     public void checkCanGoUpToFalse() {
         baseWorkerCell.setLevel(0);
@@ -55,6 +66,10 @@ public class WorkerAthenaTest {
         assertFalse(Worker.getCanGoUp());
     }
 
+    /**
+     * checks if workerAthena move to a cell with no higher level than currentWorkerCell of workerAthena,
+     * CanGoUp is true
+     */
     @Test
     public void checkCanGoUpToTrue() {
         baseWorkerCell.setLevel(0);
@@ -64,6 +79,9 @@ public class WorkerAthenaTest {
         assertTrue(Worker.getCanGoUp());
     }
 
+    /**
+     * checks that an opponent worker can't go up if workerAthena previously has go up
+     */
     @Test(expected = IllegalArgumentException.class)
     public void checkOpponentGoUpFalse() {
         baseWorkerCell.setLevel(0);
@@ -79,6 +97,9 @@ public class WorkerAthenaTest {
 
     }
 
+    /**
+     * checks that an opponent worker can go up if workerAthena previously hasn't  go up
+     */
     @Test
     public void checkOpponentGoUpTrue() {
         baseWorkerCell.setLevel(0);
