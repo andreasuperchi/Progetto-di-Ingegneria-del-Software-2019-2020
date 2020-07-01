@@ -14,6 +14,11 @@ public class WorkerAtlasTest {
     WorkerAtlas workerAtlas;
     Cell baseWorkerCell, nextWorkerCell;
 
+    /**
+     * initializes a game with 3 players, assigns to 2 of them Atlas and Pan,
+     * instantiates the model object and sets the player1 as the current player.
+     * Also stores 2 utility cells
+     */
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -33,6 +38,10 @@ public class WorkerAtlasTest {
         workerAtlas.setCurrentWorkerCell(baseWorkerCell);
     }
 
+    /**
+     * checks if the worker uses his special power correctly
+     * (he is building a dome)
+     */
     @Test
     public void testSpecialPower() {
         workerAtlas.specialPower(nextWorkerCell);
@@ -40,6 +49,9 @@ public class WorkerAtlasTest {
         assertTrue(workerAtlas.getHasUsedSpecialPower());
     }
 
+    /**
+     * tests the standard move method
+     */
     @Test
     public void normalMove() {
         workerAtlas.move(nextWorkerCell);
@@ -48,6 +60,10 @@ public class WorkerAtlasTest {
         assertFalse(workerAtlas.getHasUsedSpecialPower());
     }
 
+    /**
+     * tests if the worker behave correctly after having moved
+     * and having used the special power
+     */
     @Test
     public void moveAndSpecialPower() {
         Cell otherCell = Model.getMap().getGrid()[2][4];
@@ -58,12 +74,20 @@ public class WorkerAtlasTest {
         assertTrue(workerAtlas.getHasUsedSpecialPower());
     }
 
+    /**
+     * checks if the worker can't use his special power knowing
+     * that there's a dome on the nextWorkerCell
+     */
     @Test(expected = IllegalArgumentException.class)
     public void cantBuild() {
         nextWorkerCell.setLevel(4);
         workerAtlas.specialPower(nextWorkerCell);
     }
 
+    /**
+     * checks that the worker can use his specialPower after
+     * having moved
+     */
     @Test
     public void cantUseSpecialPower() {
         workerAtlas.move(nextWorkerCell);

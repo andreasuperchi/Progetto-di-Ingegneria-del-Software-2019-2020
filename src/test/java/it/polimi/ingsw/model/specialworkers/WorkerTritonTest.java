@@ -16,6 +16,11 @@ public class WorkerTritonTest {
     WorkerTriton workerTriton;
     Cell baseWorkerCell, nextWorkerCell;
 
+    /**
+     * initialized a game with 3 players, assigns to 2 of them Triton and Pan,
+     * instantiates the model object and sets the player1 as the current player.
+     * Also stores one workerTriton and one workerPan
+     */
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -32,6 +37,10 @@ public class WorkerTritonTest {
         worker = player2.getWorkers()[0];
     }
 
+    /**
+     * checks that the workerTriton doesn't get the flag hasUsedSpecialPower to true
+     * if he doesn't move to a cell that is on the perimeter
+     */
     @Test
     public void checkMultipleMoves() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
@@ -41,6 +50,9 @@ public class WorkerTritonTest {
         assertFalse(player1.getWorkers()[0].getHasUsedSpecialPower());
     }
 
+    /**
+     * checks that the verifyPerimeter method works correctly
+     */
     @Test
     public void notNearPerimeter() {
         baseWorkerCell = Model.getMap().getGrid()[2][2];
@@ -49,8 +61,12 @@ public class WorkerTritonTest {
         assertFalse(workerTriton.verifyPerimeter(nextWorkerCell));
     }
 
+    /**
+     * checks that the workerTriton can't use his specialPower
+     * if he has already moved in the "standard way"
+     */
     @Test
-    public void cantsUseSpecialPower() {
+    public void cantUseSpecialPower() {
         baseWorkerCell = Model.getMap().getGrid()[2][2];
         nextWorkerCell = Model.getMap().getGrid()[1][1];
         workerTriton.setCurrentWorkerCell(baseWorkerCell);
@@ -58,6 +74,10 @@ public class WorkerTritonTest {
         assertFalse(workerTriton.canUseSpecialPower());
     }
 
+    /**
+     * checks that the checkMove method of the workerTriton
+     * does not break the conditions of the "standard movement" action
+     */
     @Test(expected = IllegalArgumentException.class)
     public void negativeCheckMove() {
         baseWorkerCell = Model.getMap().getGrid()[2][2];

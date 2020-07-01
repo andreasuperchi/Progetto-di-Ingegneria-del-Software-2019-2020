@@ -18,6 +18,10 @@ public class WorkerChronusTest {
     Player player1, player2, player3;
     Cell baseWorkerCell, nextWorkerCell;
 
+    /**
+     * initializes a game with 3 players, assigns to 2 of them Chronus and Pan,
+     * instantiates the model object and sets the player1 as the current player.
+     */
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -33,6 +37,10 @@ public class WorkerChronusTest {
         Model.setCurrentPlayer(player1);
     }
 
+    /**
+     * checks that the worker satisfies the win conditions if
+     * there are 5 completed towers on the map (5 domes)
+     */
     @Test
     public void checkIfIWinWithFiveTowers() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
@@ -41,6 +49,9 @@ public class WorkerChronusTest {
         assertTrue(player1.getWorkers()[0].winCondition());
     }
 
+    /**
+     * tests the standard win conditions
+     */
     @Test
     public void checkNormalWinConditions() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];

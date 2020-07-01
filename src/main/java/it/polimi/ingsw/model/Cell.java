@@ -35,7 +35,7 @@ public class Cell {
     }
 
     public void setIsOccupied(boolean occupied) {
-        isOccupied = occupied;
+        this.isOccupied = occupied;
     }
 
     public int getLevel() {

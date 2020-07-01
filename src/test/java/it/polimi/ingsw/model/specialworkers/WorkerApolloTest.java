@@ -15,6 +15,11 @@ public class WorkerApolloTest {
     Worker workerOpponent;
     Cell baseWorkerCell, nextWorkerCell;
 
+    /**
+     * initializes a game with 3 players, assigns to 2 of them Apollo and Triton,
+     * instantiates the model object and sets the player1 as the current player.
+     * Also stores 2 utility cells
+     */
     @Before
     public void setUp() {
         player1 = new Player("Test", 5, "@");
@@ -34,6 +39,11 @@ public class WorkerApolloTest {
         nextWorkerCell = Model.getMap().getGrid()[1][2];
     }
 
+    /**
+     * tests Apollo's move method with another worker (that is not a WorkerApollo)
+     * occupying the nextWorkerCell. also verifies that the two workers are now
+     * switched
+     */
     @Test
     public void checkMoveWithAnotherWorker() {
         workerApollo.setCurrentWorkerCell(baseWorkerCell);
@@ -44,6 +54,10 @@ public class WorkerApolloTest {
         assertTrue(workerApollo.getHasMoved());
     }
 
+    /**
+     * tests Apollo's move method without any other worker occupying the
+     * nextWorkerCell
+     */
     @Test
     public void checkMoveWithoutAnotherWorker() {
         workerApollo.setCurrentWorkerCell(baseWorkerCell);
@@ -52,6 +66,10 @@ public class WorkerApolloTest {
         assertTrue(workerApollo.getHasMoved());
     }
 
+    /**
+     * tests the behaviour of Apollo's methods if the worker
+     * that occupied the nextWorkerCell is another WorkerApollo
+     */
     @Test
     public void checkIfBothWorkersAreMine() {
         Model.getAvailableGods().add(GodName.APOLLO);
@@ -62,6 +80,10 @@ public class WorkerApolloTest {
         assertFalse(workerApollo.getHasMoved());
     }
 
+    /**
+     * tests the case in which the worker can't move (in the nextWorkerCell
+     * there is a dome)
+     */
     @Test(expected = IllegalArgumentException.class)
     public void cantMove() {
         workerApollo.setCurrentWorkerCell(baseWorkerCell);

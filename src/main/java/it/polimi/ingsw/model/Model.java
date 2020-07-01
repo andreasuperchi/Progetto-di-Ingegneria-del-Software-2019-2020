@@ -329,11 +329,10 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     /**
+     * Checks if index is valid, then takes the GodName from Outcome.
+     * Adds the god selected to the arraylist availableGods and removes it from arraylist gods
      *
-     * Check if index is valid, then takes the GodName from Outcome.
-     * Add the god selected to arraylist availableGods and removes from arraylist gods
-     *
-     * @param index is an integer to select the respective god from ArrayList gods in Outcome
+     * @param index is an integer used to select the respective god from ArrayList gods in Outcome
      */
     private void addGod(int index) {
         if (index >= 0 && index <= Outcome.getGods().size()) {
@@ -349,11 +348,11 @@ public class Model extends Observable<Model> implements Cloneable {
 
 
     /**
-     * After player has choose the worker, he has to choose what his worker do, this is done by the switch case:
+     * After the player has choose the worker, he has to choose what his worker is going to do; this is done by a switch case:
      * MOVE or BUILD or USE THE SPECIAL POWER or END TURN
-     * Also set the relative Outcome and the relative turnPhase
+     * Also sets the relative Outcome and the relative turnPhase
      *
-     * @param input is integer that indicates what worker want to do
+     * @param input is an integer that indicates what the worker wants to do
      */
     private void processAction(int input) {
         switch (input) {
@@ -404,7 +403,7 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     /**
-     * This method update the currentPlayer from the arrayList players
+     * This method updates the currentPlayer from the arrayList players
      */
     private void updateCurrentPlayer() {
         if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
@@ -415,8 +414,8 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     /**
-     * This method set to false the variables hasMoved, hasBuild and hasUsedSpecialPower for the next turn of the current player.
-     * than update the current player and checks if he is still in game.
+     * This method sets to false the variables hasMoved, hasBuild and hasUsedSpecialPower for the next turn of the current player.
+     * then updates the current player and checks if he is still in game.
      */
     private void endTurn() {
         currentWorker.setHasBuilt(false);
@@ -434,7 +433,7 @@ public class Model extends Observable<Model> implements Cloneable {
 
     /**
      *
-     * @param input is integer that correspond to a Direction
+     * @param input is integer that corresponds to a Direction
      * @return the direction from the enum class Direction
      */
     private Direction parseDirection(int input) {
@@ -461,8 +460,8 @@ public class Model extends Observable<Model> implements Cloneable {
     }
 
     /**
-     * @param cellNumber is an integer that correspond to a cell
-     * @return the cell from matrix grid in Map class
+     * @param cellNumber is an integer that corresponds to a cell
+     * @return the cell from the matrix grid in Map class
      */
     private Cell parseCell(int cellNumber) {
         switch (cellNumber) {
