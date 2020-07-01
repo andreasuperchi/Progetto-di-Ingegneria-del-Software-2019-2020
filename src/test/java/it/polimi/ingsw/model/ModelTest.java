@@ -1432,6 +1432,63 @@ public class ModelTest {
     }
 
     /**
+     * tests the scenario where a player tries to use a special power of a worker that doesn't have it
+     */
+    @Test
+    public void noSpecialPower() {
+        //scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
+        model.doAction(input);
+        input = new IntChoice(player1, 7);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 4);
+        model.doAction(input);
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        input = new IntChoice(player3, 14);
+        model.doAction(input);
+        input = new IntChoice(player3, 15);
+        model.doAction(input);
+        input = new IntChoice(player1, 20);
+        model.doAction(input);
+        input = new IntChoice(player1, 21);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //scelgo di usare lo specialPower
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+
+
+        assertEquals(Outcome.NO_SPECIAL_POWER, model.getOutcome());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
+        assertEquals(player2, Model.getCurrentPlayer());
+    }
+
+    /**
      * tests the scenario where a player has both of his workers unavailable, so he his
      * skipped during the turn transition
      */
