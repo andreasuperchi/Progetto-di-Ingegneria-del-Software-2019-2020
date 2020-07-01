@@ -19,18 +19,29 @@ public class WorkerArtemisTest {
         workerArtemis.setCurrentWorkerCell(map.getGrid()[2][2]);
     }
 
+    /**
+     * tests the move method of WorkerArtemis
+     */
     @Test
     public void moveTest() {
         workerArtemis.move(map.getGrid()[2][3]);
         assertEquals(map.getGrid()[2][2], workerArtemis.oldPosition);
     }
 
-
+    /**
+     * test the method canUseSpecialPower of WorkerDemeter in the scenario where a player
+     * tries to use the special power before doing a move action
+     */
     @Test
     public void notHasMovedCanUseSpecialPowerTest() {
         assertFalse(workerArtemis.canUseSpecialPower());
     }
 
+
+    /**
+     * test the method canUseSpecialPower of WorkerArtemis in the scenario where a player
+     * tries to use the special power after a build action
+     */
     @Test
     public void hasBuiltCanUseSpecialPower() {
         workerArtemis.move(map.getGrid()[2][3]);
@@ -38,6 +49,11 @@ public class WorkerArtemisTest {
         assertFalse(workerArtemis.canUseSpecialPower());
     }
 
+
+    /**
+     * tests the method canUseSpecialPower of WorkerArtemis in the scenario where a player
+     * already did a move action
+     */
     @Test
     public void canUseSpecialPower() {
         workerArtemis.move(map.getGrid()[2][3]);
@@ -45,6 +61,10 @@ public class WorkerArtemisTest {
     }
 
 
+    /**
+     * test the method specialPower of WorkerArtemis i the scenario where a player
+     * tries to use specialPower in lodPosition cell
+     */
     @Test(expected = IllegalArgumentException.class)
     public void oldPositionSpecialPowerTest() {
         workerArtemis.move(map.getGrid()[2][3]);
@@ -53,6 +73,11 @@ public class WorkerArtemisTest {
         assertTrue(workerArtemis.canUseSpecialPower());
     }
 
+
+    /**
+     * test the method specialPower of WorkerArtemis in the scenario where a player
+     * try to use correctly the special power
+     */
     @Test
     public void specialPowerTest() {
         workerArtemis.move(map.getGrid()[2][3]);

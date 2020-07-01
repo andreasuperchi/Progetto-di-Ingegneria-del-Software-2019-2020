@@ -13,6 +13,9 @@ public class WorkerPanTest {
         workerPan = new WorkerPan();
     }
 
+    /**
+     * tests the additional WorkerPan's win condition
+     */
     @Test
     public void winConditionPanTrue() {
         workerPan.setOldLevel(3);
@@ -20,7 +23,9 @@ public class WorkerPanTest {
         assertTrue(workerPan.winCondition());
     }
 
-
+    /**
+     * tests the generic win conditions
+     */
     @Test
     public void winConditionGenericTrue() {
         workerPan.setOldLevel(2);
@@ -28,6 +33,10 @@ public class WorkerPanTest {
         assertTrue(workerPan.winCondition());
     }
 
+    /**
+     * test the method winCondition in the scenario where
+     * a player doesn't win
+     */
     @Test
     public void winConditionFalse() {
         workerPan.setOldLevel(3);
