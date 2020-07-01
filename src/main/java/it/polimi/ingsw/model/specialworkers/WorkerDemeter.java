@@ -15,7 +15,7 @@ public class WorkerDemeter extends Worker {
     /**
      * Save the position where the worker want to build and call the build method of the super class
      *
-     * @param nextWorkerCell
+     * @param nextWorkerCell is the specified cell
      */
     @Override
     public void build(Cell nextWorkerCell) {
@@ -26,20 +26,16 @@ public class WorkerDemeter extends Worker {
     /**
      * Check if the worker can use his special power
      *
-     * @return
+     * @return true if the worker has both moved and built
      */
     @Override
     public boolean canUseSpecialPower() {
-        if (!hasMoved || !hasBuilt) {
-            return false;
-        } else {
-            return true;
-        }
+        return hasMoved && hasBuilt;
     }
 
 
     /**
-     * Use the special power of the worker that consist in one additional build action. If the nextWorkerCell is equal to oldPosition
+     * Uses the special power of the worker that consists in one additional build action. If the nextWorkerCell is equal to oldPosition
      * throws an IllegalArgumentException
      *
      * @param nextWorkerCell is the Cell where the Worker wants to use his special power

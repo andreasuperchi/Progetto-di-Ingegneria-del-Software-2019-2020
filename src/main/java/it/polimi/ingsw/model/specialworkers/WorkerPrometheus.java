@@ -12,7 +12,7 @@ public class WorkerPrometheus extends Worker {
     }
 
     /**
-     * Call the move method of the super class and set the canGoUp value to true
+     * Calls the move method of the super class and set the canGoUp value to true
      * if it was false
      *
      * @param nextWorkerCell is the Cell where the Worker is going to be moved
@@ -26,21 +26,17 @@ public class WorkerPrometheus extends Worker {
     }
 
     /**
-     * Check if the worker can use his special power
+     * Checks if the worker can use his special power
      *
-     * @return
+     * @return true if the worker hasn't moved yet
      */
     @Override
     public boolean canUseSpecialPower() {
-        if (hasMoved) {
-            return false;
-        } else {
-            return true;
-        }
+        return !hasMoved;
     }
 
     /**
-     * Use the worker specialm power that consist in an additional build action
+     * Uses the worker special power that consist in an additional build action
      * before the move action. This special power does not allow the worker to go up
      *
      * @param nextWorkerCell is the Cell where the Worker wants to use his special power

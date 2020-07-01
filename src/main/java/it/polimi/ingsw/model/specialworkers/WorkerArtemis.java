@@ -15,7 +15,7 @@ public class WorkerArtemis extends Worker {
     }
 
     /**
-     * Save the old position of the Worker and call the move method of the super class
+     * Saves the old position of the Worker and calls the move method of the super-class
      *
      * @param nextWorkerCell is the Cell where the Worker is going to be moved
      */
@@ -26,21 +26,17 @@ public class WorkerArtemis extends Worker {
     }
 
     /**
-     * Check if the worker can use his special power
+     * Checks if the worker can use his special power
      *
-     * @return
+     * @return true if the worker has moved but hasn't built yet
      */
     @Override
     public boolean canUseSpecialPower() {
-        if (!hasMoved || hasBuilt) {
-            return false;
-        } else {
-            return true;
-        }
+        return hasMoved && !hasBuilt;
     }
 
     /**
-     * Use the special power that consist in one additional move action. If nextWorkerCell is equal to oldPosition
+     * Uses the special power that consists in one additional move action. If nextWorkerCell is equal to oldPosition
      * throws an IllegalArgumentException
      *
      * @param nextWorkerCell is the Cell where the Worker wants to use his special power
