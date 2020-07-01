@@ -38,4 +38,16 @@ public class WorkerPrometheusTest {
         workerPrometheus.specialPower(map.getGrid()[2][3]);
         assertFalse(workerPrometheus.getCanGoUp());
     }
+
+    @Test
+    public void cantUseSpecialPower() {
+        workerPrometheus.move(map.getGrid()[2][3]);
+        assertFalse(workerPrometheus.canUseSpecialPower());
+    }
+
+    @Test
+    public void hasMovedCanUseSpecialPower() {
+        workerPrometheus.canUseSpecialPower();
+        assertTrue(workerPrometheus.canUseSpecialPower());
+    }
 }

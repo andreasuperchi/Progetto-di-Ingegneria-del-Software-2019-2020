@@ -24,18 +24,17 @@ public class WorkerDemeterTest {
         assertEquals(map.getGrid()[2][3], workerDemeter.oldBuildPosition);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void notHasBuiltSpecialPowerTest() {
         workerDemeter.move(map.getGrid()[2][3]);
-        workerDemeter.specialPower(map.getGrid()[3][3]);
-        assertFalse(workerDemeter.getHasUsedSpecialPower());
+        assertFalse(workerDemeter.canUseSpecialPower());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void notHasMovedSpecialPowerTest() {
-        workerDemeter.build(map.getGrid()[2][3]);
-        workerDemeter.specialPower(map.getGrid()[3][3]);
-        assertFalse(workerDemeter.getHasUsedSpecialPower());
+    @Test
+    public void caUseSpecialPowerTest() {
+        workerDemeter.move(map.getGrid()[2][3]);
+        workerDemeter.build(map.getGrid()[2][4]);
+        assertTrue(workerDemeter.canUseSpecialPower());
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -27,10 +27,18 @@ public class WorkerHestiaTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void perimetricSpecialPowerTest() {
+    public void perimetricRowSpecialPowerTest() {
         workerHestia.move(map.getGrid()[3][3]);
         workerHestia.build(map.getGrid()[2][3]);
         workerHestia.specialPower(map.getGrid()[4][3]);
+        assertFalse(workerHestia.getHasUsedSpecialPower());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void perimetricColumnSpecialPowerTest() {
+        workerHestia.move(map.getGrid()[3][3]);
+        workerHestia.build(map.getGrid()[2][3]);
+        workerHestia.specialPower(map.getGrid()[3][4]);
         assertFalse(workerHestia.getHasUsedSpecialPower());
     }
 
@@ -46,6 +54,24 @@ public class WorkerHestiaTest {
         workerHestia.move(map.getGrid()[3][3]);
         workerHestia.specialPower(map.getGrid()[4][3]);
         assertFalse(workerHestia.getHasUsedSpecialPower());
+    }
+
+    @Test
+    public void notHasMovedCanUseSpecialPower() {
+        assertFalse(workerHestia.canUseSpecialPower());
+    }
+
+    @Test
+    public void notHasBuiltCanUseSpecialPower() {
+        workerHestia.move(map.getGrid()[3][3]);
+        assertFalse(workerHestia.canUseSpecialPower());
+    }
+
+    @Test
+    public void canUseSpecialPower() {
+        workerHestia.move(map.getGrid()[3][3]);
+        workerHestia.build(map.getGrid()[3][4]);
+        assertTrue(workerHestia.canUseSpecialPower());
     }
 
 }

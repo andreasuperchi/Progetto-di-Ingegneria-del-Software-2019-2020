@@ -26,10 +26,22 @@ public class WorkerArtemisTest {
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
-    public void notHasMovedSpecialPowerTest() {
-        workerArtemis.specialPower(map.getGrid()[2][3]);
-        assertFalse(workerArtemis.getHasUsedSpecialPower());
+    @Test
+    public void notHasMovedCanUseSpecialPowerTest() {
+        assertFalse(workerArtemis.canUseSpecialPower());
+    }
+
+    @Test
+    public void hasBuiltCanUseSpecialPower() {
+        workerArtemis.move(map.getGrid()[2][3]);
+        workerArtemis.build(map.getGrid()[2][4]);
+        assertFalse(workerArtemis.canUseSpecialPower());
+    }
+
+    @Test
+    public void canUseSpecialPower() {
+        workerArtemis.move(map.getGrid()[2][3]);
+        assertTrue(workerArtemis.canUseSpecialPower());
     }
 
 
@@ -38,6 +50,7 @@ public class WorkerArtemisTest {
         workerArtemis.move(map.getGrid()[2][3]);
         workerArtemis.specialPower(map.getGrid()[2][2]);
         assertFalse(workerArtemis.getHasUsedSpecialPower());
+        assertTrue(workerArtemis.canUseSpecialPower());
     }
 
     @Test
