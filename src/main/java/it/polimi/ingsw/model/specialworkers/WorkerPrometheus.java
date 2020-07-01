@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerPrometheus extends Worker {
 
+    /**
+     * builds a new worker using his super-class constructor and sets to sets to true
+     * the special power availability.
+     */
     public WorkerPrometheus() {
         super();
         hasSpecialPower = true;

@@ -4,8 +4,13 @@ import it.polimi.ingsw.model.Worker;
 
 public class WorkerPan extends Worker {
 
+    /**
+     * builds a new worker using his super-class constructor and sets to sets to false
+     * the special power availability. In fact Pan has no special power.
+     */
     public WorkerPan() {
         super();
+        hasSpecialPower = false;
     }
 
 

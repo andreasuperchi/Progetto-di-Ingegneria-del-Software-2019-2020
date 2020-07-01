@@ -8,7 +8,10 @@ import it.polimi.ingsw.model.Worker;
 public class WorkerArtemis extends Worker {
     Cell oldPosition;
 
-
+    /**
+     * builds a new worker using his super-class constructor and sets to sets to true
+     * the special power availability.
+     */
     public WorkerArtemis() {
         super();
         this.hasSpecialPower = true;

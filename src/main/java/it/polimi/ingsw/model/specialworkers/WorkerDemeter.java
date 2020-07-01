@@ -7,6 +7,11 @@ import it.polimi.ingsw.model.Worker;
 public class WorkerDemeter extends Worker {
     Cell oldBuildPosition;
 
+
+    /**
+     * builds a new worker using his super-class constructor and sets to sets to true
+     * the special power availability.
+     */
     public WorkerDemeter() {
         super();
         this.hasSpecialPower = true;

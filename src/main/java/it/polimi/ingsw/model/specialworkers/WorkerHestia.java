@@ -4,6 +4,10 @@ package it.polimi.ingsw.model.specialworkers;
 
 public class WorkerHestia extends Worker {
 
+    /**
+     * builds a new worker using his super-class constructor and sets to sets to true
+     * the special power availability
+     */
     public WorkerHestia() {
         super();
         this.hasSpecialPower = true;
