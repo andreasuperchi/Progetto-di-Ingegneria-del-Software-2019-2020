@@ -11,6 +11,10 @@ public class CellTest {
     Model model;
     Cell cell;
 
+    /**
+     * initializes a game with 3 players and instantiates the model.
+     * also stores an utility cell
+     */
     @Before
     public void setUp() {
         player1 = new Player("Andre", 5, "@");
@@ -24,12 +28,18 @@ public class CellTest {
         cell = Model.getMap().getGrid()[1][2];
     }
 
+    /**
+     * prints a cell with level set to 2
+     */
     @Test
     public void testToStringEmpty() {
         cell.setLevel(2);
         System.out.println(cell.toString());
     }
 
+    /**
+     * prints a cell with level set to 2 and occupied by a worker
+     */
     @Test
     public void testToString() {
         cell.setLevel(2);
@@ -38,6 +48,11 @@ public class CellTest {
         System.out.println(cell.toString());
     }
 
+    /**
+     * verifies that setting a cell level to 4 increments the number
+     * of completed towers and that this cell is going to be occupied
+     * (it won't be possible for a worker to move or build on it)
+     */
     @Test
     public void completeTower() {
         cell.setLevel(4);
@@ -45,6 +60,9 @@ public class CellTest {
         assertEquals(1, Model.getMap().getCompletedTowers());
     }
 
+    /**
+     * prints a cell with level set to 4 (has a dome on it)
+     */
     @Test
     public void toStringCompletedTower() {
         cell.setLevel(4);

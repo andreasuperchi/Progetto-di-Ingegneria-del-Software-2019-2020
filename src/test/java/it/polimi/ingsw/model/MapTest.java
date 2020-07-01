@@ -12,6 +12,10 @@ public class MapTest {
     Player player1, player2, player3;
     Worker worker;
 
+    /**
+     * initializes a game with 3 players and instantiates the model.
+     * also stores an utility worker
+     */
     @Before
     public void setUp() {
         player1 = new Player("Andre", 5, "@");
@@ -25,6 +29,10 @@ public class MapTest {
         worker = new Worker();
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the north direction in this case)
+     */
     @Test
     public void northTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -33,6 +41,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the south direction in this case)
+     */
     @Test
     public void southTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -41,6 +53,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the east direction in this case)
+     */
     @Test
     public void eastTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -49,6 +65,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the west direction in this case)
+     */
     @Test
     public void westTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -57,6 +77,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the northEast direction in this case)
+     */
     @Test
     public void northEastTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -65,6 +89,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the northWest direction in this case)
+     */
     @Test
     public void northWestTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -73,6 +101,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the southEast direction in this case)
+     */
     @Test
     public void southEastTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -81,6 +113,10 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the method getNextWorkerCell works correctly
+     * (returns a cell in the southWest direction in this case)
+     */
     @Test
     public void southWestTest() {
         Cell cell = Model.getMap().getGrid()[2][2];
@@ -89,12 +125,20 @@ public class MapTest {
         assertEquals(nextCell, cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the north direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullNorthTest() {
         Cell cell = Model.getMap().getGrid()[0][2];
         Model.getMap().getNextWorkerCell(cell, Direction.NORTH);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the south direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullSouthTest() {
         Cell cell = Model.getMap().getGrid()[4][2];
@@ -102,6 +146,10 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the east direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullEastTest() {
         Cell cell = Model.getMap().getGrid()[2][4];
@@ -109,6 +157,10 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the west direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullWestTest() {
         Cell cell = Model.getMap().getGrid()[2][0];
@@ -116,6 +168,10 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the northEast direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullNorthEastTest() {
         Cell cell = Model.getMap().getGrid()[0][4];
@@ -123,6 +179,10 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the northWest direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullNorthWestTest() {
         Cell cell = Model.getMap().getGrid()[0][0];
@@ -130,6 +190,10 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the southEast direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullSouthEastTest() {
         Cell cell = Model.getMap().getGrid()[4][4];
@@ -137,6 +201,10 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * checks that the getNextWorkerCell throws an IllegalArgumentException
+     * if we try to retrieve a cell out of the map in the southWest direction
+     */
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void nullSouthWestTest() {
         Cell cell = Model.getMap().getGrid()[4][0];
@@ -144,6 +212,9 @@ public class MapTest {
         assertNull(cell);
     }
 
+    /**
+     * prints out the initial map with a worker in it
+     */
     @Test
     public void testInitialMap() {
         System.out.println(Model.getMap().showInitialMap());
@@ -152,6 +223,9 @@ public class MapTest {
         System.out.println("\n\n\n\n" + Model.getMap().showInitialMap());
     }
 
+    /**
+     * prints out the map with various levels and with 2 workers
+     */
     @Test
     public void testToString() {
         player1.setWorkers(GodName.APOLLO);

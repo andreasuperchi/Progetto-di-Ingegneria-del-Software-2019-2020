@@ -715,7 +715,6 @@ public class ModelTest {
         Model.getMap().getGrid()[0][0].setLevel(2);
         Model.getMap().getGrid()[0][1].setLevel(3);
 
-
         input = new IntChoice(player1, 11);
         model.doAction(input);
         input = new IntChoice(player1, 7);

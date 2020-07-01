@@ -19,11 +19,22 @@ public class Connection extends Observable<Integer> implements ClientConnection,
         return active;
     }
 
+    /**
+     * creates a connection based on the server and the socket that are specified
+     *
+     * @param socket is the socket to whom the connection is going to link
+     * @param server is the server to whom the connection is going to link
+     */
     public Connection(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
     }
 
+    /**
+     * sends a message to the client
+     *
+     * @param message
+     */
     private synchronized void send(Object message) {
         try {
             out.reset();

@@ -17,6 +17,10 @@ public class ControllerTest {
     IntChoice intChoice;
     Player player;
 
+    /**
+     * initializes a game with 3 players and instantiates the model and the controller.
+     * also creates an intChoice to be processed
+     */
     @Before
     public void setUp() {
         Player player1 = new Player("Andre", 5, "@");
@@ -32,6 +36,9 @@ public class ControllerTest {
         intChoice = new IntChoice(player, 4);
     }
 
+    /**
+     * checks that the choice processing works correctly
+     */
     @Test
     public void doActionTest() {
         Model.setCurrentPlayer(player);
