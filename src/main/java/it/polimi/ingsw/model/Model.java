@@ -243,8 +243,10 @@ public class Model extends Observable<Model> implements Cloneable {
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
                         outcome = Outcome.DIRECTION_ERROR;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     }
                     break;
 

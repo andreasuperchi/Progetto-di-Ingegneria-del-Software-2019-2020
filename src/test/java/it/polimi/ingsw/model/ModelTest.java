@@ -1197,4 +1197,294 @@ public class ModelTest {
         assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
         assertEquals(player2, Model.getCurrentPlayer());
     }
+
+    @Test
+    public void specialPowerTest() {
+        //scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
+        model.doAction(input);
+        input = new IntChoice(player1, 7);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //scelgo di usare lo specialPower
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //uso lo specialPower
+        input = new IntChoice(player2, 7);
+        model.doAction(input);
+
+        assertEquals(Outcome.ACTION_MENU, model.getOutcome());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
+        assertEquals(player2, Model.getCurrentPlayer());
+    }
+
+
+    @Test
+    public void outOfMapSpecialPowerTest() {
+        //scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
+        model.doAction(input);
+        input = new IntChoice(player1, 7);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //scelgo di usare lo specialPower
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //uso lo specialPower
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+
+        assertEquals(Outcome.OUT_OF_MAP, model.getOutcome());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
+        assertEquals(player2, Model.getCurrentPlayer());
+    }
+
+
+    @Test
+    public void wrongDirectionSpecialPowerTest() {
+        //scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
+        model.doAction(input);
+        input = new IntChoice(player1, 7);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //scelgo di usare lo specialPower
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //uso lo specialPower
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+
+        assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
+        assertEquals(player2, Model.getCurrentPlayer());
+    }
+
+    @Test
+    public void doubleUseSpecialPowerTest() {
+        //scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
+        model.doAction(input);
+        input = new IntChoice(player1, 7);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //scelgo di usare lo specialPower
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //uso lo specialPower
+        input = new IntChoice(player2, 7);
+        model.doAction(input);
+        //provo ad usare di nuovo lo special power
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+
+
+        assertEquals(Outcome.USED_SPECIAL_POWER, model.getOutcome());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
+        assertEquals(player2, Model.getCurrentPlayer());
+    }
+
+    @Test
+    public void gameOverTest() {
+        //scelta degli dèi in gioco
+        input = new IntChoice(player1, 11);
+        model.doAction(input);
+        input = new IntChoice(player1, 7);
+        model.doAction(input);
+        input = new IntChoice(player1, 2);
+        model.doAction(input);
+        //scelta di un dio per ogni giocatore
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        input = new IntChoice(player3, 1);
+        model.doAction(input);
+        input = new IntChoice(player1, 1);
+        model.doAction(input);
+        //piazzamento worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        input = new IntChoice(player2, 13);
+        model.doAction(input);
+        input = new IntChoice(player3, 10);
+        model.doAction(input);
+        input = new IntChoice(player3, 21);
+        model.doAction(input);
+        input = new IntChoice(player1, 3);
+        model.doAction(input);
+        input = new IntChoice(player1, 22);
+        model.doAction(input);
+
+        player3.setIsInGame(false);
+
+        //scelta del worker
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //scelgo di muovere
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+        //muovo
+        input = new IntChoice(player2, 3);
+        model.doAction(input);
+        //scelgo di costruire
+        input = new IntChoice(player2, 2);
+        model.doAction(input);
+        //costruisco
+        input = new IntChoice(player2, 5);
+        model.doAction(input);
+        //vado all'end turn
+        input = new IntChoice(player2, 4);
+        model.doAction(input);
+        //confermo end turn
+        input = new IntChoice(player2, 1);
+        model.doAction(input);
+
+
+        assertEquals(Outcome.WORKER_MENU, model.getOutcome());
+        assertEquals(Model.turnPhase.WORKER_CHOICE, model.getCurrentPhase());
+        assertEquals(player1, Model.getCurrentPlayer());
+    }
 }
