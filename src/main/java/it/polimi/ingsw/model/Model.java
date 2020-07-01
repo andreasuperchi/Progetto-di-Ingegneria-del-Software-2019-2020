@@ -280,7 +280,8 @@ public class Model extends Observable<Model> implements Cloneable {
                             outcome = Outcome.ACTION_MENU;
                         }
                     } else {
-                        outcome = Outcome.DIRECTION_ERROR;
+                        outcome = Outcome.PROCESS_ACTION_ERROR;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     }
                     break;
 
