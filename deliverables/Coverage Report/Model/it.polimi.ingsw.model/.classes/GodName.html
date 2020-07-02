@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GodName</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GodName (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GodName</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96,7%
+  </span>
+  <span class="absValue">
+    (29/ 30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GodName$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96,8%
+  </span>
+  <span class="absValue">
+    (30/ 31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.model.specialworkers.*;
+<i>4</i>&nbsp;
+<b class="fc"><i>5</i>&nbsp;public enum GodName {</b>
+<b class="fc"><i>6</i>&nbsp;    APOLLO,</b>
+<b class="fc"><i>7</i>&nbsp;    ARTEMIS,</b>
+<b class="fc"><i>8</i>&nbsp;    ATHENA,</b>
+<b class="fc"><i>9</i>&nbsp;    ATLAS,</b>
+<b class="fc"><i>10</i>&nbsp;    CHARON,</b>
+<b class="fc"><i>11</i>&nbsp;    CHRONUS,</b>
+<b class="fc"><i>12</i>&nbsp;    DEMETER,</b>
+<b class="fc"><i>13</i>&nbsp;    HEPHAESTUS,</b>
+<b class="fc"><i>14</i>&nbsp;    HESTIA,</b>
+<b class="fc"><i>15</i>&nbsp;    MINOTAUR,</b>
+<b class="fc"><i>16</i>&nbsp;    PAN,</b>
+<b class="fc"><i>17</i>&nbsp;    PROMETHEUS,</b>
+<b class="fc"><i>18</i>&nbsp;    TRITON;</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * Parses the god, received as String, to the corresponding enum value
+<i>22</i>&nbsp;     *
+<i>23</i>&nbsp;     * @param input is the name of a God, received as a String
+<i>24</i>&nbsp;     * @return an enum value representing the specified god
+<i>25</i>&nbsp;     */
+<i>26</i>&nbsp;    public static GodName parseInput(String input) {
+<b class="fc"><i>27</i>&nbsp;        return Enum.valueOf(GodName.class, input.toUpperCase());</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * creates the workers associated to this god
+<i>32</i>&nbsp;     *
+<i>33</i>&nbsp;     * @return a worker of the type of this god
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    public Worker parseGod() {
+<b class="fc"><i>36</i>&nbsp;        switch (this) {</b>
+<i>37</i>&nbsp;            case APOLLO:
+<b class="fc"><i>38</i>&nbsp;                return new WorkerApollo();</b>
+<i>39</i>&nbsp;            case ARTEMIS:
+<b class="fc"><i>40</i>&nbsp;                return new WorkerArtemis();</b>
+<i>41</i>&nbsp;            case ATHENA:
+<b class="fc"><i>42</i>&nbsp;                return new WorkerAthena();</b>
+<i>43</i>&nbsp;            case ATLAS:
+<b class="fc"><i>44</i>&nbsp;                return new WorkerAtlas();</b>
+<i>45</i>&nbsp;            case CHARON:
+<b class="fc"><i>46</i>&nbsp;                return new WorkerCharon();</b>
+<i>47</i>&nbsp;            case CHRONUS:
+<b class="fc"><i>48</i>&nbsp;                return new WorkerChronus();</b>
+<i>49</i>&nbsp;            case DEMETER:
+<b class="fc"><i>50</i>&nbsp;                return new WorkerDemeter();</b>
+<i>51</i>&nbsp;            case HEPHAESTUS:
+<b class="fc"><i>52</i>&nbsp;                return new WorkerHephaestus();</b>
+<i>53</i>&nbsp;            case HESTIA:
+<b class="fc"><i>54</i>&nbsp;                return new WorkerHestia();</b>
+<i>55</i>&nbsp;            case MINOTAUR:
+<b class="fc"><i>56</i>&nbsp;                return new WorkerMinotaur();</b>
+<i>57</i>&nbsp;            case PAN:
+<b class="fc"><i>58</i>&nbsp;                return new WorkerPan();</b>
+<i>59</i>&nbsp;            case PROMETHEUS:
+<b class="fc"><i>60</i>&nbsp;                return new WorkerPrometheus();</b>
+<i>61</i>&nbsp;            case TRITON:
+<b class="fc"><i>62</i>&nbsp;                return new WorkerTriton();</b>
+<i>63</i>&nbsp;            default:
+<b class="nc"><i>64</i>&nbsp;                throw new IllegalArgumentException(&quot;Unexpected God!&quot;);</b>
+<i>65</i>&nbsp;        }
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 17:53</div>
+</div>
+</body>
+</html>

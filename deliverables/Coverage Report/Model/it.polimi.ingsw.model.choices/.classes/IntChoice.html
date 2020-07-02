@@ -1,0 +1,106 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: IntChoice</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model.choices</a> ]
+</div>
+
+<h1>Coverage Summary for Class: IntChoice (it.polimi.ingsw.model.choices)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IntChoice</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model.choices;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.model.Player;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class IntChoice extends Choice {
+<i>6</i>&nbsp;    private final int value;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;    /**
+<i>9</i>&nbsp;     * builds and intChoice that associates an integer value with the player
+<i>10</i>&nbsp;     * that typed in the value
+<i>11</i>&nbsp;     *
+<i>12</i>&nbsp;     * @param player is the player that made the action
+<i>13</i>&nbsp;     * @param value  is the value typed in by the player (in the client side)
+<i>14</i>&nbsp;     */
+<b class="fc"><i>15</i>&nbsp;    public IntChoice(Player player, int value) {</b>
+<b class="fc"><i>16</i>&nbsp;        this.player = player;</b>
+<b class="fc"><i>17</i>&nbsp;        this.value = value;</b>
+<b class="fc"><i>18</i>&nbsp;    }</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public int getValue() {
+<b class="fc"><i>21</i>&nbsp;        return value;</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 17:53</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WorkerMinotaur</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model.specialworkers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WorkerMinotaur (it.polimi.ingsw.model.specialworkers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WorkerMinotaur</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (41/ 41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model.specialworkers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.model.*;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class WorkerMinotaur extends Worker {
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    /**
+<i>8</i>&nbsp;     * builds a new WorkerMinotaur using its super-class constructor
+<i>9</i>&nbsp;     * and setting the availability of the special power to false
+<i>10</i>&nbsp;     * (Minotaur has no special power)
+<i>11</i>&nbsp;     */
+<i>12</i>&nbsp;    public WorkerMinotaur() {
+<b class="fc"><i>13</i>&nbsp;        super();</b>
+<b class="fc"><i>14</i>&nbsp;        hasSpecialPower = false;</b>
+<b class="fc"><i>15</i>&nbsp;    }</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    /**
+<i>18</i>&nbsp;     * check if the specified cell is occupied by another WorkerMinotaur
+<i>19</i>&nbsp;     *
+<i>20</i>&nbsp;     * @param opponentsCell is the cell that is going to be checked
+<i>21</i>&nbsp;     * @return true if the specified cell is not occupied by another WorkerMinotaur
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    public boolean checkNotBothMinotaurs(Cell opponentsCell) {
+<b class="fc"><i>24</i>&nbsp;        return !(opponentsCell.getThisWorker() instanceof WorkerMinotaur);</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * overrides its super-class method removing the bond of having the specified
+<i>29</i>&nbsp;     * cell occupied by a worker
+<i>30</i>&nbsp;     *
+<i>31</i>&nbsp;     * @param currentWorkerCell is the Cell where the Worker is going to be placed
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public void setCurrentWorkerCell(Cell currentWorkerCell) {
+<b class="fc"><i>35</i>&nbsp;        if (currentWorkerCell.getLevel() == 4) {</b>
+<b class="fc"><i>36</i>&nbsp;            throw new IllegalArgumentException();</b>
+<i>37</i>&nbsp;        } else {
+<b class="fc"><i>38</i>&nbsp;            currentWorkerCell.setIsOccupied(true);</b>
+<b class="fc"><i>39</i>&nbsp;            currentWorkerCell.setThisWorker(this);</b>
+<b class="fc"><i>40</i>&nbsp;            this.currentWorkerCell = currentWorkerCell;</b>
+<i>41</i>&nbsp;        }
+<b class="fc"><i>42</i>&nbsp;    }</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * retrieves the next cell on the line that passes through the two specified cells
+<i>46</i>&nbsp;     *
+<i>47</i>&nbsp;     * @param baseWorkerCell is the first specified cell (it&#39;s the current cell of the worker)
+<i>48</i>&nbsp;     * @param nextWorkerCell is the second specified cell (it&#39;s the cell specified for the movement action)
+<i>49</i>&nbsp;     * @return the cell where, if the nextWorkerCell is occupied, the worker that occupies the nextWorkerCell
+<i>50</i>&nbsp;     * is going to be moved
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    public Cell getCellInThatDirection(Cell baseWorkerCell, Cell nextWorkerCell) {  //restituisce la cella successiva a nextWorkerCell nella Direzione scelta
+<b class="fc"><i>53</i>&nbsp;        int[] cellsDifference = new int[2];</b>
+<b class="fc"><i>54</i>&nbsp;        cellsDifference[0] = baseWorkerCell.getRowNumber() - nextWorkerCell.getRowNumber();</b>
+<b class="fc"><i>55</i>&nbsp;        cellsDifference[1] = baseWorkerCell.getColumnNumber() - nextWorkerCell.getColumnNumber();</b>
+<b class="fc"><i>56</i>&nbsp;        if (cellsDifference[0] == 0 &amp;&amp; cellsDifference[1] == 0) {</b>
+<b class="fc"><i>57</i>&nbsp;            throw new IllegalArgumentException();</b>
+<i>58</i>&nbsp;        } else {
+<b class="fc"><i>59</i>&nbsp;            if (cellsDifference[0] == 1 &amp;&amp; cellsDifference[1] == -1) {</b>
+<b class="fc"><i>60</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.NORTH_EAST);</b>
+<b class="fc"><i>61</i>&nbsp;            } else if (cellsDifference[0] == 0 &amp;&amp; cellsDifference[1] == -1) {</b>
+<b class="fc"><i>62</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.EAST);</b>
+<b class="fc"><i>63</i>&nbsp;            } else if (cellsDifference[0] == -1 &amp;&amp; cellsDifference[1] == -1) {</b>
+<b class="fc"><i>64</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.SOUTH_EAST);</b>
+<b class="fc"><i>65</i>&nbsp;            } else if (cellsDifference[0] == -1 &amp;&amp; cellsDifference[1] == 0) {</b>
+<b class="fc"><i>66</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.SOUTH);</b>
+<b class="fc"><i>67</i>&nbsp;            } else if (cellsDifference[0] == -1 &amp;&amp; cellsDifference[1] == 1) {</b>
+<b class="fc"><i>68</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.SOUTH_WEST);</b>
+<b class="fc"><i>69</i>&nbsp;            } else if (cellsDifference[0] == 0 &amp;&amp; cellsDifference[1] == 1) {</b>
+<b class="fc"><i>70</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.WEST);</b>
+<b class="fc"><i>71</i>&nbsp;            } else if (cellsDifference[0] == 1 &amp;&amp; cellsDifference[1] == 1) {</b>
+<b class="fc"><i>72</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.NORTH_WEST);</b>
+<i>73</i>&nbsp;            } else {
+<b class="fc"><i>74</i>&nbsp;                return Model.getMap().getNextWorkerCell(nextWorkerCell, Direction.NORTH);</b>
+<i>75</i>&nbsp;            }
+<i>76</i>&nbsp;        }
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    /**
+<i>80</i>&nbsp;     * checks if this worker can move to the specified cell. Compared to its super-class method,
+<i>81</i>&nbsp;     * this one hasn&#39;t got the bond of having the cell not occupied
+<i>82</i>&nbsp;     *
+<i>83</i>&nbsp;     * @param nextWorkerCell is the Cell where the Worker wants to move
+<i>84</i>&nbsp;     * @return true if the worker can move to the specified cell, meaning that the maximum level
+<i>85</i>&nbsp;     * difference between the starting cell and the specified cell is 1, that the specified cell
+<i>86</i>&nbsp;     * is not the starting cell, that the cell is not occupied by another WorkerApollo and that the
+<i>87</i>&nbsp;     * cell is not at level 4
+<i>88</i>&nbsp;     */
+<i>89</i>&nbsp;    @Override
+<i>90</i>&nbsp;    public boolean checkMove(Cell nextWorkerCell) {
+<b class="fc"><i>91</i>&nbsp;        int levelDiff = nextWorkerCell.getLevel() - this.getCurrentWorkerCell().getLevel();</b>
+<i>92</i>&nbsp;
+<b class="fc"><i>93</i>&nbsp;        return !(this.getCurrentWorkerCell().equals(nextWorkerCell)) &amp;&amp;</b>
+<b class="fc"><i>94</i>&nbsp;                ((nextWorkerCell.getLevel() != 4 &amp;&amp; levelDiff &lt;= 0 &amp;&amp; checkNotBothMinotaurs(nextWorkerCell)) ||</b>
+<b class="fc"><i>95</i>&nbsp;                        (nextWorkerCell.getLevel() != 4 &amp;&amp; levelDiff == 1 &amp;&amp; canGoUp &amp;&amp; checkNotBothMinotaurs(nextWorkerCell)));</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    /**
+<i>99</i>&nbsp;     * if the nextWorkerCell is empty calls the move method of the super-class, &quot;forces back&quot;
+<i>100</i>&nbsp;     * the worker that occupies the nextWorkerCell otherwise
+<i>101</i>&nbsp;     *
+<i>102</i>&nbsp;     * @param nextWorkerCell is the Cell where the Worker is going to be moved
+<i>103</i>&nbsp;     */
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public void move(Cell nextWorkerCell) {
+<b class="fc"><i>106</i>&nbsp;        Cell otherCell = getCellInThatDirection(this.currentWorkerCell, nextWorkerCell);</b>
+<i>107</i>&nbsp;
+<b class="fc"><i>108</i>&nbsp;        if (!checkMove(nextWorkerCell)) {</b>
+<b class="fc"><i>109</i>&nbsp;            throw new IllegalArgumentException();</b>
+<i>110</i>&nbsp;        } else {
+<b class="fc"><i>111</i>&nbsp;            if (nextWorkerCell.getIsOccupied() &amp;&amp; !otherCell.getIsOccupied()) {</b>
+<b class="fc"><i>112</i>&nbsp;                nextWorkerCell.getThisWorker().setCurrentWorkerCell(otherCell);</b>
+<i>113</i>&nbsp;            }
+<b class="fc"><i>114</i>&nbsp;            super.move(nextWorkerCell);</b>
+<i>115</i>&nbsp;        }
+<b class="fc"><i>116</i>&nbsp;    }</b>
+<i>117</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 17:53</div>
+</div>
+</body>
+</html>

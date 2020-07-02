@@ -62,6 +62,7 @@ public class Server {
         } else {
             playingConnection.clear();
             waitingConnection.clear();
+            numberOfPlayers = 0;
         }
     }
 

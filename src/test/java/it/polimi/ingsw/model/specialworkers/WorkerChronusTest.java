@@ -16,6 +16,7 @@ public class WorkerChronusTest {
 
     Model model;
     Player player1, player2, player3;
+    WorkerChronus workerChronus;
     Cell baseWorkerCell, nextWorkerCell;
 
     /**
@@ -35,6 +36,7 @@ public class WorkerChronusTest {
         player1.setWorkers(GodName.CHRONUS);
         player2.setWorkers(GodName.PAN);
         Model.setCurrentPlayer(player1);
+        workerChronus = (WorkerChronus) player1.getWorkers()[0];
     }
 
     /**
@@ -44,7 +46,7 @@ public class WorkerChronusTest {
     @Test
     public void checkIfIWinWithFiveTowers() {
         baseWorkerCell = Model.getMap().getGrid()[1][1];
-        player1.getWorkers()[0].setCurrentWorkerCell(baseWorkerCell);
+        workerChronus.setCurrentWorkerCell(baseWorkerCell);
         Model.getMap().setCompletedTowers(5);
         assertTrue(player1.getWorkers()[0].winCondition());
     }
@@ -58,8 +60,8 @@ public class WorkerChronusTest {
         nextWorkerCell = Model.getMap().getGrid()[1][2];
         baseWorkerCell.setLevel(2);
         nextWorkerCell.setLevel(3);
-        player1.getWorkers()[0].setCurrentWorkerCell(baseWorkerCell);
-        player1.getWorkers()[0].move(nextWorkerCell);
-        assertTrue(player1.getWorkers()[0].winCondition());
+        workerChronus.setCurrentWorkerCell(baseWorkerCell);
+        workerChronus.move(nextWorkerCell);
+        assertTrue(workerChronus.winCondition());
     }
 }

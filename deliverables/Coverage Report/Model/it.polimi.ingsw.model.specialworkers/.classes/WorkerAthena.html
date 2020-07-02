@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WorkerAthena</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model.specialworkers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WorkerAthena (it.polimi.ingsw.model.specialworkers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WorkerAthena</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model.specialworkers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.model.Cell;
+<i>4</i>&nbsp;import it.polimi.ingsw.model.Player;
+<i>5</i>&nbsp;import it.polimi.ingsw.model.Worker;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class WorkerAthena extends Worker {
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    /**
+<i>10</i>&nbsp;     * Builds a new worker using his super-class constructor and sets to false
+<i>11</i>&nbsp;     * the special power availability.
+<i>12</i>&nbsp;     */
+<i>13</i>&nbsp;    public WorkerAthena() {
+<b class="fc"><i>14</i>&nbsp;        super();</b>
+<b class="fc"><i>15</i>&nbsp;        hasSpecialPower = false;</b>
+<b class="fc"><i>16</i>&nbsp;    }</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * Do the Override of move from the class Worker.
+<i>21</i>&nbsp;     * add the following condition:
+<i>22</i>&nbsp;     * if worker Athena is go up, the others workers can&#39;t go up in their turn.
+<i>23</i>&nbsp;     *
+<i>24</i>&nbsp;     * @param nextWorkerCell is the Cell where the Worker is going to be moved
+<i>25</i>&nbsp;     */
+<i>26</i>&nbsp;    @Override
+<i>27</i>&nbsp;    public void move(Cell nextWorkerCell) {
+<b class="fc"><i>28</i>&nbsp;        setCanGoUp(true);                       // setto canGoUp a true per tutti</b>
+<i>29</i>&nbsp;
+<b class="fc"><i>30</i>&nbsp;        if (!checkMove(nextWorkerCell)) {</b>
+<b class="fc"><i>31</i>&nbsp;            throw new IllegalArgumentException();</b>
+<i>32</i>&nbsp;        } else {
+<b class="fc"><i>33</i>&nbsp;            oldLevel = getCurrentWorkerCell().getLevel();</b>
+<b class="fc"><i>34</i>&nbsp;            getCurrentWorkerCell().setIsOccupied(false);</b>
+<b class="fc"><i>35</i>&nbsp;            getCurrentWorkerCell().setThisWorker(null);</b>
+<b class="fc"><i>36</i>&nbsp;            setCurrentWorkerCell(nextWorkerCell);</b>
+<b class="fc"><i>37</i>&nbsp;            newLevel = getCurrentWorkerCell().getLevel();</b>
+<b class="fc"><i>38</i>&nbsp;            getCurrentWorkerCell().setIsOccupied(true);</b>
+<b class="fc"><i>39</i>&nbsp;            this.hasMoved = true;</b>
+<i>40</i>&nbsp;        }
+<i>41</i>&nbsp;        //se WorkerAthena è salito dico che gli avversari non potranno salire nei loro turni
+<b class="fc"><i>42</i>&nbsp;        if (getNewLevel() &gt; getOldLevel()) {</b>
+<b class="fc"><i>43</i>&nbsp;            setCanGoUp(false);</b>
+<b class="fc"><i>44</i>&nbsp;            hasUsedSpecialPower = true;</b>
+<i>45</i>&nbsp;        }
+<i>46</i>&nbsp;
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 17:53</div>
+</div>
+</body>
+</html>

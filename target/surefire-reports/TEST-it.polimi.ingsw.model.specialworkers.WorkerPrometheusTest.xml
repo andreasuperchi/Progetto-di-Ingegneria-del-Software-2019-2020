@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IT"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-14.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\Andrew\AppData\Local\Temp\surefire11470897677430206414\surefirebooter647891425933370874.jar C:\Users\Andrew\AppData\Local\Temp\surefire11470897677430206414 2020-07-02T11-47-04_455-jvmRun1 surefire17610766667257042131tmp surefire_07814586046922638441tmp"/>
+    <property name="sun.java.command" value="C:\Users\Andrew\AppData\Local\Temp\surefire1916550594337223361\surefirebooter17942587937733301980.jar C:\Users\Andrew\AppData\Local\Temp\surefire1916550594337223361 2020-07-02T17-55-20_237-jvmRun1 surefire8287344656064770669tmp surefire_010196290220909375557tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Andrew\Desktop\ing-sw-2020-superchi-zito-parato\target\test-classes;C:\Users\Andrew\Desktop\ing-sw-2020-superchi-zito-parato\target\classes;C:\Users\Andrew\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Andrew\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="idea.version2020.1.2" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\Andrew\AppData\Local\Temp\surefire11470897677430206414\surefirebooter647891425933370874.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Andrew\AppData\Local\Temp\surefire1916550594337223361\surefirebooter17942587937733301980.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="14.0.1+7"/>
@@ -58,7 +58,7 @@
   </properties>
   <testcase name="canUseSpecialPower" classname="it.polimi.ingsw.model.specialworkers.WorkerPrometheusTest" time="0"/>
   <testcase name="specialPower" classname="it.polimi.ingsw.model.specialworkers.WorkerPrometheusTest" time="0"/>
-  <testcase name="cantUseSpecialPower" classname="it.polimi.ingsw.model.specialworkers.WorkerPrometheusTest" time="0"/>
+  <testcase name="cantUseSpecialPower" classname="it.polimi.ingsw.model.specialworkers.WorkerPrometheusTest" time="0.001"/>
   <testcase name="moveAfterSpecialPower" classname="it.polimi.ingsw.model.specialworkers.WorkerPrometheusTest" time="0"/>
   <testcase name="upMoveAfterSpecialPower" classname="it.polimi.ingsw.model.specialworkers.WorkerPrometheusTest" time="0"/>
 </testsuite>

@@ -41,7 +41,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
             out.writeObject(message);
             out.flush();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Unexpected Client disconnection!");
         }
     }
 
@@ -121,7 +121,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
                 notify(intValue);
             }
         } catch (IOException | NoSuchElementException e) {
-            System.err.println("Error! " + e.getMessage());
+            System.err.println("Input line not found!");
         } finally {
             close();
         }

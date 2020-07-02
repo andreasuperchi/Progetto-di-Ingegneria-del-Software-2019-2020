@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WorkerTriton</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model.specialworkers</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WorkerTriton (it.polimi.ingsw.model.specialworkers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WorkerTriton</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/ 21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model.specialworkers;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.model.*;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class WorkerTriton extends Worker {
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    /**
+<i>8</i>&nbsp;     * builds a new WorkerTriton using its super-class constructor and
+<i>9</i>&nbsp;     * setting the availability of the special power to true and setting
+<i>10</i>&nbsp;     * the fact that this special power hasn&#39;t been used yet
+<i>11</i>&nbsp;     */
+<i>12</i>&nbsp;    public WorkerTriton() {
+<b class="fc"><i>13</i>&nbsp;        super();</b>
+<b class="fc"><i>14</i>&nbsp;        hasSpecialPower = true;</b>
+<b class="fc"><i>15</i>&nbsp;        hasUsedSpecialPower = false;</b>
+<b class="fc"><i>16</i>&nbsp;    }</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     * verifies if the nextWorkerCell is a cell on the perimeter
+<i>20</i>&nbsp;     *
+<i>21</i>&nbsp;     * @param nextWorkerCell is the cell that is going to be analyzed
+<i>22</i>&nbsp;     * @return true if the specified cell in on the perimeter
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    public boolean verifyPerimeter(Cell nextWorkerCell) {
+<b class="fc"><i>25</i>&nbsp;        for (Direction d : Direction.values()) {</b>
+<i>26</i>&nbsp;            try {
+<b class="fc"><i>27</i>&nbsp;                Model.getMap().getNextWorkerCell(nextWorkerCell, d);</b>
+<b class="fc"><i>28</i>&nbsp;            } catch (ArrayIndexOutOfBoundsException e) {</b>
+<b class="fc"><i>29</i>&nbsp;                return true;</b>
+<b class="fc"><i>30</i>&nbsp;            }</b>
+<i>31</i>&nbsp;        }
+<b class="fc"><i>32</i>&nbsp;        return false;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * checks if this worker can use his special power
+<i>37</i>&nbsp;     *
+<i>38</i>&nbsp;     * @return true if this worker hasn&#39;t moved yet
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    @Override
+<i>41</i>&nbsp;    public boolean canUseSpecialPower() {
+<b class="fc"><i>42</i>&nbsp;        return !hasMoved;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    /**
+<i>46</i>&nbsp;     * does the exact same thing of its super-class method, but sets to false
+<i>47</i>&nbsp;     * the flag hasUsedSpecialPower if the nextWorkerCell is on the perimeter of the board
+<i>48</i>&nbsp;     *
+<i>49</i>&nbsp;     * @param nextWorkerCell is the Cell where the Worker wants to use his special power
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public void specialPower(Cell nextWorkerCell) {
+<b class="fc"><i>53</i>&nbsp;        if (!checkMove(nextWorkerCell)) {</b>
+<b class="fc"><i>54</i>&nbsp;            throw new IllegalArgumentException();</b>
+<i>55</i>&nbsp;        } else {
+<b class="fc"><i>56</i>&nbsp;            oldLevel = getCurrentWorkerCell().getLevel();</b>
+<b class="fc"><i>57</i>&nbsp;            getCurrentWorkerCell().setIsOccupied(false);</b>
+<b class="fc"><i>58</i>&nbsp;            setCurrentWorkerCell(nextWorkerCell);</b>
+<b class="fc"><i>59</i>&nbsp;            newLevel = getCurrentWorkerCell().getLevel();</b>
+<b class="fc"><i>60</i>&nbsp;            getCurrentWorkerCell().setIsOccupied(true);</b>
+<b class="fc"><i>61</i>&nbsp;            this.hasUsedSpecialPower = !verifyPerimeter(this.currentWorkerCell);  // se la cella era perimetrale posso muovermi ancora</b>
+<b class="fc"><i>62</i>&nbsp;            hasMoved = hasUsedSpecialPower;</b>
+<i>63</i>&nbsp;        }
+<b class="fc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 17:53</div>
+</div>
+</body>
+</html>
