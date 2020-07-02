@@ -4,7 +4,7 @@ Questo progetto è stato svolto da Andrea Superchi, Francesco Zito e Alessio Par
 
 Abbiamo implementato le regole complete, con CLI, socket e alcuni dèi aggiuntivi.
 
-La coverage per il package "model" è la seguente
+La coverage per il package "model" è la seguente:
 - 96% per le Classi (sono state coperte 28 classi su 29)
 - 94% per i metodi (sono stati coperti 127 metodi su 134)
 - 86% per le righe di codice (sono state coperte 703 righe su 811)
