@@ -800,7 +800,7 @@ public class ModelTest {
         input = new IntChoice(player2, 10);
         model.doAction(input);
 
-        assertEquals(Model.turnPhase.BUILD, model.getCurrentPhase());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
         assertEquals(Outcome.DIRECTION_ERROR, model.getOutcome());
     }
 
@@ -852,7 +852,7 @@ public class ModelTest {
         input = new IntChoice(player2, 1);
         model.doAction(input);
 
-        assertEquals(Model.turnPhase.BUILD, model.getCurrentPhase());
+        assertEquals(Model.turnPhase.ACTION_CHOICE, model.getCurrentPhase());
         assertEquals(Outcome.OUT_OF_MAP, model.getOutcome());
     }
 

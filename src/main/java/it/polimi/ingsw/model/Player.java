@@ -29,6 +29,12 @@ public class Player {
 
     public void setIsInGame(boolean isInGame) {
         this.isInGame = isInGame;
+        if (!isInGame) {
+            workers[0].symbol = "";
+            workers[0].getCurrentWorkerCell().setIsOccupied(false);
+            workers[1].symbol = "";
+            workers[1].getCurrentWorkerCell().setIsOccupied(false);
+        }
     }
 
     public Worker[] getWorkers() {

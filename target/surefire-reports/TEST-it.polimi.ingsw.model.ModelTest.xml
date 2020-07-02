@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="it.polimi.ingsw.model.ModelTest" time="0.005" tests="36" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="it.polimi.ingsw.model.ModelTest" time="0.006" tests="36" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="14"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IT"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-14.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\Andrew\AppData\Local\Temp\surefire17095276123771388965\surefirebooter342106336392233666.jar C:\Users\Andrew\AppData\Local\Temp\surefire17095276123771388965 2020-07-02T18-09-50_192-jvmRun1 surefire2698320244306618454tmp surefire_03130743070166183180tmp"/>
+    <property name="sun.java.command" value="C:\Users\Andrew\AppData\Local\Temp\surefire12296944413266819036\surefirebooter4663967492278415127.jar C:\Users\Andrew\AppData\Local\Temp\surefire12296944413266819036 2020-07-03T01-00-23_215-jvmRun1 surefire14576285161973418599tmp surefire_016026826136336849597tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Andrew\Desktop\ing-sw-2020-superchi-zito-parato\target\test-classes;C:\Users\Andrew\Desktop\ing-sw-2020-superchi-zito-parato\target\classes;C:\Users\Andrew\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Andrew\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="idea.version2020.1.2" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\Andrew\AppData\Local\Temp\surefire17095276123771388965\surefirebooter342106336392233666.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Andrew\AppData\Local\Temp\surefire12296944413266819036\surefirebooter4663967492278415127.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="14.0.1+7"/>
@@ -68,25 +68,25 @@
   <testcase name="firstWorkerPlacementTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="availableGodsTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="validMoveTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
-  <testcase name="validMoveWinTest" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
+  <testcase name="validMoveWinTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="confirmEndTurnTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
-  <testcase name="cantBuildTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
+  <testcase name="cantBuildTest" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
   <testcase name="workerChoiceTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="canGoToEndTurnTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="invalidGodChoiceTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="outOfMapSpecialPowerTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="godChoiceTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
-  <testcase name="dontConfirmEndTurnTest" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
-  <testcase name="outOfMapMoveTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
+  <testcase name="dontConfirmEndTurnTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
+  <testcase name="outOfMapMoveTest" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
   <testcase name="secondWorkerPlacementTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="gameOverTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
-  <testcase name="noSpecialPower" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
+  <testcase name="noSpecialPower" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="fullAvailableGodsTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="wrongDirectionSpecialPowerTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="outOfMapBuildTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="specialPowerTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
-  <testcase name="actionChoiceTest" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
-  <testcase name="occupiedWorkerPlacementTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
+  <testcase name="actionChoiceTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
+  <testcase name="occupiedWorkerPlacementTest" classname="it.polimi.ingsw.model.ModelTest" time="0.001"/>
   <testcase name="validBuildTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="cantGoToEndTurnTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>
   <testcase name="fullWorkerPlacementTest" classname="it.polimi.ingsw.model.ModelTest" time="0"/>

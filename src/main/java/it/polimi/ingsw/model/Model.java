@@ -262,8 +262,10 @@ public class Model extends Observable<Model> implements Cloneable {
                         outcome = Outcome.ACTION_MENU;
                     } catch (IllegalArgumentException e) {
                         outcome = Outcome.DIRECTION_ERROR;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         outcome = Outcome.OUT_OF_MAP;
+                        currentPhase = turnPhase.ACTION_CHOICE;
                     }
                     break;
 
@@ -406,7 +408,7 @@ public class Model extends Observable<Model> implements Cloneable {
      * This method updates the currentPlayer from the arrayList players
      */
     private void updateCurrentPlayer() {
-        if (players.indexOf(currentPlayer) == numberOfPlayers - 1) {
+        if (players.indexOf(currentPlayer) == players.size() - 1) {
             currentPlayer = players.get(0);
         } else {
             currentPlayer = players.get(players.indexOf(currentPlayer) + 1);
