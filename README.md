@@ -9,7 +9,7 @@ La coverage per il package "model" è la seguente:
 - 94% per i metodi (sono stati coperti 127 metodi su 134)
 - 86% per le righe di codice (sono state coperte 703 righe su 811)
 
-La coverage per il package "coverage" è la seguente:
+La coverage per il package "controller" è la seguente:
 - 100% per le Classi (è stata coperta 1 classe su 1)
 - 100% per i metodi (sono stati coperti 2 metodi su 2)
 - 100% per le righe di codice (sono state coperte 6 righe su 6)
