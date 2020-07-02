@@ -16,4 +16,4 @@ La coverage per il package "controller" è la seguente:
 
 Sono stati generati due file .jar diversi, rispettivamente uno per i Client e uno per il Server. 
 Per poterli avviare è sufficiente eseguire, da linea di comando, "java -jar" seguito dal percorso del file .jar che si desidera avviare. A tal proposito si consiglia l'utilizzo di un terminale a base Linux (come la W10JavaCli in combinazione con l'app "Ubuntu" disponibile sul Windows Store).
-Inoltre è raccomandato avviare prima il Server del Client. Il server deve essere attivo all'indirizzo IP 192.168.1.7
+Inoltre è raccomandato avviare prima il Server del Client. Il server deve essere attivo all'indirizzo IP 192.168.1.10
