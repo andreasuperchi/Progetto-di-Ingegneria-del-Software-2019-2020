@@ -49,7 +49,7 @@ public class WorkerCharonTest {
     @Test
     public void canUseSpecialPowerTrue() {
         workerCharonA.setCurrentWorkerCell(charonCellA);
-        assertEquals(true, workerCharonA.canUseSpecialPower() );
+        assertTrue(workerCharonA.canUseSpecialPower());
     }
 
     /**
@@ -59,7 +59,7 @@ public class WorkerCharonTest {
     public void canUseSpecialPowerFalse() {
         workerCharonA.setCurrentWorkerCell(charonCellA);
         workerCharonA.setHasMoved(true);
-        assertEquals(false, workerCharonA.canUseSpecialPower() );
+        assertFalse(workerCharonA.canUseSpecialPower());
     }
 
     /**

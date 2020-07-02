@@ -16,14 +16,19 @@ import java.util.concurrent.Executors;
 
 public class Server {
     private static final int PORT = 12345;
-    private ServerSocket serverSocket;
-    private ExecutorService executor = Executors.newFixedThreadPool(128);
-    private Map<String, ClientConnection> waitingConnection = new HashMap<>();
-    private Map<String, Integer> mapNameAge = new HashMap<>();
-    private ArrayList<ClientConnection> playingConnection = new ArrayList<>();
+    private final ServerSocket serverSocket;
+    private final ExecutorService executor = Executors.newFixedThreadPool(128);
+    private final Map<String, ClientConnection> waitingConnection = new HashMap<>();
+    private final Map<String, Integer> mapNameAge = new HashMap<>();
+    private final ArrayList<ClientConnection> playingConnection = new ArrayList<>();
 
     private int numberOfPlayers;
 
+    /**
+     * builds a new server that has a serverSocket
+     *
+     * @throws IOException general exception
+     */
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
         this.numberOfPlayers = 0;
@@ -39,7 +44,8 @@ public class Server {
 
 
     /**
-     * Deregisters connection
+     * Deregisters the connection. If only two playing connections are remaining,
+     * it removes all the connections from the playingConnections arrayList
      *
      * @param c represents the connection which has to be deregistered
      */
@@ -57,13 +63,11 @@ public class Server {
             playingConnection.clear();
             waitingConnection.clear();
         }
-
-
     }
 
     /**
      * Makes players join the game, initializing every view,  model and  controller.
-     * If players number is lower than requested, players who have already joined will be put on hold.
+     * If the players number is lower than requested, players who have already joined will be put on hold.
      *
      * @param c    represents user's connection
      * @param name represents user's name
@@ -75,9 +79,8 @@ public class Server {
 
         if (waitingConnection.size() == numberOfPlayers) {
             List<String> keys = new ArrayList<>(waitingConnection.keySet());
-            ArrayList<Player> players = new ArrayList<Player>();
+            ArrayList<Player> players = new ArrayList<>();
 
-            //creazione giocatori,connessioni, remoteview per 2 o 3
             if (numberOfPlayers == 2) {
                 ClientConnection c1 = waitingConnection.get(keys.get(0));
                 ClientConnection c2 = waitingConnection.get(keys.get(1));
@@ -116,7 +119,6 @@ public class Server {
                 View player1View = new RemoteView(player1, c1);
                 View player2View = new RemoteView(player2, c2);
                 View player3View = new RemoteView(player3, c3);
-
 
                 Model model = new Model(players, numberOfPlayers);
                 Controller controller = new Controller(model);

@@ -18,7 +18,7 @@ public class WorkerHestiaTest {
     }
 
     /**
-     * test the method specialPower of WorkerHestia in the scenario where a player
+     * tests the method specialPower of WorkerHestia in the scenario where a player
      * tries to use correctly the special power
      */
     @Test
@@ -28,7 +28,6 @@ public class WorkerHestiaTest {
         workerHestia.specialPower(map.getGrid()[2][2]);
         assertTrue(workerHestia.getHasUsedSpecialPower());
     }
-
 
     /**
      * tests the method specialPower of WorkerHestia in the scenario where a player
@@ -47,7 +46,7 @@ public class WorkerHestiaTest {
      * tries to use specialPower in a perimetrical column cell
      */
     @Test(expected = IllegalArgumentException.class)
-    public void perimetricColumnSpecialPowerTest() {
+    public void perimeterColumnSpecialPowerTest() {
         workerHestia.move(map.getGrid()[3][3]);
         workerHestia.build(map.getGrid()[2][3]);
         workerHestia.specialPower(map.getGrid()[3][4]);
@@ -55,7 +54,7 @@ public class WorkerHestiaTest {
     }
 
     /**
-     * test the method specialPower of WorkerDemeter in the scenario where a player
+     * tests the method specialPower of WorkerDemeter in the scenario where a player
      * tries to use the special power before doing a move action
      */
     @Test(expected = IllegalArgumentException.class)
@@ -66,7 +65,7 @@ public class WorkerHestiaTest {
     }
 
     /**
-     * test the method specialPower of WorkerHestia in the scenario where a player
+     * tests the method specialPower of WorkerHestia in the scenario where a player
      * tries to use the special power before doing a build action
      */
     @Test(expected = IllegalArgumentException.class)

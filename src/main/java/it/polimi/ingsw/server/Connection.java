@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Connection extends Observable<Integer> implements ClientConnection, Runnable {
-    private Socket socket;
-    private Server server;
+    private final Socket socket;
+    private final Server server;
     private ObjectOutputStream out;
 
     private boolean active = true;
@@ -33,7 +33,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
     /**
      * sends a message to the client
      *
-     * @param message
+     * @param message is the message to be sent to the client
      */
     private synchronized void send(Object message) {
         try {
@@ -46,7 +46,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
     }
 
     /**
-     * close the connection
+     * closes the connection and sets the flg "active" to false
      */
     @Override
     public void closeConnection() {
@@ -60,9 +60,9 @@ public class Connection extends Observable<Integer> implements ClientConnection,
     }
 
     /**
-     * sends a message in asynchronous way
+     * sends a message in an asynchronous way
      *
-     * @param message
+     * @param message is the message to be sent to the client
      */
     @Override
     public void asyncSend(final Object message) {
@@ -75,7 +75,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
     }
 
     /**
-     *
+     * closes the connection
      */
     private void close() {
         closeConnection();
@@ -86,7 +86,7 @@ public class Connection extends Observable<Integer> implements ClientConnection,
 
 
     /**
-     * Asks the player informations before starting the game, the sets up the connection
+     * Asks the player informations before starting the game, then sets up the connection
      */
     @Override
     public void run() {

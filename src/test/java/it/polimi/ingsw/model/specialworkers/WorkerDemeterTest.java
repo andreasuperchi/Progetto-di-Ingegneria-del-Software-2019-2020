@@ -28,7 +28,7 @@ public class WorkerDemeterTest {
 
 
     /**
-     * test the method canUseSpecialPower of WorkerDemeter in the scenario where a player
+     * tests the method canUseSpecialPower of WorkerDemeter in the scenario where a player
      * tries to use the special power before doing a build action
      */
     @Test
@@ -61,7 +61,7 @@ public class WorkerDemeterTest {
 
     /**
      * test the method specialPower of WorkerDemeter in the scenario where a player
-     * try to use correctly the special power
+     * tries to use correctly the special power
      */
     @Test
     public void specialPowerTest() {

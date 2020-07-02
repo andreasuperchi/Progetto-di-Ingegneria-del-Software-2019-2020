@@ -46,7 +46,7 @@ public class WorkerHephaestusTest {
         workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
         workerHephaestus.setHasMoved(true);
         workerHephaestus.build(nextWorkerCell);
-        assertEquals(true,workerHephaestus.canUseSpecialPower() );
+        assertTrue(workerHephaestus.canUseSpecialPower());
     }
 
     /**
@@ -58,7 +58,7 @@ public class WorkerHephaestusTest {
         workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
         //no move
         workerHephaestus.build(nextWorkerCell);
-        assertEquals(false,workerHephaestus.canUseSpecialPower() );
+        assertFalse(workerHephaestus.canUseSpecialPower());
     }
 
     /**
@@ -70,7 +70,7 @@ public class WorkerHephaestusTest {
         workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
         workerHephaestus.setHasMoved(true);
         //no Build
-        assertEquals(false,workerHephaestus.canUseSpecialPower() );
+        assertFalse(workerHephaestus.canUseSpecialPower());
     }
 
     /**
@@ -81,7 +81,7 @@ public class WorkerHephaestusTest {
         nextWorkerCell.setLevel(0);
         workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
         //no move, no build
-        assertEquals(false,workerHephaestus.canUseSpecialPower() );
+        assertFalse(workerHephaestus.canUseSpecialPower());
     }
 
     /**
@@ -92,7 +92,7 @@ public class WorkerHephaestusTest {
         nextWorkerCell.setIsOccupied(true);
         workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
         workerHephaestus.build(nextWorkerCell);
-        assertEquals(false, workerHephaestus.getHasBuilt());
+        assertFalse(workerHephaestus.getHasBuilt());
     }
 
     /**
@@ -104,7 +104,7 @@ public class WorkerHephaestusTest {
         workerHephaestus.setCurrentWorkerCell(baseWorkerCell);
         workerHephaestus.build(nextWorkerCell);
         assertEquals(4, nextWorkerCell.getLevel());
-        assertEquals(true, nextWorkerCell.getIsOccupied());
+        assertTrue(nextWorkerCell.getIsOccupied());
     }
 
     /**

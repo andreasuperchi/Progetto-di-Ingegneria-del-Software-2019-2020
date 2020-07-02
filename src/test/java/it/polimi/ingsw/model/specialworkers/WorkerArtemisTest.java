@@ -29,7 +29,7 @@ public class WorkerArtemisTest {
     }
 
     /**
-     * test the method canUseSpecialPower of WorkerDemeter in the scenario where a player
+     * tests the method canUseSpecialPower of WorkerDemeter in the scenario where a player
      * tries to use the special power before doing a move action
      */
     @Test
@@ -39,7 +39,7 @@ public class WorkerArtemisTest {
 
 
     /**
-     * test the method canUseSpecialPower of WorkerArtemis in the scenario where a player
+     * tests the method canUseSpecialPower of WorkerArtemis in the scenario where a player
      * tries to use the special power after a build action
      */
     @Test
@@ -62,8 +62,8 @@ public class WorkerArtemisTest {
 
 
     /**
-     * test the method specialPower of WorkerArtemis i the scenario where a player
-     * tries to use specialPower in lodPosition cell
+     * tests the method specialPower of WorkerArtemis in the scenario where a player
+     * tries to use specialPower in oldPosition cell
      */
     @Test(expected = IllegalArgumentException.class)
     public void oldPositionSpecialPowerTest() {
@@ -75,8 +75,8 @@ public class WorkerArtemisTest {
 
 
     /**
-     * test the method specialPower of WorkerArtemis in the scenario where a player
-     * try to use correctly the special power
+     * tests the method specialPower of WorkerArtemis in the scenario where a player
+     * tries to use correctly the special power
      */
     @Test
     public void specialPowerTest() {

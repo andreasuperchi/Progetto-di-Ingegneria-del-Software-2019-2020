@@ -14,7 +14,7 @@ public class WorkerPanTest {
     }
 
     /**
-     * tests the additional WorkerPan's win condition
+     * tests WorkerPan's additional win condition
      */
     @Test
     public void winConditionPanTrue() {
@@ -34,7 +34,7 @@ public class WorkerPanTest {
     }
 
     /**
-     * test the method winCondition in the scenario where
+     * tests the method winCondition in the scenario where
      * a player doesn't win
      */
     @Test

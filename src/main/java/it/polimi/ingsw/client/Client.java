@@ -27,10 +27,16 @@ public class Client {
         isActive = active;
     }
 
+    /**
+     * reads asynchronously from the specified socket and prints the messages to the client
+     *
+     * @param socketIn is the socket from which the client reads the messages
+     * @return a new thread
+     */
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
         Thread t = new Thread(new Runnable() {
             @Override
-            public void run() {     //Legge messaggi da RemoteView
+            public void run() {
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
@@ -55,10 +61,17 @@ public class Client {
         return t;
     }
 
+    /**
+     * writes asynchronously from the specified socket and prints the messages to the client
+     *
+     * @param stdin     is the standard input, used by the user to write messages
+     * @param socketOut is the socket where the messages are going to be sent
+     * @return a new thread
+     */
     public Thread asyncWriteFromSocket(final Scanner stdin, final PrintWriter socketOut) {
         Thread t = new Thread(new Runnable() {
             @Override
-            public void run() {        //Invia messaggi a Conection che notificha la RemoteView
+            public void run() {
                 try {
                     while (isActive()) {
                         String input = stdin.nextLine();
@@ -74,7 +87,12 @@ public class Client {
         return t;
     }
 
-    public void run() throws IOException {         //Inizializza il client e stabilisce la connessione con il server
+    /**
+     * initializes the basic tools that the client needs to work properly
+     *
+     * @throws IOException general exception
+     */
+    public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         System.out.println("\u001b[32;1mConnection Established.\u001b[0m\n");
         ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
