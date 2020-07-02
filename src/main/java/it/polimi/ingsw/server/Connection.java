@@ -45,6 +45,9 @@ public class Connection extends Observable<Integer> implements ClientConnection,
         }
     }
 
+    /**
+     * close the connection
+     */
     @Override
     public void closeConnection() {
         send("Connection closed!");
@@ -56,6 +59,11 @@ public class Connection extends Observable<Integer> implements ClientConnection,
         active = false;
     }
 
+    /**
+     * sends a message in asynchronous way
+     *
+     * @param message
+     */
     @Override
     public void asyncSend(final Object message) {
         new Thread(new Runnable() {
@@ -66,6 +74,9 @@ public class Connection extends Observable<Integer> implements ClientConnection,
         }).start();
     }
 
+    /**
+     *
+     */
     private void close() {
         closeConnection();
         System.out.println("Deregistering client...");
@@ -73,6 +84,10 @@ public class Connection extends Observable<Integer> implements ClientConnection,
         System.out.println("Done!");
     }
 
+
+    /**
+     * Asks the player informations before starting the game, the sets up the connection
+     */
     @Override
     public void run() {
         Scanner in;

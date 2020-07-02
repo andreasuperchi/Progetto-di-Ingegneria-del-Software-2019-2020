@@ -37,7 +37,12 @@ public class Server {
         this.numberOfPlayers = numberOfPlayers;
     }
 
-    //Deregister connection
+
+    /**
+     * Deregisters connection
+     *
+     * @param c represents the connection which has to be deregistered
+     */
     public synchronized void deregisterConnection(ClientConnection c) {
         if (playingConnection.size() == 3) {
             playingConnection.remove(c);
@@ -56,6 +61,14 @@ public class Server {
 
     }
 
+    /**
+     * Makes players join the game, initializing every view,  model and  controller.
+     * If players number is lower than requested, players who have already joined will be put on hold.
+     *
+     * @param c    represents user's connection
+     * @param name represents user's name
+     * @param age  represents user's age
+     */
     public synchronized void lobby(ClientConnection c, String name, int age) {
         waitingConnection.put(name, c);
         mapNameAge.put(name, age);
@@ -132,6 +145,10 @@ public class Server {
 
     }
 
+    /**
+     * Waits for user's connection and then initializes a connection
+     * between server and client
+     */
     public void run() {
         System.out.println("\u001b[32;1mServer running...");
         while (true) {

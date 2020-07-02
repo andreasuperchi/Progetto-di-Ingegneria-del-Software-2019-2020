@@ -15,6 +15,10 @@ public class RemoteView extends View {
 
     }
 
+
+    /**
+     * Processes an integer type input
+     */
     private class IntReceiver implements Observer<Integer> {      //Processa gli input di tipo intero
         @Override
         public void update(Integer message) {
