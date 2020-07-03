@@ -37,9 +37,9 @@ public class RemoteView extends View {
         String resultMessage = "";
         Model.turnPhase currentPhase = model.getCurrentPhase();
         if (model.isGameOver()) {
-            if (!getPlayer().getIsInGame()) {
+            if (!getPlayer().getIsInGame() || !getPlayer().equals(model.getCurrentPlayer())) {
                 resultMessage = "You Lose!";
-            } else {
+            }else {
                 resultMessage = "You Win!";
             }
         } else {
